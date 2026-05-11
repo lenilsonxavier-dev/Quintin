@@ -52,6 +52,37 @@ body{
 
   padding:20px;
 
+  display:flex;
+
+  align-items:center;
+
+  gap:15px;
+}
+
+.avatar{
+
+  width:70px;
+
+  height:70px;
+
+  border-radius:50%;
+
+  border:3px solid white;
+
+  object-fit:cover;
+
+  background:white;
+}
+
+.info-topo{
+
+  display:flex;
+
+  flex-direction:column;
+}
+
+.titulo{
+
   font-size:24px;
 
   font-weight:bold;
@@ -88,6 +119,21 @@ body{
   max-width:80%;
 
   line-height:1.5;
+
+  animation:aparecer 0.3s ease;
+}
+
+@keyframes aparecer{
+
+  from{
+    opacity:0;
+    transform:translateY(10px);
+  }
+
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
 }
 
 .user{
@@ -104,6 +150,30 @@ body{
   background:white;
 
   border:1px solid #ddd;
+}
+
+.pensando{
+
+  color:#666;
+
+  font-style:italic;
+
+  margin-bottom:15px;
+
+  display:flex;
+
+  align-items:center;
+
+  gap:10px;
+}
+
+.pensando img{
+
+  width:40px;
+
+  height:40px;
+
+  border-radius:50%;
 }
 
 .entrada{
@@ -163,11 +233,24 @@ button:hover{
 <div class="chat-container">
 
   <div class="topo">
-    🌍 Quinti
 
-    <div class="subtitulo">
-      English for curious kids from Osasco ✨
+    <img
+      class="avatar"
+      src="https://i.imgur.com/oAteJWd.png"
+    >
+
+    <div class="info-topo">
+
+      <div class="titulo">
+        🌍 Quinti
+      </div>
+
+      <div class="subtitulo">
+        English for curious kids from Osasco ✨
+      </div>
+
     </div>
+
   </div>
 
   <div id="chat"></div>
@@ -186,6 +269,56 @@ button:hover{
   </div>
 
 </div>
+
+<script>
+
+const input = document.getElementById("pergunta");
+
+input.addEventListener("keypress", function(event){
+
+  if(event.key === "Enter"){
+
+    enviar();
+  }
+
+});
+
+function mostrarPensando(){
+
+  const chat = document.getElementById("chat");
+
+  const div = document.createElement("div");
+
+  div.className = "pensando";
+
+  div.id = "pensando";
+
+  div.innerHTML = `
+  
+    <img src="https://i.imgur.com/oAteJWd.png">
+
+    <span>
+      Quinti is thinking... 🌍
+    </span>
+  
+  `;
+
+  chat.appendChild(div);
+
+  chat.scrollTop = chat.scrollHeight;
+}
+
+function removerPensando(){
+
+  const pensando = document.getElementById("pensando");
+
+  if(pensando){
+
+    pensando.remove();
+  }
+}
+
+</script>
 
 <script type="module" src="app.js"></script>
 
