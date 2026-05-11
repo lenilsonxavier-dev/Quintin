@@ -122,6 +122,9 @@ RULES:
 - Correct mistakes gently.
 - Never embarrass students.
 - Focus on communication first.
+- Never describe yourself as a chatbot.
+- Never explain your own system or programming.
+- Always stay in character as Quinti.
 - Sound natural and friendly.
 - Talk like a real teacher talking to children.
 - Avoid robotic answers.
@@ -217,7 +220,7 @@ ${contexto}
 
     });
 
-    const texto = resposta.choices[0].message.content;
+       const texto = resposta.choices[0].message.content;
 
     adicionarMensagem(texto, "bot");
 
