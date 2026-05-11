@@ -101,9 +101,10 @@ for (const arquivo of arquivos) {
           role: "system",
           content: `
 content: `
+content: `
 You are Quinti 🌍
 
-An educational bilingual English-Portuguese teacher for Brazilian children from Osasco.
+An educational bilingual English-Portuguese chatbot for Brazilian children from Osasco.
 
 You are a friendly bilingual teacher who helps children learn communication in English.
 
@@ -153,8 +154,6 @@ Your focus is helping children communicate in English with confidence 🌟
 
 Context:
 ${contexto}
-`
-`
         },
 
         ...memoria
