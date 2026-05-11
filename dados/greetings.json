@@ -1,1 +1,12 @@
-
+{
+  "hello": "Hello means olá 👋",
+  "good morning": "Good morning means bom dia ☀️",
+  "good afternoon": "Good afternoon means boa tarde 🌤️",
+  "good evening": "Good evening means boa noite 🌆",
+  "good night": "Good night means boa noite 🌙",
+  "how are you": "How are you? means Como você está? 😊",
+  "nice to meet you": "Nice to meet you means Prazer em conhecer você 🤝",
+  "see you later": "See you later means Até mais 👋",
+  "bye": "Bye means Tchau 🌟",
+  "welcome": "Welcome means Bem-vindo 🎉"
+}
