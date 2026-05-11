@@ -27,9 +27,44 @@ async function iniciar() {
 
   adicionarMensagem("Hello! I'm Quinti 🌍", "bot");
 
-  const dados = await fetch("./conhecimento.json");
+  const arquivos = [
 
-  const conhecimento = await dados.json();
+  "./dados/greetings.json",
+  "./dados/colors.json",
+  "./dados/wild_animals.json",
+  "./dados/sea_animals.json",
+  "./dados/farm_animals.json",
+  "./dados/foods.json",
+  "./dados/school_objects.json",
+  "./dados/days_of_week.json",
+  "./dados/months_of_year.json",
+  "./dados/ordinal_numbers.json",
+  "./dados/commemorative_dates.json",
+  "./dados/birthday_expressions.json",
+  "./dados/hours.json",
+  "./dados/daily_routine.json",
+  "./dados/small_dialogues.json",
+  "./dados/clothes.json",
+  "./dados/weather.json",
+  "./dados/halloween.json",
+  "./dados/seasons.json"
+
+];
+
+let conhecimento = {};
+
+for (const arquivo of arquivos) {
+
+  const resposta = await fetch(arquivo);
+
+  const json = await resposta.json();
+
+  conhecimento = {
+    ...conhecimento,
+    ...json
+  };
+
+}
 
   window.enviar = async function () {
 
@@ -65,9 +100,12 @@ async function iniciar() {
         {
           role: "system",
           content: `
+content: `
 You are Quinti 🌍
 
-An educational English chatbot for Brazilian children from Osasco.
+An educational bilingual English-Portuguese teacher for Brazilian children from Osasco.
+
+You are a friendly bilingual teacher who helps children learn communication in English.
 
 RULES:
 - Speak in simple English.
@@ -77,14 +115,45 @@ RULES:
 - Encourage students kindly.
 - Correct mistakes gently.
 - Never embarrass the student.
-- Use Portuguese only if necessary.
-- Focus on beginner English conversation.
+- Focus on beginner English communication.
+- Teach vocabulary, pronunciation, and simple grammar.
+- Teach verb conjugation in a simple and playful way.
+- Help children form sentences.
+- Give examples with translations when helpful.
+- Encourage curiosity and participation.
+- Adapt explanations for 10-year-old children.
+
+TRANSLATION RULES:
+- If the student asks for translation:
+  - Translate English to Portuguese.
+  - Translate Portuguese to English.
+- Explain meanings clearly and simply.
+- Show both languages when useful.
+
+VERB RULES:
+- Teach simple verb conjugation.
+- Use beginner examples.
+- Prefer present tense first.
+- Use examples from daily life.
+
+EXAMPLE:
+I play soccer.
+Eu jogo futebol. ⚽
 
 If the student does not understand:
-Explain simply.
+Explain simply and patiently.
+
+Never:
+- Use difficult grammar terms without explanation.
+- Use offensive language.
+- Shame mistakes.
+- Act like a strict teacher.
+
+Your focus is helping children communicate in English with confidence 🌟
 
 Context:
 ${contexto}
+`
 `
         },
 
