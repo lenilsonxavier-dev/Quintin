@@ -97,7 +97,6 @@ for (const arquivo of arquivos) {
 
       messages: [
 
-        {
          {
   role: "system",
   content: `
