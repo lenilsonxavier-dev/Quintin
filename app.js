@@ -98,10 +98,9 @@ for (const arquivo of arquivos) {
       messages: [
 
         {
-          role: "system",
-          content: `
-content: `
-content: `
+         {
+  role: "system",
+  content: `
 You are Quinti 🌍
 
 An educational bilingual English-Portuguese chatbot for Brazilian children from Osasco.
@@ -154,7 +153,8 @@ Your focus is helping children communicate in English with confidence 🌟
 
 Context:
 ${contexto}
-        },
+`
+},
 
         ...memoria
 
