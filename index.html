@@ -165,6 +165,23 @@ body{
   align-items:center;
 
   gap:10px;
+
+  animation:pulse 1s infinite;
+}
+
+@keyframes pulse{
+
+  0%{
+    opacity:0.5;
+  }
+
+  50%{
+    opacity:1;
+  }
+
+  100%{
+    opacity:0.5;
+  }
 }
 
 .pensando img{
@@ -270,10 +287,18 @@ button:hover{
 
 </div>
 
-<script>
+<script type="module">
+
+import * as webllm from "https://esm.run/@mlc-ai/web-llm";
+
+const engine = new webllm.MLCEngine();
+
+const chat = document.getElementById("chat");
 
 const input = document.getElementById("pergunta");
 
+
+// ENTER envia mensagem
 input.addEventListener("keypress", function(event){
 
   if(event.key === "Enter"){
@@ -283,9 +308,54 @@ input.addEventListener("keypress", function(event){
 
 });
 
+
+// CARREGA MODELO LEVE
+async function iniciarModelo(){
+
+  mostrarMensagemSistema(
+    "🌍 Quinti está acordando..."
+  );
+
+  try{
+
+    await engine.reload(
+      "TinyLlama-1.1B-Chat-v0.4-q4f16_1"
+    );
+
+    mostrarMensagemSistema(
+      "✅ Quinti está pronto para conversar!"
+    );
+
+  }catch(err){
+
+    mostrarMensagemSistema(
+      "❌ O computador ficou sem força para carregar o Quinti."
+    );
+
+    console.error(err);
+  }
+}
+
+
+// MOSTRA MENSAGEM DO SISTEMA
+function mostrarMensagemSistema(texto){
+
+  const div = document.createElement("div");
+
+  div.className = "msg bot";
+
+  div.innerHTML = texto;
+
+  chat.appendChild(div);
+
+  chat.scrollTop = chat.scrollHeight;
+}
+
+
+// MOSTRA "PENSANDO"
 function mostrarPensando(){
 
-  const chat = document.getElementById("chat");
+  removerPensando();
 
   const div = document.createElement("div");
 
@@ -298,7 +368,7 @@ function mostrarPensando(){
     <img src="https://i.imgur.com/oAteJWd.png">
 
     <span>
-      Quinti is thinking... 🌍
+      🧠 Quinti está pensando...
     </span>
   
   `;
@@ -308,6 +378,8 @@ function mostrarPensando(){
   chat.scrollTop = chat.scrollHeight;
 }
 
+
+// REMOVE "PENSANDO"
 function removerPensando(){
 
   const pensando = document.getElementById("pensando");
@@ -318,9 +390,111 @@ function removerPensando(){
   }
 }
 
-</script>
 
-<script type="module" src="app.js"></script>
+// ENVIA MENSAGEM
+window.enviar = async function(){
+
+  const pergunta = input.value.trim();
+
+  if(!pergunta){
+    return;
+  }
+
+  // mensagem usuário
+  const userDiv = document.createElement("div");
+
+  userDiv.className = "msg user";
+
+  userDiv.innerHTML = pergunta;
+
+  chat.appendChild(userDiv);
+
+  chat.scrollTop = chat.scrollHeight;
+
+  input.value = "";
+
+  // MOSTRA pensando
+  mostrarPensando();
+
+  try{
+
+    // chama IA
+    const resposta =
+      await engine.chat.completions.create({
+
+        messages:[
+
+          {
+            role:"system",
+            content:`
+Você é Quinti.
+
+Professor infantil de inglês.
+
+Ensine crianças de 7 a 9 anos.
+
+Use:
+- frases simples
+- respostas curtas
+- exemplos fáceis
+- emojis leves
+- tom amigável
+`
+          },
+
+          {
+            role:"user",
+            content:pergunta
+          }
+
+        ],
+
+        temperature:0.7,
+
+        max_tokens:80
+
+      });
+
+    // REMOVE pensando
+    removerPensando();
+
+    // resposta IA
+    const botDiv =
+      document.createElement("div");
+
+    botDiv.className = "msg bot";
+
+    botDiv.innerHTML =
+      resposta.choices[0].message.content;
+
+    chat.appendChild(botDiv);
+
+    chat.scrollTop = chat.scrollHeight;
+
+  }catch(err){
+
+    removerPensando();
+
+    const erroDiv =
+      document.createElement("div");
+
+    erroDiv.className = "msg bot";
+
+    erroDiv.innerHTML =
+      "❌ Quinti ficou cansado. Tente novamente.";
+
+    chat.appendChild(erroDiv);
+
+    console.error(err);
+  }
+
+}
+
+
+// INICIA
+iniciarModelo();
+
+</script>
 
 </body>
 </html>
