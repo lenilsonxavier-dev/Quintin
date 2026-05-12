@@ -31,11 +31,11 @@ async function iniciar() {
 
   chat.appendChild(loading);
   
-await engine.reload("Qwen2.5-3B-Instruct-q4f16_1-MLC");
+await engine.reload("Phi-2-q4f16_1");
 
   document.getElementById("loading").remove();
 
-  adicionarMensagem("Hello! I'm Quinti 🌍", "bot");
+  adicionarMensagem("Hello! I'm Quinti", "bot");
 
   const arquivos = [
 
