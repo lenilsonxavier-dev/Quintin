@@ -1,9 +1,9 @@
-import * as webllm from "https://esm.run/@mlc-ai/web-llm";
-
 const chat = document.getElementById("chat");
 
 let memoria = [];
 
+
+// ADICIONA MENSAGENS
 function adicionarMensagem(texto, classe) {
 
   const div = document.createElement("div");
@@ -17,25 +17,91 @@ function adicionarMensagem(texto, classe) {
   chat.scrollTop = chat.scrollHeight;
 }
 
-const engine = new webllm.MLCEngine();
 
+// MOSTRA "PENSANDO"
+function mostrarPensando(){
+
+  removerPensando();
+
+  const div = document.createElement("div");
+
+  div.className = "pensando";
+
+  div.id = "pensando";
+
+  div.innerHTML = `
+  
+    <img src="https://i.imgur.com/oAteJWd.png">
+
+    <span>
+      🧠 Quinti está pensando...
+    </span>
+  
+  `;
+
+  chat.appendChild(div);
+
+  chat.scrollTop = chat.scrollHeight;
+}
+
+
+// REMOVE "PENSANDO"
+function removerPensando(){
+
+  const pensando =
+    document.getElementById("pensando");
+
+  if(pensando){
+
+    pensando.remove();
+  }
+}
+
+
+// INICIAR
 async function iniciar() {
 
+  // loading inicial
   const loading = document.createElement("div");
 
   loading.className = "msg bot";
 
   loading.id = "loading";
 
-  loading.innerText = "Loading Quinti 🌍...";
+  loading.innerText =
+    "🌍 Loading Quinti...";
 
   chat.appendChild(loading);
-  await engine.reload("TinyLlama-1.1B-Chat-v0.4-q4f16_1");
 
-  document.getElementById("loading").remove();
 
-  adicionarMensagem("Hello! I'm Quinti", "bot");
+  // TESTA CONEXÃO COM GPT4ALL
+  try{
 
+    await fetch("http://localhost:4891/v1/models");
+
+    document.getElementById("loading").remove();
+
+    adicionarMensagem(
+      "🌈 Hello! I'm Quinti!",
+      "bot"
+    );
+
+  }catch(err){
+
+    document.getElementById("loading").remove();
+
+    adicionarMensagem(
+      "❌ GPT4All não está aberto.",
+      "bot"
+    );
+
+    console.error(err);
+
+    return;
+  }
+
+
+  // JSONS
   const arquivos = [
 
     "./dados/greetings.json",
@@ -69,6 +135,7 @@ async function iniciar() {
 
   let conhecimento = {};
 
+  // CARREGA JSONS
   for (const arquivo of arquivos) {
 
     const resposta = await fetch(arquivo);
@@ -82,15 +149,22 @@ async function iniciar() {
 
   }
 
+
+  // FUNÇÃO ENVIAR
   window.enviar = async function () {
 
-    const input = document.getElementById("pergunta");
+    const input =
+      document.getElementById("pergunta");
 
-    const pergunta = input.value.trim();
+    const pergunta =
+      input.value.trim();
 
     if (!pergunta) return;
 
-    adicionarMensagem(pergunta, "user");
+    adicionarMensagem(
+      pergunta,
+      "user"
+    );
 
     memoria.push({
       role: "user",
@@ -99,11 +173,21 @@ async function iniciar() {
 
     input.value = "";
 
+
+    // MOSTRA PENSANDO
+    mostrarPensando();
+
+
+    // CONTEXTO DOS JSONS
     let contexto = "";
 
     for (const chave in conhecimento) {
 
-      if (pergunta.toLowerCase().includes(chave.toLowerCase())) {
+      if (
+        pergunta
+        .toLowerCase()
+        .includes(chave.toLowerCase())
+      ) {
 
         contexto += `
 Word: ${chave}
@@ -114,62 +198,57 @@ Meaning: ${conhecimento[chave]}
 
     }
 
-    const resposta = await engine.chat.completions.create({
 
-      messages: [
+    try{
+
+      // GPT4ALL API
+      const response = await fetch(
+
+        "http://localhost:4891/v1/chat/completions",
 
         {
-          role: "system",
-         content: `
+
+          method:"POST",
+
+          headers:{
+            "Content-Type":"application/json"
+          },
+
+          body:JSON.stringify({
+
+            model:"gpt4all",
+
+            messages:[
+
+              {
+                role:"system",
+
+                content:`
+
 You are Quinti 🌍
 
-You are a gentle English teacher for Brazilian children aged 7.
+You are a gentle English teacher
+for Brazilian children aged 7.
 
 The children are beginners.
-Most of them never studied English before.
 
 MAIN GOAL:
-Teach basic English in a fun, calm, and simple way.
+Teach English slowly and kindly.
 
-IMPORTANT:
-- Teach ONE idea at a time.
-- Use VERY short sentences.
-- Use easy words.
-- Repeat important words naturally.
-- Speak like a kind elementary school teacher.
-- Be playful and patient.
-- Use emojis sometimes.
-- Never give long explanations.
-- Never act like a chatbot.
-- Never use difficult grammar terms.
-
-TEACHING STYLE:
-- Teach alphabet letters.
-- Teach colors.
-- Teach animals.
-- Teach numbers.
-- Teach greetings.
-- Teach simple classroom words.
-- Teach tiny sentences.
-- Encourage repetition.
+RULES:
+- Use short answers
+- Use simple English
+- Use emojis sometimes
+- Be playful
+- Be patient
+- Teach one thing at a time
+- Use Portuguese when necessary
+- Never give long explanations
 
 GOOD EXAMPLES:
 
 Child:
-oi
-
-Answer:
-Hello! 🌟
-
-Hello = Olá
-
-Can you say:
-"Hello"?
-
----
-
-Child:
-cachorro
+dog
 
 Answer:
 Dog 🐶
@@ -182,78 +261,83 @@ I like dogs.
 ---
 
 Child:
-2
+hello
 
 Answer:
-Two ✌️
+Hello 🌟
 
-Two = dois
+Hello = olá
 
-Can you count:
-One, two, three?
-
----
-
-Child:
-abc
-
-Answer:
-Great! 🌈
-
-A
-B
-C
-
-Excellent!
+Can you say:
+"Hello"?
 
 ---
-
-RULES:
-- Keep answers short.
-- Keep answers friendly.
-- Use Portuguese when necessary.
-- Help children feel confident.
-- Correct mistakes gently.
-- Ask simple questions.
-
-LEARNING LEVELS:
-
-- Start with very basic English.
-- Adapt to the child's level naturally.
-- If the child uses simple words:
-  teach basic vocabulary.
-- If the child uses sentences:
-  continue simple conversation.
-- If the child improves:
-  slowly introduce new grammar and vocabulary.
-- Increase difficulty little by little.
-- Always keep language appropriate for children aged 7 to 9.
-
-IMPORTANT:
-- Do not overload the child with information.
-- Teach step by step.
-- Celebrate small progress.
-- Keep learning fun and light.
 
 Context:
 ${contexto}
+
 `
-        },
+              },
 
-        ...memoria
+              ...memoria
 
-      ]
+            ],
 
-    });
+            max_tokens:80,
 
-    const texto = resposta.choices[0].message.content;
+            temperature:0.7
 
-    adicionarMensagem(texto, "bot");
+          })
 
-    memoria.push({
-      role: "assistant",
-      content: texto
-    });
+        }
+
+      );
+
+
+      const resposta =
+        await response.json();
+
+
+      // REMOVE PENSANDO
+      removerPensando();
+
+
+      const texto =
+        resposta
+        .choices[0]
+        .message
+        .content;
+
+
+      adicionarMensagem(
+        texto,
+        "bot"
+      );
+
+
+      memoria.push({
+
+        role:"assistant",
+
+        content:texto
+
+      });
+
+
+    }catch(err){
+
+      removerPensando();
+
+      adicionarMensagem(
+
+        "❌ Quinti não conseguiu responder.",
+
+        "bot"
+
+      );
+
+      console.error(err);
+    }
 
   };
 
