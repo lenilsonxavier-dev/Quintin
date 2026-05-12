@@ -39,27 +39,52 @@ adicionarMensagem("Hello! I'm Quinti 🌍", "bot");
 
   const arquivos = [
 
-    "./dados/greetings.json",
-    "./dados/colors.json",
-    "./dados/wild_animals.json",
-    "./dados/sea_animals.json",
-    "./dados/farm_animals.json",
-    "./dados/foods.json",
-    "./dados/school_objects.json",
-    "./dados/days_of_week.json",
-    "./dados/months_of_year.json",
-    "./dados/ordinal_numbers.json",
-    "./dados/commemorative_dates.json",
-    "./dados/birthday_expressions.json",
-    "./dados/hours.json",
-    "./dados/daily_routine.json",
-    "./dados/small_dialogues.json",
-    "./dados/clothes.json",
-    "./dados/weather.json",
-    "./dados/halloween.json",
-    "./dados/seasons.json"
+  "./dados/greetings.json",
+  "./dados/colors.json",
+  "./dados/wild_animals.json",
+  "./dados/sea_animals.json",
+  "./dados/farm_animals.json",
+  "./dados/birds.json",
 
-  ];
+  "./dados/foods.json",
+  "./dados/school_objects.json",
+
+  "./dados/days_of_week.json",
+  "./dados/months_of_year.json",
+
+  "./dados/ordinal_numbers.json",
+
+  "./dados/commemorative_dates.json",
+
+  "./dados/birthday_expressions.json",
+
+  "./dados/hours.json",
+
+  "./dados/daily_routine.json",
+
+  "./dados/small_dialogues.json",
+
+  "./dados/clothes.json",
+
+  "./dados/weather.json",
+
+  "./dados/halloween.json",
+
+  "./dados/seasons.json",
+
+  "./dados/people_life_stages.json",
+
+  "./dados/nouns.json",
+
+  "./dados/adjectives.json",
+
+  "./dados/synonyms.json",
+
+  "./dados/antonyms.json",
+
+  "./dados/english_glossary_300.json"
+
+];
 
   let conhecimento = {};
 
