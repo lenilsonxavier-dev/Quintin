@@ -30,8 +30,7 @@ async function iniciar() {
   loading.innerText = "Loading Quinti 🌍...";
 
   chat.appendChild(loading);
-  
-await engine.reload("Phi-2-q4f16_1");
+  await engine.reload("TinyLlama-1.1B-Chat-v0.4-q4f16_1");
 
   document.getElementById("loading").remove();
 
