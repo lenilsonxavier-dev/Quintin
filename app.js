@@ -23,68 +23,50 @@ async function iniciar() {
 
   const loading = document.createElement("div");
 
-loading.className = "msg bot";
+  loading.className = "msg bot";
 
-loading.id = "loading";
+  loading.id = "loading";
 
-loading.innerText = "Loading Quinti 🌍...";
+  loading.innerText = "Loading Quinti 🌍...";
 
-chat.appendChild(loading);
+  chat.appendChild(loading);
 
-await engine.reload("Qwen2.5-1.5B-Instruct-q4f16_1-MLC");
+  await engine.reload("Qwen2.5-1.5B-Instruct-q4f16_1-MLC");
 
-document.getElementById("loading").remove();
+  document.getElementById("loading").remove();
 
-adicionarMensagem("Hello! I'm Quinti 🌍", "bot");
+  adicionarMensagem("Hello! I'm Quinti 🌍", "bot");
 
   const arquivos = [
 
-  "./dados/greetings.json",
-  "./dados/colors.json",
-  "./dados/wild_animals.json",
-  "./dados/sea_animals.json",
-  "./dados/farm_animals.json",
-  "./dados/birds.json",
+    "./dados/greetings.json",
+    "./dados/colors.json",
+    "./dados/wild_animals.json",
+    "./dados/sea_animals.json",
+    "./dados/farm_animals.json",
+    "./dados/birds.json",
+    "./dados/foods.json",
+    "./dados/school_objects.json",
+    "./dados/days_of_week.json",
+    "./dados/months_of_year.json",
+    "./dados/ordinal_numbers.json",
+    "./dados/commemorative_dates.json",
+    "./dados/birthday_expressions.json",
+    "./dados/hours.json",
+    "./dados/daily_routine.json",
+    "./dados/small_dialogues.json",
+    "./dados/clothes.json",
+    "./dados/weather.json",
+    "./dados/halloween.json",
+    "./dados/seasons.json",
+    "./dados/people_life_stages.json",
+    "./dados/nouns.json",
+    "./dados/adjectives.json",
+    "./dados/synonyms.json",
+    "./dados/antonyms.json",
+    "./dados/english_glossary_300.json"
 
-  "./dados/foods.json",
-  "./dados/school_objects.json",
-
-  "./dados/days_of_week.json",
-  "./dados/months_of_year.json",
-
-  "./dados/ordinal_numbers.json",
-
-  "./dados/commemorative_dates.json",
-
-  "./dados/birthday_expressions.json",
-
-  "./dados/hours.json",
-
-  "./dados/daily_routine.json",
-
-  "./dados/small_dialogues.json",
-
-  "./dados/clothes.json",
-
-  "./dados/weather.json",
-
-  "./dados/halloween.json",
-
-  "./dados/seasons.json",
-
-  "./dados/people_life_stages.json",
-
-  "./dados/nouns.json",
-
-  "./dados/adjectives.json",
-
-  "./dados/synonyms.json",
-
-  "./dados/antonyms.json",
-
-  "./dados/english_glossary_300.json"
-
-];
+  ];
 
   let conhecimento = {};
 
@@ -124,7 +106,10 @@ adicionarMensagem("Hello! I'm Quinti 🌍", "bot");
 
       if (pergunta.toLowerCase().includes(chave.toLowerCase())) {
 
-        contexto += chave + ": " + conhecimento[chave] + "\n";
+        contexto += `
+Word: ${chave}
+Meaning: ${conhecimento[chave]}
+`;
 
       }
 
@@ -136,9 +121,7 @@ adicionarMensagem("Hello! I'm Quinti 🌍", "bot");
 
         {
           role: "system",
-          {
-  role: "system",
-  content: `
+          content: `
 You are Quinti 🌍
 
 You are a friendly English teacher for Brazilian children aged 7.
@@ -169,12 +152,43 @@ RULES:
 - Ask simple questions.
 - Correct mistakes gently.
 - Keep the conversation light and natural.
+- Children can speak in Portuguese or English.
+- Translate naturally when helpful.
+
+GOOD EXAMPLES:
+
+Child:
+eu gosto de cachorro
+
+Answer:
+Great! 🐶
+
+In English:
+I like dogs.
+
+Do you have a dog?
+
+---
+
+Child:
+how are you?
+
+Answer:
+I'm great today! 🌟
+And you?
+
+---
+
+Child:
+como se diz avestruz em inglês?
+
+Answer:
+Avestruz em inglês é:
+Ostrich 🐦
 
 Context:
 ${contexto}
 `
-},
-
         },
 
         ...memoria
