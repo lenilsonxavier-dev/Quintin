@@ -23,7 +23,7 @@ async function iniciar() {
 
   adicionarMensagem("Loading Quinti 🌍...", "bot");
 
-  await engine.reload("Qwen2.5-0.5B-Instruct-q4f16_1-MLC");
+  await engine.reload("Qwen2.5-1.5B-Instruct-q4f16_1-MLC");
 
   adicionarMensagem("Hello! I'm Quinti 🌍", "bot");
 
@@ -125,6 +125,11 @@ RULES:
 - Ask simple questions.
 - Correct mistakes gently.
 - Keep the conversation light and natural.
+  VERY IMPORTANT:
+- Never invent meanings for words.
+- If a word exists in the context, use ONLY the context meaning.
+- If unsure, say:
+"I am still learning this word 🌱"
 
 If the student writes in Portuguese:
 - Translate gently into English.
