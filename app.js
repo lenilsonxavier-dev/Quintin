@@ -216,7 +216,7 @@ Meaning: ${conhecimento[chave]}
 
           body:JSON.stringify({
 
-            model:"gpt4all",
+          model:"Phi-3 Mini Instruct",
 
             messages:[
 
