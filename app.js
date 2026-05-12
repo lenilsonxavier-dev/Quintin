@@ -30,8 +30,8 @@ async function iniciar() {
   loading.innerText = "Loading Quinti 🌍...";
 
   chat.appendChild(loading);
-
-  await engine.reload("Qwen2.5-1.5B-Instruct-q4f16_1-MLC");
+  
+await engine.reload("Qwen2.5-3B-Instruct-q4f16_1-MLC");
 
   document.getElementById("loading").remove();
 
