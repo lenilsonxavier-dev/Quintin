@@ -446,15 +446,15 @@ window.enviar = async function(){
 
         body:JSON.stringify({
 
-          model:"gpt4all",
+  model:"Phi-3 Mini Instruct",
 
-          messages:[
+  messages:[
 
-            {
+    {
 
-              role:"system",
+      role:"system",
 
-              content:`
+      content:`
 
 You are Quinti 🌍
 
@@ -489,17 +489,17 @@ Can you say:
 
 `
 
-            },
+    },
 
-            ...memoria
+    ...memoria
 
-          ],
+  ],
 
-          max_tokens:80,
+  max_tokens:80,
 
-          temperature:0.7
+  temperature:0.7
 
-        })
+})
 
       }
 
