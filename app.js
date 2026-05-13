@@ -31,7 +31,7 @@ function mostrarPensando(){
 
   div.innerHTML = `
   
-    <img src="https://i.imgur.com/oAteJWd.png">
+    <img src="https://cdn-icons-png.flaticon.com/512/4712/4712109.png">
 
     <span>
       🧠 Quinti está pensando...
@@ -74,10 +74,12 @@ async function iniciar() {
   chat.appendChild(loading);
 
 
-  // TESTA CONEXÃO COM GPT4ALL
+  // TESTA CONEXÃO COM OLLAMA
   try{
 
-    await fetch("http://localhost:4891/v1/models");
+    await fetch(
+      "http://localhost:11434/api/tags"
+    );
 
     document.getElementById("loading").remove();
 
@@ -91,7 +93,7 @@ async function iniciar() {
     document.getElementById("loading").remove();
 
     adicionarMensagem(
-      "❌ GPT4All não está aberto.",
+      "❌ Ollama não está aberto.",
       "bot"
     );
 
@@ -201,10 +203,10 @@ Meaning: ${conhecimento[chave]}
 
     try{
 
-      // GPT4ALL API
+      // OLLAMA API
       const response = await fetch(
 
-        "http://localhost:4891/v1/chat/completions",
+        "http://localhost:11434/api/generate",
 
         {
 
@@ -216,14 +218,9 @@ Meaning: ${conhecimento[chave]}
 
           body:JSON.stringify({
 
-          model:"Phi-3 Mini Instruct",
+            model:"qwen2:0.5b",
 
-            messages:[
-
-              {
-                role:"system",
-
-                content:`
+            prompt:`
 
 You are Quinti 🌍
 
@@ -276,16 +273,12 @@ Can you say:
 Context:
 ${contexto}
 
-`
-              },
+Child:
+${pergunta}
 
-              ...memoria
+`,
 
-            ],
-
-            max_tokens:80,
-
-            temperature:0.7
+            stream:false
 
           })
 
@@ -303,10 +296,7 @@ ${contexto}
 
 
       const texto =
-        resposta
-        .choices[0]
-        .message
-        .content;
+        resposta.response;
 
 
       adicionarMensagem(
