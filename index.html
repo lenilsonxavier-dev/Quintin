@@ -373,14 +373,14 @@ function removerPensando(){
 async function iniciar(){
 
   adicionarMensagem(
-    "🌍 Connecting to GPT4All...",
+    "🌍 Connecting to Ollama...",
     "bot"
   );
 
   try{
 
     await fetch(
-      "http://localhost:4891/v1/models"
+      "http://localhost:11434/api/tags"
     );
 
     chat.innerHTML = "";
@@ -393,7 +393,7 @@ async function iniciar(){
   }catch(err){
 
     adicionarMensagem(
-      "❌ GPT4All não está aberto.",
+      "❌ Ollama não está aberto.",
       "bot"
     );
 
@@ -434,7 +434,7 @@ window.enviar = async function(){
 
     const response = await fetch(
 
-      "http://localhost:4891/v1/chat/completions",
+      "http://localhost:11434/api/generate",
 
       {
 
@@ -446,15 +446,9 @@ window.enviar = async function(){
 
         body:JSON.stringify({
 
-  model:"Phi-3 Mini Instruct",
+          model:"qwen2:0.5b",
 
-  messages:[
-
-    {
-
-      role:"system",
-
-      content:`
+          prompt:`
 
 You are Quinti 🌍
 
@@ -487,19 +481,16 @@ Hello = olá
 Can you say:
 "Hello"?
 
-`
+---
 
-    },
+Child:
+${pergunta}
 
-    ...memoria
+`,
 
-  ],
+          stream:false
 
-  max_tokens:80,
-
-  temperature:0.7
-
-})
+        })
 
       }
 
@@ -511,10 +502,7 @@ Can you say:
     removerPensando();
 
     const texto =
-      resposta
-      .choices[0]
-      .message
-      .content;
+      resposta.response;
 
     adicionarMensagem(
       texto,
