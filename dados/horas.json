@@ -1,55 +1,69 @@
 {
-  "what time is it": "What time is it? means Que horas são? ⏰",
-  "it's one o'clock": "It's one o'clock means É uma hora 🕐",
-  "it's two o'clock": "It's two o'clock means São duas horas 🕑",
-  "it's three o'clock": "It's three o'clock means São três horas 🕒",
-  "it's four o'clock": "It's four o'clock means São quatro horas 🕓",
-  "it's five o'clock": "It's five o'clock means São cinco horas 🕔",
-  "it's six o'clock": "It's six o'clock means São seis horas 🕕",
-  "it's seven o'clock": "It's seven o'clock means São sete horas 🕖",
-  "it's eight o'clock": "It's eight o'clock means São oito horas 🕗",
-  "it's nine o'clock": "It's nine o'clock means São nove horas 🕘",
-  "it's ten o'clock": "It's ten o'clock means São dez horas 🕙",
-  "it's eleven o'clock": "It's eleven o'clock means São onze horas 🕚",
-  "it's twelve o'clock": "It's twelve o'clock means São doze horas 🕛"
-}
-{
+  "horas_basicas": {
+    "what time is it": "What time is it? means Que horas são? ⏰",
+    "it's one o'clock": "It's one o'clock means É uma hora 🕐",
+    "it's two o'clock": "It's two o'clock means São duas horas 🕑",
+    "it's three o'clock": "It's three o'clock means São três horas 🕒",
+    "it's four o'clock": "It's four o'clock means São quatro horas 🕓",
+    "it's five o'clock": "It's five o'clock means São cinco horas 🕔",
+    "it's six o'clock": "It's six o'clock means São seis horas 🕕",
+    "it's seven o'clock": "It's seven o'clock means São sete horas 🕖",
+    "it's eight o'clock": "It's eight o'clock means São oito horas 🕗",
+    "it's nine o'clock": "It's nine o'clock means São nove horas 🕘",
+    "it's ten o'clock": "It's ten o'clock means São dez horas 🕙",
+    "it's eleven o'clock": "It's eleven o'clock means São onze horas 🕚",
+    "it's twelve o'clock": "It's twelve o'clock means São doze horas 🕛"
+  },
+
   "horas_em_ingles": {
     "tema": "idiomas",
     "subtema": "vocabulario_horas",
+
     "palavras_chave": [
       "horas em ingles",
       "que horas sao em ingles",
       "dizer horas ingles",
-      "o'clock half past",
+      "o'clock",
+      "half past",
+      "quarter past",
+      "quarter to",
       "horas para criancas"
     ],
+
     "inicio": [
       "As horas em inglês ajudam a falar sobre o tempo e a rotina. ⏰"
     ],
+
     "explicacao_curta": [
-      "Para dizer as horas em inglês, usamos expressões como 'o'clock' (em ponto), 'half past' (e meia), 'quarter past' (e quinze) e 'quarter to' (faltando quinze)."
+      "Para dizer as horas em inglês usamos expressões como 'o'clock' (em ponto), 'half past' (e meia), 'quarter past' (e quinze) e 'quarter to' (faltando quinze)."
     ],
+
     "explicacao_aprofundada": [
       "7:00 → It is seven o'clock.",
       "8:30 → It is half past eight.",
       "9:15 → It is quarter past nine.",
       "10:45 → It is quarter to eleven.",
-      "Os minutos também podem ser ditos diretamente (ex: 7:10 → It is seven ten)."
+      "7:10 → It is seven ten."
     ],
+
     "curiosidade": [
-      "Em inglês, também se usa 'a.m.' (manhã) e 'p.m.' (tarde/noite) para evitar confusão. 🕐"
+      "Em inglês também usamos 'a.m.' para manhã e 'p.m.' para tarde e noite. 🕐"
     ],
+
     "interacao": [
-      "Que horas são agora? Vamos tentar dizer em inglês!",
-      "Você consegue formar a frase para 2:15?"
+      "What time is it now?",
+      "Como você diria 2:15 em inglês?",
+      "Você consegue dizer 6:30 em inglês?"
     ],
+
     "atividade": [
-      "Desenhe um relógio e escreva abaixo a hora em inglês para três horários diferentes 🕰️"
+      "Desenhe um relógio e escreva três horários em inglês. 🕰️"
     ],
+
     "final": [
-      "Saber as horas em inglês ajuda a planejar o dia em qualquer lugar do mundo! 🌟"
+      "Saber as horas em inglês ajuda a organizar o dia e viajar pelo mundo! 🌎✨"
     ],
+
     "emocao": "aprendizado",
     "nivel": "leve"
   }
