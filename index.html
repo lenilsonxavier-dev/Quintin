@@ -39,9 +39,16 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 3rem;
-            font-weight: bold;
-            color: #1e2a3a;
+            overflow: hidden;
+        }
+        .avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        /* fallback caso a imagem não carregue */
+        .avatar img:not([src]), .avatar img[src=""] {
+            display: none;
         }
         .info-topo {
             flex: 1;
@@ -151,15 +158,13 @@
 <div class="container">
     <div class="topo">
         <div class="avatar">
-            <img src="./img/quintin.png" alt="Quinti">
+            <img src="./img/quintin.png" alt="Quinti" onerror="this.style.display='none'; this.parentElement.style.fontSize='3rem'; this.parentElement.innerText='🌍';">
         </div>
-
         <div class="info-topo">
             <div class="titulo">Quinti</div>
             <div class="subtitulo">English for curious kids from Osasco ✨</div>
         </div>
     </div>
-</div>
     <div class="status-area">
         <span id="status">🔍 Inicializando...</span>
         <div class="progress-container"><div id="progress" class="progress-bar"></div></div>
@@ -247,18 +252,16 @@
         "animals.json"
     ];
     
-    // Dicionário global que vai armazenar todo o conhecimento dos JSONs
+    // Dicionário global
     let conhecimentoGlobal = {};
     let carregados = 0;
     let totalArquivos = arquivosRaiz.length + arquivosDialogos.length;
 
-    // Função para carregar um JSON
     async function carregarJSON(url, nome) {
         try {
             const response = await fetch(url);
             if (!response.ok) throw new Error(`HTTP ${response.status}`);
             const data = await response.json();
-            // Mescla os dados (espera-se chave: valor)
             conhecimentoGlobal = { ...conhecimentoGlobal, ...data };
             carregados++;
             statusSpan.innerText = `📚 Carregando vocabulário: ${carregados}/${totalArquivos} - ${nome}`;
@@ -270,21 +273,15 @@
         }
     }
 
-    // Função principal de carregamento
     async function carregarTodosJSONs() {
         statusSpan.innerText = "📚 Carregando vocabulários do GitHub...";
         progressBar.style.width = "0%";
         
-        // Carrega arquivos da raiz
         for (const arquivo of arquivosRaiz) {
-            const url = BASE_URL + arquivo;
-            await carregarJSON(url, arquivo);
+            await carregarJSON(BASE_URL + arquivo, arquivo);
         }
-        
-        // Carrega arquivos da pasta dialogos
         for (const arquivo of arquivosDialogos) {
-            const url = BASE_URL + "conteudo-5ano/dialogos/" + arquivo;
-            await carregarJSON(url, arquivo);
+            await carregarJSON(BASE_URL + "conteudo-5ano/dialogos/" + arquivo, arquivo);
         }
         
         statusSpan.innerText = `✅ Vocabulário carregado: ${Object.keys(conhecimentoGlobal).length} palavras/frases`;
@@ -292,27 +289,20 @@
         return conhecimentoGlobal;
     }
 
-    // Função para buscar conhecimento nos JSONs
     function buscarConhecimento(pergunta) {
         const perguntaLower = pergunta.toLowerCase();
         const resultados = [];
-        
-        // Busca por palavras/frases que estão no conhecimentoGlobal
         for (const [chave, valor] of Object.entries(conhecimentoGlobal)) {
             const chaveLower = chave.toLowerCase();
             const valorLower = String(valor).toLowerCase();
-            
-            // Se a pergunta contém a chave ou o valor
             if (perguntaLower.includes(chaveLower) || perguntaLower.includes(valorLower)) {
                 resultados.push(`${chave} = ${valor}`);
                 if (resultados.length >= 5) break;
             }
         }
-        
         return resultados;
     }
 
-    // Fallback local (para palavras comuns, caso o JSON não tenha)
     const fallbackLocal = {
         "dog": "cachorro", "cat": "gato", "bird": "pássaro", "fish": "peixe",
         "cow": "vaca", "horse": "cavalo", "pig": "porco", "duck": "pato",
@@ -323,9 +313,6 @@
         "hi": "oi", "how are you": "como você está"
     };
 
-    // ----------------------------------------------
-    // 3. PROMPT DO SISTEMA (desbloqueado)
-    // ----------------------------------------------
     function getSystemPrompt() {
         return `You are Quinti, an English teacher for Brazilian children aged 7-9.
 
@@ -348,9 +335,6 @@ Example: The dog is barking loudly.
 Be friendly, helpful, and always encourage learning.`;
     }
 
-    // ----------------------------------------------
-    // 4. UI E MODELO
-    // ----------------------------------------------
     let engine = null;
     let modeloPronto = false;
     let jsonPronto = false;
@@ -415,7 +399,6 @@ Be friendly, helpful, and always encourage learning.`;
             adicionarMensagem("Quinti ainda está carregando... Aguarde o vocabulário e o modelo.", "bot");
             return;
         }
-        
         const pergunta = inputPergunta.value.trim();
         if (!pergunta) return;
 
@@ -425,13 +408,11 @@ Be friendly, helpful, and always encourage learning.`;
         btnEnviar.disabled = true;
         mostrarPensando();
 
-        // Busca conhecimento nos JSONs
         const conhecimentoRelevante = buscarConhecimento(pergunta);
         let contexto = "";
         if (conhecimentoRelevante.length > 0) {
             contexto = "Relevant vocabulary from my knowledge base:\n" + conhecimentoRelevante.join("\n") + "\n\n";
         } else {
-            // Fallback para dicionário local
             const fallbackResultados = [];
             for (const [en, pt] of Object.entries(fallbackLocal)) {
                 if (pergunta.toLowerCase().includes(en) || pergunta.toLowerCase().includes(pt)) {
@@ -456,13 +437,10 @@ Be friendly, helpful, and always encourage learning.`;
                 max_tokens: 150
             });
             let texto = resposta.choices[0].message.content;
-            
-            // Se a resposta contiver recusa indevida, substitui
             if (texto.toLowerCase().includes("cannot") || texto.toLowerCase().includes("sexual")) {
                 texto = "Desculpe, tive um problema técnico. Vamos tentar de outra forma: " + 
                         (conhecimentoRelevante[0] || "pergunte de maneira mais simples, como 'cachorro' ou 'gato'.");
             }
-            
             removerPensando();
             adicionarMensagem(texto, "bot");
         } catch (err) {
@@ -480,14 +458,10 @@ Be friendly, helpful, and always encourage learning.`;
         if (e.key === "Enter" && !btnEnviar.disabled && modeloPronto && jsonPronto) enviar();
     });
 
-    // Inicialização: primeiro carrega JSONs, depois o modelo
     (async () => {
-        // 1. Carrega todos os JSONs do GitHub
         await carregarTodosJSONs();
         jsonPronto = true;
         adicionarMensagem(`✨ Vocabulário carregado! Agora sei ${Object.keys(conhecimentoGlobal).length} palavras/frases.`, "info");
-        
-        // 2. Inicia o modelo
         const ok = await iniciarModelo();
         if (ok) {
             modeloPronto = true;
@@ -499,7 +473,6 @@ Be friendly, helpful, and always encourage learning.`;
                 adicionarMensagem("Olá! Sou o Quinti 🌍 Agora com todo o vocabulário dos seus JSONs! Pergunte qualquer coisa em português.", "bot");
             }
         } else {
-            // Mesmo sem modelo, o conhecimento dos JSONs está disponível
             adicionarMensagem("⚠️ Modelo de IA não carregou, mas posso te ajudar com o vocabulário básico! Tente perguntar palavras simples.", "bot");
             inputPergunta.disabled = false;
             btnEnviar.disabled = false;
