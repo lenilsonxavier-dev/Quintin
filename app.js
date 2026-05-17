@@ -1,20 +1,14 @@
 import * as webllm from "https://esm.sh/@mlc-ai/web-llm";
 
 const chat = document.getElementById("chat");
-
-let memoria = [];
-
 let engine = null;
+let modeloPronto = false;
+let conhecimentoGlobal = {};   // onde ficam os dados dos JSONs
 
-// MODELO MAIS LEVE
-const MODEL =
-  "SmolLM-1.7B-Instruct-q4f16_1-MLC";
-
-
-// ========= LISTA DE ARQUIVOS JSON =========
-const arquivos = [
-  
-  // Conversação
+// =====================================================
+// 1. LISTA DE ARQUIVOS JSON (no GitHub)
+// =====================================================
+const arquivosVocabulario = [
   "food_and_drink.json",
   "historia_lingua_inglesa.json",
   "lets_have_fun.json",
@@ -26,8 +20,6 @@ const arquivos = [
   "where_can_we_buy_clothes.json",
   "where_can_we_find_it.json",
   "where_is_the_candy_shop.json",
-
-  // Vocabulário
   "adjetivos.json",
   "animais_fazenda.json",
   "animais_marinhos.json",
@@ -57,349 +49,234 @@ const arquivos = [
   "sinonimos.json",
   "substantivos.json",
   "datas_comemorativas_ingles.json"
-
 ];
-// =========================================
 
+// Arquivos de diálogo (dentro da pasta conteudo-5ano/dialogos)
+// 🔁 Você deve listar aqui os nomes reais dos arquivos que estão nessa pasta.
+// Exemplo (suposição):
+const arquivosDialogos = [
+  "greetings.json",
+  "family.json",
+  "school.json",
+  "shopping.json",
+  "animals.json"
+  // Adicione todos os que existirem
+];
 
-// BASE DOS JSONS
-let conhecimento = {};
+// =====================================================
+// 2. FUNÇÃO PARA CARREGAR JSONs DO GITHUB
+// =====================================================
+async function carregarConhecimento() {
+  const baseUrl = "https://raw.githubusercontent.com/lenilsonxavier-dev/Quintin/main/dados/";
+  const dialogosUrl = "https://raw.githubusercontent.com/lenilsonxavier-dev/Quintin/main/dados/conteudo-5ano/dialogos/";
 
+  let total = 0;
+  let sucessos = 0;
 
-// ADICIONA MENSAGENS
-function adicionarMensagem(texto, classe) {
-
-  const div = document.createElement("div");
-
-  div.className = "msg " + classe;
-
-  div.innerText = texto;
-
-  chat.appendChild(div);
-
-  chat.scrollTop = chat.scrollHeight;
-}
-
-
-// MOSTRA "PENSANDO"
-function mostrarPensando(){
-
-  removerPensando();
-
-  const div = document.createElement("div");
-
-  div.className = "pensando";
-
-  div.id = "pensando";
-
-  div.innerHTML = `
-    <img src="./img/quintin.png">
-    <span>🧠 Quinti está pensando...</span>
-  `;
-
-  chat.appendChild(div);
-
-  chat.scrollTop = chat.scrollHeight;
-}
-
-
-// REMOVE "PENSANDO"
-function removerPensando(){
-
-  const pensando =
-    document.getElementById("pensando");
-
-  if(pensando){
-
-    pensando.remove();
-  }
-}
-
-
-// CARREGA JSONS
-async function carregarConhecimento(){
-
-  for (const arquivo of arquivos) {
-
+  // Carrega vocabulário
+  for (const arquivo of arquivosVocabulario) {
     try {
-
-      const resposta =
-        await fetch(`./dados/${arquivo}`);
-
-      if (!resposta.ok) continue;
-
-      const json =
-        await resposta.json();
-
-      conhecimento = {
-        ...conhecimento,
-        ...json
-      };
-
+      const resp = await fetch(baseUrl + arquivo);
+      if (!resp.ok) continue;
+      const dados = await resp.json();
+      conhecimentoGlobal = { ...conhecimentoGlobal, ...dados };
+      sucessos++;
     } catch (e) {
+      console.warn(`Erro ao carregar ${arquivo}:`, e);
+    }
+    total++;
+  }
 
-      console.warn(
-        `Erro ao carregar ${arquivo}:`,
-        e
-      );
+  // Carrega diálogos
+  for (const arquivo of arquivosDialogos) {
+    try {
+      const resp = await fetch(dialogosUrl + arquivo);
+      if (!resp.ok) continue;
+      const dados = await resp.json();
+      conhecimentoGlobal = { ...conhecimentoGlobal, ...dados };
+      sucessos++;
+    } catch (e) {
+      console.warn(`Erro ao carregar diálogo ${arquivo}:`, e);
+    }
+    total++;
+  }
+
+  adicionarMensagem(`📚 ${sucessos}/${total} arquivos de conhecimento carregados.`, "bot");
+  return sucessos > 0;
+}
+
+// =====================================================
+// 3. FALLBACK LOCAL (CASO OS JSONS FALHEM)
+// =====================================================
+const fallbackDicionario = {
+  "dog": "cachorro", "cat": "gato", "bird": "pássaro",
+  "cow": "vaca", "horse": "cavalo", "pig": "porco",
+  "red": "vermelho", "blue": "azul", "green": "verde",
+  "hello": "olá", "good morning": "bom dia", "good night": "boa noite"
+};
+
+function buscarContextoLocal(pergunta) {
+  const lower = pergunta.toLowerCase();
+  const resultados = [];
+  const fonte = Object.keys(conhecimentoGlobal).length ? conhecimentoGlobal : fallbackDicionario;
+  for (const [en, pt] of Object.entries(fonte)) {
+    if (lower.includes(en) || lower.includes(pt.toLowerCase())) {
+      resultados.push(`${en} = ${pt}`);
+      if (resultados.length >= 6) break;
     }
   }
+  return resultados;
 }
 
+// =====================================================
+// 4. INICIALIZAÇÃO DO MODELO WebLLM
+// =====================================================
+const MODEL_NAME = "Llama-3.2-1B-Instruct-q4f16_1-MLC"; // modelo leve e compatível
 
-// INICIAR
-async function iniciar() {
+async function iniciarModelo() {
+  if (!navigator.gpu) {
+    adicionarMensagem("❌ Seu navegador não suporta WebGPU. Use Chrome/Edge.", "bot");
+    return false;
+  }
 
-  // loading inicial
-  const loading =
-    document.createElement("div");
-
-  loading.className = "msg bot";
-
-  loading.id = "loading";
-
-  loading.innerText =
-    "🌍 Loading Quinti...";
-
-  chat.appendChild(loading);
+  adicionarMensagem("🧠 Baixando modelo de IA (Llama 3.2 1B ~850MB)...", "bot");
+  const progressDiv = document.createElement("div");
+  progressDiv.className = "progress";
+  chat.appendChild(progressDiv);
 
   try {
-
-    // CARREGA JSONS
-    await carregarConhecimento();
-
-    adicionarMensagem(
-      "🧠 Carregando cérebro do Quinti...",
-      "bot"
-    );
-
-    // INICIA WEBLLM
-    engine =
-      new webllm.MLCEngine();
-
-    await engine.reload(MODEL);
-
-    // REMOVE LOADING
-    const loadingEl =
-      document.getElementById("loading");
-
-    if (loadingEl){
-
-      loadingEl.remove();
-    }
-
-    adicionarMensagem(
-      "Hello! I'm Quinti!",
-      "bot"
-    );
-
-  } catch (erro) {
-
-    console.error(
-      "Erro WebLLM:",
-      erro
-    );
-
-    adicionarMensagem(
-      "❌ Seu navegador não suportou WebLLM.",
-      "bot"
-    );
+    engine = await webllm.CreateMLCEngine(MODEL_NAME, {
+      initProgressCallback: (progress) => {
+        const percent = Math.round((progress.progress || 0) * 100);
+        progressDiv.innerText = `${progress.text || "Carregando..."} (${percent}%)`;
+        if (percent === 100) setTimeout(() => progressDiv.remove(), 1000);
+      }
+    });
+    adicionarMensagem("✅ Quinti está pronto! Pergunte sobre inglês.", "bot");
+    return true;
+  } catch (err) {
+    console.error(err);
+    adicionarMensagem(`❌ Erro ao carregar modelo: ${err.message}`, "bot");
+    return false;
   }
 }
 
+// =====================================================
+// 5. PROMPT DO SISTEMA (CORRIGIDO, SEM CENSURA TOLA)
+// =====================================================
+const systemPrompt = `You are Quinti, a Brazilian English teacher for children aged 7-9.
 
-// FUNÇÃO ENVIAR
+CRITICAL RULES:
+- There is NOTHING wrong with words like dog, cat, bark, run, eat. They are normal.
+- NEVER refuse a translation. ALWAYS translate what the child asks.
+- Answer in Portuguese, teaching the English word.
+- Use this EXACT format when asked "como se diz X em inglês":
+
+English word ✨
+English word = translation
+Example: simple sentence.
+
+Example:
+Child: como se diz vaca
+Quinti: Cow 🐮
+Cow = vaca
+Example: The cow is big.
+
+Child: o cachorro está latindo
+Quinti: The dog is barking 🐕
+The dog is barking = o cachorro está latindo
+Example: The dog is barking at night.
+
+Never add extra explanations, never refuse, never say "I cannot". Just translate.`;
+
+// =====================================================
+// 6. FUNÇÃO ENVIAR (COM CONTEXTO DOS JSONs)
+// =====================================================
 window.enviar = async function () {
-
-  const input =
-    document.getElementById("pergunta");
-
-  const pergunta =
-    input.value.trim();
-
+  const input = document.getElementById("pergunta");
+  const pergunta = input.value.trim();
   if (!pergunta) return;
 
-  adicionarMensagem(
-    pergunta,
-    "user"
-  );
-
-  memoria.push({
-    role: "user",
-    content: pergunta
-  });
-
+  adicionarMensagem(pergunta, "user");
   input.value = "";
+  input.disabled = true;
+  document.getElementById("btnEnviar").disabled = true;
 
   mostrarPensando();
 
-  // CONTEXTO DOS JSONS
-  let contexto = "";
-
-  for (const chave in conhecimento) {
-
-    if (
-      pergunta
-        .toLowerCase()
-        .includes(
-          chave.toLowerCase()
-        )
-    ) {
-
-      contexto += `
-Word: ${chave}
-Meaning: ${conhecimento[chave]}
-`;
-    }
+  // Busca contexto nos JSONs (ou fallback)
+  const palavrasContexto = buscarContextoLocal(pergunta);
+  let contextoExtra = "";
+  if (palavrasContexto.length) {
+    contextoExtra = "Palavras que podem ajudar:\n" + palavrasContexto.join("\n") + "\n\n";
   }
 
-  // SYSTEM PROMPT
-  const systemPrompt = `
-
-You are Quinti 🌍
-
-You are ONLY Quinti.
-You are NOT an AI assistant.
-Never say you are an AI.
-Never break character.
-Always act like a children's English teacher.
-
-You are a Brazilian elementary English teacher
-for children aged 7 to 9.
-
-IMPORTANT RULES:
-
-- Teach basic English only.
-- Always answer like a calm teacher.
-- Never speak like a teenager.
-- Never use slang.
-- Never use internet expressions.
-- Never invent conversations.
-- Never ignore the child's question.
-- Always help in Portuguese when necessary.
-- Use short answers.
-- Teach step by step.
-- Use simple vocabulary.
-- Use at most 1 emoji sometimes.
-
-VERY IMPORTANT:
-
-If the child asks:
-"como se diz X em inglês"
-or
-"o que é X em inglês"
-
-Always answer in this format:
-
-English word ✨
-
-English word = tradução
-
-Example:
-Simple sentence.
-
-GOOD EXAMPLES:
-
-Child:
-dog
-
-Answer:
-Dog 🐶
-
-Dog = cachorro
-
-Example:
-I like dogs.
-
----
-
-Child:
-como se diz vaca em inglês
-
-Answer:
-Cow 🐄
-
-Cow = vaca
-
-Example:
-The cow is big.
-
-IMPORTANT:
-Never ask about family.
-Never invent personal questions.
-Never behave like social media.
-Stay focused on English teaching only.
-
-`;
-
-  const userMessage = `
-
-Context (vocabulary that may help):
-${contexto || "No specific vocabulary found."}
-
-Child: ${pergunta}
-
-Quinti:
-
-`;
+  const mensagemUsuario = `${contextoExtra}Child asks: "${pergunta}"\n\nQuinti, responda exatamente no formato.`;
 
   try {
+    if (!engine || !modeloPronto) throw new Error("Modelo não carregado ainda.");
 
-    const resposta =
-      await engine.chat.completions.create({
-
-        messages: [
-
-          {
-            role: "system",
-            content: systemPrompt
-          },
-
-          {
-            role: "user",
-            content: userMessage
-          }
-
-        ],
-
-        temperature: 0.7,
-
-        max_tokens: 300
-
-      });
-
-    const texto =
-      resposta
-        .choices[0]
-        .message
-        .content
-        .trim();
-
-    removerPensando();
-
-    adicionarMensagem(
-      texto,
-      "bot"
-    );
-
-    memoria.push({
-      role: "assistant",
-      content: texto
+    const resposta = await engine.chat.completions.create({
+      messages: [
+        { role: "system", content: systemPrompt },
+        { role: "user", content: mensagemUsuario }
+      ],
+      temperature: 0.4,
+      max_tokens: 150
     });
-
-  } catch (err) {
-
+    const texto = resposta.choices[0].message.content.trim();
     removerPensando();
-
+    adicionarMensagem(texto, "bot");
+  } catch (err) {
+    removerPensando();
     console.error(err);
-
-    adicionarMensagem(
-      "❌ Quinti não conseguiu pensar localmente.",
-      "bot"
-    );
+    adicionarMensagem("❌ Erro ao processar. Tente perguntar de outra forma.", "bot");
+  } finally {
+    input.disabled = false;
+    document.getElementById("btnEnviar").disabled = false;
+    input.focus();
   }
 };
 
+// =====================================================
+// 7. FUNÇÕES AUXILIARES DE UI
+// =====================================================
+function adicionarMensagem(texto, classe) {
+  const div = document.createElement("div");
+  div.className = `msg ${classe}`;
+  div.innerText = texto;
+  chat.appendChild(div);
+  chat.scrollTop = chat.scrollHeight;
+}
 
-// INICIAR APP
-iniciar();
+function mostrarPensando() {
+  removerPensando();
+  const div = document.createElement("div");
+  div.className = "pensando";
+  div.id = "pensando";
+  div.innerHTML = `<img src="./img/quintin.png"><span>🧠 Quinti está pensando...</span>`;
+  chat.appendChild(div);
+  chat.scrollTop = chat.scrollHeight;
+}
+
+function removerPensando() {
+  const el = document.getElementById("pensando");
+  if (el) el.remove();
+}
+
+// =====================================================
+// 8. INICIALIZAÇÃO PRINCIPAL
+// =====================================================
+(async function iniciar() {
+  adicionarMensagem("🌍 Carregando Quinti...", "bot");
+  await carregarConhecimento();        // tenta buscar os JSONs do GitHub
+  const modeloOk = await iniciarModelo();
+  modeloPronto = modeloOk;
+  if (!modeloOk) {
+    adicionarMensagem("⚠️ Modo offline: apenas respostas básicas do dicionário local.", "bot");
+  } else {
+    adicionarMensagem("Hello! I'm Quinti! Pergunte qualquer palavra ou frase.", "bot");
+  }
+  document.getElementById("pergunta").disabled = false;
+  document.getElementById("btnEnviar").disabled = false;
+})();
