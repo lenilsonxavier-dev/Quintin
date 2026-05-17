@@ -1,0 +1,53 @@
+{
+  "where_can_we_buy_clothes": {
+    "tema": "idiomas",
+    "subtema": "dialogo_compras",
+    "palavras_chave": [
+      "where can we buy clothes",
+      "shopping mall",
+      "T-shirt",
+      "comprar roupas em ingles",
+      "mother daughter dialog"
+    ],
+    "inicio": [
+      "Emma needs new clothes. She goes shopping with her mother at the mall. 👕🛍️"
+    ],
+    "explicacao_curta": [
+      "Emma pergunta: 'Where can we buy clothes?' A mãe responde: 'We can go to the mall.' Emma quer uma camiseta azul: 'I want a blue T-shirt.' A mãe diz: 'Let’s find one for you.'"
+    ],
+    "explicacao_aprofundada": [
+      "**Diálogo:**",
+      "Emma: Where can we buy clothes?",
+      "Mother: We can go to the mall.",
+      "Emma: I want a blue T-shirt.",
+      "Mother: Let’s find one for you.",
+      "",
+      "**Vocabulário:**",
+      "clothes = roupas",
+      "mall = shopping",
+      "T-shirt = camiseta",
+      "pants = calça",
+      "dress = vestido",
+      "shoes = sapatos",
+      "blue = azul",
+      "buy = comprar",
+      "store = loja",
+      "shopping = compras"
+    ],
+    "curiosidade": [
+      "Nos Estados Unidos, 'mall' é um centro comercial enorme, geralmente fechado, com muitas lojas. 🛍️"
+    ],
+    "interacao": [
+      "What color T-shirt do you like the most?",
+      "Do you prefer shopping at the mall or online?"
+    ],
+    "atividade": [
+      "Desenhe uma vitrine de loja com roupas em inglês (T-shirt, pants, dress, shoes) e escreva os nomes 🎨👗"
+    ],
+    "final": [
+      "Comprar roupas em inglês pode ser muito divertido. Agora você já sabe como perguntar onde comprar! 🌟"
+    ],
+    "emocao": "aprendizado",
+    "nivel": "leve"
+  }
+}
