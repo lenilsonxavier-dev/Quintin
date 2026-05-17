@@ -252,9 +252,9 @@ button:hover{
   <div class="topo">
 
     <img
-  class="avatar"
-  src="./img/quintin.png"
->
+      class="avatar"
+      src="./img/quintin.png"
+    >
   
     <div class="info-topo">
 
@@ -287,7 +287,9 @@ button:hover{
 
 </div>
 
-<script>
+<script type="module">
+
+import * as webllm from "https://esm.run/@mlc-ai/web-llm";
 
 const chat =
   document.getElementById("chat");
@@ -296,6 +298,65 @@ const input =
   document.getElementById("pergunta");
 
 let memoria = [];
+
+let engine = null;
+
+const MODEL =
+  "Llama-3.2-3B-Instruct-q4f16_1";
+
+
+// ========= LISTA DE JSON =========
+const arquivos = [
+
+  // Conversação
+  "food_and_drink.json",
+  "historia_lingua_inglesa.json",
+  "lets_have_fun.json",
+  "places_to_go_in_town.json",
+  "prepositions_in_on_at.json",
+  "pronomes.json",
+  "verb_to_be.json",
+  "we_are_having_fun.json",
+  "where_can_we_buy_clothes.json",
+  "where_can_we_find_it.json",
+  "where_is_the_candy_shop.json",
+
+  // Vocabulário
+  "adjetivos.json",
+  "animais_fazenda.json",
+  "animais_marinhos.json",
+  "animais_selvagens.json",
+  "aniversario_expressoes.json",
+  "clima.json",
+  "comidas.json",
+  "cores.json",
+  "cumprimentos.json",
+  "curiosidades_lingua_inglesa.json",
+  "dias_da_semana.json",
+  "estacoes.json",
+  "fases_da_vida.json",
+  "glossario.json",
+  "halloween.json",
+  "horas.json",
+  "materias_escolares.json",
+  "meses_do_ano.json",
+  "numeros_ordinais.json",
+  "o_que_e_lingua_inglesa.json",
+  "objetos_escolares.json",
+  "opostos.json",
+  "passaros.json",
+  "pequenos_dialogos.json",
+  "rotinas.json",
+  "roupas.json",
+  "sinonimos.json",
+  "substantivos.json",
+  "datas_comemorativas_ingles.json"
+
+];
+// =================================
+
+
+let conhecimento = {};
 
 
 // ENTER envia
@@ -369,6 +430,41 @@ function removerPensando(){
 }
 
 
+// CARREGAR JSONS
+async function carregarConhecimento(){
+
+  for(const arquivo of arquivos){
+
+    try{
+
+      const resposta =
+        await fetch(`./dados/${arquivo}`);
+
+      if(!resposta.ok){
+        continue;
+      }
+
+      const json =
+        await resposta.json();
+
+      conhecimento = {
+
+        ...conhecimento,
+
+        ...json
+      };
+
+    }catch(e){
+
+      console.warn(
+        `Erro ao carregar ${arquivo}`,
+        e
+      );
+    }
+  }
+}
+
+
 // INICIAR
 async function iniciar(){
 
@@ -379,9 +475,17 @@ async function iniciar(){
 
   try{
 
-    await fetch(
-      "http://localhost:11434/api/tags"
+    await carregarConhecimento();
+
+    adicionarMensagem(
+      "🧠 Quinti está carregando o cérebro...",
+      "bot"
     );
+
+    engine =
+      new webllm.MLCEngine();
+
+    await engine.reload(MODEL);
 
     chat.innerHTML = "";
 
@@ -393,7 +497,7 @@ async function iniciar(){
   }catch(err){
 
     adicionarMensagem(
-      "😴 Quinti ainda está dormindo...",
+      "❌ Seu navegador não conseguiu iniciar o Quinti.",
       "bot"
     );
 
@@ -430,26 +534,47 @@ window.enviar = async function(){
 
   mostrarPensando();
 
+  let contexto = "";
+
+  for(const chave in conhecimento){
+
+    if(
+
+      pergunta
+        .toLowerCase()
+        .includes(
+          chave.toLowerCase()
+        )
+
+    ){
+
+      contexto += `
+Word: ${chave}
+Meaning: ${conhecimento[chave]}
+`;
+
+    }
+  }
+
   try{
 
-    const response = await fetch(
+    const resposta =
+      await engine.chat.completions.create({
 
-      "http://localhost:11434/api/generate",
+        messages:[
 
-      {
-method:"POST",
+          {
 
-headers:{
-  "Content-Type":"application/json"
-},
+role:"system",
 
-body:JSON.stringify({
-
-  model:"llama3.2:3b",
-
-  prompt:`
+content:`
 
 You are Quinti 🌍
+
+You are ONLY Quinti.
+You are NOT an AI assistant.
+Never say you are an AI.
+Never break character.
 
 You are a Brazilian elementary English teacher
 for children aged 7 to 9.
@@ -485,8 +610,6 @@ English word = tradução
 Example:
 Simple sentence.
 
-GOOD EXAMPLES:
-
 Child:
 como se diz vaca em inglês
 
@@ -498,80 +621,43 @@ Cow = vaca
 Example:
 The cow is big.
 
----
+`
 
-Child:
-como se diz bezerro em inglês
+          },
 
-Answer:
-Calf 🐮
+          {
 
-Calf = bezerro
+role:"user",
 
-Example:
-The calf is small.
+content:`
 
----
-
-Child:
-oi
-
-Answer:
-Hello 🌟
-
-Hello = olá
-
----
-
-Child:
-dog
-
-Answer:
-Dog 🐶
-
-Dog = cachorro
-
-Example:
-I like dogs.
-
----
-
-Child:
-i like dogs
-
-Answer:
-Great 🌈
-
-"I like dogs"
-=
-"Eu gosto de cachorros"
-
-IMPORTANT:
-- Stay focused.
-- Be educational.
-- Be gentle.
-- Be child-friendly.
-- Never act like social media.
+Context:
+${contexto || "No context"}
 
 Child:
 ${pergunta}
 
-`,
+Quinti:
 
-  stream:false
+`
 
-})
-      }
+          }
 
-    );
+        ],
 
-    const resposta =
-      await response.json();
+        temperature:0.7,
+
+        max_tokens:300
+
+      });
 
     removerPensando();
 
     const texto =
-      resposta.response;
+      resposta
+        .choices[0]
+        .message
+        .content;
 
     adicionarMensagem(
       texto,
@@ -591,7 +677,7 @@ ${pergunta}
     removerPensando();
 
     adicionarMensagem(
-      "❌ Quinti não conseguiu responder.",
+      "❌ Quinti não conseguiu pensar.",
       "bot"
     );
 
