@@ -1,0 +1,53 @@
+{
+  "we_are_having_fun": {
+    "tema": "idiomas",
+    "subtema": "dialogo_praia",
+    "palavras_chave": [
+      "we are having fun",
+      "beach dialog",
+      "sandcastle",
+      "praia em ingles",
+      "present continuous"
+    ],
+    "inicio": [
+      "Sara and Max are at the beach. They build a sandcastle and play in the water. 🌊"
+    ],
+    "explicacao_curta": [
+      "Sara diz: 'We are having fun!' Max concorda: 'Yes! The beach is amazing.' Sara mostra o castelo: 'Look at our sandcastle!' Max elogia: 'It is beautiful.'"
+    ],
+    "explicacao_aprofundada": [
+      "**Diálogo:**",
+      "Sara: We are having fun!",
+      "Max: Yes! The beach is amazing.",
+      "Sara: Look at our sandcastle!",
+      "Max: It is beautiful.",
+      "",
+      "**Vocabulário:**",
+      "beach = praia",
+      "water = água",
+      "sandcastle = castelo de areia",
+      "fun = diversão",
+      "play = brincar",
+      "beautiful = bonito",
+      "sun = sol",
+      "friends = amigos",
+      "sea = mar",
+      "happy = feliz"
+    ],
+    "curiosidade": [
+      "A expressão 'We are having fun' usa o present continuous (estar + -ing), que mostra que a ação está acontecendo agora. ⏳"
+    ],
+    "interacao": [
+      "Do you like going to the beach?",
+      "What do you like to build in the sand?"
+    ],
+    "atividade": [
+      "Desenhe uma cena na praia e escreva três frases em inglês usando o present continuous (ex: 'I am swimming') 🏖️🎨"
+    ],
+    "final": [
+      "Na praia ou no parque, o importante é se divertir e praticar inglês! 🌟"
+    ],
+    "emocao": "alegria",
+    "nivel": "leve"
+  }
+}
