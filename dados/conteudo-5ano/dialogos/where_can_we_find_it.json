@@ -1,0 +1,53 @@
+{
+  "where_can_we_find_it": {
+    "tema": "idiomas",
+    "subtema": "dialogo_escola",
+    "palavras_chave": [
+      "where can we find",
+      "ball game",
+      "teacher dialog",
+      "gym school",
+      "encontrar em ingles"
+    ],
+    "inicio": [
+      "The children need a ball for the game. They ask a teacher where they can find one. ⚽"
+    ],
+    "explicacao_curta": [
+      "Nina pergunta: 'Where can we find a ball?' A professora responde: 'You can find one in the gym.' Leo agradece: 'Thank you, teacher!' Professora: 'You are welcome.'"
+    ],
+    "explicacao_aprofundada": [
+      "**Diálogo:**",
+      "Nina: Where can we find a ball?",
+      "Teacher: You can find one in the gym.",
+      "Leo: Thank you, teacher!",
+      "Teacher: You are welcome.",
+      "",
+      "**Vocabulário:**",
+      "find = encontrar",
+      "ball = bola",
+      "gym = ginásio",
+      "teacher = professor",
+      "game = jogo",
+      "school = escola",
+      "thank you = obrigado",
+      "you are welcome = de nada",
+      "children = crianças",
+      "play = brincar"
+    ],
+    "curiosidade": [
+      "Nos Estados Unidos, 'gym' pode ser tanto o ginásio esportivo quanto a aula de educação física. 🏋️"
+    ],
+    "interacao": [
+      "What objects do you usually need at school?",
+      "Do you like physical education class?"
+    ],
+    "atividade": [
+      "Desenhe a sua escola e escreva onde você encontra os objetos (ball in the gym, books in the library, etc.) 🏫✏️"
+    ],
+    "final": [
+      "Saber perguntar onde encontrar as coisas é muito útil no dia a dia. Continue praticando! 🌟"
+    ],
+    "emocao": "aprendizado",
+    "nivel": "leve"
+  }
+}
