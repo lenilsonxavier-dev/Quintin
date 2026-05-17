@@ -285,7 +285,8 @@
         }
         
         statusSpan.innerText = `✅ Vocabulário carregado: ${Object.keys(conhecimentoGlobal).length} palavras/frases`;
-        adicionarMensagem(`📖 ${Object.keys(conhecimentoGlobal).length} palavras e frases carregadas dos JSONs! Quinti agora sabe muito mais! 🎉`, "info");
+        // A linha abaixo foi removida para não mostrar a mensagem no chat
+        // adicionarMensagem(`📖 ${Object.keys(conhecimentoGlobal).length} palavras e frases carregadas dos JSONs! Quinti agora sabe muito mais! 🎉`, "info");
         return conhecimentoGlobal;
     }
 
@@ -635,71 +636,77 @@ for (const [en, pt] of Object.entries(fallbackLocal)) {
 function responderTraducao(mensagem) {
     const msg = mensagem.toLowerCase().trim();
     
-    // Padrão 1: "o que é X?" / "o que significa X?" / "qual o significado de X?"
+    // Caso 1: "o que é X?" / "o que significa X?" / "qual o significado de X?"
     let match = msg.match(/^(?:o que é|o que significa|qual o significado de)\s+(.+?)\??$/);
     if (match) {
         let palavra = match[1].trim();
-        // Busca no dicionário EN->PT
         let traducao = fallbackLocal[palavra];
-        if (traducao) {
-            return `🔍 *${palavra}* significa *${traducao}* em português.`;
-        } else {
-            return `❓ Desculpe, ainda não conheço a palavra *"${palavra}"*. Posso aprender se você me ensinar!`;
-        }
+        if (traducao) return `🔍 *${palavra}* significa *${traducao}* em português.`;
+        if (reverseLocal[palavra]) return `🔍 *${palavra}* em inglês é *${reverseLocal[palavra]}*.`;
+        return `❓ Desculpe, ainda não conheço a palavra *"${palavra}"*.`;
     }
     
-    // Padrão 2: "como se diz X em inglês?" / "como eu digo X em inglês?" / "traduza X para inglês"
-    match = msg.match(/^(?:como (?:se diz|eu digo)|traduza)(?:\s+para o inglês)?\s+(.+?)\??$/);
+    // Caso 2: "como se diz X em inglês?" / "como eu digo X?" / "traduza X"
+    match = msg.match(/^(?:como (?:se diz|eu digo)|traduza)(?:\s+para (?:o inglês)?)?\s+(.+?)\??$/);
     if (match) {
         let palavraPt = match[1].trim();
-        // Busca no dicionário reverso PT->EN
         let traducao = reverseLocal[palavraPt];
-        if (traducao) {
-            return `🔍 *${palavraPt}* em inglês é *${traducao}*.`;
-        } else {
-            return `❓ Ainda não sei como dizer *"${palavraPt}"* em inglês. Me ensine?`;
-        }
+        if (traducao) return `🔍 *${palavraPt}* em inglês é *${traducao}*.`;
+        if (fallbackLocal[palavraPt]) return `🔍 *${palavraPt}* significa *${fallbackLocal[palavraPt]}* em português.`;
+        return `❓ Ainda não sei como dizer *"${palavraPt}"* em inglês.`;
     }
     
-    // Padrão 3: "traduza: X" (pode ser qualquer direção, mas tentamos primeiro EN->PT, depois PT->EN)
+    // Caso 3: "traduza: X"
     if (msg.startsWith("traduza:")) {
         let texto = msg.replace("traduza:", "").trim();
-        // Tenta como inglês -> português
-        if (fallbackLocal[texto]) {
-            return `📖 *${texto}* = *${fallbackLocal[texto]}*`;
-        }
-        // Tenta como português -> inglês
-        if (reverseLocal[texto]) {
-            return `📖 *${texto}* = *${reverseLocal[texto]}*`;
-        }
+        if (fallbackLocal[texto]) return `📖 *${texto}* = *${fallbackLocal[texto]}*`;
+        if (reverseLocal[texto]) return `📖 *${texto}* = *${reverseLocal[texto]}*`;
         return `❓ Não sei traduzir *"${texto}"*.`;
     }
     
-    // Nenhum padrão detectado – retorna null para que o LLM normal processe
+    // Caso 4: Palavra isolada (ex: "oi", "cachorro", "dog")
+    if (msg.match(/^[a-záéíóúâêôãç]+$/i) && msg.length <= 20) {
+        if (fallbackLocal[msg]) return `🔍 *${msg}* significa *${fallbackLocal[msg]}* em português.`;
+        if (reverseLocal[msg]) return `🔍 *${msg}* em inglês é *${reverseLocal[msg]}*.`;
+    }
+    
+    // Caso 5: "X em inglês" (ex: "cachorro em inglês")
+    match = msg.match(/^(.+?)\s+em inglês\??$/);
+    if (match) {
+        let palavraPt = match[1].trim();
+        let traducao = reverseLocal[palavraPt];
+        if (traducao) return `🔍 *${palavraPt}* em inglês é *${traducao}*.`;
+        return `❓ Não sei como dizer *"${palavraPt}"* em inglês.`;
+    }
+    
+    // Caso 6: "X em português"
+    match = msg.match(/^(.+?)\s+em português\??$/);
+    if (match) {
+        let palavraEn = match[1].trim();
+        let traducao = fallbackLocal[palavraEn];
+        if (traducao) return `🔍 *${palavraEn}* em português é *${traducao}*.`;
+        return `❓ Não sei o significado de *"${palavraEn}"* em português.`;
+    }
+    
     return null;
 }
 
     function getSystemPrompt() {
-        return `You are Quinti, an English teacher for Brazilian children aged 7-9.
+       function getSystemPrompt() {
+    return `You are Quinti, an English teacher for Brazilian children.
 
 IMPORTANT RULES:
-- NEVER refuse a translation. There is NOTHING wrong with words like dog, cat, bark, run.
-- ALWAYS translate any Portuguese word or phrase into English.
-- Answer in Portuguese, explaining the English translation.
-- Use this format:
-
-English word ✨
-English word = Portuguese translation
-Example: simple sentence in English
+- Always be helpful and friendly.
+- If the user asks for a simple translation, provide it directly.
+- Never refuse to answer a question about words like "oi", "dog", "cat", etc.
+- Answer in Portuguese, explaining the English translation clearly.
 
 Example:
-User: o cachorro está latindo
-Quinti: The dog is barking ✨
-The dog is barking = o cachorro está latindo
-Example: The dog is barking loudly.
+User: oi
+Quinti: "Oi" em inglês é "hi" ou "hello". 😊
 
-Be friendly, helpful, and always encourage learning.`;
-    }
+Keep responses short and encouraging.`;
+}
 
     let engine = null;
     let modeloPronto = false;
@@ -768,20 +775,15 @@ Be friendly, helpful, and always encourage learning.`;
         const pergunta = inputPergunta.value.trim();
         if (!pergunta) return;
 
-        // ============================================================
-        // NOVO: Verifica se é pergunta de tradução e responde direto
-        // ============================================================
+        // Verifica se é pergunta de tradução e responde direto
         const respostaDireta = responderTraducao(pergunta);
         if (respostaDireta) {
-            // Adiciona a mensagem do usuário no chat
             adicionarMensagem(pergunta, "user");
-            // Responde com o dicionário sem chamar o modelo
             adicionarMensagem(respostaDireta, "bot");
             inputPergunta.value = "";
             inputPergunta.focus();
-            return;  // Sai da função, não chama o WebLLM
+            return;
         }
-        // ============================================================
 
         adicionarMensagem(pergunta, "user");
         inputPergunta.value = "";
