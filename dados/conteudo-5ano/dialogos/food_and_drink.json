@@ -1,0 +1,53 @@
+{
+  "food_and_drink": {
+    "tema": "idiomas",
+    "subtema": "dialogo_restaurante",
+    "palavras_chave": [
+      "food and drink",
+      "restaurant dialog",
+      "comida em ingles",
+      "bebida em ingles",
+      "can I have please"
+    ],
+    "inicio": [
+      "Julia and her father are at a restaurant. Julia wants juice and a sandwich. 🍎🥤"
+    ],
+    "explicacao_curta": [
+      "Julia pede: 'Can I have apple juice, please?' O pai responde: 'Of course.' Julia também quer um sanduíche: 'And a sandwich too!' O pai elogia: 'Great choice.'"
+    ],
+    "explicacao_aprofundada": [
+      "**Diálogo:**",
+      "Julia: Can I have apple juice, please?",
+      "Father: Of course.",
+      "Julia: And a sandwich too!",
+      "Father: Great choice.",
+      "",
+      "**Vocabulário:**",
+      "food = comida",
+      "drink = bebida",
+      "juice = suco",
+      "water = água",
+      "sandwich = sanduíche",
+      "apple = maçã",
+      "restaurant = restaurante",
+      "please = por favor",
+      "eat = comer",
+      "hungry = com fome"
+    ],
+    "curiosidade": [
+      "Em restaurantes ingleses, é comum pedir com 'Can I have...?' – é educado e muito usado. 🍽️"
+    ],
+    "interacao": [
+      "What is your favorite drink?",
+      "What do you like to eat for lunch?"
+    ],
+    "atividade": [
+      "Desenhe um cardápio (menu) com três comidas e três bebidas em inglês e faça um pequeno diálogo de pedido 🍔🥤🎨"
+    ],
+    "final": [
+      "Saber pedir comida em inglês é essencial para viajar e fazer amigos. Bom apetite! 🌟"
+    ],
+    "emocao": "aprendizado",
+    "nivel": "leve"
+  }
+}
