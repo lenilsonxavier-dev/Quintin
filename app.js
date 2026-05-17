@@ -1,57 +1,16 @@
+import * as webllm from "https://esm.sh/@mlc-ai/web-llm";
+
 const chat = document.getElementById("chat");
 
 let memoria = [];
 
-// ========= CONFIGURAÇÃO WEBLLM LOCAL =========
-import * as webllm from "https://esm.run/@mlc-ai/web-llm";
-
 let engine = null;
 
-const MODEL = "Llama-3.2-3B-Instruct-q4f16_1";
+// MODELO MAIS LEVE
+const MODEL = "Qwen2.5-1.5B-Instruct-q4f16_1";
 
-// =================================================
 
-// ADICIONA MENSAGENS
-function adicionarMensagem(texto, classe) {
-  const div = document.createElement("div");
-  div.className = "msg " + classe;
-  div.innerText = texto;
-  chat.appendChild(div);
-  chat.scrollTop = chat.scrollHeight;
-}
-
-// MOSTRA "PENSANDO"
-function mostrarPensando(){
-  removerPensando();
-  const div = document.createElement("div");
-  div.className = "pensando";
-  div.id = "pensando";
-  div.innerHTML = `
-    <img src="https://cdn-icons-png.flaticon.com/512/4712/4712109.png">
-    <span>🧠 Quinti está pensando...</span>
-  `;
-  chat.appendChild(div);
-  chat.scrollTop = chat.scrollHeight;
-}
-
-// REMOVE "PENSANDO"
-function removerPensando(){
-  const pensando = document.getElementById("pensando");
-  if(pensando){
-    pensando.remove();
-  }
-}
-
-// INICIAR (sem teste do Ollama)
-async function iniciar() {
-  // loading inicial
-  const loading = document.createElement("div");
-  loading.className = "msg bot";
-  loading.id = "loading";
-  loading.innerText = "🌍 Loading Quinti...";
-  chat.appendChild(loading);
-
-  // ========= LISTA DE ARQUIVOS JSON =========
+// ========= LISTA DE ARQUIVOS JSON =========
 const arquivos = [
   
   // Conversação
@@ -99,66 +58,205 @@ const arquivos = [
   "datas_comemorativas_ingles.json"
 
 ];
-  
 // =========================================
 
-  let conhecimento = {};
-  // INICIA WEBLLM
-try {
-  adicionarMensagem("🧠 Carregando cérebro do Quinti...", "bot");
 
-  engine = new webllm.MLCEngine();
+// BASE DOS JSONS
+let conhecimento = {};
 
-  await engine.reload(MODEL);
 
-  adicionarMensagem("✅ Quinti está pronto!", "bot");
+// ADICIONA MENSAGENS
+function adicionarMensagem(texto, classe) {
 
-} catch (erro) {
-  console.error("Erro WebLLM:", erro);
-  adicionarMensagem("❌ Seu navegador não suportou WebLLM.", "bot");
+  const div = document.createElement("div");
+
+  div.className = "msg " + classe;
+
+  div.innerText = texto;
+
+  chat.appendChild(div);
+
+  chat.scrollTop = chat.scrollHeight;
 }
 
-  // CARREGA JSONS
+
+// MOSTRA "PENSANDO"
+function mostrarPensando(){
+
+  removerPensando();
+
+  const div = document.createElement("div");
+
+  div.className = "pensando";
+
+  div.id = "pensando";
+
+  div.innerHTML = `
+    <img src="./img/quintin.png">
+    <span>🧠 Quinti está pensando...</span>
+  `;
+
+  chat.appendChild(div);
+
+  chat.scrollTop = chat.scrollHeight;
+}
+
+
+// REMOVE "PENSANDO"
+function removerPensando(){
+
+  const pensando =
+    document.getElementById("pensando");
+
+  if(pensando){
+
+    pensando.remove();
+  }
+}
+
+
+// CARREGA JSONS
+async function carregarConhecimento(){
+
   for (const arquivo of arquivos) {
+
     try {
-      const resposta = await fetch(arquivo);
+
+      const resposta =
+        await fetch(`./dados/${arquivo}`);
+
       if (!resposta.ok) continue;
-      const json = await resposta.json();
-      conhecimento = { ...conhecimento, ...json };
+
+      const json =
+        await resposta.json();
+
+      conhecimento = {
+        ...conhecimento,
+        ...json
+      };
+
     } catch (e) {
-      console.warn(`Erro ao carregar ${arquivo}:`, e);
+
+      console.warn(
+        `Erro ao carregar ${arquivo}:`,
+        e
+      );
+    }
+  }
+}
+
+
+// INICIAR
+async function iniciar() {
+
+  // loading inicial
+  const loading =
+    document.createElement("div");
+
+  loading.className = "msg bot";
+
+  loading.id = "loading";
+
+  loading.innerText =
+    "🌍 Loading Quinti...";
+
+  chat.appendChild(loading);
+
+  try {
+
+    // CARREGA JSONS
+    await carregarConhecimento();
+
+    adicionarMensagem(
+      "🧠 Carregando cérebro do Quinti...",
+      "bot"
+    );
+
+    // INICIA WEBLLM
+    engine =
+      new webllm.MLCEngine();
+
+    await engine.reload(MODEL);
+
+    // REMOVE LOADING
+    const loadingEl =
+      document.getElementById("loading");
+
+    if (loadingEl){
+
+      loadingEl.remove();
+    }
+
+    adicionarMensagem(
+      "Hello! I'm Quinti!",
+      "bot"
+    );
+
+  } catch (erro) {
+
+    console.error(
+      "Erro WebLLM:",
+      erro
+    );
+
+    adicionarMensagem(
+      "❌ Seu navegador não suportou WebLLM.",
+      "bot"
+    );
+  }
+}
+
+
+// FUNÇÃO ENVIAR
+window.enviar = async function () {
+
+  const input =
+    document.getElementById("pergunta");
+
+  const pergunta =
+    input.value.trim();
+
+  if (!pergunta) return;
+
+  adicionarMensagem(
+    pergunta,
+    "user"
+  );
+
+  memoria.push({
+    role: "user",
+    content: pergunta
+  });
+
+  input.value = "";
+
+  mostrarPensando();
+
+  // CONTEXTO DOS JSONS
+  let contexto = "";
+
+  for (const chave in conhecimento) {
+
+    if (
+      pergunta
+        .toLowerCase()
+        .includes(
+          chave.toLowerCase()
+        )
+    ) {
+
+      contexto += `
+Word: ${chave}
+Meaning: ${conhecimento[chave]}
+`;
     }
   }
 
-  // Remove loading e mostra saudação
-  const loadingEl = document.getElementById("loading");
-  if (loadingEl) loadingEl.remove();
+  // SYSTEM PROMPT
+  const systemPrompt = `
 
-  adicionarMensagem("Hello! I'm Quinti!", "bot");
-
-  // FUNÇÃO ENVIAR (agora usando Groq)
-  window.enviar = async function () {
-    const input = document.getElementById("pergunta");
-    const pergunta = input.value.trim();
-    if (!pergunta) return;
-
-    adicionarMensagem(pergunta, "user");
-    memoria.push({ role: "user", content: pergunta });
-    input.value = "";
-
-    mostrarPensando();
-
-    // CONTEXTO DOS JSONS
-    let contexto = "";
-    for (const chave in conhecimento) {
-      if (pergunta.toLowerCase().includes(chave.toLowerCase())) {
-        contexto += `Word: ${chave}\nMeaning: ${conhecimento[chave]}\n`;
-      }
-    }
-
-    // System prompt (exatamente o mesmo conteúdo, sem duplicações)
-    const systemPrompt = `
 You are Quinti 🌍
+
 You are ONLY Quinti.
 You are NOT an AI assistant.
 Never say you are an AI.
@@ -174,11 +272,7 @@ IMPORTANT RULES:
 - Always answer like a calm teacher.
 - Never speak like a teenager.
 - Never use slang.
-- Never say:
-  "Yo"
-  "What's up"
-  "baby"
-  or internet expressions.
+- Never use internet expressions.
 - Never invent conversations.
 - Never ignore the child's question.
 - Always help in Portuguese when necessary.
@@ -206,47 +300,6 @@ Simple sentence.
 GOOD EXAMPLES:
 
 Child:
-hello
-
-Answer:
-Hello 🌟
-
-Hello = olá
-
-How are you?
-
----
-
-Child:
-Eu quero aprender inglês
-
-Answer:
-Yay! 🌈
-
-Vamos aprender juntos!
-
-English = inglês
-
-Hello = olá
-
-Can you say:
-"Hello"?
-
----
-
-Child:
-How are you?
-
-Answer:
-I am happy 🌈
-
-How are you?
-=
-Como você está?
-
----
-
-Child:
 dog
 
 Answer:
@@ -260,73 +313,92 @@ I like dogs.
 ---
 
 Child:
-i like dogs
+como se diz vaca em inglês
 
 Answer:
-Great 🌈
+Cow 🐄
 
-"I like dogs"
-=
-"Eu gosto de cachorros"
+Cow = vaca
+
+Example:
+The cow is big.
 
 IMPORTANT:
 Never ask about family.
 Never invent personal questions.
 Never behave like social media.
 Stay focused on English teaching only.
-- Stay focused.
-- Be educational.
-- Be gentle.
-- Be child-friendly.
-- Never act like social media.
+
 `;
 
-    const userMessage = `
+  const userMessage = `
+
 Context (vocabulary that may help):
 ${contexto || "No specific vocabulary found."}
 
 Child: ${pergunta}
+
 Quinti:
+
 `;
 
-        try {
+  try {
 
-  const resposta = await engine.chat.completions.create({
-    messages: [
-      {
-        role: "system",
-        content: systemPrompt
-      },
-      {
-        role: "user",
-        content: userMessage
-      }
-    ],
-    temperature: 0.7,
-    max_tokens: 300
-  });
+    const resposta =
+      await engine.chat.completions.create({
 
-  const texto = resposta.choices[0].message.content.trim();
+        messages: [
 
-  removerPensando();
+          {
+            role: "system",
+            content: systemPrompt
+          },
 
-  adicionarMensagem(texto, "bot");
+          {
+            role: "user",
+            content: userMessage
+          }
 
-  memoria.push({
-    role: "assistant",
-    content: texto
-  });
+        ],
 
-} catch (err) {
+        temperature: 0.7,
 
-  removerPensando();
+        max_tokens: 300
 
-  console.error(err);
+      });
 
-  adicionarMensagem(
-    "❌ Quinti não conseguiu pensar localmente.",
-    "bot"
-  );
-}
+    const texto =
+      resposta
+        .choices[0]
+        .message
+        .content
+        .trim();
 
+    removerPensando();
+
+    adicionarMensagem(
+      texto,
+      "bot"
+    );
+
+    memoria.push({
+      role: "assistant",
+      content: texto
+    });
+
+  } catch (err) {
+
+    removerPensando();
+
+    console.error(err);
+
+    adicionarMensagem(
+      "❌ Quinti não conseguiu pensar localmente.",
+      "bot"
+    );
+  }
+};
+
+
+// INICIAR APP
 iniciar();
