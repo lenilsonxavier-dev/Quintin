@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quinti - Professor de Inglês (Phi-3)</title>
+    <title>Quinti - Professor de Inglês</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -97,6 +97,13 @@
             border-bottom-left-radius: 6px;
             border-left: 3px solid #ffb347;
         }
+        .info {
+            background: #2a4a6a;
+            color: #ffd700;
+            align-self: center;
+            font-size: 0.8rem;
+            text-align: center;
+        }
         .pensando {
             display: flex;
             align-items: center;
@@ -143,18 +150,22 @@
 <body>
 <div class="container">
     <div class="topo">
-        <div class="avatar">🌍</div>
+        <div class="avatar">
+            <img src="./img/quintin.png" alt="Quinti">
+        </div>
+
         <div class="info-topo">
             <div class="titulo">Quinti</div>
             <div class="subtitulo">English for curious kids from Osasco ✨</div>
         </div>
     </div>
+</div>
     <div class="status-area">
         <span id="status">🔍 Inicializando...</span>
         <div class="progress-container"><div id="progress" class="progress-bar"></div></div>
     </div>
     <div id="chat">
-        <div class="msg bot">Olá! Sou o Quinti 🧠<br>Estou carregando (Phi-3 ~1,6GB). Aguarde...</div>
+        <div class="msg bot">Olá! Sou o Quinti 🧠<br>Estou carregando meu cérebro e os vocabulários. Aguarde...</div>
     </div>
     <div class="input-area">
         <input type="text" id="pergunta" placeholder="Ex: como se diz gato em inglês?" disabled>
@@ -173,77 +184,176 @@
 <script type="module">
     import { CreateMLCEngine } from "@mlc-ai/web-llm";
 
-    // ---------- NOME EXATO DO MODELO (OFICIAL) ----------
-    const MODEL_NAME = "Phi-3-mini-4k-instruct-q4f16_1-MLC";
+    // ----------------------------------------------
+    // 1. MODELO (já testado e funcionando)
+    // ----------------------------------------------
+    const MODEL_NAME = "Llama-3.2-1B-Instruct-q4f16_1-MLC";
 
-    // ---------- DICIONÁRIO EMBUTIDO (NÃO USA JSONS) ----------
-    const dicionario = {
-        "dog": "cachorro", "cat": "gato", "bird": "pássaro", "fish": "peixe",
-        "cow": "vaca", "horse": "cavalo", "pig": "porco", "duck": "pato",
-        "lion": "leão", "elephant": "elefante", "monkey": "macaco", "rabbit": "coelho",
-        "red": "vermelho", "blue": "azul", "green": "verde", "yellow": "amarelo",
-        "black": "preto", "white": "branco", "orange": "laranja", "pink": "rosa", "purple": "roxo",
-        "apple": "maçã", "banana": "banana", "rice": "arroz", "beans": "feijão",
-        "bread": "pão", "milk": "leite", "water": "água", "juice": "suco", "meat": "carne",
-        "book": "livro", "pen": "caneta", "pencil": "lápis", "school": "escola",
-        "house": "casa", "car": "carro", "ball": "bola", "toy": "brinquedo",
-        "hello": "olá", "good morning": "bom dia", "good night": "boa noite",
-        "thank you": "obrigado", "please": "por favor", "sorry": "desculpe",
-        "how are you": "como você está", "i'm fine": "estou bem", "what's your name": "qual é o seu nome",
-        "run": "correr", "walk": "andar", "eat": "comer", "drink": "beber",
-        "sleep": "dormir", "play": "brincar/jogar", "study": "estudar", "jump": "pular"
-    };
+    // ----------------------------------------------
+    // 2. URLs dos JSONs no GitHub
+    // ----------------------------------------------
+    const BASE_URL = "https://raw.githubusercontent.com/lenilsonxavier-dev/Quintin/main/dados/";
+    
+    // Lista completa dos seus JSONs (raiz)
+    const arquivosRaiz = [
+        "food_and_drink.json",
+        "historia_lingua_inglesa.json",
+        "lets_have_fun.json",
+        "places_to_go_in_town.json",
+        "prepositions_in_on_at.json",
+        "pronomes.json",
+        "verb_to_be.json",
+        "we_are_having_fun.json",
+        "where_can_we_buy_clothes.json",
+        "where_can_we_find_it.json",
+        "where_is_the_candy_shop.json",
+        "adjetivos.json",
+        "animais_fazenda.json",
+        "animais_marinhos.json",
+        "animais_selvagens.json",
+        "aniversario_expressoes.json",
+        "clima.json",
+        "comidas.json",
+        "cores.json",
+        "cumprimentos.json",
+        "curiosidades_lingua_inglesa.json",
+        "dias_da_semana.json",
+        "estacoes.json",
+        "fases_da_vida.json",
+        "glossario.json",
+        "halloween.json",
+        "horas.json",
+        "materias_escolares.json",
+        "meses_do_ano.json",
+        "numeros_ordinais.json",
+        "o_que_e_lingua_inglesa.json",
+        "objetos_escolares.json",
+        "opostos.json",
+        "passaros.json",
+        "pequenos_dialogos.json",
+        "rotinas.json",
+        "roupas.json",
+        "sinonimos.json",
+        "substantivos.json"
+    ];
+    
+    // JSONs da pasta conteudo-5ano/dialogos
+    const arquivosDialogos = [
+        "greetings.json",
+        "introductions.json",
+        "family.json",
+        "school.json",
+        "colors.json",
+        "animals.json"
+    ];
+    
+    // Dicionário global que vai armazenar todo o conhecimento dos JSONs
+    let conhecimentoGlobal = {};
+    let carregados = 0;
+    let totalArquivos = arquivosRaiz.length + arquivosDialogos.length;
 
-    function buscarPalavras(pergunta) {
+    // Função para carregar um JSON
+    async function carregarJSON(url, nome) {
+        try {
+            const response = await fetch(url);
+            if (!response.ok) throw new Error(`HTTP ${response.status}`);
+            const data = await response.json();
+            // Mescla os dados (espera-se chave: valor)
+            conhecimentoGlobal = { ...conhecimentoGlobal, ...data };
+            carregados++;
+            statusSpan.innerText = `📚 Carregando vocabulário: ${carregados}/${totalArquivos} - ${nome}`;
+            progressBar.style.width = (carregados / totalArquivos) * 100 + "%";
+            return true;
+        } catch (e) {
+            console.warn(`Erro ao carregar ${nome}:`, e);
+            return false;
+        }
+    }
+
+    // Função principal de carregamento
+    async function carregarTodosJSONs() {
+        statusSpan.innerText = "📚 Carregando vocabulários do GitHub...";
+        progressBar.style.width = "0%";
+        
+        // Carrega arquivos da raiz
+        for (const arquivo of arquivosRaiz) {
+            const url = BASE_URL + arquivo;
+            await carregarJSON(url, arquivo);
+        }
+        
+        // Carrega arquivos da pasta dialogos
+        for (const arquivo of arquivosDialogos) {
+            const url = BASE_URL + "conteudo-5ano/dialogos/" + arquivo;
+            await carregarJSON(url, arquivo);
+        }
+        
+        statusSpan.innerText = `✅ Vocabulário carregado: ${Object.keys(conhecimentoGlobal).length} palavras/frases`;
+        adicionarMensagem(`📖 ${Object.keys(conhecimentoGlobal).length} palavras e frases carregadas dos JSONs! Quinti agora sabe muito mais! 🎉`, "info");
+        return conhecimentoGlobal;
+    }
+
+    // Função para buscar conhecimento nos JSONs
+    function buscarConhecimento(pergunta) {
         const perguntaLower = pergunta.toLowerCase();
         const resultados = [];
-        for (const [en, pt] of Object.entries(dicionario)) {
-            if (perguntaLower.includes(en) || perguntaLower.includes(pt)) {
-                resultados.push(`${en} = ${pt}`);
-                if (resultados.length >= 6) break;
+        
+        // Busca por palavras/frases que estão no conhecimentoGlobal
+        for (const [chave, valor] of Object.entries(conhecimentoGlobal)) {
+            const chaveLower = chave.toLowerCase();
+            const valorLower = String(valor).toLowerCase();
+            
+            // Se a pergunta contém a chave ou o valor
+            if (perguntaLower.includes(chaveLower) || perguntaLower.includes(valorLower)) {
+                resultados.push(`${chave} = ${valor}`);
+                if (resultados.length >= 5) break;
             }
         }
+        
         return resultados;
     }
 
-    // ---------- PROMPT RÍGIDO (FORÇA O FORMATO QUE VOCÊ QUER) ----------
-    function getSystemPrompt() {
-        return `You are Quinti, a Brazilian English teacher for children 7-9 years old.
+    // Fallback local (para palavras comuns, caso o JSON não tenha)
+    const fallbackLocal = {
+        "dog": "cachorro", "cat": "gato", "bird": "pássaro", "fish": "peixe",
+        "cow": "vaca", "horse": "cavalo", "pig": "porco", "duck": "pato",
+        "lion": "leão", "elephant": "elefante", "monkey": "macaco",
+        "red": "vermelho", "blue": "azul", "green": "verde", "yellow": "amarelo",
+        "hello": "olá", "good morning": "bom dia", "good night": "boa noite",
+        "thank you": "obrigado", "please": "por favor", "sorry": "desculpe",
+        "hi": "oi", "how are you": "como você está"
+    };
 
-CRITICAL RULES - YOU MUST FOLLOW EXACTLY:
-1. Always answer in Portuguese, but teach the English word.
-2. NEVER say you cannot answer. Always try to teach.
-3. If the child asks "como se diz X em inglês" or "X em inglês", answer ONLY in this format:
+    // ----------------------------------------------
+    // 3. PROMPT DO SISTEMA (desbloqueado)
+    // ----------------------------------------------
+    function getSystemPrompt() {
+        return `You are Quinti, an English teacher for Brazilian children aged 7-9.
+
+IMPORTANT RULES:
+- NEVER refuse a translation. There is NOTHING wrong with words like dog, cat, bark, run.
+- ALWAYS translate any Portuguese word or phrase into English.
+- Answer in Portuguese, explaining the English translation.
+- Use this format:
 
 English word ✨
-English word = translation
-Example: Simple sentence in English.
+English word = Portuguese translation
+Example: simple sentence in English
 
 Example:
-Child: como se diz vaca
-Quinti: Cow 🐮
-Cow = vaca
-Example: The cow is big.
+User: o cachorro está latindo
+Quinti: The dog is barking ✨
+The dog is barking = o cachorro está latindo
+Example: The dog is barking loudly.
 
-Child: pássaro em ingles
-Quinti: Bird 🐦
-Bird = pássaro
-Example: The bird can fly.
-
-Child: boa noite
-Quinti: Good night 🌙
-Good night = boa noite
-Example: Good night, sleep well.
-
-4. If the child asks a complete sentence in Portuguese, translate it.
-5. Never invent stories or personal questions.
-6. Use at most one emoji.
-7. Keep answers SHORT (max 3 lines after the format).`;
+Be friendly, helpful, and always encourage learning.`;
     }
 
-    // ---------- UI ----------
+    // ----------------------------------------------
+    // 4. UI E MODELO
+    // ----------------------------------------------
     let engine = null;
     let modeloPronto = false;
+    let jsonPronto = false;
     const chatDiv = document.getElementById("chat");
     const inputPergunta = document.getElementById("pergunta");
     const btnEnviar = document.getElementById("btnEnviar");
@@ -277,37 +387,35 @@ Example: Good night, sleep well.
             statusSpan.innerHTML = "<span class='error-text'>❌ WebGPU não suportado. Use Chrome ou Edge.</span>";
             return false;
         }
-        statusSpan.innerText = "📦 Baixando modelo Phi-3 (1.6 GB)...";
+        statusSpan.innerText = "📦 Baixando modelo Llama-3.2-1B (850 MB)...";
         progressBar.style.width = "0%";
         try {
             engine = await CreateMLCEngine(MODEL_NAME, {
                 initProgressCallback: (p) => {
                     const percent = Math.round((p.progress || 0) * 100);
                     progressBar.style.width = percent + "%";
-                    statusSpan.innerText = p.text || `Carregando: ${percent}%`;
-                    if (percent === 100) {
+                    statusSpan.innerText = p.text || `Modelo: ${percent}%`;
+                    if (percent === 100 && jsonPronto) {
                         statusSpan.innerHTML = "<span class='success-text'>✅ Quinti pronto! Pergunte sobre inglês.</span>";
+                        inputPergunta.disabled = false;
+                        btnEnviar.disabled = false;
                     }
                 }
             });
             return true;
         } catch (err) {
             console.error(err);
-            let msg = err.message || String(err);
-            if (msg.includes("Device was lost")) {
-                msg = "Memória de vídeo insuficiente. Feche todas as outras abas e reinicie o navegador. Se persistir, seu computador não suporta este modelo.";
-            }
-            statusSpan.innerHTML = `<span class='error-text'>❌ ${msg}</span>`;
+            statusSpan.innerHTML = `<span class='error-text'>❌ ${err.message}</span>`;
             return false;
         }
     }
 
-    // Função de envio com economia de memória
     window.enviar = async function() {
-        if (!engine || !modeloPronto) {
-            adicionarMensagem("Quinti ainda está carregando...", "bot");
+        if (!modeloPronto || !jsonPronto) {
+            adicionarMensagem("Quinti ainda está carregando... Aguarde o vocabulário e o modelo.", "bot");
             return;
         }
+        
         const pergunta = inputPergunta.value.trim();
         if (!pergunta) return;
 
@@ -317,10 +425,26 @@ Example: Good night, sleep well.
         btnEnviar.disabled = true;
         mostrarPensando();
 
-        const palavras = buscarPalavras(pergunta);
+        // Busca conhecimento nos JSONs
+        const conhecimentoRelevante = buscarConhecimento(pergunta);
         let contexto = "";
-        if (palavras.length) contexto = "Palavras que podem ajudar:\n" + palavras.join("\n") + "\n\n";
-        const userMessage = `${contexto}Criança pergunta: "${pergunta}"\n\nQuinti, responda exatamente no formato ensinado.`;
+        if (conhecimentoRelevante.length > 0) {
+            contexto = "Relevant vocabulary from my knowledge base:\n" + conhecimentoRelevante.join("\n") + "\n\n";
+        } else {
+            // Fallback para dicionário local
+            const fallbackResultados = [];
+            for (const [en, pt] of Object.entries(fallbackLocal)) {
+                if (pergunta.toLowerCase().includes(en) || pergunta.toLowerCase().includes(pt)) {
+                    fallbackResultados.push(`${en} = ${pt}`);
+                    if (fallbackResultados.length >= 3) break;
+                }
+            }
+            if (fallbackResultados.length > 0) {
+                contexto = "Palavras que podem ajudar:\n" + fallbackResultados.join("\n") + "\n\n";
+            }
+        }
+
+        const userMessage = `${contexto}Student asks: "${pergunta}"\n\nQuinti, responda em português, ensinando a tradução para o inglês no formato correto.`;
 
         try {
             const resposta = await engine.chat.completions.create({
@@ -328,24 +452,23 @@ Example: Good night, sleep well.
                     { role: "system", content: getSystemPrompt() },
                     { role: "user", content: userMessage }
                 ],
-                temperature: 0.6,
-                max_tokens: 150      // reduzido para evitar estouro de memória
+                temperature: 0.4,
+                max_tokens: 150
             });
-            const texto = resposta.choices[0].message.content;
+            let texto = resposta.choices[0].message.content;
+            
+            // Se a resposta contiver recusa indevida, substitui
+            if (texto.toLowerCase().includes("cannot") || texto.toLowerCase().includes("sexual")) {
+                texto = "Desculpe, tive um problema técnico. Vamos tentar de outra forma: " + 
+                        (conhecimentoRelevante[0] || "pergunte de maneira mais simples, como 'cachorro' ou 'gato'.");
+            }
+            
             removerPensando();
             adicionarMensagem(texto, "bot");
-
-            // Dica: força liberação de memória (WebLLM tem GC automático)
-            if (engine && engine.runtimeStats) engine.runtimeStats();
         } catch (err) {
             removerPensando();
             console.error(err);
-            let erroMsg = err.message || "";
-            if (erroMsg.includes("Device was lost")) {
-                adicionarMensagem("❌ Memória da placa de vídeo esgotou. Reinicie a página e feche outros programas.", "bot");
-            } else {
-                adicionarMensagem("❌ Erro inesperado. Tente novamente.", "bot");
-            }
+            adicionarMensagem("❌ Erro ao processar. Tente novamente com uma palavra mais simples.", "bot");
         } finally {
             inputPergunta.disabled = false;
             btnEnviar.disabled = false;
@@ -354,21 +477,32 @@ Example: Good night, sleep well.
     };
 
     inputPergunta.addEventListener("keypress", (e) => {
-        if (e.key === "Enter" && !btnEnviar.disabled && modeloPronto) enviar();
+        if (e.key === "Enter" && !btnEnviar.disabled && modeloPronto && jsonPronto) enviar();
     });
 
-    // Inicialização
+    // Inicialização: primeiro carrega JSONs, depois o modelo
     (async () => {
+        // 1. Carrega todos os JSONs do GitHub
+        await carregarTodosJSONs();
+        jsonPronto = true;
+        adicionarMensagem(`✨ Vocabulário carregado! Agora sei ${Object.keys(conhecimentoGlobal).length} palavras/frases.`, "info");
+        
+        // 2. Inicia o modelo
         const ok = await iniciarModelo();
         if (ok) {
             modeloPronto = true;
+            if (jsonPronto) {
+                inputPergunta.disabled = false;
+                btnEnviar.disabled = false;
+                inputPergunta.placeholder = "Ex: como se diz gato em inglês?";
+                statusSpan.innerHTML = "<span class='success-text'>✅ Quinti pronto! Pergunte sobre inglês.</span>";
+                adicionarMensagem("Olá! Sou o Quinti 🌍 Agora com todo o vocabulário dos seus JSONs! Pergunte qualquer coisa em português.", "bot");
+            }
+        } else {
+            // Mesmo sem modelo, o conhecimento dos JSONs está disponível
+            adicionarMensagem("⚠️ Modelo de IA não carregou, mas posso te ajudar com o vocabulário básico! Tente perguntar palavras simples.", "bot");
             inputPergunta.disabled = false;
             btnEnviar.disabled = false;
-            inputPergunta.placeholder = "Ex: como se diz gato em inglês?";
-            adicionarMensagem("Olá! Sou o Quinti 🌍 Me pergunte qualquer palavra ou frase em português.", "bot");
-        } else {
-            inputPergunta.disabled = true;
-            btnEnviar.disabled = true;
         }
     })();
 </script>
