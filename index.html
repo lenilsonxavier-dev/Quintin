@@ -1,723 +1,376 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
-
+<html lang="pt-br">
 <head>
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Quinti 🌍</title>
-
-<style>
-
-*{
-  box-sizing:border-box;
-}
-
-body{
-  margin:0;
-  background:#e0f2fe;
-  font-family:Arial, sans-serif;
-
-  display:flex;
-  justify-content:center;
-  align-items:center;
-
-  height:100vh;
-}
-
-.chat-container{
-
-  width:100%;
-  max-width:850px;
-  height:95vh;
-
-  background:white;
-
-  border-radius:20px;
-
-  overflow:hidden;
-
-  box-shadow:0 0 20px rgba(0,0,0,0.1);
-
-  display:flex;
-  flex-direction:column;
-}
-
-.topo{
-
-  background:#60a5fa;
-
-  color:white;
-
-  padding:20px;
-
-  display:flex;
-
-  align-items:center;
-
-  gap:15px;
-}
-
-.avatar{
-
-  width:70px;
-
-  height:70px;
-
-  border-radius:50%;
-
-  border:3px solid white;
-
-  object-fit:cover;
-
-  background:white;
-}
-
-.info-topo{
-
-  display:flex;
-
-  flex-direction:column;
-}
-
-.titulo{
-
-  font-size:24px;
-
-  font-weight:bold;
-}
-
-.subtitulo{
-
-  font-size:14px;
-
-  opacity:0.9;
-
-  margin-top:4px;
-}
-
-#chat{
-
-  flex:1;
-
-  overflow-y:auto;
-
-  padding:20px;
-
-  background:#f8fafc;
-}
-
-.msg{
-
-  padding:14px;
-
-  border-radius:14px;
-
-  margin-bottom:14px;
-
-  max-width:80%;
-
-  line-height:1.5;
-
-  animation:aparecer 0.3s ease;
-}
-
-@keyframes aparecer{
-
-  from{
-    opacity:0;
-    transform:translateY(10px);
-  }
-
-  to{
-    opacity:1;
-    transform:translateY(0);
-  }
-}
-
-.user{
-
-  background:#2563eb;
-
-  color:white;
-
-  margin-left:auto;
-}
-
-.bot{
-
-  background:white;
-
-  border:1px solid #ddd;
-}
-
-.pensando{
-
-  color:#666;
-
-  font-style:italic;
-
-  margin-bottom:15px;
-
-  display:flex;
-
-  align-items:center;
-
-  gap:10px;
-
-  animation:pulse 1s infinite;
-}
-
-@keyframes pulse{
-
-  0%{
-    opacity:0.5;
-  }
-
-  50%{
-    opacity:1;
-  }
-
-  100%{
-    opacity:0.5;
-  }
-}
-
-.pensando img{
-
-  width:40px;
-
-  height:40px;
-
-  border-radius:50%;
-}
-
-.entrada{
-
-  display:flex;
-
-  gap:10px;
-
-  padding:15px;
-
-  background:white;
-
-  border-top:1px solid #ddd;
-}
-
-input{
-
-  flex:1;
-
-  padding:14px;
-
-  border-radius:12px;
-
-  border:1px solid #ccc;
-
-  font-size:16px;
-}
-
-button{
-
-  padding:14px 20px;
-
-  border:none;
-
-  border-radius:12px;
-
-  background:#34d399;
-
-  color:white;
-
-  cursor:pointer;
-
-  font-size:16px;
-}
-
-button:hover{
-
-  opacity:0.9;
-}
-
-</style>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quinti - Professor de Inglês (Phi-3)</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .container {
+            width: 100%;
+            max-width: 900px;
+            background: #1e2a3a;
+            border-radius: 28px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            overflow: hidden;
+        }
+        .topo {
+            background: #0d1b2a;
+            padding: 20px 25px;
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            border-bottom: 3px solid #ffb347;
+        }
+        .avatar {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: #ffb347;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            font-weight: bold;
+            color: #1e2a3a;
+        }
+        .info-topo {
+            flex: 1;
+        }
+        .titulo {
+            color: #ffb347;
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+        .subtitulo {
+            color: #cbd5e0;
+            font-size: 0.85rem;
+            margin-top: 4px;
+        }
+        .status-area {
+            padding: 12px 25px;
+            background: #0f1724;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #2d3e50;
+        }
+        #status { color: #ffb347; font-weight: 500; font-size: 0.85rem; }
+        .progress-container { width: 200px; background: #2d3e50; border-radius: 20px; height: 8px; overflow: hidden; }
+        .progress-bar { width: 0%; height: 100%; background: linear-gradient(90deg, #ffb347, #ff7e05); transition: width 0.3s; }
+        #chat {
+            height: 450px;
+            overflow-y: auto;
+            padding: 20px;
+            background: #1a2a36;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .msg {
+            max-width: 80%;
+            padding: 12px 18px;
+            border-radius: 24px;
+            line-height: 1.4;
+            font-size: 0.95rem;
+            word-wrap: break-word;
+        }
+        .user {
+            background: #2c5f8a;
+            color: white;
+            align-self: flex-end;
+            border-bottom-right-radius: 6px;
+        }
+        .bot {
+            background: #2d3e50;
+            color: #f0f0f0;
+            align-self: flex-start;
+            border-bottom-left-radius: 6px;
+            border-left: 3px solid #ffb347;
+        }
+        .pensando {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: #2d3e50;
+            padding: 10px 18px;
+            border-radius: 30px;
+            width: fit-content;
+            color: #ffb347;
+        }
+        .input-area {
+            padding: 20px;
+            background: #0d1b2a;
+            display: flex;
+            gap: 12px;
+            border-top: 1px solid #2d3e50;
+        }
+        input {
+            flex: 1;
+            padding: 14px 18px;
+            border: none;
+            border-radius: 40px;
+            font-size: 1rem;
+            background: #2d3e50;
+            color: white;
+            outline: none;
+        }
+        button {
+            background: #ffb347;
+            border: none;
+            padding: 0 24px;
+            border-radius: 40px;
+            font-weight: bold;
+            color: #1e2a3a;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        button:hover:not(:disabled) { background: #ff9f1a; }
+        button:disabled { background: #5a6e7a; cursor: not-allowed; }
+        .error-text { color: #ff8a7a; }
+        .success-text { color: #6fcf97; }
+    </style>
 </head>
-
 <body>
-
-<div class="chat-container">
-
-  <div class="topo">
-
-    <img
-      class="avatar"
-      src="./img/quintin.png"
-    >
-  
-    <div class="info-topo">
-
-      <div class="titulo">
-        🌍 Quinti
-      </div>
-
-      <div class="subtitulo">
-        English for curious kids from Osasco ✨
-      </div>
-
+<div class="container">
+    <div class="topo">
+        <div class="avatar">🌍</div>
+        <div class="info-topo">
+            <div class="titulo">Quinti</div>
+            <div class="subtitulo">English for curious kids from Osasco ✨</div>
+        </div>
     </div>
-
-  </div>
-
-  <div id="chat"></div>
-
-  <div class="entrada">
-
-    <input
-      id="pergunta"
-      placeholder="Type in English..."
-    >
-
-    <button onclick="enviar()">
-      Send
-    </button>
-
-  </div>
-
+    <div class="status-area">
+        <span id="status">🔍 Inicializando...</span>
+        <div class="progress-container"><div id="progress" class="progress-bar"></div></div>
+    </div>
+    <div id="chat">
+        <div class="msg bot">Olá! Sou o Quinti 🧠<br>Estou carregando (Phi-3 ~1,6GB). Aguarde...</div>
+    </div>
+    <div class="input-area">
+        <input type="text" id="pergunta" placeholder="Ex: como se diz gato em inglês?" disabled>
+        <button id="btnEnviar" onclick="enviar()" disabled>Enviar ✨</button>
+    </div>
 </div>
 
-<script type="module">
-
-import * as webllm from "https://esm.sh/@mlc-ai/web-llm";
-
-const chat =
-  document.getElementById("chat");
-
-const input =
-  document.getElementById("pergunta");
-
-let memoria = [];
-
-let engine = null;
-
-
-// MODELO MAIS LEVE
-const MODEL =
-  "SmolLM-1.7B-Instruct-q4f16_1-MLC";
-
-
-// ========= LISTA DE JSON =========
-const arquivos = [
-
-  // Conversação
-  "food_and_drink.json",
-  "historia_lingua_inglesa.json",
-  "lets_have_fun.json",
-  "places_to_go_in_town.json",
-  "prepositions_in_on_at.json",
-  "pronomes.json",
-  "verb_to_be.json",
-  "we_are_having_fun.json",
-  "where_can_we_buy_clothes.json",
-  "where_can_we_find_it.json",
-  "where_is_the_candy_shop.json",
-
-  // Vocabulário
-  "adjetivos.json",
-  "animais_fazenda.json",
-  "animais_marinhos.json",
-  "animais_selvagens.json",
-  "aniversario_expressoes.json",
-  "clima.json",
-  "comidas.json",
-  "cores.json",
-  "cumprimentos.json",
-  "curiosidades_lingua_inglesa.json",
-  "dias_da_semana.json",
-  "estacoes.json",
-  "fases_da_vida.json",
-  "glossario.json",
-  "halloween.json",
-  "horas.json",
-  "materias_escolares.json",
-  "meses_do_ano.json",
-  "numeros_ordinais.json",
-  "o_que_e_lingua_inglesa.json",
-  "objetos_escolares.json",
-  "opostos.json",
-  "passaros.json",
-  "pequenos_dialogos.json",
-  "rotinas.json",
-  "roupas.json",
-  "sinonimos.json",
-  "substantivos.json",
-  "datas_comemorativas_ingles.json"
-
-];
-// =================================
-
-
-let conhecimento = {};
-
-
-// ENTER envia
-input.addEventListener("keypress", function(event){
-
-  if(event.key === "Enter"){
-
-    enviar();
-  }
-
-});
-
-
-// MENSAGEM
-function adicionarMensagem(texto, classe){
-
-  const div =
-    document.createElement("div");
-
-  div.className =
-    "msg " + classe;
-
-  div.innerText = texto;
-
-  chat.appendChild(div);
-
-  chat.scrollTop =
-    chat.scrollHeight;
-}
-
-
-// PENSANDO
-function mostrarPensando(){
-
-  removerPensando();
-
-  const div =
-    document.createElement("div");
-
-  div.className = "pensando";
-
-  div.id = "pensando";
-
-  div.innerHTML = `
-  
-  <img src="./img/quintin.png">
-
-  <span>
-    🧠 Quinti está pensando...
-  </span>
-
-`;
-
-  chat.appendChild(div);
-
-  chat.scrollTop =
-    chat.scrollHeight;
-}
-
-
-// REMOVE PENSANDO
-function removerPensando(){
-
-  const pensando =
-    document.getElementById("pensando");
-
-  if(pensando){
-
-    pensando.remove();
-  }
-}
-
-
-// CARREGAR JSONS
-async function carregarConhecimento(){
-
-  for(const arquivo of arquivos){
-
-    try{
-
-      const resposta =
-        await fetch(`./dados/${arquivo}`);
-
-      if(!resposta.ok){
-        continue;
-      }
-
-      const json =
-        await resposta.json();
-
-      conhecimento = {
-
-        ...conhecimento,
-
-        ...json
-      };
-
-    }catch(e){
-
-      console.warn(
-        `Erro ao carregar ${arquivo}`,
-        e
-      );
+<script type="importmap">
+    {
+        "imports": {
+            "@mlc-ai/web-llm": "https://esm.run/@mlc-ai/web-llm"
+        }
     }
-  }
-}
-
-
-// INICIAR
-async function iniciar(){
-
-  adicionarMensagem(
-    "📚 Quinti está abrindo os livrinhos...",
-    "bot"
-  );
-
-  try{
-
-    // CARREGA JSONS
-    await carregarConhecimento();
-
-    adicionarMensagem(
-      "🧠 Quinti está carregando o cérebro...",
-      "bot"
-    );
-
-    // INICIA WEBLLM
-    engine =
-      new webllm.MLCEngine();
-
-    await engine.reload(MODEL);
-
-    chat.innerHTML = "";
-
-    adicionarMensagem(
-      "Hello! I'm Quinti!",
-      "bot"
-    );
-
-  }catch(err){
-
-    adicionarMensagem(
-      "❌ Seu navegador não conseguiu iniciar o Quinti.",
-      "bot"
-    );
-
-    console.error(err);
-  }
-
-}
-
-
-// ENVIAR
-window.enviar = async function(){
-
-  const pergunta =
-    input.value.trim();
-
-  if(!pergunta){
-    return;
-  }
-
-  adicionarMensagem(
-    pergunta,
-    "user"
-  );
-
-  memoria.push({
-
-    role:"user",
-
-    content:pergunta
-
-  });
-
-  input.value = "";
-
-  mostrarPensando();
-
-  // CONTEXTO DOS JSONS
-  let contexto = "";
-
-  for(const chave in conhecimento){
-
-    if(
-
-      pergunta
-        .toLowerCase()
-        .includes(
-          chave.toLowerCase()
-        )
-
-    ){
-
-      contexto += `
-Word: ${chave}
-Meaning: ${conhecimento[chave]}
-`;
-
-    }
-  }
-
-  // SYSTEM PROMPT
-  const systemPrompt = `
-
-You are Quinti 🌍
-
-You are ONLY Quinti.
-You are NOT an AI assistant.
-Never say you are an AI.
-Never break character.
-Always act like a children's English teacher.
-
-You are a Brazilian elementary English teacher
-for children aged 7 to 9.
-
-IMPORTANT RULES:
-
-- Teach basic English only.
-- Always answer like a calm teacher.
-- Never speak like a teenager.
-- Never use slang.
-- Never use internet expressions.
-- Never invent conversations.
-- Never ignore the child's question.
-- Always help in Portuguese when necessary.
-- Use short answers.
-- Teach step by step.
-- Use simple vocabulary.
-- Use at most 1 emoji sometimes.
-
-VERY IMPORTANT:
-
-If the child asks:
-"como se diz X em inglês"
-or
-"o que é X em inglês"
-
-Always answer in this format:
-
-English word ✨
-
-English word = tradução
-
-Example:
-Simple sentence.
-
-GOOD EXAMPLES:
-
-Child:
-dog
-
-Answer:
-Dog 🐶
-
-Dog = cachorro
-
-Example:
-I like dogs.
-
----
-
-Child:
-como se diz vaca em inglês
-
-Answer:
-Cow 🐄
-
-Cow = vaca
-
-Example:
-The cow is big.
-
-IMPORTANT:
-Never ask about family.
-Never invent personal questions.
-Never behave like social media.
-Stay focused on English teaching only.
-
-`;
-
-  const userMessage = `
-
-Context:
-${contexto || "No context"}
-
-Child:
-${pergunta}
-
-Quinti:
-
-`;
-
-  try {
-
-    const resposta =
-      await engine.chat.completions.create({
-
-        messages: [
-
-          {
-            role: "system",
-            content: systemPrompt
-          },
-
-          {
-            role: "user",
-            content: userMessage
-          }
-
-        ],
-
-        temperature: 0.7,
-
-        max_tokens: 300
-
-      });
-
-    const texto =
-      resposta
-        .choices[0]
-        .message
-        .content
-        .trim();
-
-    removerPensando();
-
-    adicionarMensagem(
-      texto,
-      "bot"
-    );
-
-    memoria.push({
-
-      role:"assistant",
-
-      content:texto
-
-    });
-
-  } catch (err) {
-
-    removerPensando();
-
-    console.error(err);
-
-    adicionarMensagem(
-      "❌ Quinti não conseguiu pensar localmente.",
-      "bot"
-    );
-  }
-
-}
-
-
-// INICIAR APP
-iniciar();
-
 </script>
 
+<script type="module">
+    import { CreateMLCEngine } from "@mlc-ai/web-llm";
+
+    // ---------- NOME EXATO DO MODELO (OFICIAL) ----------
+    const MODEL_NAME = "Phi-3-mini-4k-instruct-q4f16_1-MLC";
+
+    // ---------- DICIONÁRIO EMBUTIDO (NÃO USA JSONS) ----------
+    const dicionario = {
+        "dog": "cachorro", "cat": "gato", "bird": "pássaro", "fish": "peixe",
+        "cow": "vaca", "horse": "cavalo", "pig": "porco", "duck": "pato",
+        "lion": "leão", "elephant": "elefante", "monkey": "macaco", "rabbit": "coelho",
+        "red": "vermelho", "blue": "azul", "green": "verde", "yellow": "amarelo",
+        "black": "preto", "white": "branco", "orange": "laranja", "pink": "rosa", "purple": "roxo",
+        "apple": "maçã", "banana": "banana", "rice": "arroz", "beans": "feijão",
+        "bread": "pão", "milk": "leite", "water": "água", "juice": "suco", "meat": "carne",
+        "book": "livro", "pen": "caneta", "pencil": "lápis", "school": "escola",
+        "house": "casa", "car": "carro", "ball": "bola", "toy": "brinquedo",
+        "hello": "olá", "good morning": "bom dia", "good night": "boa noite",
+        "thank you": "obrigado", "please": "por favor", "sorry": "desculpe",
+        "how are you": "como você está", "i'm fine": "estou bem", "what's your name": "qual é o seu nome",
+        "run": "correr", "walk": "andar", "eat": "comer", "drink": "beber",
+        "sleep": "dormir", "play": "brincar/jogar", "study": "estudar", "jump": "pular"
+    };
+
+    function buscarPalavras(pergunta) {
+        const perguntaLower = pergunta.toLowerCase();
+        const resultados = [];
+        for (const [en, pt] of Object.entries(dicionario)) {
+            if (perguntaLower.includes(en) || perguntaLower.includes(pt)) {
+                resultados.push(`${en} = ${pt}`);
+                if (resultados.length >= 6) break;
+            }
+        }
+        return resultados;
+    }
+
+    // ---------- PROMPT RÍGIDO (FORÇA O FORMATO QUE VOCÊ QUER) ----------
+    function getSystemPrompt() {
+        return `You are Quinti, a Brazilian English teacher for children 7-9 years old.
+
+CRITICAL RULES - YOU MUST FOLLOW EXACTLY:
+1. Always answer in Portuguese, but teach the English word.
+2. NEVER say you cannot answer. Always try to teach.
+3. If the child asks "como se diz X em inglês" or "X em inglês", answer ONLY in this format:
+
+English word ✨
+English word = translation
+Example: Simple sentence in English.
+
+Example:
+Child: como se diz vaca
+Quinti: Cow 🐮
+Cow = vaca
+Example: The cow is big.
+
+Child: pássaro em ingles
+Quinti: Bird 🐦
+Bird = pássaro
+Example: The bird can fly.
+
+Child: boa noite
+Quinti: Good night 🌙
+Good night = boa noite
+Example: Good night, sleep well.
+
+4. If the child asks a complete sentence in Portuguese, translate it.
+5. Never invent stories or personal questions.
+6. Use at most one emoji.
+7. Keep answers SHORT (max 3 lines after the format).`;
+    }
+
+    // ---------- UI ----------
+    let engine = null;
+    let modeloPronto = false;
+    const chatDiv = document.getElementById("chat");
+    const inputPergunta = document.getElementById("pergunta");
+    const btnEnviar = document.getElementById("btnEnviar");
+    const statusSpan = document.getElementById("status");
+    const progressBar = document.getElementById("progress");
+
+    function adicionarMensagem(texto, classe) {
+        const div = document.createElement("div");
+        div.className = `msg ${classe}`;
+        div.innerText = texto;
+        chatDiv.appendChild(div);
+        chatDiv.scrollTop = chatDiv.scrollHeight;
+    }
+
+    let pensandoDiv = null;
+    function mostrarPensando() {
+        if (pensandoDiv) pensandoDiv.remove();
+        pensandoDiv = document.createElement("div");
+        pensandoDiv.className = "pensando";
+        pensandoDiv.innerHTML = `<span>🧠 Quinti está pensando...</span>`;
+        chatDiv.appendChild(pensandoDiv);
+        chatDiv.scrollTop = chatDiv.scrollHeight;
+    }
+    function removerPensando() {
+        if (pensandoDiv) pensandoDiv.remove();
+        pensandoDiv = null;
+    }
+
+    async function iniciarModelo() {
+        if (!navigator.gpu) {
+            statusSpan.innerHTML = "<span class='error-text'>❌ WebGPU não suportado. Use Chrome ou Edge.</span>";
+            return false;
+        }
+        statusSpan.innerText = "📦 Baixando modelo Phi-3 (1.6 GB)...";
+        progressBar.style.width = "0%";
+        try {
+            engine = await CreateMLCEngine(MODEL_NAME, {
+                initProgressCallback: (p) => {
+                    const percent = Math.round((p.progress || 0) * 100);
+                    progressBar.style.width = percent + "%";
+                    statusSpan.innerText = p.text || `Carregando: ${percent}%`;
+                    if (percent === 100) {
+                        statusSpan.innerHTML = "<span class='success-text'>✅ Quinti pronto! Pergunte sobre inglês.</span>";
+                    }
+                }
+            });
+            return true;
+        } catch (err) {
+            console.error(err);
+            let msg = err.message || String(err);
+            if (msg.includes("Device was lost")) {
+                msg = "Memória de vídeo insuficiente. Feche todas as outras abas e reinicie o navegador. Se persistir, seu computador não suporta este modelo.";
+            }
+            statusSpan.innerHTML = `<span class='error-text'>❌ ${msg}</span>`;
+            return false;
+        }
+    }
+
+    // Função de envio com economia de memória
+    window.enviar = async function() {
+        if (!engine || !modeloPronto) {
+            adicionarMensagem("Quinti ainda está carregando...", "bot");
+            return;
+        }
+        const pergunta = inputPergunta.value.trim();
+        if (!pergunta) return;
+
+        adicionarMensagem(pergunta, "user");
+        inputPergunta.value = "";
+        inputPergunta.disabled = true;
+        btnEnviar.disabled = true;
+        mostrarPensando();
+
+        const palavras = buscarPalavras(pergunta);
+        let contexto = "";
+        if (palavras.length) contexto = "Palavras que podem ajudar:\n" + palavras.join("\n") + "\n\n";
+        const userMessage = `${contexto}Criança pergunta: "${pergunta}"\n\nQuinti, responda exatamente no formato ensinado.`;
+
+        try {
+            const resposta = await engine.chat.completions.create({
+                messages: [
+                    { role: "system", content: getSystemPrompt() },
+                    { role: "user", content: userMessage }
+                ],
+                temperature: 0.6,
+                max_tokens: 150      // reduzido para evitar estouro de memória
+            });
+            const texto = resposta.choices[0].message.content;
+            removerPensando();
+            adicionarMensagem(texto, "bot");
+
+            // Dica: força liberação de memória (WebLLM tem GC automático)
+            if (engine && engine.runtimeStats) engine.runtimeStats();
+        } catch (err) {
+            removerPensando();
+            console.error(err);
+            let erroMsg = err.message || "";
+            if (erroMsg.includes("Device was lost")) {
+                adicionarMensagem("❌ Memória da placa de vídeo esgotou. Reinicie a página e feche outros programas.", "bot");
+            } else {
+                adicionarMensagem("❌ Erro inesperado. Tente novamente.", "bot");
+            }
+        } finally {
+            inputPergunta.disabled = false;
+            btnEnviar.disabled = false;
+            inputPergunta.focus();
+        }
+    };
+
+    inputPergunta.addEventListener("keypress", (e) => {
+        if (e.key === "Enter" && !btnEnviar.disabled && modeloPronto) enviar();
+    });
+
+    // Inicialização
+    (async () => {
+        const ok = await iniciarModelo();
+        if (ok) {
+            modeloPronto = true;
+            inputPergunta.disabled = false;
+            btnEnviar.disabled = false;
+            inputPergunta.placeholder = "Ex: como se diz gato em inglês?";
+            adicionarMensagem("Olá! Sou o Quinti 🌍 Me pergunte qualquer palavra ou frase em português.", "bot");
+        } else {
+            inputPergunta.disabled = true;
+            btnEnviar.disabled = true;
+        }
+    })();
+</script>
 </body>
 </html>
