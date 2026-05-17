@@ -618,11 +618,65 @@
     "end": "fim"
 };
 
-    function traduzir(palavra) {
-    console.log("Buscando:", palavra);
-    const traducao = fallbackLocal[palavra.toLowerCase()];
-    console.log("Tradução encontrada:", traducao);
-    return traducao || palavra;
+// Depois do seu fallbackLocal, crie um dicionário reverso (português -> inglês)
+const reverseLocal = {};
+for (const [en, pt] of Object.entries(fallbackLocal)) {
+    // Algumas traduções têm múltiplas possibilidades (ex: "ser/estar").
+    // Para simplificar, pegamos a primeira parte antes da barra.
+    const ptSimplified = pt.split('/')[0].trim();
+    if (!reverseLocal[ptSimplified]) {
+        reverseLocal[ptSimplified] = en;
+    }
+    // Também adiciona a versão original completa (ex: "ser/estar" -> "be")
+    reverseLocal[pt] = en;
+}
+
+// Função que processa perguntas de tradução
+function responderTraducao(mensagem) {
+    const msg = mensagem.toLowerCase().trim();
+    
+    // Padrão 1: "o que é X?" / "o que significa X?" / "qual o significado de X?"
+    let match = msg.match(/^(?:o que é|o que significa|qual o significado de)\s+(.+?)\??$/);
+    if (match) {
+        let palavra = match[1].trim();
+        // Busca no dicionário EN->PT
+        let traducao = fallbackLocal[palavra];
+        if (traducao) {
+            return `🔍 *${palavra}* significa *${traducao}* em português.`;
+        } else {
+            return `❓ Desculpe, ainda não conheço a palavra *"${palavra}"*. Posso aprender se você me ensinar!`;
+        }
+    }
+    
+    // Padrão 2: "como se diz X em inglês?" / "como eu digo X em inglês?" / "traduza X para inglês"
+    match = msg.match(/^(?:como (?:se diz|eu digo)|traduza)(?:\s+para o inglês)?\s+(.+?)\??$/);
+    if (match) {
+        let palavraPt = match[1].trim();
+        // Busca no dicionário reverso PT->EN
+        let traducao = reverseLocal[palavraPt];
+        if (traducao) {
+            return `🔍 *${palavraPt}* em inglês é *${traducao}*.`;
+        } else {
+            return `❓ Ainda não sei como dizer *"${palavraPt}"* em inglês. Me ensine?`;
+        }
+    }
+    
+    // Padrão 3: "traduza: X" (pode ser qualquer direção, mas tentamos primeiro EN->PT, depois PT->EN)
+    if (msg.startsWith("traduza:")) {
+        let texto = msg.replace("traduza:", "").trim();
+        // Tenta como inglês -> português
+        if (fallbackLocal[texto]) {
+            return `📖 *${texto}* = *${fallbackLocal[texto]}*`;
+        }
+        // Tenta como português -> inglês
+        if (reverseLocal[texto]) {
+            return `📖 *${texto}* = *${reverseLocal[texto]}*`;
+        }
+        return `❓ Não sei traduzir *"${texto}"*.`;
+    }
+    
+    // Nenhum padrão detectado – retorna null para que o LLM normal processe
+    return null;
 }
 
     function getSystemPrompt() {
@@ -713,6 +767,21 @@ Be friendly, helpful, and always encourage learning.`;
         }
         const pergunta = inputPergunta.value.trim();
         if (!pergunta) return;
+
+        // ============================================================
+        // NOVO: Verifica se é pergunta de tradução e responde direto
+        // ============================================================
+        const respostaDireta = responderTraducao(pergunta);
+        if (respostaDireta) {
+            // Adiciona a mensagem do usuário no chat
+            adicionarMensagem(pergunta, "user");
+            // Responde com o dicionário sem chamar o modelo
+            adicionarMensagem(respostaDireta, "bot");
+            inputPergunta.value = "";
+            inputPergunta.focus();
+            return;  // Sai da função, não chama o WebLLM
+        }
+        // ============================================================
 
         adicionarMensagem(pergunta, "user");
         inputPergunta.value = "";
