@@ -2,230 +2,162 @@ const chat = document.getElementById("chat");
 
 let memoria = [];
 
+// ========= CONFIGURAÇÃO WEBLLM LOCAL =========
+import * as webllm from "https://esm.run/@mlc-ai/web-llm";
+
+let engine = null;
+
+const MODEL = "Llama-3.2-3B-Instruct-q4f16_1";
+
+// =================================================
 
 // ADICIONA MENSAGENS
 function adicionarMensagem(texto, classe) {
-
   const div = document.createElement("div");
-
   div.className = "msg " + classe;
-
   div.innerText = texto;
-
   chat.appendChild(div);
-
   chat.scrollTop = chat.scrollHeight;
 }
-
 
 // MOSTRA "PENSANDO"
 function mostrarPensando(){
-
   removerPensando();
-
   const div = document.createElement("div");
-
   div.className = "pensando";
-
   div.id = "pensando";
-
   div.innerHTML = `
-  
     <img src="https://cdn-icons-png.flaticon.com/512/4712/4712109.png">
-
-    <span>
-      🧠 Quinti está pensando...
-    </span>
-  
+    <span>🧠 Quinti está pensando...</span>
   `;
-
   chat.appendChild(div);
-
   chat.scrollTop = chat.scrollHeight;
 }
 
-
 // REMOVE "PENSANDO"
 function removerPensando(){
-
-  const pensando =
-    document.getElementById("pensando");
-
+  const pensando = document.getElementById("pensando");
   if(pensando){
-
     pensando.remove();
   }
 }
 
-
-// INICIAR
+// INICIAR (sem teste do Ollama)
 async function iniciar() {
-
   // loading inicial
   const loading = document.createElement("div");
-
   loading.className = "msg bot";
-
   loading.id = "loading";
-
-  loading.innerText =
-    "🌍 Loading Quinti...";
-
+  loading.innerText = "🌍 Loading Quinti...";
   chat.appendChild(loading);
 
+  // ========= LISTA DE ARQUIVOS JSON =========
+const arquivos = [
+  
+  // Conversação
+  "food_and_drink.json",
+  "historia_lingua_inglesa.json",
+  "lets_have_fun.json",
+  "places_to_go_in_town.json",
+  "prepositions_in_on_at.json",
+  "pronomes.json",
+  "verb_to_be.json",
+  "we_are_having_fun.json",
+  "where_can_we_buy_clothes.json",
+  "where_can_we_find_it.json",
+  "where_is_the_candy_shop.json",
 
-  // TESTA CONEXÃO COM OLLAMA
-  try{
+  // Vocabulário
+  "adjetivos.json",
+  "animais_fazenda.json",
+  "animais_marinhos.json",
+  "animais_selvagens.json",
+  "aniversario_expressoes.json",
+  "clima.json",
+  "comidas.json",
+  "cores.json",
+  "cumprimentos.json",
+  "curiosidades_lingua_inglesa.json",
+  "dias_da_semana.json",
+  "estacoes.json",
+  "fases_da_vida.json",
+  "glossario.json",
+  "halloween.json",
+  "horas.json",
+  "materias_escolares.json",
+  "meses_do_ano.json",
+  "numeros_ordinais.json",
+  "o_que_e_lingua_inglesa.json",
+  "objetos_escolares.json",
+  "opostos.json",
+  "passaros.json",
+  "pequenos_dialogos.json",
+  "rotinas.json",
+  "roupas.json",
+  "sinonimos.json",
+  "substantivos.json",
+  "datas_comemorativas_ingles.json"
 
-    await fetch(
-      "http://localhost:11434/api/tags"
-    );
-
-    document.getElementById("loading").remove();
-
-    adicionarMensagem(
-      "Hello! I'm Quinti!",
-      "bot"
-    );
-
-  }catch(err){
-
-    document.getElementById("loading").remove();
-
-    adicionarMensagem(
-      "❌ Ollama não está aberto.",
-      "bot"
-    );
-
-    console.error(err);
-
-    return;
-  }
-
-
-  // JSONS
-  const arquivos = [
-
-    "./dados/greetings.json",
-    "./dados/colors.json",
-    "./dados/wild_animals.json",
-    "./dados/sea_animals.json",
-    "./dados/farm_animals.json",
-    "./dados/birds.json",
-    "./dados/foods.json",
-    "./dados/school_objects.json",
-    "./dados/days_of_week.json",
-    "./dados/months_of_year.json",
-    "./dados/ordinal_numbers.json",
-    "./dados/commemorative_dates.json",
-    "./dados/birthday_expressions.json",
-    "./dados/hours.json",
-    "./dados/daily_routine.json",
-    "./dados/small_dialogues.json",
-    "./dados/clothes.json",
-    "./dados/weather.json",
-    "./dados/halloween.json",
-    "./dados/seasons.json",
-    "./dados/people_life_stages.json",
-    "./dados/nouns.json",
-    "./dados/adjectives.json",
-    "./dados/synonyms.json",
-    "./dados/antonyms.json",
-    "./dados/english_glossary_300.json"
-
-  ];
+];
+  
+// =========================================
 
   let conhecimento = {};
+  // INICIA WEBLLM
+try {
+  adicionarMensagem("🧠 Carregando cérebro do Quinti...", "bot");
+
+  engine = new webllm.MLCEngine();
+
+  await engine.reload(MODEL);
+
+  adicionarMensagem("✅ Quinti está pronto!", "bot");
+
+} catch (erro) {
+  console.error("Erro WebLLM:", erro);
+  adicionarMensagem("❌ Seu navegador não suportou WebLLM.", "bot");
+}
 
   // CARREGA JSONS
   for (const arquivo of arquivos) {
-
-    const resposta = await fetch(arquivo);
-
-    const json = await resposta.json();
-
-    conhecimento = {
-      ...conhecimento,
-      ...json
-    };
-
+    try {
+      const resposta = await fetch(arquivo);
+      if (!resposta.ok) continue;
+      const json = await resposta.json();
+      conhecimento = { ...conhecimento, ...json };
+    } catch (e) {
+      console.warn(`Erro ao carregar ${arquivo}:`, e);
+    }
   }
 
+  // Remove loading e mostra saudação
+  const loadingEl = document.getElementById("loading");
+  if (loadingEl) loadingEl.remove();
 
-  // FUNÇÃO ENVIAR
+  adicionarMensagem("Hello! I'm Quinti!", "bot");
+
+  // FUNÇÃO ENVIAR (agora usando Groq)
   window.enviar = async function () {
-
-    const input =
-      document.getElementById("pergunta");
-
-    const pergunta =
-      input.value.trim();
-
+    const input = document.getElementById("pergunta");
+    const pergunta = input.value.trim();
     if (!pergunta) return;
 
-    adicionarMensagem(
-      pergunta,
-      "user"
-    );
-
-    memoria.push({
-      role: "user",
-      content: pergunta
-    });
-
+    adicionarMensagem(pergunta, "user");
+    memoria.push({ role: "user", content: pergunta });
     input.value = "";
 
-
-    // MOSTRA PENSANDO
     mostrarPensando();
-
 
     // CONTEXTO DOS JSONS
     let contexto = "";
-
     for (const chave in conhecimento) {
-
-      if (
-        pergunta
-        .toLowerCase()
-        .includes(chave.toLowerCase())
-      ) {
-
-        contexto += `
-Word: ${chave}
-Meaning: ${conhecimento[chave]}
-`;
-
+      if (pergunta.toLowerCase().includes(chave.toLowerCase())) {
+        contexto += `Word: ${chave}\nMeaning: ${conhecimento[chave]}\n`;
       }
-
     }
 
-
-    try{
-
-      // OLLAMA API
-      const response = await fetch(
-
-        "http://localhost:11434/api/generate",
-
-        {
-
-          method:"POST",
-
-          headers:{
-            "Content-Type":"application/json"
-          },
-
-          body:JSON.stringify({
-
-           model:"llama3.2:3b",
-
-            prompt:`
-
-prompt:`
-
-prompt:`
-
+    // System prompt (exatamente o mesmo conteúdo, sem duplicações)
+    const systemPrompt = `
 You are Quinti 🌍
 You are ONLY Quinti.
 You are NOT an AI assistant.
@@ -347,73 +279,54 @@ Stay focused on English teaching only.
 - Be gentle.
 - Be child-friendly.
 - Never act like social media.
+`;
 
-Child:
-${pergunta}
+    const userMessage = `
+Context (vocabulary that may help):
+${contexto || "No specific vocabulary found."}
 
-`,
+Child: ${pergunta}
+Quinti:
+`;
 
-Context:
-${contexto}
+        try {
 
-Child:
-${pergunta}
+  const resposta = await engine.chat.completions.create({
+    messages: [
+      {
+        role: "system",
+        content: systemPrompt
+      },
+      {
+        role: "user",
+        content: userMessage
+      }
+    ],
+    temperature: 0.7,
+    max_tokens: 300
+  });
 
-`,
+  const texto = resposta.choices[0].message.content.trim();
 
-            stream:false
+  removerPensando();
 
-          })
+  adicionarMensagem(texto, "bot");
 
-        }
+  memoria.push({
+    role: "assistant",
+    content: texto
+  });
 
-      );
+} catch (err) {
 
+  removerPensando();
 
-      const resposta =
-        await response.json();
+  console.error(err);
 
-
-      // REMOVE PENSANDO
-      removerPensando();
-
-
-      const texto =
-        resposta.response;
-
-
-      adicionarMensagem(
-        texto,
-        "bot"
-      );
-
-
-      memoria.push({
-
-        role:"assistant",
-
-        content:texto
-
-      });
-
-
-    }catch(err){
-
-      removerPensando();
-
-      adicionarMensagem(
-
-        "❌ Quinti não conseguiu responder.",
-
-        "bot"
-
-      );
-
-      console.error(err);
-    }
-
-  };
-
+  adicionarMensagem(
+    "❌ Quinti não conseguiu pensar localmente.",
+    "bot"
+  );
 }
 
 iniciar();
