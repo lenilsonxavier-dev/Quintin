@@ -289,7 +289,7 @@ button:hover{
 
 <script type="module">
 
-import * as webllm from "https://esm.run/@mlc-ai/web-llm";
+import * as webllm from "https://esm.sh/@mlc-ai/web-llm";
 
 const chat =
   document.getElementById("chat");
@@ -301,8 +301,10 @@ let memoria = [];
 
 let engine = null;
 
+
+// MODELO MAIS LEVE
 const MODEL =
-  "Llama-3.2-3B-Instruct-q4f16_1";
+  "Qwen2.5-1.5B-Instruct-q4f16_1";
 
 
 // ========= LISTA DE JSON =========
@@ -475,6 +477,7 @@ async function iniciar(){
 
   try{
 
+    // CARREGA JSONS
     await carregarConhecimento();
 
     adicionarMensagem(
@@ -482,6 +485,7 @@ async function iniciar(){
       "bot"
     );
 
+    // INICIA WEBLLM
     engine =
       new webllm.MLCEngine();
 
@@ -534,6 +538,7 @@ window.enviar = async function(){
 
   mostrarPensando();
 
+  // CONTEXTO DOS JSONS
   let contexto = "";
 
   for(const chave in conhecimento){
@@ -556,18 +561,8 @@ Meaning: ${conhecimento[chave]}
     }
   }
 
-  try{
-
-    const resposta =
-      await engine.chat.completions.create({
-
-        messages:[
-
-          {
-
-role:"system",
-
-content:`
+  // SYSTEM PROMPT
+  const systemPrompt = `
 
 You are Quinti 🌍
 
@@ -575,6 +570,7 @@ You are ONLY Quinti.
 You are NOT an AI assistant.
 Never say you are an AI.
 Never break character.
+Always act like a children's English teacher.
 
 You are a Brazilian elementary English teacher
 for children aged 7 to 9.
@@ -586,7 +582,7 @@ IMPORTANT RULES:
 - Never speak like a teenager.
 - Never use slang.
 - Never use internet expressions.
-- Never invent random conversations.
+- Never invent conversations.
 - Never ignore the child's question.
 - Always help in Portuguese when necessary.
 - Use short answers.
@@ -610,6 +606,21 @@ English word = tradução
 Example:
 Simple sentence.
 
+GOOD EXAMPLES:
+
+Child:
+dog
+
+Answer:
+Dog 🐶
+
+Dog = cachorro
+
+Example:
+I like dogs.
+
+---
+
 Child:
 como se diz vaca em inglês
 
@@ -621,15 +632,15 @@ Cow = vaca
 Example:
 The cow is big.
 
-`
+IMPORTANT:
+Never ask about family.
+Never invent personal questions.
+Never behave like social media.
+Stay focused on English teaching only.
 
-          },
+`;
 
-          {
-
-role:"user",
-
-content:`
+  const userMessage = `
 
 Context:
 ${contexto || "No context"}
@@ -639,25 +650,41 @@ ${pergunta}
 
 Quinti:
 
-`
+`;
 
+  try {
+
+    const resposta =
+      await engine.chat.completions.create({
+
+        messages: [
+
+          {
+            role: "system",
+            content: systemPrompt
+          },
+
+          {
+            role: "user",
+            content: userMessage
           }
 
         ],
 
-        temperature:0.7,
+        temperature: 0.7,
 
-        max_tokens:300
+        max_tokens: 300
 
       });
-
-    removerPensando();
 
     const texto =
       resposta
         .choices[0]
         .message
-        .content;
+        .content
+        .trim();
+
+    removerPensando();
 
     adicionarMensagem(
       texto,
@@ -672,16 +699,16 @@ Quinti:
 
     });
 
-  }catch(err){
+  } catch (err) {
 
     removerPensando();
 
+    console.error(err);
+
     adicionarMensagem(
-      "❌ Quinti não conseguiu pensar.",
+      "❌ Quinti não conseguiu pensar localmente.",
       "bot"
     );
-
-    console.error(err);
   }
 
 }
