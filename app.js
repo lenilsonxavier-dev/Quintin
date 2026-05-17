@@ -7,7 +7,8 @@ let memoria = [];
 let engine = null;
 
 // MODELO MAIS LEVE
-const MODEL ="SmolLM-1.7B-Instruct-q4f16_1-MLC";
+const MODEL =
+  "SmolLM-1.7B-Instruct-q4f16_1-MLC";
 
 
 // ========= LISTA DE ARQUIVOS JSON =========
