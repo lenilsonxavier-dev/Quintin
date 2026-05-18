@@ -1,7 +1,9 @@
 import { CreateMLCEngine }
 from "https://esm.sh/@mlc-ai/web-llm";
 
-import { knowledgeBase }
+import {
+  carregarConhecimento
+}
 from "./data/index.js";
 
 import { memory }
@@ -75,8 +77,7 @@ memory.totalMessages =
 // BASE DE CONHECIMENTO
 // ========================================
 
-const conhecimentoGlobal =
-  knowledgeBase;
+let conhecimentoGlobal = {};
 
 // ========================================
 // MODELO WEBLLM
@@ -698,6 +699,13 @@ document
     "🌍 Loading Quinti...",
     "bot"
   );
+
+  // ========================================
+  // CARREGAR CONHECIMENTO
+  // ========================================
+
+  conhecimentoGlobal =
+    await carregarConhecimento();
 
   adicionarMensagem(
     "📚 Knowledge base loaded!",
