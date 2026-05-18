@@ -1,111 +1,185 @@
 import * as webllm from "https://esm.sh/@mlc-ai/web-llm";
 
 import { knowledgeBase } from "./data/index.js";
+
 import { memory } from "./brain/memory.js";
+
 import { personality } from "./brain/personality.js";
+
 import { detectIntent } from "./brain/orchestrator.js";
 
-// =====================================================
+// ========================================
+// MODOS
+// ========================================
+
+import { teacherMode } from "./modes/teacherMode.js";
+
+import { gameMode } from "./modes/gameMode.js";
+
+import { storyMode } from "./modes/storyMode.js";
+
+// ========================================
+// MEMÓRIA PERSISTENTE
+// ========================================
+
+function salvarMemoria() {
+
+  localStorage.setItem(
+
+    "quintiMemory",
+
+    JSON.stringify(memory)
+  );
+}
+
+// ========================================
 // ELEMENTOS DA UI
-// =====================================================
+// ========================================
 
 const chat = document.getElementById("chat");
 
 let engine = null;
+
 let modeloPronto = false;
 
-// =====================================================
+// ========================================
+// ESTADO EMOCIONAL
+// ========================================
+
+memory.friendshipLevel =
+  memory.friendshipLevel || 1;
+
+memory.totalMessages =
+  memory.totalMessages || 0;
+
+// ========================================
 // BASE DE CONHECIMENTO
-// =====================================================
+// ========================================
 
 const conhecimentoGlobal = knowledgeBase;
 
-// =====================================================
+// ========================================
 // MODELO WEBLLM
-// =====================================================
+// ========================================
 
-const MODEL_NAME = "Llama-3.2-1B-Instruct-q4f16_1-MLC";
+const MODEL_NAME =
+  "Llama-3.2-1B-Instruct-q4f16_1-MLC";
 
-// =====================================================
-// PROMPT DINÂMICO COM PERSONALIDADE
-// =====================================================
+// ========================================
+// PROMPT DINÂMICO
+// ========================================
 
 const systemPrompt = `
-You are ${personality.name}, a magical English teacher owl for Brazilian children.
+You are ${personality.name},
+a magical English teacher owl
+for Brazilian children.
 
 PERSONALITY:
 - ${personality.style}
 
 RULES:
-${personality.rules.map(rule => `- ${rule}`).join("\n")}
+${personality.rules.map(
+  rule => `- ${rule}`
+).join("\n")}
 
 IMPORTANT:
-- Always answer in a fun and playful way
+- Always answer in a fun way
 - Keep answers short
 - Use emojis
 - Encourage the child
 - Ask playful questions
-- Never refuse simple translations
-- Always help the child learn English
+- Never refuse translations
+- Be warm and magical
+- Build emotional connection
+- Remember previous learning
 `;
 
-// =====================================================
-// BUSCAR CONTEXTO NOS JSONS
-// =====================================================
+// ========================================
+// CONTEXTO DOS JSONS
+// ========================================
 
 function buscarContextoLocal(pergunta) {
 
-  const lower = pergunta.toLowerCase();
+  const lower =
+    pergunta.toLowerCase();
 
   const resultados = [];
 
-  for (const [en, pt] of Object.entries(conhecimentoGlobal)) {
+  for (
+    const [en, pt]
+    of Object.entries(conhecimentoGlobal)
+  ) {
 
     if (
-      lower.includes(en.toLowerCase()) ||
-      lower.includes(String(pt).toLowerCase())
+
+      lower.includes(
+        en.toLowerCase()
+      )
+
+      ||
+
+      lower.includes(
+        String(pt).toLowerCase()
+      )
+
     ) {
 
-      resultados.push(`${en} = ${pt}`);
+      resultados.push(
+        `${en} = ${pt}`
+      );
 
-      // ============================
+      // ========================================
       // MEMÓRIA DE PALAVRAS
-      // ============================
-
-      if (!memory.learnedWords.includes(en)) {
-        memory.learnedWords.push(en);
-      }
-
-      // ============================
-      // TEMA FAVORITO
-      // ============================
+      // ========================================
 
       if (
+        !memory.learnedWords.includes(en)
+      ) {
+
+        memory.learnedWords.push(en);
+
+        salvarMemoria();
+      }
+
+      // ========================================
+      // TEMA FAVORITO
+      // ========================================
+
+      if (
+
         en.includes("dog") ||
         en.includes("cat") ||
         en.includes("lion") ||
-        en.includes("bird")
+        en.includes("bird") ||
+        en.includes("cow")
+
       ) {
-        memory.favoriteTheme = "animals";
+
+        memory.favoriteTheme =
+          "animals";
+
+        salvarMemoria();
       }
 
-      if (resultados.length >= 6) break;
+      if (
+        resultados.length >= 6
+      ) break;
     }
   }
 
   return resultados;
 }
 
-// =====================================================
-// INICIAR MODELO
-// =====================================================
+// ========================================
+// INICIAR WEBLLM
+// ========================================
 
 async function iniciarModelo() {
 
   if (!navigator.gpu) {
 
     adicionarMensagem(
-      "❌ Seu navegador não suporta WebGPU. Use Chrome ou Edge.",
+      "❌ WebGPU not supported.",
       "bot"
     );
 
@@ -117,38 +191,53 @@ async function iniciarModelo() {
     "bot"
   );
 
-  const progressDiv = document.createElement("div");
+  const progressDiv =
+    document.createElement("div");
 
-  progressDiv.className = "progress";
+  progressDiv.className =
+    "progress";
 
   chat.appendChild(progressDiv);
 
   try {
 
-    engine = await webllm.CreateMLCEngine(
-      MODEL_NAME,
-      {
-        initProgressCallback: (progress) => {
+    engine =
+      await webllm.CreateMLCEngine(
 
-          const percent = Math.round(
-            (progress.progress || 0) * 100
-          );
+        MODEL_NAME,
 
-          progressDiv.innerText =
-            `${progress.text || "Loading..."} (${percent}%)`;
+        {
 
-          if (percent === 100) {
+          initProgressCallback:
+            (progress) => {
 
-            setTimeout(() => {
-              progressDiv.remove();
-            }, 1000);
+            const percent =
+              Math.round(
+
+                (progress.progress || 0)
+                * 100
+              );
+
+            progressDiv.innerText =
+
+              `${progress.text || "Loading..."}
+
+(${percent}%)`;
+
+            if (percent === 100) {
+
+              setTimeout(() => {
+
+                progressDiv.remove();
+
+              }, 1000);
+            }
           }
         }
-      }
-    );
+      );
 
     adicionarMensagem(
-      "✅ Quinti is ready! 🌍",
+      "✅ Quinti is ready 🌍",
       "bot"
     );
 
@@ -159,7 +248,7 @@ async function iniciarModelo() {
     console.error(err);
 
     adicionarMensagem(
-      `❌ Error loading model: ${err.message}`,
+      `❌ ${err.message}`,
       "bot"
     );
 
@@ -167,163 +256,269 @@ async function iniciarModelo() {
   }
 }
 
-// =====================================================
-// ENVIAR MENSAGEM
-// =====================================================
+// ========================================
+// ENVIAR
+// ========================================
 
 window.enviar = async function () {
 
-  const input = document.getElementById("pergunta");
+  const input =
+    document.getElementById(
+      "pergunta"
+    );
 
-  const pergunta = input.value.trim();
+  const pergunta =
+    input.value.trim();
 
   if (!pergunta) return;
 
-  // ============================
+  // ========================================
+  // CONTADOR DE MENSAGENS
+  // ========================================
+
+  memory.totalMessages++;
+
+  if (
+    memory.totalMessages % 10 === 0
+  ) {
+
+    memory.friendshipLevel++;
+  }
+
+  salvarMemoria();
+
+  // ========================================
   // DETECTAR MODO
-  // ============================
+  // ========================================
 
-  const intent = detectIntent(pergunta);
+  const intent =
+    detectIntent(pergunta);
 
-  memory.currentMode = intent;
+  memory.currentMode =
+    intent;
 
-  // ============================
+  salvarMemoria();
+
+  // ========================================
   // MOSTRAR USUÁRIO
-  // ============================
+  // ========================================
 
-  adicionarMensagem(pergunta, "user");
+  adicionarMensagem(
+    pergunta,
+    "user"
+  );
 
   input.value = "";
 
   input.disabled = true;
 
-  document.getElementById("btnEnviar").disabled = true;
+  document.getElementById(
+    "btnEnviar"
+  ).disabled = true;
 
   mostrarPensando();
 
-  // ============================
-  // BUSCAR CONTEXTO
-  // ============================
+  // ========================================
+  // CONTEXTO DOS JSONS
+  // ========================================
 
-  const palavrasContexto = buscarContextoLocal(pergunta);
+  const palavrasContexto =
+    buscarContextoLocal(pergunta);
 
   let contextoExtra = "";
 
-  if (palavrasContexto.length) {
+  if (
+    palavrasContexto.length
+  ) {
 
     contextoExtra =
-      "Relevant vocabulary:\n" +
-      palavrasContexto.join("\n") +
+
+      "Relevant vocabulary:\n"
+
+      +
+
+      palavrasContexto.join("\n")
+
+      +
+
       "\n\n";
   }
 
-  // ============================
+  // ========================================
   // MEMÓRIA
-  // ============================
+  // ========================================
 
   let memoriaExtra = "";
 
-  if (memory.learnedWords.length > 0) {
+  if (
+    memory.learnedWords.length > 0
+  ) {
 
     memoriaExtra =
-      `The child already learned:\n${memory.learnedWords.join(", ")}\n\n`;
+
+      `The child already learned:
+
+${memory.learnedWords.join(", ")}
+
+\n\n`;
   }
 
-  // ============================
-  // MODO ATUAL
-  // ============================
+  // ========================================
+  // AMIZADE
+  // ========================================
+
+  let amizadeExtra = `
+
+Friendship level:
+${memory.friendshipLevel}
+
+Total conversations:
+${memory.totalMessages}
+
+`;
+
+  // ========================================
+  // MODOS
+  // ========================================
 
   let modoExtra = "";
 
-  if (memory.currentMode === "story") {
+  if (
+    memory.currentMode === "teacher"
+  ) {
 
     modoExtra =
-      "Tell the answer like a small magical story.\n\n";
+      teacherMode(pergunta);
   }
 
-  if (memory.currentMode === "game") {
+  if (
+    memory.currentMode === "game"
+  ) {
 
     modoExtra =
-      "Turn the answer into a playful game.\n\n";
+      gameMode(pergunta);
   }
 
-  // ============================
+  if (
+    memory.currentMode === "story"
+  ) {
+
+    modoExtra =
+      storyMode(pergunta);
+  }
+
+  // ========================================
   // TEMA FAVORITO
-  // ============================
+  // ========================================
 
   let temaExtra = "";
 
-  if (memory.favoriteTheme) {
+  if (
+    memory.favoriteTheme
+  ) {
 
     temaExtra =
-      `Favorite theme of the child: ${memory.favoriteTheme}\n\n`;
+
+      `Favorite theme:
+
+${memory.favoriteTheme}
+
+\n\n`;
   }
 
-  // ============================
-  // MENSAGEM FINAL
-  // ============================
+  // ========================================
+  // PROMPT FINAL
+  // ========================================
 
   const mensagemUsuario = `
+
 ${contextoExtra}
+
 ${memoriaExtra}
+
+${amizadeExtra}
+
 ${modoExtra}
+
 ${temaExtra}
 
 Child asks:
+
 "${pergunta}"
 
-Quinti, answer in a magical and playful way.
+Quinti, answer in a magical,
+friendly and playful way.
 `;
 
   try {
 
-    if (!engine || !modeloPronto) {
+    if (
+      !engine ||
+      !modeloPronto
+    ) {
 
-      throw new Error("Modelo ainda não carregado.");
+      throw new Error(
+        "Model not loaded."
+      );
     }
 
-    const resposta = await engine.chat.completions.create({
+    const resposta =
 
-      messages: [
-        {
-          role: "system",
-          content: systemPrompt
-        },
-        {
-          role: "user",
-          content: mensagemUsuario
-        }
-      ],
+      await engine.chat.completions.create({
 
-      temperature: 0.7,
+        messages: [
 
-      max_tokens: 180
-    });
+          {
+            role: "system",
+            content: systemPrompt
+          },
+
+          {
+            role: "user",
+            content: mensagemUsuario
+          }
+
+        ],
+
+        temperature: 0.7,
+
+        max_tokens: 180
+      });
 
     const texto =
-      resposta.choices[0].message.content.trim();
+
+      resposta.choices[0]
+      .message.content.trim();
 
     removerPensando();
 
-    adicionarMensagem(texto, "bot");
+    adicionarMensagem(
+      texto,
+      "bot"
+    );
 
-    // ============================
-    // DEBUG DE MEMÓRIA
-    // ============================
+    // ========================================
+    // DEBUG
+    // ========================================
 
     console.log(
-      "📚 Learned words:",
+      "📚 Learned:",
       memory.learnedWords
     );
 
     console.log(
-      "🎮 Current mode:",
+      "🎮 Mode:",
       memory.currentMode
     );
 
     console.log(
-      "🌈 Favorite theme:",
+      "🌈 Theme:",
       memory.favoriteTheme
+    );
+
+    console.log(
+      "🦉 Friendship:",
+      memory.friendshipLevel
     );
 
   } catch (err) {
@@ -333,7 +528,7 @@ Quinti, answer in a magical and playful way.
     console.error(err);
 
     adicionarMensagem(
-      "❌ Quinti got confused 🌪️ Try again!",
+      "❌ Quinti got confused 🌪️",
       "bot"
     );
 
@@ -341,85 +536,117 @@ Quinti, answer in a magical and playful way.
 
     input.disabled = false;
 
-    document.getElementById("btnEnviar").disabled = false;
+    document.getElementById(
+      "btnEnviar"
+    ).disabled = false;
 
     input.focus();
   }
 };
 
-// =====================================================
+// ========================================
 // UI
-// =====================================================
+// ========================================
 
-function adicionarMensagem(texto, classe) {
+function adicionarMensagem(
+  texto,
+  classe
+) {
 
-  const div = document.createElement("div");
+  const div =
+    document.createElement("div");
 
-  div.className = `msg ${classe}`;
+  div.className =
+    `msg ${classe}`;
 
   div.innerText = texto;
 
   chat.appendChild(div);
 
-  chat.scrollTop = chat.scrollHeight;
+  chat.scrollTop =
+    chat.scrollHeight;
 }
 
-// =====================================================
+// ========================================
 // PENSANDO
-// =====================================================
+// ========================================
 
 function mostrarPensando() {
 
   removerPensando();
 
-  const div = document.createElement("div");
+  const div =
+    document.createElement("div");
 
-  div.className = "pensando";
+  div.className =
+    "pensando";
 
-  div.id = "pensando";
+  div.id =
+    "pensando";
 
   div.innerHTML = `
-    <img src="./img/quintin.png">
-    <span>🧠 Quinti is thinking...</span>
-  `;
+
+<img src="./img/quintin.png">
+
+<span>
+🧠 Quinti is thinking...
+</span>
+`;
 
   chat.appendChild(div);
 
-  chat.scrollTop = chat.scrollHeight;
+  chat.scrollTop =
+    chat.scrollHeight;
 }
 
 function removerPensando() {
 
-  const el = document.getElementById("pensando");
+  const el =
+    document.getElementById(
+      "pensando"
+    );
 
   if (el) el.remove();
 }
 
-// =====================================================
+// ========================================
 // ENTER
-// =====================================================
+// ========================================
 
 document
-  .getElementById("pergunta")
-  .addEventListener("keypress", (e) => {
+
+.getElementById("pergunta")
+
+.addEventListener(
+  "keypress",
+
+  (e) => {
 
     if (
-      e.key === "Enter" &&
-      !document.getElementById("btnEnviar").disabled
+
+      e.key === "Enter"
+
+      &&
+
+      !document.getElementById(
+        "btnEnviar"
+      ).disabled
+
     ) {
 
       enviar();
     }
-  });
+  }
+);
 
-// =====================================================
-// INICIALIZAÇÃO
-// =====================================================
+// ========================================
+// INICIAR
+// ========================================
 
 (async function iniciar() {
 
   adicionarMensagem(
-    "🌍 Loading Quinti's magical brain...",
+    "🌍 Loading Quinti...",
     "bot"
   );
 
@@ -428,9 +655,11 @@ document
     "bot"
   );
 
-  const modeloOk = await iniciarModelo();
+  const modeloOk =
+    await iniciarModelo();
 
-  modeloPronto = modeloOk;
+  modeloPronto =
+    modeloOk;
 
   if (!modeloOk) {
 
@@ -444,18 +673,64 @@ document
     adicionarMensagem(
 
       personality.greetings[
+
         Math.floor(
-          Math.random() *
+
+          Math.random()
+
+          *
+
           personality.greetings.length
         )
       ],
 
       "bot"
     );
+
+    // ========================================
+    // MEMÓRIA DE RETORNO
+    // ========================================
+
+    if (
+      memory.learnedWords.length > 0
+    ) {
+
+      adicionarMensagem(
+
+`🌟 Welcome back!
+
+You already learned:
+
+${memory.learnedWords
+  .slice(0,5)
+  .join(", ")}`,
+
+        "bot"
+      );
+    }
+
+    if (
+      memory.friendshipLevel > 3
+    ) {
+
+      adicionarMensagem(
+
+`🦉 Quinti remembers you!
+
+Friendship level:
+${memory.friendshipLevel} ✨`,
+
+        "bot"
+      );
+    }
   }
 
-  document.getElementById("pergunta").disabled = false;
+  document.getElementById(
+    "pergunta"
+  ).disabled = false;
 
-  document.getElementById("btnEnviar").disabled = false;
+  document.getElementById(
+    "btnEnviar"
+  ).disabled = false;
 
 })();
