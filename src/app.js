@@ -1,5 +1,5 @@
-import { CreateMLCEngine }
-from "https://esm.sh/@mlc-ai/web-llm";
+import * as webllm
+from "https://esm.run/@mlc-ai/web-llm";
 
 import {
   carregarConhecimento
@@ -243,40 +243,30 @@ async function iniciarModelo() {
 
   try {
 
-    engine =
-      await CreateMLCEngine(
+   engine =
+  await webllm.CreateMLCEngine(
 
-        MODEL_NAME,
+    MODEL_NAME,
 
-        {
+    {
+      initProgressCallback:
+        (progress) => {
 
-          initProgressCallback:
-            (progress) => {
+          const percent =
+            Math.round(
 
-            const percent =
-              Math.round(
+              (progress.progress || 0)
+              * 100
+            );
 
-                (progress.progress || 0)
-                * 100
-              );
+          progressDiv.innerText =
 
-            progressDiv.innerText =
-
-              `${progress.text || "Loading..."}
+            `${progress.text || "Loading..."}
 
 (${percent}%)`;
-
-            if (percent === 100) {
-
-              setTimeout(() => {
-
-                progressDiv.remove();
-
-              }, 1000);
-            }
-          }
         }
-      );
+    }
+  );
 
     adicionarMensagem(
       "✅ Quinti is ready 🌍",
