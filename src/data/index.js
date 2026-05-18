@@ -32,10 +32,6 @@ const arquivosJSON = [
 
 ];
 
-// ========================================
-// CARREGAR TODOS OS JSONS
-// ========================================
-
 export async function carregarConhecimento() {
 
   const knowledgeBase = {};
@@ -45,19 +41,7 @@ export async function carregarConhecimento() {
     try {
 
       const response =
-
-        await fetch(
-
-          `./src/data/${arquivo}`
-        );
-
-      if (!response.ok) {
-
-        throw new Error(
-
-          `Erro ao carregar ${arquivo}`
-        );
-      }
+        await fetch(`src/data/${arquivo}`);
 
       const data =
         await response.json();
@@ -74,17 +58,11 @@ export async function carregarConhecimento() {
     } catch(err) {
 
       console.error(
-        `❌ ${arquivo}`,
+        `❌ Erro em ${arquivo}`,
         err
       );
     }
   }
-
-  console.log(
-    "📚 Base total:",
-    Object.keys(knowledgeBase).length,
-    "palavras"
-  );
 
   return knowledgeBase;
 }
