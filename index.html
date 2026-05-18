@@ -1,496 +1,406 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="./img/quintin.png">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <link rel="icon"
+          href="./img/quintin.png">
+
     <title>Quinti - Professor de Inglês</title>
+
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+
+            font-family: 'Segoe UI',
+                         Tahoma,
+                         Geneva,
+                         Verdana,
+                         sans-serif;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #0f2027,
+                    #203a43,
+                    #2c5364
+                );
+
             min-height: 100vh;
+
             display: flex;
+
             justify-content: center;
+
             align-items: center;
+
             padding: 20px;
         }
+
         .container {
+
             width: 100%;
             max-width: 900px;
+
             background: #1e2a3a;
+
             border-radius: 28px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+
+            box-shadow:
+                0 20px 40px
+                rgba(0,0,0,0.4);
+
             overflow: hidden;
         }
+
         .topo {
+
             background: #0d1b2a;
+
             padding: 20px 25px;
+
             display: flex;
+
             align-items: center;
+
             gap: 18px;
-            border-bottom: 3px solid #ffb347;
+
+            border-bottom:
+                3px solid #ffb347;
         }
+
         .avatar {
+
             width: 70px;
             height: 70px;
+
             border-radius: 50%;
+
             background: #ffb347;
+
             display: flex;
+
             align-items: center;
+
             justify-content: center;
+
             overflow: hidden;
         }
+
         .avatar img {
+
             width: 100%;
             height: 100%;
+
             object-fit: cover;
         }
-        .avatar img:not([src]), .avatar img[src=""] {
-            display: none;
-        }
+
         .info-topo {
+
             flex: 1;
         }
+
         .titulo {
+
             color: #ffb347;
+
             font-size: 1.8rem;
+
             font-weight: bold;
         }
+
         .subtitulo {
+
             color: #cbd5e0;
+
             font-size: 0.85rem;
+
             margin-top: 4px;
         }
+
         .status-area {
+
             padding: 12px 25px;
+
             background: #0f1724;
+
             display: flex;
+
             justify-content: space-between;
+
             align-items: center;
-            border-bottom: 1px solid #2d3e50;
+
+            border-bottom:
+                1px solid #2d3e50;
         }
-        #status { color: #ffb347; font-weight: 500; font-size: 0.85rem; }
-        .progress-container { width: 200px; background: #2d3e50; border-radius: 20px; height: 8px; overflow: hidden; }
-        .progress-bar { width: 0%; height: 100%; background: linear-gradient(90deg, #ffb347, #ff7e05); transition: width 0.3s; }
+
+        #status {
+
+            color: #ffb347;
+
+            font-weight: 500;
+
+            font-size: 0.85rem;
+        }
+
+        .progress-container {
+
+            width: 200px;
+
+            background: #2d3e50;
+
+            border-radius: 20px;
+
+            height: 8px;
+
+            overflow: hidden;
+        }
+
+        .progress-bar {
+
+            width: 0%;
+            height: 100%;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #ffb347,
+                    #ff7e05
+                );
+
+            transition: width 0.3s;
+        }
+
         #chat {
+
             height: 450px;
+
             overflow-y: auto;
+
             padding: 20px;
+
             background: #1a2a36;
+
             display: flex;
+
             flex-direction: column;
+
             gap: 15px;
         }
+
         .msg {
+
             max-width: 80%;
+
             padding: 12px 18px;
+
             border-radius: 24px;
+
             line-height: 1.4;
+
             font-size: 0.95rem;
+
             word-wrap: break-word;
         }
+
         .user {
+
             background: #2c5f8a;
+
             color: white;
+
             align-self: flex-end;
+
             border-bottom-right-radius: 6px;
         }
+
         .bot {
+
             background: #2d3e50;
+
             color: #f0f0f0;
+
             align-self: flex-start;
+
             border-bottom-left-radius: 6px;
-            border-left: 3px solid #ffb347;
+
+            border-left:
+                3px solid #ffb347;
         }
-        .info {
-            background: #2a4a6a;
-            color: #ffd700;
-            align-self: center;
-            font-size: 0.8rem;
-            text-align: center;
-        }
+
         .pensando {
+
             display: flex;
+
             align-items: center;
+
             gap: 12px;
+
             background: #2d3e50;
+
             padding: 10px 18px;
+
             border-radius: 30px;
+
             width: fit-content;
+
             color: #ffb347;
         }
+
         .input-area {
+
             padding: 20px;
+
             background: #0d1b2a;
+
             display: flex;
+
             gap: 12px;
-            border-top: 1px solid #2d3e50;
+
+            border-top:
+                1px solid #2d3e50;
         }
+
         input {
+
             flex: 1;
+
             padding: 14px 18px;
+
             border: none;
+
             border-radius: 40px;
+
             font-size: 1rem;
+
             background: #2d3e50;
+
             color: white;
+
             outline: none;
         }
+
         button {
+
             background: #ffb347;
+
             border: none;
+
             padding: 0 24px;
+
             border-radius: 40px;
+
             font-weight: bold;
+
             color: #1e2a3a;
+
             cursor: pointer;
+
             transition: 0.2s;
         }
-        button:hover:not(:disabled) { background: #ff9f1a; }
-        button:disabled { background: #5a6e7a; cursor: not-allowed; }
-        .error-text { color: #ff8a7a; }
-        .success-text { color: #6fcf97; }
+
+        button:hover:not(:disabled) {
+
+            background: #ff9f1a;
+        }
+
+        button:disabled {
+
+            background: #5a6e7a;
+
+            cursor: not-allowed;
+        }
+
     </style>
+
 </head>
+
 <body>
-<div class="container">
-    <div class="topo">
-        <div class="avatar">
-            <img src="./img/quintin.png" alt="Quinti" onerror="this.style.display='none'; this.parentElement.style.fontSize='3rem'; this.parentElement.innerText='🌍';">
+
+    <div class="container">
+
+        <div class="topo">
+
+            <div class="avatar">
+
+                <img src="img/quintin.png"
+                     alt="Quinti">
+
+            </div>
+
+            <div class="info-topo">
+
+                <div class="titulo">
+                    Quinti
+                </div>
+
+                <div class="subtitulo">
+                    English for curious kids from Osasco ✨
+                </div>
+
+            </div>
+
         </div>
-        <div class="info-topo">
-            <div class="titulo">Quinti</div>
-            <div class="subtitulo">English for curious kids from Osasco ✨</div>
+
+        <div class="status-area">
+
+            <span id="status">
+                🔍 Inicializando...
+            </span>
+
+            <div class="progress-container">
+
+                <div id="progress"
+                     class="progress-bar">
+                </div>
+
+            </div>
+
         </div>
+
+        <div id="chat">
+
+            <div class="msg bot">
+
+                Olá! Sou o Quinti 🌍<br>
+                Estou carregando meu cérebro...
+
+            </div>
+
+        </div>
+
+        <div class="input-area">
+
+            <input type="text"
+                   id="pergunta"
+                   placeholder="Ex: como se diz gato em inglês?"
+                   disabled>
+
+            <button id="btnEnviar"
+                    disabled>
+
+                Enviar ✨
+
+            </button>
+
+        </div>
+
     </div>
-    <div class="status-area">
-        <span id="status">🔍 Inicializando...</span>
-        <div class="progress-container"><div id="progress" class="progress-bar"></div></div>
-    </div>
-    <div id="chat">
-        <div class="msg bot">Olá! Sou o Quinti 🧠<br>Estou carregando meu cérebro e os vocabulários. Aguarde...</div>
-    </div>
-    <div class="input-area">
-        <input type="text" id="pergunta" placeholder="Ex: como se diz gato em inglês?" disabled>
-        <button id="btnEnviar" onclick="enviar()" disabled>Enviar ✨</button>
-    </div>
-</div>
 
-    function buscarConhecimento(pergunta) {
-        const perguntaLower = pergunta.toLowerCase();
-        const resultados = [];
-        for (const [chave, valor] of Object.entries(conhecimentoGlobal)) {
-            const chaveLower = chave.toLowerCase();
-            const valorStr = String(valor).toLowerCase();
-            if (perguntaLower.includes(chaveLower) || perguntaLower.includes(valorStr)) {
-                // Formata a resposta de forma amigável
-                let respostaFormatada = `${chave} = ${valor}`;
-                // Se for um objeto complexo (como os de gramática), pula
-                if (typeof valor === 'object') continue;
-                resultados.push(respostaFormatada);
-                if (resultados.length >= 5) break;
-            }
-        }
-        return resultados;
-    }
+    <script type="module"
+            src="src/app.js"></script>
 
-    const fallbackLocal = {
-        "dog": "cachorro", "cat": "gato", "bird": "pássaro", "fish": "peixe",
-        "cow": "vaca", "horse": "cavalo", "pig": "porco", "duck": "pato",
-        "lion": "leão", "elephant": "elefante", "monkey": "macaco",
-        "red": "vermelho", "blue": "azul", "green": "verde", "yellow": "amarelo",
-        "hello": "olá", "good morning": "bom dia", "good night": "boa noite",
-        "thank you": "obrigado", "please": "por favor", "sorry": "desculpe",
-        "hi": "oi", "how are you": "como você está",
-        "i": "eu", "you": "você", "he": "ele", "she": "ela", "it": "isso",
-        "we": "nós", "they": "eles", "me": "mim", "him": "ele", "her": "ela",
-        "us": "nós", "them": "eles", "my": "meu", "your": "seu", "his": "dele",
-        "our": "nosso", "their": "deles", "mine": "meu", "yours": "seu", "who": "quem",
-        "be": "ser/estar", "have": "ter", "do": "fazer", "say": "dizer", "go": "ir",
-        "can": "poder", "get": "pegar", "make": "fazer", "know": "saber", "think": "pensar",
-        "take": "pegar", "see": "ver", "come": "vir", "want": "querer", "look": "olhar",
-        "use": "usar", "find": "encontrar", "give": "dar", "tell": "contar", "work": "trabalhar",
-        "call": "chamar", "try": "tentar", "ask": "perguntar", "need": "precisar", "feel": "sentir",
-        "become": "tornar-se", "leave": "sair", "put": "colocar", "mean": "significar", "keep": "manter",
-        "time": "tempo", "day": "dia", "year": "ano", "people": "pessoas", "way": "jeito",
-        "man": "homem", "woman": "mulher", "child": "criança", "world": "mundo", "school": "escola",
-        "family": "família", "student": "estudante", "friend": "amigo", "house": "casa", "room": "quarto",
-        "food": "comida", "water": "água", "money": "dinheiro", "city": "cidade", "country": "país",
-        "and": "e", "but": "mas", "or": "ou", "because": "porque", "so": "então", "if": "se",
-        "when": "quando", "before": "antes", "after": "depois", "while": "enquanto", "with": "com",
-        "without": "sem", "for": "para", "from": "de", "to": "para", "in": "em", "on": "sobre",
-        "at": "em", "by": "por", "about": "sobre", "good": "bom", "bad": "ruim", "big": "grande",
-        "small": "pequeno", "new": "novo", "old": "velho", "young": "jovem", "happy": "feliz",
-        "sad": "triste", "beautiful": "bonito", "easy": "fácil", "difficult": "difícil", "important": "importante",
-        "different": "diferente", "same": "mesmo", "strong": "forte", "weak": "fraco", "hot": "quente",
-        "cold": "frio", "fast": "rápido", "one": "um", "two": "dois", "three": "três", "four": "quatro",
-        "five": "cinco", "six": "seis", "seven": "sete", "eight": "oito", "nine": "nove", "ten": "dez",
-        "what": "o que", "where": "onde", "why": "por quê", "how": "como", "which": "qual",
-        "eat": "comer", "drink": "beber", "sleep": "dormir", "read": "ler", "write": "escrever",
-        "speak": "falar", "listen": "escutar", "hear": "ouvir", "play": "brincar", "run": "correr",
-        "walk": "caminhar", "open": "abrir", "close": "fechar", "buy": "comprar", "pay": "pagar",
-        "send": "enviar", "help": "ajudar", "start": "começar", "finish": "terminar", "learn": "aprender",
-        "street": "rua", "park": "parque", "beach": "praia", "river": "rio", "mountain": "montanha",
-        "tree": "árvore", "flower": "flor", "sun": "sol", "moon": "lua", "star": "estrela", "sky": "céu",
-        "rain": "chuva", "wind": "vento", "fire": "fogo", "earth": "terra", "book": "livro", "pen": "caneta",
-        "pencil": "lápis", "table": "mesa", "chair": "cadeira", "phone": "telefone", "computer": "computador",
-        "door": "porta", "window": "janela", "bed": "cama", "bag": "mochila", "shoes": "sapatos",
-        "shirt": "camisa", "car": "carro", "bus": "ônibus", "love": "amar", "like": "gostar",
-        "hate": "odiar", "smile": "sorrir", "laugh": "rir", "cry": "chorar", "dream": "sonhar",
-        "remember": "lembrar", "forget": "esquecer", "hope": "esperar", "yes": "sim", "no": "não",
-        "maybe": "talvez", "always": "sempre", "never": "nunca", "sometimes": "às vezes", "now": "agora",
-        "today": "hoje", "tomorrow": "amanhã", "yesterday": "ontem", "here": "aqui", "there": "lá",
-        "again": "novamente", "very": "muito", "more": "mais", "less": "menos", "all": "tudo",
-        "some": "alguns", "many": "muitos", "few": "poucos", "black": "preto", "white": "branco",
-        "orange": "laranja", "pink": "rosa", "purple": "roxo", "brown": "marrom", "chicken": "galinha",
-        "tiger": "tigre", "head": "cabeça", "hand": "mão", "arm": "braço", "leg": "perna", "foot": "pé",
-        "eye": "olho", "ear": "orelha", "mouth": "boca", "nose": "nariz", "hair": "cabelo", "bread": "pão",
-        "milk": "leite", "cheese": "queijo", "rice": "arroz", "meat": "carne", "fruit": "fruta", "apple": "maçã",
-        "banana": "banana", "egg": "ovo", "cake": "bolo", "teacher": "professor", "class": "aula",
-        "lesson": "lição", "question": "pergunta", "answer": "resposta", "test": "prova", "paper": "papel",
-        "word": "palavra", "sentence": "frase", "language": "língua", "internet": "internet", "game": "jogo",
-        "video": "vídeo", "music": "música", "photo": "foto", "email": "e-mail", "message": "mensagem",
-        "website": "site", "app": "aplicativo", "password": "senha", "morning": "manhã", "afternoon": "tarde",
-        "evening": "noite", "night": "noite", "minute": "minuto", "hour": "hora", "week": "semana",
-        "month": "mês", "holiday": "feriado", "birthday": "aniversário", "life": "vida", "job": "trabalho",
-        "idea": "ideia", "story": "história", "problem": "problema", "solution": "solução", "example": "exemplo",
-        "change": "mudança", "reason": "razão", "result": "resultado", "future": "futuro", "past": "passado",
-        "present": "presente", "thing": "coisa", "place": "lugar", "person": "pessoa", "part": "parte", "end": "fim"
-    };
-
-    const reverseLocal = {};
-    for (const [en, pt] of Object.entries(fallbackLocal)) {
-        const ptSimplified = pt.split('/')[0].trim();
-        if (!reverseLocal[ptSimplified]) reverseLocal[ptSimplified] = en;
-        reverseLocal[pt] = en;
-    }
-
-    function responderTraducao(mensagem) {
-        const msg = mensagem.toLowerCase().trim();
-        
-        let match = msg.match(/^(?:o que é|o que significa|qual o significado de)\s+(.+?)\??$/);
-        if (match) {
-            let palavra = match[1].trim();
-            let traducao = fallbackLocal[palavra];
-            if (traducao) return `🔍 *${palavra}* significa *${traducao}* em português.`;
-            if (reverseLocal[palavra]) return `🔍 *${palavra}* em inglês é *${reverseLocal[palavra]}*.`;
-            return `❓ Desculpe, ainda não conheço a palavra *"${palavra}"*.`;
-        }
-        
-        match = msg.match(/^(?:como (?:se diz|eu digo)|traduza)(?:\s+para (?:o inglês)?)?\s+(.+?)\??$/);
-        if (match) {
-            let palavraPt = match[1].trim();
-            let traducao = reverseLocal[palavraPt];
-            if (traducao) return `🔍 *${palavraPt}* em inglês é *${traducao}*.`;
-            if (fallbackLocal[palavraPt]) return `🔍 *${palavraPt}* significa *${fallbackLocal[palavraPt]}* em português.`;
-            return `❓ Ainda não sei como dizer *"${palavraPt}"* em inglês.`;
-        }
-        
-        if (msg.startsWith("traduza:")) {
-            let texto = msg.replace("traduza:", "").trim();
-            if (fallbackLocal[texto]) return `📖 *${texto}* = *${fallbackLocal[texto]}*`;
-            if (reverseLocal[texto]) return `📖 *${texto}* = *${reverseLocal[texto]}*`;
-            return `❓ Não sei traduzir *"${texto}"*.`;
-        }
-        
-        if (msg.match(/^[a-záéíóúâêôãç]+$/i) && msg.length <= 20) {
-            if (fallbackLocal[msg]) return `🔍 *${msg}* significa *${fallbackLocal[msg]}* em português.`;
-            if (reverseLocal[msg]) return `🔍 *${msg}* em inglês é *${reverseLocal[msg]}*.`;
-        }
-        
-        match = msg.match(/^(.+?)\s+em inglês\??$/);
-        if (match) {
-            let palavraPt = match[1].trim();
-            let traducao = reverseLocal[palavraPt];
-            if (traducao) return `🔍 *${palavraPt}* em inglês é *${traducao}*.`;
-            return `❓ Não sei como dizer *"${palavraPt}"* em inglês.`;
-        }
-        
-        match = msg.match(/^(.+?)\s+em português\??$/);
-        if (match) {
-            let palavraEn = match[1].trim();
-            let traducao = fallbackLocal[palavraEn];
-            if (traducao) return `🔍 *${palavraEn}* em português é *${traducao}*.`;
-            return `❓ Não sei o significado de *"${palavraEn}"* em português.`;
-        }
-        
-        return null;
-    }
-
-    function getSystemPrompt() {
-        return `You are Quinti, an English teacher for Brazilian children.
-
-IMPORTANT RULES:
-- Always be helpful and friendly.
-- If the user asks for a simple translation, provide it directly.
-- Never refuse to answer a question about words like "oi", "dog", "cat", etc.
-- Answer in Portuguese, explaining the English translation clearly.
-
-Keep responses short and encouraging.`;
-    }
-
-    let engine = null;
-    let modeloPronto = false;
-    let jsonPronto = false;
-    const chatDiv = document.getElementById("chat");
-    const inputPergunta = document.getElementById("pergunta");
-    const btnEnviar = document.getElementById("btnEnviar");
-    const statusSpan = document.getElementById("status");
-    const progressBar = document.getElementById("progress");
-
-    function adicionarMensagem(texto, classe) {
-        const div = document.createElement("div");
-        div.className = `msg ${classe}`;
-        div.innerText = texto;
-        chatDiv.appendChild(div);
-        chatDiv.scrollTop = chatDiv.scrollHeight;
-    }
-
-    let pensandoDiv = null;
-    function mostrarPensando() {
-        if (pensandoDiv) pensandoDiv.remove();
-        pensandoDiv = document.createElement("div");
-        pensandoDiv.className = "pensando";
-        pensandoDiv.innerHTML = `<span>🧠 Quinti está pensando...</span>`;
-        chatDiv.appendChild(pensandoDiv);
-        chatDiv.scrollTop = chatDiv.scrollHeight;
-    }
-    function removerPensando() {
-        if (pensandoDiv) pensandoDiv.remove();
-        pensandoDiv = null;
-    }
-
-    async function iniciarModelo() {
-        if (!navigator.gpu) {
-            statusSpan.innerHTML = "<span class='error-text'>❌ WebGPU não suportado. Use Chrome ou Edge.</span>";
-            return false;
-        }
-        statusSpan.innerText = "📦 Baixando modelo Llama-3.2-1B (850 MB)...";
-        progressBar.style.width = "0%";
-        try {
-            engine = await CreateMLCEngine(MODEL_NAME, {
-                initProgressCallback: (p) => {
-                    const percent = Math.round((p.progress || 0) * 100);
-                    progressBar.style.width = percent + "%";
-                    statusSpan.innerText = p.text || `Modelo: ${percent}%`;
-                    if (percent === 100 && jsonPronto) {
-                        statusSpan.innerHTML = "<span class='success-text'>✅ Quinti pronto! Pergunte sobre inglês.</span>";
-                        inputPergunta.disabled = false;
-                        btnEnviar.disabled = false;
-                    }
-                }
-            });
-            return true;
-        } catch (err) {
-            console.error(err);
-            statusSpan.innerHTML = `<span class='error-text'>❌ ${err.message}</span>`;
-            return false;
-        }
-    }
-
-    window.enviar = async function() {
-        if (!modeloPronto || !jsonPronto) {
-            adicionarMensagem("Quinti ainda está carregando... Aguarde o vocabulário e o modelo.", "bot");
-            return;
-        }
-        const pergunta = inputPergunta.value.trim();
-        if (!pergunta) return;
-
-        const respostaDireta = responderTraducao(pergunta);
-        if (respostaDireta) {
-            adicionarMensagem(pergunta, "user");
-            adicionarMensagem(respostaDireta, "bot");
-            inputPergunta.value = "";
-            inputPergunta.focus();
-            return;
-        }
-
-        adicionarMensagem(pergunta, "user");
-        inputPergunta.value = "";
-        inputPergunta.disabled = true;
-        btnEnviar.disabled = true;
-        mostrarPensando();
-
-        const conhecimentoRelevante = buscarConhecimento(pergunta);
-        let contexto = "";
-        if (conhecimentoRelevante.length > 0) {
-            contexto = "Relevant vocabulary from my knowledge base:\n" + conhecimentoRelevante.join("\n") + "\n\n";
-        } else {
-            const fallbackResultados = [];
-            for (const [en, pt] of Object.entries(fallbackLocal)) {
-                if (pergunta.toLowerCase().includes(en) || pergunta.toLowerCase().includes(pt)) {
-                    fallbackResultados.push(`${en} = ${pt}`);
-                    if (fallbackResultados.length >= 3) break;
-                }
-            }
-            if (fallbackResultados.length > 0) {
-                contexto = "Palavras que podem ajudar:\n" + fallbackResultados.join("\n") + "\n\n";
-            }
-        }
-
-        const userMessage = `${contexto}Student asks: "${pergunta}"\n\nQuinti, responda em português, ensinando a tradução para o inglês no formato correto.`;
-
-        try {
-            const resposta = await engine.chat.completions.create({
-                messages: [
-                    { role: "system", content: getSystemPrompt() },
-                    { role: "user", content: userMessage }
-                ],
-                temperature: 0.4,
-                max_tokens: 150
-            });
-            let texto = resposta.choices[0].message.content;
-            if (texto.toLowerCase().includes("cannot") || texto.toLowerCase().includes("sexual")) {
-                texto = "Desculpe, tive um problema técnico. Vamos tentar de outra forma: " + 
-                        (conhecimentoRelevante[0] || "pergunte de maneira mais simples, como 'cachorro' ou 'gato'.");
-            }
-            removerPensando();
-            adicionarMensagem(texto, "bot");
-        } catch (err) {
-            removerPensando();
-            console.error(err);
-            adicionarMensagem("❌ Erro ao processar. Tente novamente com uma palavra mais simples.", "bot");
-        } finally {
-            inputPergunta.disabled = false;
-            btnEnviar.disabled = false;
-            inputPergunta.focus();
-        }
-    };
-
-    inputPergunta.addEventListener("keypress", (e) => {
-        if (e.key === "Enter" && !btnEnviar.disabled && modeloPronto && jsonPronto) enviar();
-    });
-
-  (async () => {
-
-    jsonPronto = true;
-
-    const ok = await iniciarModelo();
-
-    if (ok) {
-
-        modeloPronto = true;
-
-        inputPergunta.disabled = false;
-        btnEnviar.disabled = false;
-
-        inputPergunta.placeholder =
-            "Ex: como se diz gato em inglês?";
-
-        statusSpan.innerHTML =
-            "<span class='success-text'>✅ Quinti pronto! Pergunte sobre inglês.</span>";
-
-        adicionarMensagem(
-            "Olá! Sou o Quinti 🌍",
-            "bot"
-        );
-    }
-
-})();
-
-<script type="module" src="src/app.js"></script>            
-            
 </body>
+
 </html>
