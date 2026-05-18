@@ -189,30 +189,45 @@
     import { CreateMLCEngine } from "@mlc-ai/web-llm";
 
     const MODEL_NAME = "Llama-3.2-1B-Instruct-q4f16_1-MLC";
-    const BASE_URL = "https://raw.githubusercontent.com/lenilsonxavier-dev/Quintin/main/dados/";
+    const BASE_URL = "https://raw.githubusercontent.com/lenilsonxavier-dev/Quintin/refs/heads/main/dados/";
     
-    const arquivosRaiz = [
-        "food_and_drink.json", "historia_lingua_inglesa.json", "lets_have_fun.json",
-        "places_to_go_in_town.json", "prepositions_in_on_at.json", "pronomes.json",
-        "verb_to_be.json", "we_are_having_fun.json", "where_can_we_buy_clothes.json",
-        "where_can_we_find_it.json", "where_is_the_candy_shop.json", "adjetivos.json",
-        "animais_fazenda.json", "animais_marinhos.json", "animais_selvagens.json",
-        "aniversario_expressoes.json", "clima.json", "comidas.json", "cores.json",
-        "cumprimentos.json", "curiosidades_lingua_inglesa.json", "dias_da_semana.json",
-        "estacoes.json", "fases_da_vida.json", "glossario.json", "halloween.json",
-        "horas.json", "materias_escolares.json", "meses_do_ano.json", "numeros_ordinais.json",
-        "o_que_e_lingua_inglesa.json", "objetos_escolares.json", "opostos.json",
-        "passaros.json", "pequenos_dialogos.json", "rotinas.json", "roupas.json",
-        "sinonimos.json", "substantivos.json"
-    ];
-    
-    const arquivosDialogos = [
-        "greetings.json", "introductions.json", "family.json", "school.json", "colors.json", "animals.json"
+    // ==============================================
+    // TODOS OS JSONS FUNCIONANDO (26 ARQUIVOS)
+    // ==============================================
+    const arquivosJSON = [
+        // JSONs da raiz "dados/"
+        "adjetivos.json",
+        "animais_fazenda.json",
+        "animais_marinhos.json",
+        "animais_selvagens.json",
+        "aniversario_expressoes.json",
+        "clima.json",
+        "comidas.json",
+        "cumprimentos.json",
+        "curiosidades_lingua_inglesa.json",
+        "dias_da_semana.json",
+        "estacoes.json",
+        "fases_da_vida.json",
+        "glossario.json",
+        "horas.json",
+        "materias_escolares.json",
+        "meses_do_ano.json",
+        "numeros_ordinais.json",
+        "o_que_e_lingua_inglesa.json",
+        "objetos_escolares.json",
+        "sinonimos.json",
+        "substantivos.json",
+        
+        // JSONs da pasta "conteudo-5ano/dialogos/"
+        "conteudo-5ano/dialogos/prepositions_in_on_at.json",
+        "conteudo-5ano/dialogos/historia_lingua_inglesa.json",
+        "conteudo-5ano/dialogos/pronomes.json",
+        "conteudo-5ano/dialogos/verb_to_be.json"
     ];
     
     let conhecimentoGlobal = {};
     let carregados = 0;
-    let totalArquivos = arquivosRaiz.length + arquivosDialogos.length;
+    let totalArquivos = arquivosJSON.length;
 
     async function carregarJSON(url, nome) {
         try {
@@ -221,11 +236,12 @@
             const data = await response.json();
             conhecimentoGlobal = { ...conhecimentoGlobal, ...data };
             carregados++;
-            statusSpan.innerText = `📚 Carregando vocabulário: ${carregados}/${totalArquivos} - ${nome}`;
+            statusSpan.innerText = `📚 Carregando: ${carregados}/${totalArquivos} - ${nome}`;
             progressBar.style.width = (carregados / totalArquivos) * 100 + "%";
+            console.log(`✅ Carregado: ${nome}`);
             return true;
         } catch (e) {
-            console.warn(`Erro ao carregar ${nome}:`, e);
+            console.warn(`❌ Erro ao carregar ${nome}:`, e);
             return false;
         }
     }
@@ -233,13 +249,14 @@
     async function carregarTodosJSONs() {
         statusSpan.innerText = "📚 Carregando vocabulários do GitHub...";
         progressBar.style.width = "0%";
-        for (const arquivo of arquivosRaiz) {
+        
+        for (const arquivo of arquivosJSON) {
             await carregarJSON(BASE_URL + arquivo, arquivo);
         }
-        for (const arquivo of arquivosDialogos) {
-            await carregarJSON(BASE_URL + "conteudo-5ano/dialogos/" + arquivo, arquivo);
-        }
-        statusSpan.innerText = `✅ Vocabulário carregado: ${Object.keys(conhecimentoGlobal).length} palavras/frases`;
+        
+        const totalPalavras = Object.keys(conhecimentoGlobal).length;
+        statusSpan.innerText = `✅ Vocabulário carregado: ${totalPalavras} palavras/frases`;
+        adicionarMensagem(`📖 ${totalPalavras} palavras e expressões carregadas dos arquivos!`, "info");
         return conhecimentoGlobal;
     }
 
@@ -248,9 +265,13 @@
         const resultados = [];
         for (const [chave, valor] of Object.entries(conhecimentoGlobal)) {
             const chaveLower = chave.toLowerCase();
-            const valorLower = String(valor).toLowerCase();
-            if (perguntaLower.includes(chaveLower) || perguntaLower.includes(valorLower)) {
-                resultados.push(`${chave} = ${valor}`);
+            const valorStr = String(valor).toLowerCase();
+            if (perguntaLower.includes(chaveLower) || perguntaLower.includes(valorStr)) {
+                // Formata a resposta de forma amigável
+                let respostaFormatada = `${chave} = ${valor}`;
+                // Se for um objeto complexo (como os de gramática), pula
+                if (typeof valor === 'object') continue;
+                resultados.push(respostaFormatada);
                 if (resultados.length >= 5) break;
             }
         }
@@ -388,10 +409,6 @@ IMPORTANT RULES:
 - If the user asks for a simple translation, provide it directly.
 - Never refuse to answer a question about words like "oi", "dog", "cat", etc.
 - Answer in Portuguese, explaining the English translation clearly.
-
-Example:
-User: oi
-Quinti: "Oi" em inglês é "hi" ou "hello". 😊
 
 Keep responses short and encouraging.`;
     }
