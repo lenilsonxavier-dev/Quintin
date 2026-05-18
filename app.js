@@ -1,22 +1,30 @@
-import * as webllm from "https://esm.sh/@mlc-ai/web-llm";
+import { CreateMLCEngine }
+from "https://esm.sh/@mlc-ai/web-llm";
 
-import { knowledgeBase } from "./data/index.js";
+import { knowledgeBase }
+from "./data/index.js";
 
-import { memory } from "./brain/memory.js";
+import { memory }
+from "./brain/memory.js";
 
-import { personality } from "./brain/personality.js";
+import { personality }
+from "./brain/personality.js";
 
-import { detectIntent } from "./brain/orchestrator.js";
+import { detectIntent }
+from "./brain/orchestrator.js";
 
 // ========================================
 // MODOS
 // ========================================
 
-import { teacherMode } from "./modes/teacherMode.js";
+import { teacherMode }
+from "./modes/teacherMode.js";
 
-import { gameMode } from "./modes/gameMode.js";
+import { gameMode }
+from "./modes/gameMode.js";
 
-import { storyMode } from "./modes/storyMode.js";
+import { storyMode }
+from "./modes/storyMode.js";
 
 // ========================================
 // MEMÓRIA PERSISTENTE
@@ -24,19 +32,30 @@ import { storyMode } from "./modes/storyMode.js";
 
 function salvarMemoria() {
 
-  localStorage.setItem(
+  try {
 
-    "quintiMemory",
+    localStorage.setItem(
 
-    JSON.stringify(memory)
-  );
+      "quintiMemory",
+
+      JSON.stringify(memory)
+    );
+
+  } catch(err) {
+
+    console.warn(
+      "Memory save failed",
+      err
+    );
+  }
 }
 
 // ========================================
 // ELEMENTOS DA UI
 // ========================================
 
-const chat = document.getElementById("chat");
+const chat =
+  document.getElementById("chat");
 
 let engine = null;
 
@@ -56,7 +75,8 @@ memory.totalMessages =
 // BASE DE CONHECIMENTO
 // ========================================
 
-const conhecimentoGlobal = knowledgeBase;
+const conhecimentoGlobal =
+  knowledgeBase;
 
 // ========================================
 // MODELO WEBLLM
@@ -93,6 +113,23 @@ IMPORTANT:
 - Build emotional connection
 - Remember previous learning
 `;
+
+// ========================================
+// PALAVRAS DE TEMA
+// ========================================
+
+const animalWords = [
+  "dog",
+  "cat",
+  "lion",
+  "bird",
+  "cow",
+  "fish",
+  "horse",
+  "tiger",
+  "monkey",
+  "snake"
+];
 
 // ========================================
 // CONTEXTO DOS JSONS
@@ -138,6 +175,14 @@ function buscarContextoLocal(pergunta) {
 
         memory.learnedWords.push(en);
 
+        // limite
+        if (
+          memory.learnedWords.length > 100
+        ) {
+
+          memory.learnedWords.shift();
+        }
+
         salvarMemoria();
       }
 
@@ -146,13 +191,9 @@ function buscarContextoLocal(pergunta) {
       // ========================================
 
       if (
-
-        en.includes("dog") ||
-        en.includes("cat") ||
-        en.includes("lion") ||
-        en.includes("bird") ||
-        en.includes("cow")
-
+        animalWords.includes(
+          en.toLowerCase()
+        )
       ) {
 
         memory.favoriteTheme =
@@ -187,7 +228,7 @@ async function iniciarModelo() {
   }
 
   adicionarMensagem(
-    "🧠 Quinti is waking up...",
+    "🦉 Quinti is opening his magical books...",
     "bot"
   );
 
@@ -202,7 +243,7 @@ async function iniciarModelo() {
   try {
 
     engine =
-      await webllm.CreateMLCEngine(
+      await CreateMLCEngine(
 
         MODEL_NAME,
 
@@ -369,12 +410,15 @@ ${memory.learnedWords.join(", ")}
 
   let amizadeExtra = `
 
+Quinti already knows the child.
+
 Friendship level:
 ${memory.friendshipLevel}
 
 Total conversations:
 ${memory.totalMessages}
 
+Be warm and friendly.
 `;
 
   // ========================================
@@ -490,10 +534,13 @@ friendly and playful way.
       resposta.choices[0]
       .message.content.trim();
 
+    const respostaFinal =
+      texto.slice(0, 600);
+
     removerPensando();
 
     adicionarMensagem(
-      texto,
+      respostaFinal,
       "bot"
     );
 
@@ -559,7 +606,8 @@ function adicionarMensagem(
   div.className =
     `msg ${classe}`;
 
-  div.innerText = texto;
+  div.innerText =
+    texto;
 
   chat.appendChild(div);
 
@@ -618,6 +666,7 @@ document
 .getElementById("pergunta")
 
 .addEventListener(
+
   "keypress",
 
   (e) => {
