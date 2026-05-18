@@ -32,6 +32,10 @@ const arquivosJSON = [
 
 ];
 
+// ========================================
+// CARREGAR BASE DE CONHECIMENTO
+// ========================================
+
 export async function carregarConhecimento() {
 
   const knowledgeBase = {};
@@ -40,8 +44,22 @@ export async function carregarConhecimento() {
 
     try {
 
+      // caminho absoluto para GitHub Pages
+      const caminho =
+
+        `/Quintin/src/data/${arquivo}`;
+
       const response =
-        await fetch(`src/data/${arquivo}`);
+        await fetch(caminho);
+
+      // verifica erro HTTP
+      if (!response.ok) {
+
+        throw new Error(
+
+          `HTTP ${response.status}`
+        );
+      }
 
       const data =
         await response.json();
@@ -63,6 +81,11 @@ export async function carregarConhecimento() {
       );
     }
   }
+
+  console.log(
+    "📚 Total carregado:",
+    Object.keys(knowledgeBase).length
+  );
 
   return knowledgeBase;
 }
