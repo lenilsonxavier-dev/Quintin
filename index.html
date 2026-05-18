@@ -178,17 +178,6 @@
     </div>
 </div>
 
-<script type="importmap">
-    {
-        "imports": {
-            "@mlc-ai/web-llm": "https://esm.run/@mlc-ai/web-llm"
-        }
-    }
-</script>
-
-<script type="module">
-  <script type="module" src="src/app.js"></script>    
-    
     function buscarConhecimento(pergunta) {
         const perguntaLower = pergunta.toLowerCase();
         const resultados = [];
@@ -500,6 +489,8 @@ Keep responses short and encouraging.`;
     }
 
 })();
-</script>
+
+<script type="module" src="src/app.js"></script>            
+            
 </body>
 </html>
