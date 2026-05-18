@@ -1,0 +1,57 @@
+{
+  "datas_comemorativas_ingles": {
+    "tema": "idiomas",
+    "subtema": "datas_comemorativas",
+    "palavras_chave": [
+      "datas comemorativas em ingles",
+      "feriados em ingles",
+      "christmas",
+      "easter",
+      "halloween",
+      "valentine's day",
+      "thanksgiving"
+    ],
+    "inicio": [
+      "Você sabe como se diz as datas comemorativas em inglês? Vamos aprender! 🎄🐰🎃"
+    ],
+    "explicacao_curta": [
+      "Christmas = Natal",
+      "Easter = Páscoa",
+      "Children's Day = Dia das Crianças",
+      "Mother's Day = Dia das Mães",
+      "Father's Day = Dia dos Pais",
+      "Teacher's Day = Dia dos Professores",
+      "New Year's Eve = Ano Novo",
+      "Halloween = Halloween",
+      "Valentine's Day = Dia dos Namorados",
+      "Independence Day = Dia da Independência"
+    ],
+    "explicacao_aprofundada": [
+      "🎄 Christmas (Natal): comemorado em 25 de dezembro.",
+      "🐰 Easter (Páscoa): celebra a ressurreição de Jesus, com ovos de chocolate e coelhos.",
+      "🧸 Children's Day (Dia das Crianças): 12 de outubro no Brasil; em outros países, datas diferentes.",
+      "💐 Mother's Day (Dia das Mães): segundo domingo de maio em muitos países.",
+      "👔 Father's Day (Dia dos Pais): terceiro domingo de junho no Brasil e EUA.",
+      "📚 Teacher's Day (Dia dos Professores): 15 de outubro no Brasil; em outros lugares, datas variam.",
+      "🎆 New Year's Eve (Ano Novo): 31 de dezembro, com festas e queima de fogos.",
+      "🎃 Halloween (Dia das Bruxas): 31 de outubro, com fantasias e doces.",
+      "💖 Valentine's Day (Dia dos Namorados): 14 de fevereiro em muitos países.",
+      "🇧🇷 Independence Day (Dia da Independência): 7 de setembro no Brasil."
+    ],
+    "curiosidade": [
+      "Nos Estados Unidos, o Halloween é muito popular: as crianças dizem 'trick or treat' (doces ou travessuras) e ganham balas. 🍬"
+    ],
+    "interacao": [
+      "Qual é a sua data comemorativa favorita?",
+      "Como se diz 'Dia das Mães' em inglês?"
+    ],
+    "atividade": [
+      "Desenhe um cartão para a data comemorativa que você mais gosta e escreva o nome dela em inglês 🎨✏️"
+    ],
+    "final": [
+      "Agora você já sabe os nomes das principais datas comemorativas em inglês. Pratique com seus amigos! 🌟"
+    ],
+    "emocao": "aprendizado",
+    "nivel": "leve"
+  }
+}

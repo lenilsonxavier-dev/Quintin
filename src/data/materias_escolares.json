@@ -1,0 +1,43 @@
+{
+  "school_subjects": {
+    "tema": "idiomas",
+    "subtema": "vocabulario_escolar",
+    "palavras_chave": [
+      "materias escolares em ingles",
+      "school subjects",
+      "vocabulario ingles escola",
+      "matérias em ingles"
+    ],
+    "inicio": [
+      "As matérias escolares têm nomes diferentes em inglês. Vamos aprender algumas! 📚"
+    ],
+    "explicacao_curta": [
+      "Math é matemática, Science são ciências, History é história, Geography é geografia, Art é arte, Physical Education é educação física, English é inglês, Music é música."
+    ],
+    "explicacao_aprofundada": [
+      "Math = Matemática ➕",
+      "Science = Ciências 🔬",
+      "History = História 📜",
+      "Geography = Geografia 🌍",
+      "Art = Arte 🎨",
+      "Physical Education = Educação Física 🏃‍♂️",
+      "English = Inglês 🇬🇧",
+      "Music = Música 🎵"
+    ],
+    "curiosidade": [
+      "Nos Estados Unidos, 'Physical Education' é frequentemente chamado apenas de 'P.E.' 🏫"
+    ],
+    "interacao": [
+      "What is your favorite subject? (Qual é a sua matéria favorita?)",
+      "Do you like Math? (Você gosta de Matemática?)"
+    ],
+    "atividade": [
+      "Desenhe um quadro de horários (timetable) em inglês com as matérias que você estuda 🗓️"
+    ],
+    "final": [
+      "Saber o nome das matérias em inglês ajuda a conversar sobre a escola com amigos de outros países! 🌟"
+    ],
+    "emocao": "curiosidade",
+    "nivel": "leve"
+  }
+}
