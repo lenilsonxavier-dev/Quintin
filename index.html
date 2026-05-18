@@ -187,13 +187,7 @@
 </script>
 
 <script type="module">
-    import { CreateMLCEngine } from "@mlc-ai/web-llm";
-    import { knowledgeBase } from "./data/index.js";
-
-    const MODEL_NAME = "Llama-3.2-1B-Instruct-q4f16_1-MLC";
-    
-    const conhecimentoGlobal = knowledgeBase;
-    
+   <script type="module" src="./src/app.js"></script>    
     
     function buscarConhecimento(pergunta) {
         const perguntaLower = pergunta.toLowerCase();
