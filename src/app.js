@@ -271,6 +271,8 @@ function detectarIntencao(
     texto.includes("how do you say")
     ||
     texto.includes("significa")
+    ||
+    texto.includes("o que é")
 
   ) {
 
@@ -281,110 +283,7 @@ function detectarIntencao(
 }
 
 // ========================================
-// DETECTOR DE TEMA
-// ========================================
-
-function detectarTema(pergunta) {
-
-  const texto =
-    pergunta.toLowerCase();
-
-  // ========================================
-  // SPACE
-  // ========================================
-
-  if (
-
-    texto.includes("planet")
-    ||
-    texto.includes("moon")
-    ||
-    texto.includes("star")
-    ||
-    texto.includes("astronaut")
-    ||
-    texto.includes("space")
-
-  ) {
-
-    return "space";
-  }
-
-  // ========================================
-  // DINOSAURS
-  // ========================================
-
-  if (
-
-    texto.includes("dinosaur")
-    ||
-    texto.includes("t-rex")
-    ||
-    texto.includes("triceratops")
-
-  ) {
-
-    return "dinosaurs";
-  }
-
-  // ========================================
-  // SPORTS
-  // ========================================
-
-  if (
-
-    texto.includes("soccer")
-    ||
-    texto.includes("basketball")
-    ||
-    texto.includes("sport")
-
-  ) {
-
-    return "sports";
-  }
-
-  // ========================================
-  // BODY
-  // ========================================
-
-  if (
-
-    texto.includes("hand")
-    ||
-    texto.includes("head")
-    ||
-    texto.includes("eye")
-    ||
-    texto.includes("body")
-
-  ) {
-
-    return "body";
-  }
-
-  // ========================================
-  // HISTORY
-  // ========================================
-
-  if (
-
-    texto.includes("vikings")
-    ||
-    texto.includes("celtas")
-    ||
-    texto.includes("romanos")
-
-  ) {
-
-    return "history";
-  }
-
-  return "general";
-}
-
-// ========================================
-// BUSCA TEMÁTICA
+// BUSCA GLOBAL
 // ========================================
 
 function buscarTema(
@@ -392,7 +291,114 @@ function buscarTema(
 ) {
 
   const texto =
-    pergunta.toLowerCase();
+
+    pergunta
+      .toLowerCase()
+      .trim();
+
+  const palavras =
+
+    texto.split(/\s+/);
+
+  // ========================================
+  // GLOSSARY
+  // ========================================
+
+  if (
+    conhecimentoGlobal.glossary
+  ) {
+
+    for (
+
+      const categoria of
+
+      Object.values(
+        conhecimentoGlobal.glossary
+      )
+
+    ) {
+
+      if (
+        !categoria.words
+      ) continue;
+
+      for (
+        const item
+        of categoria.words
+      ) {
+
+        // PT
+
+        if (
+
+          item.pt
+          &&
+          palavras.includes(
+            item.pt.toLowerCase()
+          )
+
+        ) {
+
+          return {
+
+            palavra:
+              item.en,
+
+            dados: {
+
+              pt: item.pt,
+
+              emoji:
+                item.emoji,
+
+              example_en:
+                item.example_en,
+
+              example_pt:
+                item.example_pt
+            }
+          };
+        }
+
+        // EN
+
+        if (
+
+          item.en
+          &&
+          palavras.includes(
+            item.en.toLowerCase()
+          )
+
+        ) {
+
+          return {
+
+            palavra:
+              item.en,
+
+            dados: {
+
+              pt: item.pt,
+
+              emoji:
+                item.emoji,
+
+              example_en:
+                item.example_en,
+
+              example_pt:
+                item.example_pt
+            }
+          };
+        }
+      }
+    }
+  }
+
+  // ========================================
+  // OUTROS JSONS
+  // ========================================
 
   for (
 
@@ -405,13 +411,65 @@ function buscarTema(
   ) {
 
     if (
-      typeof value !== "object"
+      key === "glossary"
     ) continue;
 
     if (
 
-      texto.includes(
+      typeof value !== "object"
+
+    ) continue;
+
+    // ========================================
+    // MATCH DA CHAVE
+    // ========================================
+
+    if (
+
+      palavras.includes(
         key.toLowerCase()
+      )
+
+    ) {
+
+      return {
+
+        palavra: key,
+        dados: value
+      };
+    }
+
+    // ========================================
+    // MATCH PT
+    // ========================================
+
+    if (
+
+      value.pt
+      &&
+      palavras.includes(
+        value.pt.toLowerCase()
+      )
+
+    ) {
+
+      return {
+
+        palavra: key,
+        dados: value
+      };
+    }
+
+    // ========================================
+    // MATCH EN
+    // ========================================
+
+    if (
+
+      value.en
+      &&
+      palavras.includes(
+        value.en.toLowerCase()
       )
 
     ) {
@@ -453,6 +511,8 @@ ${dados.fact || ""}
 
 ${dados.example_en || ""}
 
+${dados.example_pt || ""}
+
 `;
 }
 
@@ -469,10 +529,6 @@ function respostaControlada(
     pergunta
       .toLowerCase()
       .trim();
-
-  const palavras =
-
-    texto.split(/\s+/);
 
   // ========================================
   // DETECTAR INTENÇÃO
@@ -536,105 +592,19 @@ in Britain ✨
   }
 
   // ========================================
-  // GLOSSÁRIO
+  // BUSCA GLOBAL
   // ========================================
 
-  if (
-    conhecimentoGlobal.glossary
-  ) {
-
-    for (
-
-      const categoria of
-
-      Object.values(
-        conhecimentoGlobal.glossary
-      )
-
-    ) {
-
-      if (
-        !categoria.words
-      ) continue;
-
-      for (
-        const item
-        of categoria.words
-      ) {
-
-        // ========================================
-        // PT -> EN
-        // ========================================
-
-        if (
-
-          item.pt
-          &&
-          palavras.includes(
-            item.pt.toLowerCase()
-          )
-
-        ) {
-
-          return `
-
-${item.emoji || "✨"}
-
-${item.pt}
-em inglês é:
-
-${item.en}
-
-${item.example_en || ""}
-
-`;
-        }
-
-        // ========================================
-        // EN -> PT
-        // ========================================
-
-        if (
-
-          item.en
-          &&
-          palavras.includes(
-            item.en.toLowerCase()
-          )
-
-        ) {
-
-          return `
-
-${item.emoji || "✨"}
-
-${item.en}
-significa:
-
-${item.pt}
-
-${item.example_pt || ""}
-
-`;
-        }
-      }
-    }
-  }
-
-  // ========================================
-  // TEMAS
-  // ========================================
-
-  const resultadoTema =
+  const resultado =
 
     buscarTema(
       pergunta
     );
 
-  if (resultadoTema) {
+  if (resultado) {
 
     return criarTemplate(
-      resultadoTema
+      resultado
     );
   }
 
