@@ -200,9 +200,7 @@
         {"pt": "estrela-do-mar", "en": "starfish", "example_pt": "A estrela-do-mar vive no fundo do mar.", "example_en": "The starfish lives at the bottom of the sea."},
         {"pt": "pinguim", "en": "penguin", "example_pt": "O pinguim não voa, mas nada muito bem.", "example_en": "The penguin doesn't fly, but swims very well."},
         {"pt": "coruja", "en": "owl", "example_pt": "A coruja dorme de dia e acorda de noite.", "example_en": "The owl sleeps during the day and wakes at night."},
-        {"pt": "águi
-
-ia", "en": "eagle", "example_pt": "A águia voa muito alto.", "example_en": "The eagle flies very high."},
+        {"pt": "águia", "en": "eagle", "example_pt": "A águia voa muito alto.", "example_en": "The eagle flies very high."},
         {"pt": "papagaio", "en": "parrot", "example_pt": "O papagaio repete o que a gente fala.", "example_en": "The parrot repeats what we say."},
         {"pt": "flamingo", "en": "flamingo", "example_pt": "O flamingo é cor-de-rosa.", "example_en": "The flamingo is pink."}
       ]
