@@ -1,44 +1,54 @@
 {
   "stories": [
     {
+      "id": 1,
       "title": "The Brave Little Turtle",
       "characters": ["Tommy the Turtle", "Lily the Rabbit", "Sammy the Squirrel"],
-      "setting": "A green forest near a sparkling pond",
-      "story": "Tommy the Turtle was slow, but he was very brave. One day, Lily the Rabbit dropped her favorite ball into the deep pond. 'Oh no!' cried Lily. 'I cannot swim!' Sammy the Squirrel said, 'The water is too cold!' Tommy said, 'I am not fast, but I can swim. I will help you.' Tommy dove into the pond. He swam down, down, down. He found the ball and brought it back to Lily. 'Thank you, brave Tommy!' said Lily. 'You are slow on land, but you are fast in water!' Everyone cheered for the brave little turtle.",
-      "moral": "Everyone has special talents. You don't have to be fast to be brave.",
-      "reading_time_minutes": 3
+      "setting": "A green forest near a sparkling pond with tall trees and colorful flowers",
+      "story": "Tommy the Turtle was slow, but he was very brave. One sunny morning, Lily the Rabbit dropped her favorite pink ball into the deep pond. 'Oh no!' cried Lily. 'That was my birthday present! I cannot swim!' Sammy the Squirrel ran to the edge and said, 'The water is too cold and too deep! We can't get it!' Tommy smiled and said, 'I am not fast on land, but I am a great swimmer. I will help you.' Tommy slowly walked to the water. He took a deep breath and dove into the pond. He swam down, down, down through the blue water. He saw colorful fish and green plants. Finally, he found the pink ball sitting on a rock at the bottom. Tommy grabbed the ball with his mouth and swam back up. 'Look!' shouted Lily. 'Tommy has my ball!' Tommy gave the ball to Lily. 'Thank you, brave Tommy!' said Lily. 'You are slow on land, but you are fast in water!' All the animals cheered for the brave little turtle. From that day on, everyone knew that being slow didn't mean you couldn't be a hero.",
+      "moral": "Everyone has special talents. You don't have to be fast to be brave and helpful.",
+      "reading_time_minutes": 3,
+      "vocabulary_words": ["brave", "sparkling", "pond", "surface", "hero"]
     },
     {
+      "id": 2,
       "title": "The Sharing Cloud",
-      "characters": ["Puffy the Cloud", "Sunny the Sun", "Daisy the Flower"],
-      "setting": "A bright blue sky above a garden",
-      "story": "Puffy was a little cloud who loved to rain. But Sunny the Sun said, 'Stop raining! You are blocking my sunshine!' Puffy felt sad. He wanted to help, but Sunny was angry. Daisy the Flower looked up and said, 'Please, Puffy, I am so thirsty! Rain on me!' Puffy smiled. He rained gently on Daisy. The flower grew tall and colorful. Sunny saw how happy Daisy was. 'I am sorry, Puffy. Rain is important too,' said Sunny. From that day, Sunny and Puffy worked together. Sunny shone, and Puffy rained. The garden was beautiful.",
-      "moral": "Working together is better than fighting.",
-      "reading_time_minutes": 3
+      "characters": ["Puffy the Cloud", "Sunny the Sun", "Daisy the Flower", "Farmer Joe"],
+      "setting": "A bright blue sky above a beautiful garden with vegetables and flowers",
+      "story": "Puffy was a little white cloud who loved to rain. But every time Puffy tried to rain, Sunny the Sun would shout, 'Stop raining, Puffy! You are blocking my warm sunshine!' Puffy felt very sad. He floated away and cried tiny tears. Down in the garden, Daisy the Flower was wilting. Her petals were drooping because she was so thirsty. 'Oh no,' said Daisy. 'I need water or I will die!' Farmer Joe looked at his dry vegetables and frowned. 'We need rain,' he said. Puffy heard them and floated back. 'Sunny,' said Puffy, 'the flowers and vegetables need me. They are thirsty.' Sunny looked down and saw the sad garden. 'I am sorry, Puffy,' said Sunny. 'You are important too. Let's work together.' From that day on, Sunny shone first to warm the garden, and then Puffy rained gently on the plants. The garden became the most beautiful in the whole valley. Daisy grew tall and colorful. 'Thank you, Puffy and Sunny!' she said. They learned that working together is better than fighting.",
+      "moral": "Working together is better than fighting. Everyone has an important job to do.",
+      "reading_time_minutes": 3,
+      "vocabulary_words": ["wilting", "drooping", "valley", "important", "together"]
     },
     {
+      "id": 3,
       "title": "The Lost Mitten",
-      "characters": ["Emma", "Max the Dog", "Grandma"],
-      "setting": "A snowy winter day in a small town",
-      "story": "Emma lost her red mitten in the snow. 'Max, can you help me find it?' she asked her dog. Max sniffed the ground. He followed a trail through the park. They saw a squirrel playing with something red! 'That's my mitten!' said Emma. The squirrel ran up a tree. Emma said, 'Please, squirrel, I am cold.' The squirrel felt sorry for Emma. It dropped the mitten. Emma put it on her hand. 'Thank you, squirrel!' she said. Emma gave the squirrel a nut. 'Now we are friends,' she said.",
-      "moral": "Being kind and asking nicely can solve problems.",
-      "reading_time_minutes": 2
+      "characters": ["Emma", "Max the Dog", "Grandma", "Squirrel"],
+      "setting": "A snowy winter day in a small town with white everywhere",
+      "story": "Emma lost her red mitten in the snow. 'Oh no!' she said. 'Grandma knitted these for me. I can't lose one!' Emma looked under the bench, near the tree, and by the fence. No mitten. 'Max,' she asked her golden retriever, 'can you help me find my mitten?' Max sniffed the ground. His nose twitched. He followed a trail through the park, past the swing set, and around the fountain. Then Max stopped. He looked up at a tall oak tree. There, on a branch, sat a little brown squirrel. The squirrel was playing with something red! 'That's my mitten!' said Emma. The squirrel saw Emma and ran higher up the tree. 'Please, squirrel,' said Emma softly. 'I am very cold. My hand is freezing. That mitten is special because my grandma made it for me.' The squirrel looked at Emma's sad face. It felt sorry for her. The squirrel dropped the mitten gently down to the ground. Emma picked it up and put it on her warm hand. 'Thank you, squirrel!' she said. Emma gave the squirrel a peanut from her pocket. 'Now we are friends,' she said. The squirrel chattered happily and ate the peanut.",
+      "moral": "Being kind and asking nicely can solve problems and make new friends.",
+      "reading_time_minutes": 2,
+      "vocabulary_words": ["knitted", "retriever", "twitched", "freezing", "chattered"]
     },
     {
+      "id": 4,
       "title": "The Listening Ears",
       "characters": ["Leo", "Mia", "Mr. Jenkins the Teacher"],
-      "setting": "A busy classroom with colorful posters",
-      "story": "Leo loved to talk. He talked during reading time, math time, and even during quiet time. His friend Mia could not hear the teacher. 'Leo, please be quiet,' said Mia. 'I cannot learn.' Leo did not listen. Then, Mr. Jenkins said, 'Leo, please stay after school.' Leo was sad. 'Why do I have to stay?' Mr. Jenkins said, 'Because your friends cannot hear. Listening is part of learning.' Leo practiced being quiet. He listened to his friends. He learned more that week than ever before. 'Thank you for teaching me to listen,' Leo said to Mr. Jenkins.",
-      "moral": "Listening is as important as talking.",
-      "reading_time_minutes": 3
+      "setting": "A busy second-grade classroom with colorful posters and a big whiteboard",
+      "story": "Leo loved to talk. He talked during reading time. He talked during math time. He talked during spelling time. He even talked during quiet time! His friend Mia sat next to him. 'Leo,' whispered Mia, 'I cannot hear what the teacher is saying. Please be quiet.' But Leo did not listen. He kept talking. 'Leo, please stop,' said another friend. Leo talked louder. Then Mr. Jenkins said, 'Leo, please stay after school today.' Leo's heart sank. After school, Mr. Jenkins sat down with Leo. 'Do you know why you are staying?' asked Mr. Jenkins. 'Because I talk too much,' said Leo sadly. 'Yes,' said Mr. Jenkins. 'Your friends cannot hear the lessons. Listening is just as important as talking. When you listen, you learn. When you listen, your friends learn too.' Leo thought about that. The next day, Leo practiced being quiet. He listened to the teacher. He listened to his friends. He learned more that week than ever before. 'Thank you for teaching me to listen, Mr. Jenkins,' said Leo. 'You are welcome, Leo. Now you are a great student AND a great friend.'",
+      "moral": "Listening is as important as talking. Good listeners are good friends and good students.",
+      "reading_time_minutes": 3,
+      "vocabulary_words": ["whispered", "sank", "practiced", "important", "listening"]
     },
     {
+      "id": 5,
       "title": "The Colorful Butterfly",
       "characters": ["Caterpillar Carl", "Butterfly Bella", "Ant Tony"],
-      "setting": "A sunny meadow with many flowers",
-      "story": "Caterpillar Carl was sad because he was not beautiful. 'Look at Butterfly Bella,' he said. 'She has pretty wings. I am just a green worm.' Ant Tony said, 'Be patient, Carl. You will change.' Carl ate leaves and grew bigger. One day, he made a cocoon. He stayed inside for many days. When he came out, he had wings! Red, orange, and yellow wings! 'Look at me!' said Carl. 'I am a butterfly now!' Bella smiled. 'You were always special, Carl. You just needed time to grow.'",
-      "moral": "Everyone grows and changes. Be patient with yourself.",
-      "reading_time_minutes": 3
+      "setting": "A sunny meadow with many colorful flowers and buzzing bees",
+      "story": "Caterpillar Carl was sad. He looked at his green, squishy body. 'Look at Butterfly Bella,' he said to his friend Ant Tony. 'She has beautiful wings of red, orange, and yellow. She can fly anywhere she wants. I am just a green worm who crawls on the ground.' Ant Tony patted Carl on the back. 'Be patient, Carl,' said Tony. 'You will change. Every caterpillar becomes a butterfly. You just need time.' Carl ate leaves every day. He grew bigger and bigger. One day, Carl felt strange. He spun a silky cocoon around his body. 'Goodbye, Tony,' said Carl. 'I will see you soon.' Carl stayed inside his dark cocoon for many days. He dreamed of flying. Then one morning, the cocoon cracked open. Carl crawled out. But he wasn't Carl the caterpillar anymore. He had wings! Beautiful wings of red, orange, and yellow! 'Look at me!' said Carl. 'I have wings! I am a butterfly now!' Butterfly Bella flew over. 'You were always special, Carl,' she said. 'You just needed time to grow and change. Now you are more beautiful than me!' Carl spread his new wings and flew into the sky. He found Ant Tony and said, 'Thank you for believing in me.'",
+      "moral": "Everyone grows and changes. Be patient with yourself. Good things take time.",
+      "reading_time_minutes": 3,
+      "vocabulary_words": ["meadow", "patient", "cocoon", "cracked", "spread"]
     }
   ]
 }
