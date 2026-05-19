@@ -1,94 +1,184 @@
 {
   "riddles": [
     {
+      "id": 1,
       "riddle": "I have a face and two hands, but no arms or legs. What am I?",
       "answer": "A clock",
-      "explanation": "Clocks have a face (the front) and hands (the pointers) but no real arms or legs.",
-      "kid_friendly_hint": "It tells you what time it is."
+      "explanation": "Clocks have a 'face' (the front with numbers) and 'hands' (the pointers that move), but they don't have real arms or legs like a person.",
+      "kid_friendly_hint": "It tells you what time it is. It hangs on the wall.",
+      "category": "objects",
+      "difficulty": "easy"
     },
     {
+      "id": 2,
       "riddle": "What has keys but cannot open any locks?",
       "answer": "A piano",
-      "explanation": "Pianos have keys (the white and black parts you press), but they are not for opening doors.",
-      "kid_friendly_hint": "You play music with it."
+      "explanation": "Pianos have black and white 'keys' that you press to make music, but they are not metal keys for opening doors.",
+      "kid_friendly_hint": "You play music with it. It has black and white keys.",
+      "category": "music",
+      "difficulty": "easy"
     },
     {
+      "id": 3,
       "riddle": "I have a tail and a head, but no body. What am I?",
       "answer": "A coin",
-      "explanation": "Coins have a head (the front picture) and a tail (the back side), but no body.",
-      "kid_friendly_hint": "You use it to buy candy."
+      "explanation": "Coins have a 'head' (the front picture of a person) and a 'tail' (the back side), but they don't have a body like an animal.",
+      "kid_friendly_hint": "You use it to buy candy or gum. It's made of metal.",
+      "category": "objects",
+      "difficulty": "medium"
     },
     {
+      "id": 4,
       "riddle": "What gets wetter as it dries?",
       "answer": "A towel",
-      "explanation": "When you use a towel to dry something, the towel gets wet.",
-      "kid_friendly_hint": "You use it after a bath."
+      "explanation": "When you use a towel to dry something (like your body or a spill), the towel itself gets wet from the water it absorbs.",
+      "kid_friendly_hint": "You use it after a bath or shower to dry yourself.",
+      "category": "objects",
+      "difficulty": "medium"
     },
     {
+      "id": 5,
       "riddle": "What has to be broken before you can use it?",
       "answer": "An egg",
-      "explanation": "You have to crack or break the shell of an egg to cook and eat it.",
-      "kid_friendly_hint": "It comes from a chicken."
+      "explanation": "You have to crack or break the hard shell of an egg to get to the yolk and white inside so you can cook and eat it.",
+      "kid_friendly_hint": "It comes from a chicken. You eat it for breakfast.",
+      "category": "food",
+      "difficulty": "easy"
     },
     {
+      "id": 6,
       "riddle": "I have cities, but no houses. I have mountains, but no trees. I have water, but no fish. What am I?",
       "answer": "A map",
-      "explanation": "Maps show places, but they are pictures, not real things.",
-      "kid_friendly_hint": "It helps you find your way."
+      "explanation": "Maps show pictures of places like cities, mountains, and water, but they are not real - they are just drawings on paper.",
+      "kid_friendly_hint": "It helps you find your way when you are lost.",
+      "category": "objects",
+      "difficulty": "hard"
     },
     {
+      "id": 7,
       "riddle": "What has a thumb and four fingers but is not alive?",
       "answer": "A glove",
-      "explanation": "Gloves have shapes for fingers including a thumb, but they are made of fabric.",
-      "kid_friendly_hint": "You wear it on your hand in winter."
+      "explanation": "Gloves have a part for your thumb and four parts for your fingers, but gloves are made of fabric or leather, not living skin.",
+      "kid_friendly_hint": "You wear it on your hand in winter to keep warm.",
+      "category": "clothing",
+      "difficulty": "easy"
     },
     {
+      "id": 8,
       "riddle": "What can you catch but never throw?",
       "answer": "A cold",
-      "explanation": "You can catch a cold (get sick), but you cannot throw a cold like a ball.",
-      "kid_friendly_hint": "It makes you sneeze."
+      "explanation": "You can 'catch a cold' (get sick with a virus), but you cannot throw a cold like a ball because it's an illness.",
+      "kid_friendly_hint": "It makes you sneeze, cough, and feel yucky.",
+      "category": "health",
+      "difficulty": "medium"
     },
     {
+      "id": 9,
       "riddle": "What building has the most stories?",
       "answer": "A library",
-      "explanation": "'Stories' can mean tales in books or floors in a building. Libraries have many storybooks.",
-      "kid_friendly_hint": "Where do you borrow books?"
+      "explanation": "'Stories' can mean tales in books OR floors in a building. Libraries have thousands of storybooks, so they have the most 'stories'.",
+      "kid_friendly_hint": "Where do you go to borrow books to read?",
+      "category": "places",
+      "difficulty": "hard"
     },
     {
+      "id": 10,
       "riddle": "What is full of holes but still holds water?",
       "answer": "A sponge",
-      "explanation": "Sponges have many tiny holes, but they soak up and hold water.",
-      "kid_friendly_hint": "You use it to clean dishes."
+      "explanation": "Sponges have many tiny holes (pores), but they soak up and hold water inside those holes when you squeeze them.",
+      "kid_friendly_hint": "You use it to clean dishes or take a bath.",
+      "category": "objects",
+      "difficulty": "medium"
     },
     {
+      "id": 11,
       "riddle": "I am light as a feather, yet the strongest person cannot hold me for five minutes. What am I?",
       "answer": "Your breath",
-      "explanation": "Holding your breath for more than a few minutes is impossible for anyone.",
-      "kid_friendly_hint": "You do this all day without thinking."
+      "explanation": "Breath is very light (you can't even feel it), but no one can hold their breath (stop breathing) for more than a few minutes.",
+      "kid_friendly_hint": "You do this all day without thinking. You need it to live.",
+      "category": "body",
+      "difficulty": "hard"
     },
     {
+      "id": 12,
       "riddle": "What belongs to you but other people use it more than you do?",
       "answer": "Your name",
-      "explanation": "Your name is yours, but other people say it more often than you say it yourself.",
-      "kid_friendly_hint": "People call you by it."
+      "explanation": "Your name belongs to you, but other people say your name more often than you say it yourself. You rarely say your own name!",
+      "kid_friendly_hint": "People call you by it. Friends and teachers say it every day.",
+      "category": "identity",
+      "difficulty": "medium"
     },
     {
+      "id": 13,
       "riddle": "What has words but never speaks?",
       "answer": "A book",
-      "explanation": "Books have many words, but they cannot talk out loud.",
-      "kid_friendly_hint": "You read it before bed."
+      "explanation": "Books have many words printed on their pages, but a book cannot talk out loud like a person can.",
+      "kid_friendly_hint": "You read it before bed. It has a cover and pages.",
+      "category": "objects",
+      "difficulty": "easy"
     },
     {
-      "riddle": "What has a bottom at the top?",
-      "answer": "Your legs",
-      "explanation": "Your legs have bottoms (your feet) at the top of your legs? No - wait! The answer is actually 'legs' because the bottom of your legs (feet) are at the bottom. Many children get this one! Alternative answer: a down feather.",
-      "kid_friendly_hint": "Think about your body."
-    },
-    {
+      "id": 14,
       "riddle": "What can you hold without ever touching?",
       "answer": "Your breath",
-      "explanation": "You can hold your breath without touching anything physical.",
-      "kid_friendly_hint": "You do this when you go underwater."
+      "explanation": "You can 'hold your breath' (stop breathing), but you never physically touch your breath because it's air inside your lungs.",
+      "kid_friendly_hint": "You do this when you go underwater in a swimming pool.",
+      "category": "body",
+      "difficulty": "hard"
+    },
+    {
+      "id": 15,
+      "riddle": "What has one eye but cannot see?",
+      "answer": "A needle",
+      "explanation": "A sewing needle has an 'eye' (the hole where thread goes through), but it doesn't have a real eye that can see.",
+      "kid_friendly_hint": "You use it to sew clothes or fix a button.",
+      "category": "objects",
+      "difficulty": "medium"
+    },
+    {
+      "id": 16,
+      "riddle": "What has a neck but no head?",
+      "answer": "A bottle",
+      "explanation": "Bottles have a 'neck' (the narrow part at the top), but they don't have a head like a person or animal.",
+      "kid_friendly_hint": "You drink from it. It holds water or soda.",
+      "category": "objects",
+      "difficulty": "easy"
+    },
+    {
+      "id": 17,
+      "riddle": "What gets bigger the more you take from it?",
+      "answer": "A hole",
+      "explanation": "When you take dirt or material away from a hole, the hole gets larger and larger. Taking away makes it bigger!",
+      "kid_friendly_hint": "You dig it in the ground. Animals live in it.",
+      "category": "nature",
+      "difficulty": "hard"
+    },
+    {
+      "id": 18,
+      "riddle": "What is so delicate that saying its name breaks it?",
+      "answer": "Silence",
+      "explanation": "Silence is the absence of sound. If you speak (say the word 'silence'), you break the silence by making noise.",
+      "kid_friendly_hint": "The library is full of it. Shhhh!",
+      "category": "concepts",
+      "difficulty": "hard"
+    },
+    {
+      "id": 19,
+      "riddle": "What has teeth but cannot eat?",
+      "answer": "A comb",
+      "explanation": "Combs have 'teeth' (the little spikes that go through your hair), but they cannot eat food like real teeth.",
+      "kid_friendly_hint": "You use it on your hair after a bath.",
+      "category": "objects",
+      "difficulty": "easy"
+    },
+    {
+      "id": 20,
+      "riddle": "What has a ring but no finger?",
+      "answer": "A telephone",
+      "explanation": "Telephones 'ring' (make a ringing sound), but they don't have a metal ring for a finger like jewelry.",
+      "kid_friendly_hint": "You use it to call Grandma. It goes 'brrrring brrrring'!",
+      "category": "technology",
+      "difficulty": "medium"
     }
   ]
 }
