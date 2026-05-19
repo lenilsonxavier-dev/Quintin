@@ -36,4 +36,89 @@
       "word": "zebra",
       "plural": "zebras",
       "sound": "neigh",
-      "meaning":
+      "meaning": "An animal with black and white stripes like a horse",
+      "example": "The zebra has black and white stripes all over its body.",
+      "kid_friendly_explanation": "Zebras look like horses with stripes."
+    },
+    {
+      "word": "penguin",
+      "plural": "penguins",
+      "sound": "honk",
+      "meaning": "A black and white bird that swims but cannot fly",
+      "example": "Penguins slide on their bellies on the ice.",
+      "kid_friendly_explanation": "Penguins are birds that love cold places and swimming."
+    },
+    {
+      "word": "dolphin",
+      "plural": "dolphins",
+      "sound": "click",
+      "meaning": "A smart gray sea animal that jumps and plays in the ocean",
+      "example": "The dolphin jumps out of the water and does flips.",
+      "kid_friendly_explanation": "Dolphins are smart, friendly animals in the ocean."
+    },
+    {
+      "word": "shark",
+      "plural": "sharks",
+      "sound": "none",
+      "meaning": "A big fish with sharp teeth that lives in the ocean",
+      "example": "The shark swims fast and has many rows of teeth.",
+      "kid_friendly_explanation": "Sharks are fish with sharp teeth."
+    },
+    {
+      "word": "butterfly",
+      "plural": "butterflies",
+      "sound": "none",
+      "meaning": "A flying insect with colorful wings",
+      "example": "The butterfly lands on the flower to drink sweet nectar.",
+      "kid_friendly_explanation": "Butterflies have beautiful colored wings."
+    },
+    {
+      "word": "bee",
+      "plural": "bees",
+      "sound": "buzz",
+      "meaning": "A small flying insect that makes honey",
+      "example": "The bee buzzes from flower to flower collecting pollen.",
+      "kid_friendly_explanation": "Bees fly and make yummy honey."
+    },
+    {
+      "word": "rabbit",
+      "plural": "rabbits",
+      "sound": "none",
+      "meaning": "A small furry animal with long ears that hops",
+      "example": "The rabbit hops through the grass and eats carrots.",
+      "kid_friendly_explanation": "Rabbits are soft, fluffy animals that hop."
+    },
+    {
+      "word": "frog",
+      "plural": "frogs",
+      "sound": "ribbit",
+      "meaning": "A small green animal that jumps and lives near water",
+      "example": "The frog jumps into the pond with a splash.",
+      "kid_friendly_explanation": "Frogs are green, jumpy animals that say 'ribbit'."
+    },
+    {
+      "word": "snake",
+      "plural": "snakes",
+      "sound": "hiss",
+      "meaning": "A long animal with no legs that slides on the ground",
+      "example": "The snake slithers through the grass looking for food.",
+      "kid_friendly_explanation": "Snakes are long, slithery animals with no legs."
+    },
+    {
+      "word": "owl",
+      "plural": "owls",
+      "sound": "hoot",
+      "meaning": "A bird that sleeps during the day and stays awake at night",
+      "example": "The owl sits in the tree and says 'who, who' at night.",
+      "kid_friendly_explanation": "Owls are night birds that say 'hoot'."
+    },
+    {
+      "word": "panda",
+      "plural": "pandas",
+      "sound": "bleat",
+      "meaning": "A black and white bear that eats bamboo",
+      "example": "The panda sits on the ground and munches on bamboo sticks.",
+      "kid_friendly_explanation": "Pandas are cute bears that eat bamboo."
+    }
+  ]
+}
