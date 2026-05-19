@@ -1,0 +1,246 @@
+{
+  "english_language": {
+    "metadata": {
+      "title": "A Língua Inglesa - The English Language",
+      "target_audience": "children 10 years old",
+      "reading_level": "elementary",
+      "total_words": 3200
+    },
+    "introduction": {
+      "pt": "O que é a língua inglesa?",
+      "en": "What is the English language?",
+      "explanation_pt": "A língua inglesa é um idioma falado por milhões de pessoas em todo o mundo. É como uma ponte que conecta pessoas de diferentes países. Quando você aprende inglês, você pode conversar com pessoas dos Estados Unidos, Inglaterra, Austrália, Canadá e muitos outros lugares! O inglês é a língua mais falada do mundo depois do chinês, mas é a língua número 1 para negócios, ciência, internet, aviação e música pop.",
+      "explanation_en": "The English language is spoken by millions of people all over the world. It's like a bridge that connects people from different countries. When you learn English, you can talk to people from the United States, England, Australia, Canada, and many other places! English is the most spoken language in the world after Chinese, but it is the number 1 language for business, science, internet, aviation, and pop music.",
+      "fun_fact_pt": "Sabia que cerca de 1,5 bilhão de pessoas falam inglês no mundo? Isso é quase 1 em cada 5 pessoas!",
+      "fun_fact_en": "Did you know that about 1.5 billion people speak English in the world? That's almost 1 in every 5 people!"
+    },
+    "origins": {
+      "title_pt": "De onde vem o inglês? Uma jornada no tempo!",
+      "title_en": "Where does English come from? A journey through time!",
+      "paragraphs": [
+        {
+          "pt": "Imagine uma máquina do tempo! Vamos viajar para trás, cerca de 1.500 anos atrás, para a região que hoje chamamos de Inglaterra. Naquela época, a Inglaterra era habitada por povos chamados Celtas. Eles falavam uma língua celta, que hoje ainda existe no País de Gales, na Escócia e na Irlanda, mas é bem diferente do inglês moderno.",
+          "en": "Imagine a time machine! Let's travel back about 1,500 years ago to the region we now call England. At that time, England was inhabited by people called Celts. They spoke a Celtic language, which still exists today in Wales, Scotland, and Ireland, but it's very different from modern English."
+        },
+        {
+          "pt": "Tudo mudou quando três tribos germânicas vieram do que hoje é a Alemanha e a Dinamarca. Eram os Anglos, os Saxões e os Jutos. Eles atravessaram o mar e invadiram a Inglaterra. Os Anglos eram tão importantes que deram o nome à terra: 'Englaland' (Terra dos Anglos), que com o tempo virou 'England'. E a língua deles era o 'Englisc', que mais tarde se tornou 'English'!",
+          "en": "Everything changed when three Germanic tribes came from what is now Germany and Denmark. They were the Angles, the Saxons, and the Jutes. They crossed the sea and invaded England. The Angles were so important that they gave their name to the land: 'Englaland' (Land of the Angles), which over time became 'England'. And their language was 'Englisc', which later became 'English'!"
+        }
+      ],
+      "image_concept": "Tribos germânicas cruzando o mar em barcos de madeira para chegar à Inglaterra"
+    },
+    "old_english": {
+      "period_pt": "Inglês Antigo (450 d.C. - 1100 d.C.)",
+      "period_en": "Old English (450 AD - 1100 AD)",
+      "description_pt": "O Inglês Antigo é muito diferente do inglês que falamos hoje! Se você ouvisse alguém falando Inglês Antigo, quase não entenderia nada. Era uma língua cheia de letras estranhas como 'þ' (chamado de 'thorn') e 'æ' (chamado de 'ash'). As palavras tinham terminações diferentes dependendo de como eram usadas na frase, igual acontece em português com 'menino', 'menina', 'meninos', 'meninas' - mas bem mais complicado!",
+      "description_en": "Old English is very different from the English we speak today! If you heard someone speaking Old English, you would barely understand anything. It was a language full of strange letters like 'þ' (called 'thorn') and 'æ' (called 'ash'). Words had different endings depending on how they were used in the sentence, just like in Portuguese with 'menino', 'menina', 'meninos', 'meninas' - but much more complicated!",
+      "example_old": "Fæder ūre þū þe eart on heofonum",
+      "example_modern": "Our Father who art in heaven",
+      "example_pt": "Pai nosso que estás nos céus",
+      "fun_fact_pt": "A letra 'þ' (thorn) era usada para o som de 'th' em palavras como 'think' (pensar) e 'the' (o/a). Hoje usamos duas letras 'th' juntas para fazer esse som!",
+      "fun_fact_en": "The letter 'þ' (thorn) was used for the 'th' sound in words like 'think' and 'the'. Today we use two letters 'th' together to make that sound!"
+    },
+    "viking_influence": {
+      "title_pt": "A chegada dos Vikings",
+      "title_en": "The Arrival of the Vikings",
+      "description_pt": "No século VIII, novos visitantes chegaram à Inglaterra: os Vikings! Eles vinham da Escandinávia (hoje Noruega, Suécia e Dinamarca) em seus famosos barcos com cabeça de dragão. Os Vikings não vieram para fazer amizade - eles atacavam mosteiros e vilas, levando ouro e comida. Mas com o tempo, muitos Vikings se estabeleceram na Inglaterra e se misturaram com os ingleses.",
+      "description_en": "In the 8th century, new visitors arrived in England: the Vikings! They came from Scandinavia (today Norway, Sweden, and Denmark) in their famous dragon-headed boats. The Vikings didn't come to make friends - they attacked monasteries and villages, taking gold and food. But over time, many Vikings settled in England and mixed with the English.",
+      "words_given": [
+        {"word": "sky", "pt": "céu", "note": "Do nórdico antigo 'ský'"},
+        {"word": "egg", "pt": "ovo", "note": "Do nórdico antigo 'egg'"},
+        {"word": "window", "pt": "janela", "note": "Do nórdico antigo 'vindauga' - 'vindr' (vento) + 'auga' (olho) - olho do vento!"},
+        {"word": "husband", "pt": "marido", "note": "Do nórdico antigo 'húsbóndi' - 'hús' (casa) + 'bóndi' (morador)"},
+        {"word": "knife", "pt": "faca", "note": "Do nórdico antigo 'knífr'"}
+      ],
+      "fun_fact_pt": "Os Vikings também nos deram os nomes de alguns dias da semana! 'Wednesday' (quarta-feira) vem de 'Odin's day' (dia de Odin), o deus principal dos vikings. 'Thursday' (quinta-feira) vem de 'Thor's day' (dia de Thor), o deus do trovão!",
+      "fun_fact_en": "The Vikings also gave us the names of some days of the week! 'Wednesday' comes from 'Odin's day', the main Viking god. 'Thursday' comes from 'Thor's day', the god of thunder!"
+    },
+    "norman_invasion": {
+      "title_pt": "A Invasão Normanda - O Grande Ponto de Virada",
+      "title_en": "The Norman Invasion - The Big Turning Point",
+      "year": 1066,
+      "description_pt": "O ano de 1066 é o mais famoso da história inglesa! Neste ano, Guilherme, o Conquistador, veio da Normandia (uma região no norte da França) e derrotou o rei inglês na Batalha de Hastings. Os normandos falavam uma língua chamada 'Norman French', que era prima do francês moderno.",
+      "description_en": "The year 1066 is the most famous year in English history! In this year, William the Conqueror came from Normandy (a region in northern France) and defeated the English king at the Battle of Hastings. The Normans spoke a language called 'Norman French', which was a cousin to modern French.",
+      "bilingual_concept_pt": "Por cerca de 300 anos, a Inglaterra teve duas línguas! Os reis e nobres falavam francês, e as pessoas comuns falavam inglês. Isso criou uma situação interessante: os animais na fazenda tinham nomes ingleses (porque os camponeses ingleses cuidavam deles), mas a carne na mesa do rei tinha nomes franceses (porque os nobres franceses a comiam).",
+      "bilingual_concept_en": "For about 300 years, England had two languages! Kings and nobles spoke French, and common people spoke English. This created an interesting situation: animals on the farm had English names (because English peasants took care of them), but the meat on the king's table had French names (because French nobles ate it).",
+      "examples": [
+        {"english_word": "cow", "french_word": "beef", "pt": "vaca → carne de vaca (boi)"},
+        {"english_word": "sheep", "french_word": "mutton", "pt": "ovelha → carne de ovelha"},
+        {"english_word": "pig", "french_word": "pork", "pt": "porco → carne de porco"},
+        {"english_word": "calf", "french_word": "veal", "pt": "bezerro → carne de vitela"},
+        {"english_word": "chicken", "french_word": "poultry", "pt": "galinha → aves (carne)"}
+      ]
+    },
+    "middle_english": {
+      "period_pt": "Inglês Médio (1100 d.C. - 1500 d.C.)",
+      "period_en": "Middle English (1100 AD - 1500 AD)",
+      "description_pt": "Com o tempo, o francês e o inglês se misturaram. O Inglês Médio era mais parecido com o inglês atual, mas ainda bem diferente. A pessoa mais famosa que escreveu em Inglês Médio foi Geoffrey Chaucer, que viveu no século XIV. Ele escreveu um livro chamado 'Os Contos da Cantuária' (The Canterbury Tales), que conta a história de um grupo de peregrinos viajando juntos e contando histórias para passar o tempo.",
+      "description_en": "Over time, French and English mixed together. Middle English was closer to modern English, but still quite different. The most famous person who wrote in Middle English was Geoffrey Chaucer, who lived in the 14th century. He wrote a book called 'The Canterbury Tales', which tells the story of a group of pilgrims traveling together and telling stories to pass the time.",
+      "example_middle": "Whan that Aprille with his shoures soote\nThe droghte of March hath perced to the roote",
+      "example_modern": "When that April with its sweet showers\nHas pierced the drought of March to the root",
+      "example_pt": "Quando Abril com suas doces chuvas\nPenetrou a seca de Março até a raiz"
+    },
+    "great_vowel_shift": {
+      "title_pt": "A Grande Mudança das Vogais",
+      "title_en": "The Great Vowel Shift",
+      "period": "1400-1700",
+      "description_pt": "Esse é um dos mistérios mais fascinantes da história do inglês! Entre 1400 e 1700, a pronúncia de todas as vogais longas do inglês mudou completamente. Imagine se amanhã todos os brasileiros começassem a falar 'méia' em vez de 'mais', ou 'cachôro' em vez de 'cachorro'? Foi mais ou menos isso que aconteceu com o inglês! Ninguém sabe exatamente por quê. Uma teoria é que a peste negra (uma doença terrível que matou muitas pessoas) fez tantas pessoas se mudarem que a pronúncia mudou naturalmente.",
+      "description_en": "This is one of the most fascinating mysteries in the history of English! Between 1400 and 1700, the pronunciation of all long vowels in English changed completely. Imagine if tomorrow all Brazilians started saying 'méia' instead of 'mais', or 'cachôro' instead of 'cachorro'? That's more or less what happened to English! Nobody knows exactly why. One theory is that the Black Death (a terrible disease that killed many people) caused so many people to move around that pronunciation changed naturally.",
+      "examples": [
+        {"word": "mice", "old_pronunciation": "mees", "new_pronunciation": "mais", "pt": "camundongos"},
+        {"word": "house", "old_pronunciation": "hoos", "new_pronunciation": "haus", "pt": "casa"},
+        {"word": "see", "old_pronunciation": "say", "new_pronunciation": "see", "pt": "ver"},
+        {"word": "boot", "old_pronunciation": "boat", "new_pronunciation": "boot", "pt": "bota"}
+      ]
+    },
+    "modern_english": {
+      "period_pt": "Inglês Moderno (1500 d.C. - Hoje)",
+      "period_en": "Modern English (1500 AD - Today)",
+      "description_pt": "O Inglês Moderno começou por volta de 1500. Duas coisas muito importantes aconteceram nessa época: a invenção da prensa de tipos por Gutenberg (que permitiu imprimir livros mais rápido e barato) e a publicação da Bíblia em inglês. Isso fez com que mais pessoas aprendessem a ler e que o inglês se padronizasse.",
+      "description_en": "Modern English began around 1500. Two very important things happened during this time: the invention of the printing press by Gutenberg (which allowed books to be printed faster and cheaper) and the publication of the Bible in English. This made more people learn to read and standardized the English language."
+    },
+    "shakespeare": {
+      "name": "William Shakespeare",
+      "years": "1564-1616",
+      "description_pt": "A pessoa mais famosa da língua inglesa é William Shakespeare! Ele escreveu peças de teatro como Romeu e Julieta, Hamlet, Sonho de Uma Noite de Verão e muitas outras. Shakespeare inventou mais de 1.700 palavras novas em inglês! Palavras como 'assassination' (assassinato), 'bump' (colisão/ protuberância), 'lonely' (solitário), 'generous' (generoso) e 'eyeball' (globo ocular) foram criadas por ele.",
+      "description_en": "The most famous person in the English language is William Shakespeare! He wrote plays like Romeo and Juliet, Hamlet, A Midsummer Night's Dream, and many others. Shakespeare invented more than 1,700 new words in English! Words like 'assassination', 'bump', 'lonely', 'generous', and 'eyeball' were created by him.",
+      "fun_fact_pt": "Shakespeare também inventou muitas frases que usamos até hoje, como 'break the ice' (quebrar o gelo), 'heart of gold' (coração de ouro) e 'wild goose chase' (perseguição inútil - literalmente 'perseguição a um ganso selvagem')!",
+      "fun_fact_en": "Shakespeare also invented many phrases we still use today, like 'break the ice', 'heart of gold', and 'wild goose chase'!"
+    },
+    "english_around_world": {
+      "title_pt": "O inglês se espalha pelo mundo",
+      "title_en": "English spreads around the world",
+      "description_pt": "A partir do século XVII, a Inglaterra começou a colonizar outros lugares do mundo. Navios ingleses cruzaram os oceanos levando soldados, fazendeiros, comerciantes e a língua inglesa para a América do Norte, a África, a Austrália, a Nova Zelândia e a Índia. Com o tempo, os Estados Unidos se tornaram uma potência mundial, e o inglês americano se espalhou ainda mais, especialmente através do cinema, da música, da televisão e da internet.",
+      "description_en": "From the 17th century onward, England began colonizing other places in the world. English ships crossed the oceans carrying soldiers, farmers, merchants, and the English language to North America, Africa, Australia, New Zealand, and India. Over time, the United States became a world power, and American English spread even further, especially through movies, music, television, and the internet.",
+      "english_varieties": [
+        {"country": "Estados Unidos", "country_en": "United States", "example": "color (color) vs British colour", "pt": "Diferença na escrita de 'cor'"},
+        {"country": "Reino Unido", "country_en": "United Kingdom", "example": "lorry (caminhão) vs US truck", "pt": "Palavras diferentes para 'caminhão'"},
+        {"country": "Austrália", "country_en": "Australia", "example": "G'day mate! (Bom dia, amigo!)", "pt": "Saudação típica australiana"},
+        {"country": "Canadá", "country_en": "Canada", "example": "eh? no final das frases (como 'né?')", "pt": "Uso de 'eh?' no final das frases"}
+      ]
+    },
+    "why_learn_english": {
+      "title_pt": "Por que aprender inglês é incrível?",
+      "title_en": "Why is learning English awesome?",
+      "reasons": [
+        {
+          "pt": "🎬 Filmes e séries: Você pode assistir aos filmes da Marvel, Disney e Netflix sem legendas!",
+          "en": "🎬 Movies and series: You can watch Marvel, Disney, and Netflix movies without subtitles!"
+        },
+        {
+          "pt": "🎵 Músicas: Entender as letras das suas músicas favoritas do Justin Bieber, Taylor Swift, e artistas do mundo todo.",
+          "en": "🎵 Music: Understand the lyrics of your favorite songs by Justin Bieber, Taylor Swift, and artists from all over the world."
+        },
+        {
+          "pt": "🎮 Videogames: Jogar Minecraft, Fortnite e Roblox em inglês sem precisar de tradução.",
+          "en": "🎮 Video games: Play Minecraft, Fortnite, and Roblox in English without needing translation."
+        },
+        {
+          "pt": "✈️ Viajar: Fazer amigos em qualquer lugar do mundo! O inglês é a língua que conecta todos.",
+          "en": "✈️ Travel: Make friends anywhere in the world! English is the language that connects everyone."
+        },
+        {
+          "pt": "🧠 Inteligência: Aprender um novo idioma deixa seu cérebro mais forte e inteligente!",
+          "en": "🧠 Intelligence: Learning a new language makes your brain stronger and smarter!"
+        },
+        {
+          "pt": "📚 Conhecimento: A maior parte da ciência, da tecnologia e da internet está em inglês.",
+          "en": "📚 Knowledge: Most of science, technology, and the internet is in English."
+        }
+      ]
+    },
+    "loanwords": {
+      "title_pt": "Palavras que o inglês 'pegou emprestadas' de outros idiomas",
+      "title_en": "Words that English 'borrowed' from other languages",
+      "description_pt": "O inglês é como uma esponja - ele absorveu palavras de muitos idiomas diferentes! Isso aconteceu porque os ingleses viajaram, invadiram outros países e foram invadidos também. Hoje, quase 70% do vocabulário inglês vem de outras línguas, principalmente do latim, do francês e do grego.",
+      "description_en": "English is like a sponge - it absorbed words from many different languages! This happened because the English traveled, invaded other countries, and were invaded themselves. Today, almost 70% of English vocabulary comes from other languages, mainly Latin, French, and Greek.",
+      "examples": [
+        {"word": "piano", "origin": "Italiano", "meaning_pt": "Instrumento musical"},
+        {"word": "safari", "origin": "Suaíli (África)", "meaning_pt": "Viagem para ver animais selvagens"},
+        {"word": "yogurt", "origin": "Turco", "meaning_pt": "Iogurte"},
+        {"word": "ketchup", "origin": "Chinês", "meaning_pt": "Ketchup/molho de tomate"},
+        {"word": "chocolate", "origin": "Nahuatl (Asteca)", "meaning_pt": "Chocolate"},
+        {"word": "banana", "origin": "Línguas africanas", "meaning_pt": "Banana"},
+        {"word": "zero", "origin": "Árabe", "meaning_pt": "Número zero"},
+        {"word": "robot", "origin": "Tcheco", "meaning_pt": "Robô"}
+      ]
+    },
+    "portuguese_words_in_english": {
+      "title_pt": "Palavras do português que existem em inglês!",
+      "title_en": "Portuguese words that exist in English!",
+      "description_pt": "Você sabia que o inglês também pegou palavras emprestadas do português? Principalmente de quando Portugal era uma grande potência marítima, explorando o mundo e descobrindo novos lugares. Algumas palavras que o inglês aprendeu com a gente:",
+      "description_en": "Did you know that English also borrowed words from Portuguese? Mainly from when Portugal was a great maritime power, exploring the world and discovering new places. Some words that English learned from us:",
+      "examples": [
+        {"word": "cobra", "meaning_pt": "Cobra (a serpente)", "note_pt": "Os portugueses encontraram essa cobra na Índia."},
+        {"word": "piranha", "meaning_pt": "Peixe carnívoro da Amazônia", "note_pt": "Os portugueses aprenderam essa palavra com os indígenas do Brasil."},
+        {"word": "flamingo", "meaning_pt": "Pássaro cor-de-rosa", "note_pt": "Vem do português 'flamengo', que significa 'de cor de chama'."},
+        {"word": "toucan", "meaning_pt": "Tucano", "note_pt": "Os portugueses aprenderam com os indígenas do Brasil."},
+        {"word": "fetish", "meaning_pt": "Fetiche (objeto de culto)", "note_pt": "Vem do português 'feitiço'."},
+        {"word": "marmalade", "meaning_pt": "Marmelada (doce de marmelo)", "note_pt": "A palavra original portuguesa ficou famosa na Inglaterra."},
+        {"word": "albino", "meaning_pt": "Albino", "note_pt": "Vem do português 'albino' (branco, claro)."},
+        {"word": "lambada", "meaning_pt": "Dança brasileira", "note_pt": "Ficou famosa mundialmente na década de 1980."}
+      ]
+    },
+    "fun_facts": {
+      "title_pt": "Curiosidades incríveis sobre o inglês",
+      "title_en": "Amazing fun facts about English",
+      "facts": [
+        {
+          "fact_pt": "📝 A palavra mais longa do inglês tem 189.819 letras! É o nome de uma proteína. Para ler, levaria mais de 3 horas!",
+          "fact_en": "📝 The longest word in English has 189,819 letters! It's the name of a protein. It would take over 3 hours to read!"
+        },
+        {
+          "fact_pt": "🔄 A palavra 'set' tem o maior número de significados - mais de 430! Pode significar 'colocar', 'conjunto', 'cenário' e muito mais.",
+          "fact_en": "🔄 The word 'set' has the highest number of meanings - more than 430! It can mean 'to place', 'collection', 'scenery', and much more."
+        },
+        {
+          "fact_pt": "⚡ 'Queue' tem 4 letras em inglês que são mudas! Só a primeira letra 'Q' é pronunciada. É a palavra mais 'silenciosa' do idioma.",
+          "fact_en": "⚡ 'Queue' has 4 silent letters in English! Only the first letter 'Q' is pronounced. It's the most 'silent' word in the language."
+        },
+        {
+          "fact_pt": "🔄 'Palindrome' são palavras que se leem igual de trás para frente, como 'racecar' (carro de corrida).",
+          "fact_en": "🔄 'Palindrome' are words that read the same backwards and forwards, like 'racecar'."
+        },
+        {
+          "fact_pt": "🎓 A Universidade de Cambridge, na Inglaterra, foi fundada em 1209 - isso é mais de 800 anos atrás!",
+          "fact_en": "🎓 Cambridge University in England was founded in 1209 - that's over 800 years ago!"
+        },
+        {
+          "fact_pt": "📖 O dicionário de inglês tem mais de 600.000 palavras! Uma pessoa comum conhece cerca de 20.000.",
+          "fact_en": "📖 The English dictionary has over 600,000 words! An average person knows about 20,000."
+        },
+        {
+          "fact_pt": "🗺️ Existem 45 países onde o inglês é a língua oficial (como Estados Unidos, Canadá, Austrália e Inglaterra).",
+          "fact_en": "🗺️ There are 45 countries where English is the official language (like the United States, Canada, Australia, and England)."
+        }
+      ]
+    },
+    "timeline": {
+      "title_pt": "Linha do Tempo da Língua Inglesa",
+      "title_en": "English Language Timeline",
+      "events": [
+        {"year": "450 d.C.", "event_pt": "Anglos, Saxões e Jutos chegam à Inglaterra. Começa o Inglês Antigo.", "event_en": "Angles, Saxons, and Jutes arrive in England. Old English begins."},
+        {"year": "700 d.C.", "event_pt": "Beowulf, o poema mais famoso em Inglês Antigo, é escrito.", "event_en": "Beowulf, the most famous poem in Old English, is written."},
+        {"year": "793 d.C.", "event_pt": "Primeiro ataque Viking à Inglaterra.", "event_en": "First Viking attack on England."},
+        {"year": "1066", "event_pt": "Invasão Normanda. O francês chega à Inglaterra. Começa o Inglês Médio.", "event_en": "Norman Invasion. French arrives in England. Middle English begins."},
+        {"year": "1387", "event_pt": "Chaucer escreve 'Os Contos da Cantuária'.", "event_en": "Chaucer writes 'The Canterbury Tales'."},
+        {"year": "1476", "event_pt": "William Caxton traz a prensa de tipos para a Inglaterra.", "event_en": "William Caxton brings the printing press to England."},
+        {"year": "1500", "event_pt": "Começa o Inglês Moderno.", "event_en": "Modern English begins."},
+        {"year": "1564", "event_pt": "William Shakespeare nasce.", "event_en": "William Shakespeare is born."},
+        {"year": "1604", "event_pt": "Primeiro dicionário de inglês é publicado.", "event_en": "First English dictionary is published."},
+        {"year": "1620", "event_pt": "Peregrinos ingleses chegam à América do Norte.", "event_en": "English pilgrims arrive in North America."},
+        {"year": "1755", "event_pt": "Samuel Johnson publica seu famoso dicionário.", "event_en": "Samuel Johnson publishes his famous dictionary."},
+        {"year": "1828", "event_pt": "Noah Webster publica o dicionário americano de inglês.", "event_en": "Noah Webster publishes the American dictionary of English."},
+        {"year": "Hoje", "event_pt": "O inglês é a língua global da internet, ciência e negócios.", "event_en": "English is the global language of internet, science, and business."}
+      ]
+    },
+    "conclusion": {
+      "title_pt": "Conclusão: Uma Língua Viva",
+      "title_en": "Conclusion: A Living Language",
+      "text_pt": "O inglês é uma língua viva que continua mudando e crescendo a cada dia. Crianças como você inventam novas palavras na internet, músicas pop trazem novas expressões, e a tecnologia cria palavras novas o tempo todo (como 'selfie', 'emoji', 'google' e 'app'). Aprender inglês é como ter uma chave mágica que abre portas para o mundo todo. E a melhor parte? Você já começou sua jornada! Toda palavra nova que você aprende é um passo mais perto de ser bilíngue. Continue praticando, continue curioso, e um dia você vai perceber que o inglês é seu também!",
+      "text_en": "English is a living language that continues to change and grow every day. Children like you invent new words on the internet, pop music brings new expressions, and technology creates new words all the time (like 'selfie', 'emoji', 'google', and 'app'). Learning English is like having a magic key that opens doors to the whole world. And the best part? You've already started your journey! Every new word you learn is one step closer to being bilingual. Keep practicing, stay curious, and one day you'll realize that English is yours too!",
+      "motivational_message_pt": "🌟 Você consegue! Milhões de crianças ao redor do mundo aprendem inglês todos os dias. Não desista - cada palavra nova é uma vitória! 🌟",
+      "motivational_message_en": "🌟 You can do it! Millions of children around the world learn English every day. Don't give up - every new word is a victory! 🌟"
+    }
+  }
+}
