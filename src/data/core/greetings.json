@@ -5,98 +5,160 @@
       "pronunciation": "heh-LOH",
       "meaning": "A friendly word to say when you see someone",
       "example": "Hello, my name is Emma. What is your name?",
-      "kid_friendly_explanation": "Say 'hello' when you want to be friendly to someone."
+      "kid_friendly_explanation": "Say 'hello' when you want to be friendly to someone.",
+      "dialog_example": "Child: Hello! Friend: Hello! Do you want to play?"
     },
     {
       "word": "Good morning",
       "pronunciation": "gud MOR-ning",
-      "meaning": "A greeting used in the morning",
-      "example": "Good morning, Mom! Did you sleep well?",
-      "kid_friendly_explanation": "Say 'good morning' when you wake up or see someone before lunch."
+      "meaning": "A greeting used in the morning before noon",
+      "example": "Good morning, Mom! Did you sleep well? I had a dream about a puppy.",
+      "kid_friendly_explanation": "Say 'good morning' when you wake up or see someone before lunch.",
+      "dialog_example": "Child: Good morning, teacher! Teacher: Good morning! Ready to learn?"
     },
     {
       "word": "Good afternoon",
       "pronunciation": "gud af-ter-NOON",
-      "meaning": "A greeting used from noon until evening",
-      "example": "Good afternoon, teacher! Are we having art class today?",
-      "kid_friendly_explanation": "Say 'good afternoon' after 12 o'clock until dinner time."
+      "meaning": "A greeting used from 12 PM until evening",
+      "example": "Good afternoon, class! Today we will learn about butterflies.",
+      "kid_friendly_explanation": "Say 'good afternoon' after 12 o'clock until dinner time.",
+      "dialog_example": "Child: Good afternoon, Grandma! Grandma: Good afternoon, sweetie!"
     },
     {
       "word": "Good evening",
       "pronunciation": "gud EEV-ning",
-      "meaning": "A greeting used in the evening",
-      "example": "Good evening, Dad! What's for dinner?",
-      "kid_friendly_explanation": "Say 'good evening' when the sun starts to go down."
+      "meaning": "A greeting used in the evening after sunset",
+      "example": "Good evening, Dad! What's for dinner? I am very hungry today.",
+      "kid_friendly_explanation": "Say 'good evening' when the sun starts to go down.",
+      "dialog_example": "Child: Good evening! Neighbor: Good evening! Beautiful night, isn't it?"
+    },
+    {
+      "word": "Good night",
+      "pronunciation": "gud night",
+      "meaning": "Said when going to bed or leaving at night",
+      "example": "Good night, Mom. I love you. See you in the morning!",
+      "kid_friendly_explanation": "Say 'good night' before you go to sleep.",
+      "dialog_example": "Child: Good night! Mom: Good night! Sweet dreams!"
     },
     {
       "word": "Hi",
       "pronunciation": "hye",
-      "meaning": "A casual and friendly greeting",
-      "example": "Hi! Do you want to play with me?",
-      "kid_friendly_explanation": "'Hi' is a quick and happy way to say hello to a friend."
+      "meaning": "A casual and friendly way to greet someone",
+      "example": "Hi! Do you want to play with me? I have a new soccer ball.",
+      "kid_friendly_explanation": "'Hi' is a quick and happy way to say hello to a friend.",
+      "dialog_example": "Child: Hi! Friend: Hi! Let's go to the park."
     },
     {
       "word": "Hey",
       "pronunciation": "hay",
-      "meaning": "An informal greeting to get attention",
-      "example": "Hey! Wait for me! I want to come too!",
-      "kid_friendly_explanation": "Say 'hey' when you want a friend to look at you."
+      "meaning": "An informal greeting often used to get attention",
+      "example": "Hey! Wait for me! I want to come to the playground too!",
+      "kid_friendly_explanation": "Say 'hey' when you want a friend to look at you or wait for you.",
+      "dialog_example": "Child: Hey, look at this! Friend: Wow, that's cool!"
     },
     {
       "word": "How are you?",
       "pronunciation": "how ar yoo",
-      "meaning": "A question asking about someone's well-being",
-      "example": "Hi Lily! How are you today? I hope you feel better.",
-      "kid_friendly_explanation": "Ask 'how are you' to show you care about your friend."
+      "meaning": "A polite question about someone's health or feelings",
+      "example": "Hi Lily! How are you today? I hope you feel better after being sick.",
+      "kid_friendly_explanation": "Ask 'how are you' to show you care about how your friend feels.",
+      "dialog_example": "Child: How are you? Friend: I'm great, thanks!"
     },
     {
       "word": "I'm fine, thank you",
       "pronunciation": "eyem fyne THANK yoo",
-      "meaning": "A polite response to 'How are you?'",
-      "example": "How are you? I'm fine, thank you. And you?",
-      "kid_friendly_explanation": "Say this when someone asks how you feel and you feel good."
+      "meaning": "A polite response meaning you feel good",
+      "example": "How are you? I'm fine, thank you. And you? How was your weekend?",
+      "kid_friendly_explanation": "Say this when someone asks how you feel and you feel good and happy.",
+      "dialog_example": "Child: I'm fine, thank you! Teacher: That's wonderful to hear."
+    },
+    {
+      "word": "I'm great",
+      "pronunciation": "eyem grayt",
+      "meaning": "An enthusiastic response meaning you feel very good",
+      "example": "How are you today? I'm great! I got a new puppy yesterday!",
+      "kid_friendly_explanation": "Say 'I'm great' when you feel super happy and excited.",
+      "dialog_example": "Child: I'm great! Friend: Tell me why!"
+    },
+    {
+      "word": "Not so good",
+      "pronunciation": "not so gud",
+      "meaning": "A response meaning you don't feel well",
+      "example": "How are you feeling? Not so good. I have a headache today.",
+      "kid_friendly_explanation": "Say 'not so good' when you feel sad or sick.",
+      "dialog_example": "Child: Not so good. Mom: Oh no! Let me help you."
     },
     {
       "word": "Nice to meet you",
       "pronunciation": "neyss to meet yoo",
       "meaning": "Said when meeting someone for the first time",
       "example": "Hello, I'm Tom. Nice to meet you! Do you want to be friends?",
-      "kid_friendly_explanation": "Say 'nice to meet you' when you meet a new person."
+      "kid_friendly_explanation": "Say 'nice to meet you' when you meet a new person for the first time.",
+      "dialog_example": "Child: Nice to meet you! New friend: Nice to meet you too!"
     },
     {
       "word": "See you later",
       "pronunciation": "see yoo LAY-ter",
-      "meaning": "A friendly way to say goodbye",
-      "example": "I have to go home now. See you later, Alex!",
-      "kid_friendly_explanation": "Say 'see you later' when you will see your friend again soon."
+      "meaning": "A friendly way to say you will see someone again soon",
+      "example": "I have to go home now. See you later, Alex! Same time tomorrow?",
+      "kid_friendly_explanation": "Say 'see you later' when you will see your friend again soon.",
+      "dialog_example": "Child: See you later! Friend: See you tomorrow!"
+    },
+    {
+      "word": "See you tomorrow",
+      "pronunciation": "see yoo tuh-MOR-oh",
+      "meaning": "Said when you will see someone the next day",
+      "example": "Goodbye, class! See you tomorrow! Don't forget your homework.",
+      "kid_friendly_explanation": "Say this when you know you will see someone the next day.",
+      "dialog_example": "Child: See you tomorrow! Friend: Bye! Have a good night."
     },
     {
       "word": "Goodbye",
       "pronunciation": "gud-BYE",
-      "meaning": "A word used when leaving someone",
-      "example": "Goodbye, Grandma! I love you! I will visit again next week.",
-      "kid_friendly_explanation": "Say 'goodbye' when you are leaving a place or person."
+      "meaning": "A standard word used when leaving someone",
+      "example": "Goodbye, Grandma! I love you! I will visit again next weekend.",
+      "kid_friendly_explanation": "Say 'goodbye' when you are leaving a place or person for a while.",
+      "dialog_example": "Child: Goodbye! Grandma: Goodbye, my sweet child!"
     },
     {
       "word": "Bye bye",
       "pronunciation": "bye bye",
-      "meaning": "A casual way to say goodbye",
-      "example": "Bye bye, puppy! Be a good dog!",
-      "kid_friendly_explanation": "'Bye bye' is a fun way to say goodbye to friends and family."
+      "meaning": "A casual, child-friendly way to say goodbye",
+      "example": "Bye bye, puppy! Be a good dog while I am at school today!",
+      "kid_friendly_explanation": "'Bye bye' is a fun and easy way to say goodbye to friends and family.",
+      "dialog_example": "Child: Bye bye! Baby: Bye bye! Wave your hand!"
     },
     {
       "word": "Take care",
       "pronunciation": "tayk kair",
-      "meaning": "A kind goodbye wishing someone safety",
-      "example": "Have fun at the park! Take care!",
-      "kid_friendly_explanation": "Say 'take care' when you want your friend to be safe."
+      "meaning": "A kind goodbye wishing someone safety and health",
+      "example": "Have fun at the park with your friends! Take care and be careful!",
+      "kid_friendly_explanation": "Say 'take care' when you want your friend to be safe and healthy.",
+      "dialog_example": "Child: Take care! Friend: You too! See you later."
     },
     {
       "word": "Welcome",
       "pronunciation": "WEL-kum",
-      "meaning": "A greeting for someone who has arrived",
-      "example": "Welcome to my birthday party! I have cake and games!",
-      "kid_friendly_explanation": "Say 'welcome' when someone comes to your house or party."
+      "meaning": "A greeting for someone who has arrived at your place",
+      "example": "Welcome to my birthday party! I have cake, games, and presents for everyone!",
+      "kid_friendly_explanation": "Say 'welcome' when someone comes to your house, party, or school.",
+      "dialog_example": "Child: Welcome to my home! Guest: Thank you for inviting me."
+    },
+    {
+      "word": "What's up?",
+      "pronunciation": "wuts up",
+      "meaning": "A casual way to ask what someone is doing",
+      "example": "Hey Jake! What's up? Do you want to build a fort with me?",
+      "kid_friendly_explanation": "Say 'what's up' to ask a friend what they are doing or how they feel.",
+      "dialog_example": "Child: What's up? Friend: Nothing much. Want to play?"
+    },
+    {
+      "word": "Long time no see",
+      "pronunciation": "long time no see",
+      "meaning": "Said when you haven't seen someone in a while",
+      "example": "Wow, Sarah! Long time no see! You grew so tall since last summer!",
+      "kid_friendly_explanation": "Say this when you haven't seen a friend for many days or weeks.",
+      "dialog_example": "Child: Long time no see! Cousin: I know! I missed you!"
     }
   ]
 }
