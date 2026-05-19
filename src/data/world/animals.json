@@ -154,4 +154,103 @@
       "example": "The blue whale is the biggest animal on Earth, even bigger than dinosaurs!",
       "kid_friendly_explanation": "Whales are huge animals that live in the ocean. They sing to each other.",
       "fun_fact": "A blue whale's heart is as big as a small car!",
-      "
+      "sentence": "The whale spouted water from its blowhole."
+    },
+    {
+      "word": "shark",
+      "plural": "sharks",
+      "sound": "none",
+      "habitat": "ocean",
+      "diet": "carnivore",
+      "meaning": "A large fish with sharp teeth and a streamlined body, living in the ocean",
+      "example": "The shark swims fast and has many rows of sharp teeth for catching fish.",
+      "kid_friendly_explanation": "Sharks are fish with sharp teeth. They have been on Earth for millions of years.",
+      "fun_fact": "Sharks can lose and grow back thousands of teeth in their lifetime!",
+      "sentence": "The shark circled around its prey."
+    },
+    {
+      "word": "butterfly",
+      "plural": "butterflies",
+      "sound": "none",
+      "habitat": "garden, meadow",
+      "diet": "nectar",
+      "meaning": "A flying insect with large, colorful wings and a long proboscis for drinking nectar",
+      "example": "The butterfly lands on the flower to drink sweet nectar with its long tongue.",
+      "kid_friendly_explanation": "Butterflies have beautiful colored wings. They start as caterpillars.",
+      "fun_fact": "Butterflies taste with their feet!",
+      "sentence": "The butterfly fluttered from flower to flower."
+    },
+    {
+      "word": "bee",
+      "plural": "bees",
+      "sound": "buzz",
+      "habitat": "garden, meadow",
+      "diet": "nectar and pollen",
+      "meaning": "A small flying insect that makes honey and pollinates flowers",
+      "example": "The bee buzzes from flower to flower collecting pollen to bring back to the hive.",
+      "kid_friendly_explanation": "Bees fly and make yummy honey. They help flowers grow.",
+      "fun_fact": "A honeybee can visit 5,000 flowers in one day!",
+      "sentence": "The bee is collecting nectar from the flower."
+    },
+    {
+      "word": "rabbit",
+      "plural": "rabbits",
+      "sound": "none",
+      "habitat": "forest, grassland",
+      "diet": "herbivore",
+      "meaning": "A small furry mammal with long ears, a fluffy tail, and strong hopping legs",
+      "example": "The rabbit hops through the grass and nibbles on carrots and lettuce.",
+      "kid_friendly_explanation": "Rabbits are soft, fluffy animals that hop. They have long ears and like carrots.",
+      "fun_fact": "A rabbit's teeth never stop growing!",
+      "sentence": "The rabbit thumped its foot to warn other rabbits."
+    },
+    {
+      "word": "frog",
+      "plural": "frogs",
+      "sound": "ribbit",
+      "habitat": "pond, swamp",
+      "diet": "insectivore",
+      "meaning": "A small amphibian with smooth skin, long jumping legs, and webbed feet",
+      "example": "The frog jumps into the pond with a splash and swims with its webbed feet.",
+      "kid_friendly_explanation": "Frogs are green, jumpy animals that say 'ribbit' and live near water.",
+      "fun_fact": "Some frogs can freeze in winter and come back to life in spring!",
+      "sentence": "The frog caught a fly with its long tongue."
+    },
+    {
+      "word": "snake",
+      "plural": "snakes",
+      "sound": "hiss",
+      "habitat": "various: forest, desert, grassland",
+      "diet": "carnivore",
+      "meaning": "A long, legless reptile that slithers on the ground and has scales",
+      "example": "The snake slithers through the grass, smelling the air with its forked tongue.",
+      "kid_friendly_explanation": "Snakes are long, slithery animals with no legs. They eat mice and other small animals.",
+      "fun_fact": "Snakes smell with their tongues!",
+      "sentence": "The snake shed its old skin."
+    },
+    {
+      "word": "owl",
+      "plural": "owls",
+      "sound": "hoot",
+      "habitat": "forest, woodland",
+      "diet": "carnivore",
+      "meaning": "A bird of prey that sleeps during the day and hunts at night",
+      "example": "The owl sits in the tree and says 'who, who' at night while hunting for mice.",
+      "kid_friendly_explanation": "Owls are night birds that say 'hoot.' They have big eyes and can turn their heads far around.",
+      "fun_fact": "An owl can turn its head almost all the way around - 270 degrees!",
+      "sentence": "The owl flew silently through the night."
+    },
+    {
+      "word": "eagle",
+      "plural": "eagles",
+      "sound": "screech",
+      "habitat": "mountains, cliffs",
+      "diet": "carnivore",
+      "meaning": "A large bird of prey with excellent eyesight, sharp talons, and a hooked beak",
+      "example": "The eagle soars high in the sky and spots a fish in the water from far away.",
+      "kid_friendly_explanation": "Eagles are big, strong birds that hunt for food. They have amazing eyesight.",
+      "fun_fact": "An eagle can see a rabbit from 2 miles away!",
+      "sentence": "The eagle built its nest on the cliff."
+    }
+  ]
+}
