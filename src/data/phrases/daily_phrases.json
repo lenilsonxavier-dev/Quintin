@@ -1,0 +1,158 @@
+{
+  "good morning": {
+    "pt": "bom dia",
+    "emoji": "☀️",
+    "example": "Good morning, Mom! Did you sleep well?",
+    "when_to_use": "Use before 12 PM to greet people."
+  },
+  "good afternoon": {
+    "pt": "boa tarde",
+    "emoji": "🌤️",
+    "example": "Good afternoon, teacher! Are we having art class today?",
+    "when_to_use": "Use from 12 PM to 6 PM."
+  },
+  "good evening": {
+    "pt": "boa noite",
+    "emoji": "🌙",
+    "example": "Good evening, Dad! What's for dinner?",
+    "when_to_use": "Use from 6 PM until bedtime."
+  },
+  "good night": {
+    "pt": "boa noite (ao dormir)",
+    "emoji": "😴",
+    "example": "Good night, everyone! Sweet dreams!",
+    "when_to_use": "Use before going to sleep."
+  },
+  "hello": {
+    "pt": "olá",
+    "emoji": "👋",
+    "example": "Hello! My name is Maria. What is your name?",
+    "when_to_use": "A friendly greeting anytime."
+  },
+  "hi": {
+    "pt": "oi",
+    "emoji": "😊",
+    "example": "Hi! Do you want to play with me?",
+    "when_to_use": "A casual and quick greeting for friends."
+  },
+  "bye bye": {
+    "pt": "tchau tchau",
+    "emoji": "👋",
+    "example": "Bye bye, puppy! Be a good dog!",
+    "when_to_use": "A cute way to say goodbye to friends and pets."
+  },
+  "see you later": {
+    "pt": "até mais",
+    "emoji": "👋",
+    "example": "See you later, alligator! After a while, crocodile!",
+    "when_to_use": "When you will see someone again soon."
+  },
+  "see you tomorrow": {
+    "pt": "até amanhã",
+    "emoji": "📅",
+    "example": "See you tomorrow at school! Don't forget your homework.",
+    "when_to_use": "When you will see someone the next day."
+  },
+  "thank you": {
+    "pt": "obrigado",
+    "emoji": "🙏",
+    "example": "Thank you for the birthday present! I love it!",
+    "when_to_use": "Say this when someone gives you something or helps you."
+  },
+  "thanks": {
+    "pt": "valeu",
+    "emoji": "😊",
+    "example": "Thanks for helping me with my homework!",
+    "when_to_use": "A casual way to say thank you."
+  },
+  "please": {
+    "pt": "por favor",
+    "emoji": "🙏",
+    "example": "Please, can I have some water? I am very thirsty.",
+    "when_to_use": "Say this when you ask for something politely."
+  },
+  "sorry": {
+    "pt": "desculpa",
+    "emoji": "😔",
+    "example": "Sorry I stepped on your foot! I didn't mean to.",
+    "when_to_use": "Say this when you make a mistake or hurt someone."
+  },
+  "excuse me": {
+    "pt": "com licença",
+    "emoji": "🚶",
+    "example": "Excuse me, may I pass through? Thank you!",
+    "when_to_use": "When you need to get someone's attention or pass by."
+  },
+  "yes": {
+    "pt": "sim",
+    "emoji": "✅",
+    "example": "Yes, I would love to go to the park!",
+    "when_to_use": "When you agree or say something is true."
+  },
+  "no": {
+    "pt": "não",
+    "emoji": "❌",
+    "example": "No, thank you. I am not hungry right now.",
+    "when_to_use": "When you disagree or say no to something."
+  },
+  "okay": {
+    "pt": "ok",
+    "emoji": "👌",
+    "example": "Okay, I will be ready in five minutes!",
+    "when_to_use": "When you agree or say everything is fine."
+  },
+  "I love you": {
+    "pt": "eu te amo",
+    "emoji": "❤️",
+    "example": "I love you, Grandma! You are the best!",
+    "when_to_use": "Say this to people you care about very much."
+  },
+  "you're welcome": {
+    "pt": "de nada",
+    "emoji": "🙏",
+    "example": "You're welcome! I was happy to help you.",
+    "when_to_use": "Say this when someone says thank you."
+  },
+  "congratulations": {
+    "pt": "parabéns",
+    "emoji": "🎉",
+    "example": "Congratulations on winning the game! You did great!",
+    "when_to_use": "Say this when someone achieves something good."
+  },
+  "good luck": {
+    "pt": "boa sorte",
+    "emoji": "🍀",
+    "example": "Good luck on your test tomorrow! You will do great!",
+    "when_to_use": "Say this before someone tries something important."
+  },
+  "bless you": {
+    "pt": "saúde",
+    "emoji": "🤧",
+    "example": "Bless you! Did you sneeze?",
+    "when_to_use": "Say this when someone sneezes."
+  },
+  "have fun": {
+    "pt": "divirta-se",
+    "emoji": "🎢",
+    "example": "Have fun at the birthday party! Eat lots of cake!",
+    "when_to_use": "Say this before someone does something fun."
+  },
+  "be careful": {
+    "pt": "cuidado",
+    "emoji": "⚠️",
+    "example": "Be careful on the stairs! Hold the railing.",
+    "when_to_use": "Say this to warn someone about danger."
+  },
+  "wait a minute": {
+    "pt": "espera um minuto",
+    "emoji": "⏱️",
+    "example": "Wait a minute, I forgot my backpack!",
+    "when_to_use": "When you need someone to pause for a moment."
+  },
+  "help": {
+    "pt": "socorro",
+    "emoji": "🆘",
+    "example": "Help! I dropped my pencil and cannot reach it!",
+    "when_to_use": "Call this when you need assistance."
+  }
+}
