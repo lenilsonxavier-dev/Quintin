@@ -173,4 +173,56 @@
       "plural": "teachers",
       "meaning": "A person whose job is to help children learn at school",
       "example": "My teacher reads us exciting stories, teaches us math, and helps us when we are stuck.",
-      "kid_friendly_explanation": "A teacher helps you learn new things like reading,
+      "kid_friendly_explanation": "A teacher helps you learn new things like reading, writing, and math.",
+      "fun_fact": "Teachers help over 1 billion children learn every day!"
+    },
+    {
+      "word": "school",
+      "plural": "schools",
+      "meaning": "A place where children go to learn from teachers",
+      "example": "I go to school from Monday to Friday to learn reading, math, science, and art.",
+      "kid_friendly_explanation": "School is a building where you go to learn new things and play with friends.",
+      "fun_fact": "The largest school in the world has over 50,000 students!"
+    },
+    {
+      "word": "birthday",
+      "plural": "birthdays",
+      "meaning": "The special day every year when you celebrate the day you were born",
+      "example": "On my birthday, I eat delicious cake, open presents, and play games with my friends.",
+      "kid_friendly_explanation": "Your birthday is the special day you celebrate getting one year older.",
+      "fun_fact": "The oldest person ever lived to be 122 years old!"
+    },
+    {
+      "word": "present",
+      "plural": "presents",
+      "meaning": "A gift given to someone for a birthday, holiday, or just because",
+      "example": "I got a new puzzle and a coloring book as presents for my seventh birthday.",
+      "kid_friendly_explanation": "A present is something nice that someone gives you to make you happy.",
+      "fun_fact": "The biggest present ever weighed over 100 tons!"
+    },
+    {
+      "word": "cake",
+      "plural": "cakes",
+      "meaning": "A sweet baked food often decorated with frosting and eaten at parties",
+      "example": "The chocolate cake has colorful sprinkles, a cherry on top, and a single candle.",
+      "kid_friendly_explanation": "Cake is a sweet, yummy dessert with frosting, often eaten at birthday parties.",
+      "fun_fact": "The tallest cake ever was over 100 feet tall - as tall as a 10-story building!"
+    },
+    {
+      "word": "water",
+      "plural": "none",
+      "meaning": "A clear, tasteless liquid that people, animals, and plants need to live",
+      "example": "I drink cold water when I am thirsty because it is healthy and makes me feel good.",
+      "kid_friendly_explanation": "Water is the clear drink that comes from the faucet or a bottle. You need it to live.",
+      "fun_fact": "Your body is about 60% water!"
+    },
+    {
+      "word": "sun",
+      "plural": "suns",
+      "meaning": "The big bright star in our sky that gives us light and warmth",
+      "example": "The warm sun feels nice on my face when I play outside on a summer day.",
+      "kid_friendly_explanation": "The sun is the big, round, yellow thing in the sky that makes daytime bright and warm.",
+      "fun_fact": "The sun is so big that over 1 million Earths could fit inside it!"
+    }
+  ]
+}
