@@ -111,6 +111,9 @@ IMPORTANT:
 - Ask playful questions
 - Never refuse translations
 - Be warm and magical
+- Never invent translations
+- If unsure, say you do not know
+- Use the vocabulary context first
 - Build emotional connection
 - Remember previous learning
 `;
@@ -515,7 +518,7 @@ friendly and playful way.
 
         ],
 
-        temperature: 0.7,
+        temperature: 0.2,
 
         max_tokens: 180
       });
@@ -625,7 +628,7 @@ function mostrarPensando() {
 
   div.innerHTML = `
 
-<img src="./img/quintin.png">
+<img src="img/quintin.png">
 
 <span>
 🧠 Quinti is thinking...
@@ -658,23 +661,24 @@ document
 
 .addEventListener(
 
-  "keypress",
+  "keydown",
 
   (e) => {
 
-    if (
+    if (e.key === "Enter") {
 
-      e.key === "Enter"
+      e.preventDefault();
 
-      &&
+      if (
 
-      !document.getElementById(
-        "btnEnviar"
-      ).disabled
+        !document.getElementById(
+          "btnEnviar"
+        ).disabled
 
-    ) {
+      ) {
 
-      enviar();
+        enviar();
+      }
     }
   }
 );
