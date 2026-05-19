@@ -1,0 +1,107 @@
+{
+  "how are you": {
+    "pt": "como você está?",
+    "emoji": "😊",
+    "response": "I'm fine, thank you! And you?",
+    "response_pt": "Estou bem, obrigado! E você?",
+    "example": "Hi! How are you today? I hope you are happy!"
+  },
+  "what is your name": {
+    "pt": "qual é o seu nome?",
+    "emoji": "📛",
+    "response": "My name is [name]. What is yours?",
+    "response_pt": "Meu nome é [nome]. Qual é o seu?",
+    "example": "Hello! What is your name? Nice to meet you!"
+  },
+  "nice to meet you": {
+    "pt": "prazer em conhecê-lo",
+    "emoji": "🤝",
+    "response": "Nice to meet you too! Let's be friends!",
+    "response_pt": "Prazer em conhecê-lo também! Vamos ser amigos!",
+    "example": "Nice to meet you, Lucas! Do you want to play?"
+  },
+  "where are you from": {
+    "pt": "de onde você é?",
+    "emoji": "🗺️",
+    "response": "I am from Brazil. And you?",
+    "response_pt": "Eu sou do Brasil. E você?",
+    "example": "Where are you from? Is it far from here?"
+  },
+  "how old are you": {
+    "pt": "quantos anos você tem?",
+    "emoji": "🎂",
+    "response": "I am [age] years old. How old are you?",
+    "response_pt": "Eu tenho [idade] anos. Quantos anos você tem?",
+    "example": "How old are you? I am seven years old!"
+  },
+  "what do you like": {
+    "pt": "o que você gosta?",
+    "emoji": "❤️",
+    "response": "I like pizza, soccer, and playing video games!",
+    "response_pt": "Eu gosto de pizza, futebol e jogar videogame!",
+    "example": "What do you like to do on weekends?"
+  },
+  "do you want to play": {
+    "pt": "você quer brincar?",
+    "emoji": "🎮",
+    "response": "Yes! Let's play hide and seek!",
+    "response_pt": "Sim! Vamos brincar de esconde-esconde!",
+    "example": "Do you want to play with me? I have a new ball!"
+  },
+  "what time is it": {
+    "pt": "que horas são?",
+    "emoji": "⏰",
+    "response": "It is [time] o'clock. Time for lunch!",
+    "response_pt": "São [hora] horas. Hora do almoço!",
+    "example": "What time is it? I don't want to be late!"
+  },
+  "what is this": {
+    "pt": "o que é isto?",
+    "emoji": "❓",
+    "response": "It is a [object]. Do you like it?",
+    "response_pt": "É um [objeto]. Você gosta?",
+    "example": "What is this? It looks so interesting!"
+  },
+  "can you help me": {
+    "pt": "você pode me ajudar?",
+    "emoji": "🙏",
+    "response": "Of course! What do you need?",
+    "response_pt": "Claro! Do que você precisa?",
+    "example": "Can you help me tie my shoes, please?"
+  },
+  "where is the bathroom": {
+    "pt": "onde fica o banheiro?",
+    "emoji": "🚻",
+    "response": "It is down the hall on the left.",
+    "response_pt": "Fica no corredor à esquerda.",
+    "example": "Where is the bathroom? I really need to go!"
+  },
+  "I don't understand": {
+    "pt": "eu não entendo",
+    "emoji": "🤔",
+    "response": "Let me explain it again more slowly.",
+    "response_pt": "Deixa eu explicar de novo mais devagar.",
+    "example": "I don't understand this math problem. Help me!"
+  },
+  "can I have some water": {
+    "pt": "posso tomar um pouco de água?",
+    "emoji": "💧",
+    "response": "Yes, here you go! Drink slowly.",
+    "response_pt": "Sim, aqui está! Beba devagar.",
+    "example": "Can I have some water, please? I am very thirsty."
+  },
+  "what is your favorite color": {
+    "pt": "qual é a sua cor favorita?",
+    "emoji": "🎨",
+    "response": "My favorite color is blue! What about you?",
+    "response_pt": "Minha cor favorita é azul! E a sua?",
+    "example": "What is your favorite color? I like purple and pink."
+  },
+  "do you like school": {
+    "pt": "você gosta da escola?",
+    "emoji": "🏫",
+    "response": "Yes! I love learning and playing with friends!",
+    "response_pt": "Sim! Eu amo aprender e brincar com os amigos!",
+    "example": "Do you like school? What is your favorite subject?"
+  }
+}
