@@ -1,3 +1,7 @@
+// ========================================
+// ARQUIVOS JSON
+// ========================================
+
 const arquivosJSON = [
 
   // ========================================
@@ -27,6 +31,49 @@ const arquivosJSON = [
   "world/nature.json",
   "world/weather.json",
   "world/history_of_english.json",
+
+  // ========================================
+  // SPACE
+  // ========================================
+
+  "space/planets.json",
+  "space/astronauts.json",
+
+  // ========================================
+  // DINOSAURS
+  // ========================================
+
+  "dinosaurs/dinosaurs.json",
+
+  // ========================================
+  // SPORTS
+  // ========================================
+
+  "sports/sports.json",
+
+  // ========================================
+  // BODY
+  // ========================================
+
+  "body/body_parts.json",
+
+  // ========================================
+  // PHRASES
+  // ========================================
+
+  "phrases/daily_phrases.json",
+
+  // ========================================
+  // CONVERSATION
+  // ========================================
+
+  "conversation/greetings.json",
+
+  // ========================================
+  // HISTORY
+  // ========================================
+
+  "history/english_origins.json",
 
   // ========================================
   // FUN
@@ -80,7 +127,7 @@ export async function carregarConhecimento() {
         await response.json();
 
       // ========================================
-      // GLOSSARY STRUCTURE
+      // GLOSSARY ESTRUTURADO
       // ========================================
 
       if (data.glossary) {
@@ -90,7 +137,7 @@ export async function carregarConhecimento() {
       }
 
       // ========================================
-      // NORMAL JSON
+      // JSON NORMAL
       // ========================================
 
       else {
@@ -102,20 +149,28 @@ export async function carregarConhecimento() {
       }
 
       console.log(
-        `✅ ${arquivo}`
+        `✅ ${arquivo} carregado`
       );
 
     } catch(err) {
 
       console.error(
-        `❌ ${arquivo}`,
+        `❌ Erro em ${arquivo}`,
         err
       );
     }
   }
 
+  // ========================================
+  // DEBUG FINAL
+  // ========================================
+
   console.log(
     "📚 Knowledge loaded!"
+  );
+
+  console.log(
+    knowledgeBase
   );
 
   return knowledgeBase;
