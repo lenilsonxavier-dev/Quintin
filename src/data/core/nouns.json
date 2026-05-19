@@ -3,142 +3,174 @@
     {
       "word": "cat",
       "plural": "cats",
-      "meaning": "A small furry animal that says meow",
-      "example": "My cat sleeps on my bed and purrs when I pet her.",
-      "kid_friendly_explanation": "A cat is a pet that says 'meow'."
+      "meaning": "A small furry domestic animal with whiskers that says meow",
+      "example": "My cat sleeps on my bed every night and purrs when I pet her soft fur.",
+      "kid_friendly_explanation": "A cat is a soft, furry pet that says 'meow' and likes to chase mice.",
+      "fun_fact": "Cats sleep for about 13 to 16 hours every day!"
     },
     {
       "word": "dog",
       "plural": "dogs",
-      "meaning": "A friendly animal that says woof and loves to play",
-      "example": "My dog wags his tail when I come home from school.",
-      "kid_friendly_explanation": "A dog is a pet that barks and likes to play fetch."
+      "meaning": "A friendly domestic animal that barks and loves to play fetch",
+      "example": "My dog wags his tail and jumps with joy when I come home from school.",
+      "kid_friendly_explanation": "A dog is a pet that barks 'woof woof' and loves to play and go for walks.",
+      "fun_fact": "Dogs can understand up to 250 words and gestures!"
     },
     {
       "word": "bird",
       "plural": "birds",
-      "meaning": "An animal with feathers and wings that can fly",
-      "example": "The red bird sits on the tree branch and sings a pretty song.",
-      "kid_friendly_explanation": "A bird is an animal that has feathers and can fly."
+      "meaning": "An animal with feathers, wings, and a beak that can fly",
+      "example": "The red cardinal bird sits on the tree branch and sings a beautiful, pretty song.",
+      "kid_friendly_explanation": "A bird is an animal that has feathers, wings, and can fly in the sky.",
+      "fun_fact": "Hummingbirds can fly backwards and flap their wings 80 times per second!"
     },
     {
       "word": "fish",
       "plural": "fish",
-      "meaning": "An animal that lives in water and has fins",
-      "example": "The orange fish swims around the castle in its tank.",
-      "kid_friendly_explanation": "A fish is an animal that lives in water."
+      "meaning": "An animal that lives in water, breathes with gills, and has fins",
+      "example": "The orange goldfish swims around the little castle inside its fish tank.",
+      "kid_friendly_explanation": "A fish is an animal that lives in water, breathes underwater, and has fins to swim.",
+      "fun_fact": "The largest fish is the whale shark, which can be as long as a school bus!"
     },
     {
       "word": "house",
       "plural": "houses",
-      "meaning": "A building where people live",
-      "example": "My house has a red door and a big backyard for playing.",
-      "kid_friendly_explanation": "A house is where you and your family live."
+      "meaning": "A building where a person or family lives",
+      "example": "My house has a bright red door and a big backyard with a swing set for playing.",
+      "kid_friendly_explanation": "A house is a building where you and your family live, eat, and sleep.",
+      "fun_fact": "The first houses were made from animal skins, wood, and even ice!"
+    },
+    {
+      "word": "apartment",
+      "plural": "apartments",
+      "meaning": "A set of rooms for living in a larger building",
+      "example": "We live on the third floor of our apartment building, and we have an elevator.",
+      "kid_friendly_explanation": "An apartment is a home inside a big building with many other homes.",
+      "fun_fact": "Some apartment buildings are so tall they touch the clouds!"
     },
     {
       "word": "car",
       "plural": "cars",
-      "meaning": "A vehicle with four wheels that drives on roads",
-      "example": "My dad drives the blue car to work every morning.",
-      "kid_friendly_explanation": "A car is a machine that takes you places."
+      "meaning": "A four-wheeled vehicle that drives on roads to take people places",
+      "example": "My dad drives our blue car to work every morning, and I ride in the back seat.",
+      "kid_friendly_explanation": "A car is a machine with wheels that you drive to go to school, the store, or far places.",
+      "fun_fact": "The fastest car in the world can go over 300 miles per hour!"
+    },
+    {
+      "word": "bus",
+      "plural": "buses",
+      "meaning": "A large vehicle that carries many people on fixed routes",
+      "example": "I take the yellow school bus to school every day, and I sit with my best friend.",
+      "kid_friendly_explanation": "A bus is a big vehicle that carries lots of people at the same time.",
+      "fun_fact": "The longest bus in the world can carry over 250 people!"
+    },
+    {
+      "word": "train",
+      "plural": "trains",
+      "meaning": "A connected line of vehicles that moves on railroad tracks",
+      "example": "We took a train to visit Grandma, and I watched the trees and houses zoom by the window.",
+      "kid_friendly_explanation": "A train is a long line of cars that moves on special metal tracks.",
+      "fun_fact": "The longest train ever was over 4 miles long!"
+    },
+    {
+      "word": "bicycle",
+      "plural": "bicycles",
+      "meaning": "A two-wheeled vehicle you ride by pushing pedals with your feet",
+      "example": "I ride my red bicycle around the park with my helmet on to stay safe.",
+      "kid_friendly_explanation": "A bicycle is a fun vehicle with two wheels that you pedal with your feet.",
+      "fun_fact": "The first bicycle had no pedals - you pushed it with your feet on the ground!"
     },
     {
       "word": "ball",
       "plural": "balls",
-      "meaning": "A round object used in games and sports",
-      "example": "I kick the red ball into the goal and score a point!",
-      "kid_friendly_explanation": "A ball is a round toy you can throw or kick."
+      "meaning": "A round object used in many games and sports like soccer or basketball",
+      "example": "I kick the red ball into the soccer goal and score a point for my team! Hooray!",
+      "kid_friendly_explanation": "A ball is a round toy that you can throw, kick, bounce, or catch.",
+      "fun_fact": "The largest ball of paint has over 20,000 layers of paint!"
     },
     {
       "word": "book",
       "plural": "books",
-      "meaning": "Pages with words and pictures stuck together",
-      "example": "My favorite book has a dragon, a princess, and a knight.",
-      "kid_friendly_explanation": "A book has stories and pictures inside."
+      "meaning": "A set of pages with words and pictures that are stuck together inside a cover",
+      "example": "My favorite book has a friendly dragon, a brave princess, and a funny knight.",
+      "kid_friendly_explanation": "A book has stories, pictures, and information inside that you can read.",
+      "fun_fact": "The longest book ever written would take over 100 days to read!"
     },
     {
       "word": "toy",
       "plural": "toys",
-      "meaning": "Something fun to play with",
-      "example": "My new toy is a robot that lights up and makes sounds.",
-      "kid_friendly_explanation": "A toy is something you play with for fun."
+      "meaning": "An object for children to play with and have fun",
+      "example": "My new toy is a robot that lights up, makes sounds, and even walks across the floor.",
+      "kid_friendly_explanation": "A toy is something fun that you play with, like dolls, cars, blocks, or stuffed animals.",
+      "fun_fact": "The oldest toy ever found is over 4,000 years old!"
+    },
+    {
+      "word": "doll",
+      "plural": "dolls",
+      "meaning": "A small toy shaped like a person or baby",
+      "example": "I brush my doll's long hair and dress her in pretty purple clothes.",
+      "kid_friendly_explanation": "A doll is a toy that looks like a person, and you can dress her up and play pretend.",
+      "fun_fact": "The most expensive doll ever sold cost over $6 million!"
+    },
+    {
+      "word": "teddy bear",
+      "plural": "teddy bears",
+      "meaning": "A soft stuffed toy shaped like a bear",
+      "example": "I hug my teddy bear every night when I go to sleep because he is so soft.",
+      "kid_friendly_explanation": "A teddy bear is a cuddly stuffed animal shaped like a bear.",
+      "fun_fact": "Teddy bears were named after President Theodore 'Teddy' Roosevelt!"
     },
     {
       "word": "friend",
       "plural": "friends",
-      "meaning": "Someone you like to spend time with",
-      "example": "My best friend sits next to me at lunch every day.",
-      "kid_friendly_explanation": "A friend is someone you like to play with."
+      "meaning": "A person you like and enjoy spending time with",
+      "example": "My best friend sits next to me at lunch every day and we share our snacks.",
+      "kid_friendly_explanation": "A friend is someone you like to play with, talk to, and share things with.",
+      "fun_fact": "Having friends makes you happier and healthier!"
     },
     {
       "word": "family",
       "plural": "families",
-      "meaning": "The people you live with or are related to",
-      "example": "My family has mom, dad, my sister, and me.",
-      "kid_friendly_explanation": "Your family is the people who love and take care of you."
+      "meaning": "A group of people related to each other, living together or not",
+      "example": "My family has my mom, my dad, my little sister, and me, plus our dog Max.",
+      "kid_friendly_explanation": "Your family is the people who love you, take care of you, and live with you.",
+      "fun_fact": "Families come in all sizes - some are big, some are small!"
     },
     {
       "word": "mom",
       "plural": "moms",
-      "meaning": "Your female parent",
-      "example": "My mom gives me a hug and a kiss every morning.",
-      "kid_friendly_explanation": "Mom is the lady who is your parent."
+      "meaning": "Your female parent who takes care of you",
+      "example": "My mom gives me a big hug and a kiss on the forehead every morning before school.",
+      "kid_friendly_explanation": "Mom is the lady who is your parent and loves you very much.",
+      "fun_fact": "The word 'mom' is similar in almost every language!"
     },
     {
       "word": "dad",
       "plural": "dads",
-      "meaning": "Your male parent",
-      "example": "My dad makes pancakes on Sunday mornings.",
-      "kid_friendly_explanation": "Dad is the man who is your parent."
+      "meaning": "Your male parent who takes care of you",
+      "example": "My dad makes fluffy pancakes with maple syrup on Sunday mornings for breakfast.",
+      "kid_friendly_explanation": "Dad is the man who is your parent and loves you very much.",
+      "fun_fact": "Some animal dads, like seahorses, even have the babies!"
+    },
+    {
+      "word": "grandma",
+      "plural": "grandmas",
+      "meaning": "Your mother's mother or father's mother",
+      "example": "My grandma bakes the best chocolate chip cookies and tells me stories about when she was little.",
+      "kid_friendly_explanation": "Grandma is your parent's mom. She loves to spoil you!",
+      "fun_fact": "Grandmas give the best hugs in the whole world!"
+    },
+    {
+      "word": "grandpa",
+      "plural": "grandpas",
+      "meaning": "Your mother's father or father's father",
+      "example": "My grandpa teaches me how to fish and tells funny jokes that make me laugh.",
+      "kid_friendly_explanation": "Grandpa is your parent's dad. He loves to play with you.",
+      "fun_fact": "Some grandpas can do amazing magic tricks!"
     },
     {
       "word": "teacher",
       "plural": "teachers",
-      "meaning": "A person who helps you learn at school",
-      "example": "My teacher reads us stories and teaches us math.",
-      "kid_friendly_explanation": "A teacher helps you learn new things."
-    },
-    {
-      "word": "school",
-      "plural": "schools",
-      "meaning": "A place where children go to learn",
-      "example": "I go to school from Monday to Friday to learn and play.",
-      "kid_friendly_explanation": "School is where you learn reading, math, and science."
-    },
-    {
-      "word": "birthday",
-      "plural": "birthdays",
-      "meaning": "The day you were born, celebrated each year",
-      "example": "On my birthday, I eat cake and open presents.",
-      "kid_friendly_explanation": "Your birthday is the special day you were born."
-    },
-    {
-      "word": "present",
-      "plural": "presents",
-      "meaning": "A gift given to someone",
-      "example": "I got a new puzzle as a present for my birthday.",
-      "kid_friendly_explanation": "A present is something nice someone gives you."
-    },
-    {
-      "word": "cake",
-      "plural": "cakes",
-      "meaning": "A sweet baked food often eaten at parties",
-      "example": "The chocolate cake has sprinkles and a candle on top.",
-      "kid_friendly_explanation": "Cake is a sweet dessert with frosting."
-    },
-    {
-      "word": "water",
-      "plural": "none",
-      "meaning": "A clear liquid that people and animals drink",
-      "example": "I drink water when I am thirsty because it is healthy.",
-      "kid_friendly_explanation": "Water is what you drink from the faucet or a bottle."
-    },
-    {
-      "word": "sun",
-      "plural": "suns",
-      "meaning": "The big bright star that gives us light and warmth",
-      "example": "The sun feels warm on my face when I play outside.",
-      "kid_friendly_explanation": "The sun is the big yellow light in the sky."
-    }
-  ]
-}
+      "meaning": "A person whose job is to help children learn at school",
+      "example": "My teacher reads us exciting stories, teaches us math, and helps us when we are stuck.",
+      "kid_friendly_explanation": "A teacher helps you learn new things like reading,
