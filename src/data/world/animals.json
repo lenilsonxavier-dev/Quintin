@@ -4,121 +4,154 @@
       "word": "elephant",
       "plural": "elephants",
       "sound": "trumpet",
-      "meaning": "A very large gray animal with a long trunk and big ears",
-      "example": "The elephant uses its trunk to drink water and pick up food.",
-      "kid_friendly_explanation": "Elephants are the biggest animals on land."
+      "habitat": "savanna, forest",
+      "diet": "herbivore",
+      "meaning": "A very large gray mammal with a long trunk, large ears, and tusks",
+      "example": "The elephant uses its long trunk to drink water, pick up food, and give itself a bath.",
+      "kid_friendly_explanation": "Elephants are the biggest animals on land. They have a long nose called a trunk.",
+      "fun_fact": "An elephant's trunk has over 40,000 muscles!",
+      "sentence": "The elephant sprayed water with its trunk."
     },
     {
       "word": "lion",
       "plural": "lions",
       "sound": "roar",
-      "meaning": "A big wild cat with golden fur, called the king of the jungle",
-      "example": "The lion has a big mane and roars very loudly.",
-      "kid_friendly_explanation": "Lions are big cats that say 'roar'."
+      "habitat": "savanna, grassland",
+      "diet": "carnivore",
+      "meaning": "A large wild cat with golden fur, called the king of the jungle",
+      "example": "The lion has a big furry mane around its neck and roars very loudly at night.",
+      "kid_friendly_explanation": "Lions are big cats that say 'roar.' They live in groups called prides.",
+      "fun_fact": "A lion's roar can be heard from 5 miles away!",
+      "sentence": "The lion is resting in the shade."
+    },
+    {
+      "word": "tiger",
+      "plural": "tigers",
+      "sound": "growl",
+      "habitat": "jungle, forest",
+      "diet": "carnivore",
+      "meaning": "A large wild cat with orange fur and black stripes",
+      "example": "The tiger hides in the tall grass because its stripes help it blend in.",
+      "kid_friendly_explanation": "Tigers are big cats with orange and black stripes. They are excellent swimmers.",
+      "fun_fact": "No two tigers have the same stripe pattern, just like fingerprints!",
+      "sentence": "The tiger is swimming in the water."
     },
     {
       "word": "giraffe",
       "plural": "giraffes",
       "sound": "bleat",
-      "meaning": "A very tall animal with a long neck and spots",
-      "example": "The giraffe eats leaves from the tops of tall trees.",
-      "kid_friendly_explanation": "Giraffes have very long necks to reach high leaves."
-    },
-    {
-      "word": "monkey",
-      "plural": "monkeys",
-      "sound": "chatter",
-      "meaning": "A playful animal that climbs trees and swings on branches",
-      "example": "The monkey eats bananas and swings from vine to vine.",
-      "kid_friendly_explanation": "Monkeys are funny animals that love to climb."
+      "habitat": "savanna",
+      "diet": "herbivore",
+      "meaning": "A very tall African mammal with a long neck and spotted coat",
+      "example": "The giraffe eats leaves from the tops of tall trees that other animals cannot reach.",
+      "kid_friendly_explanation": "Giraffes have very long necks to reach high leaves on trees.",
+      "fun_fact": "A giraffe's neck can be up to 6 feet long, but it has the same number of bones as a human!",
+      "sentence": "The giraffe stretched its long neck to eat the leaves."
     },
     {
       "word": "zebra",
       "plural": "zebras",
       "sound": "neigh",
-      "meaning": "An animal with black and white stripes like a horse",
-      "example": "The zebra has black and white stripes all over its body.",
-      "kid_friendly_explanation": "Zebras look like horses with stripes."
+      "habitat": "savanna",
+      "diet": "herbivore",
+      "meaning": "An African animal with black and white stripes like a horse",
+      "example": "The zebra has black and white stripes all over its body, and no two are the same.",
+      "kid_friendly_explanation": "Zebras look like horses with black and white stripes.",
+      "fun_fact": "A group of zebras is called a 'dazzle'!",
+      "sentence": "The zebra ran across the grassland."
     },
     {
-      "word": "penguin",
-      "plural": "penguins",
-      "sound": "honk",
-      "meaning": "A black and white bird that swims but cannot fly",
-      "example": "Penguins slide on their bellies on the ice.",
-      "kid_friendly_explanation": "Penguins are birds that love cold places and swimming."
+      "word": "monkey",
+      "plural": "monkeys",
+      "sound": "chatter, screech",
+      "habitat": "jungle, forest",
+      "diet": "omnivore",
+      "meaning": "A playful primate with a long tail that climbs trees and swings on branches",
+      "example": "The monkey swings from vine to vine and eats bananas, nuts, and insects.",
+      "kid_friendly_explanation": "Monkeys are funny animals that love to climb trees and play.",
+      "fun_fact": "Some monkeys wash their food before eating it!",
+      "sentence": "The monkey is grooming its friend's fur."
     },
     {
-      "word": "dolphin",
-      "plural": "dolphins",
-      "sound": "click",
-      "meaning": "A smart gray sea animal that jumps and plays in the ocean",
-      "example": "The dolphin jumps out of the water and does flips.",
-      "kid_friendly_explanation": "Dolphins are smart, friendly animals in the ocean."
+      "word": "gorilla",
+      "plural": "gorillas",
+      "sound": "grunt, hoot",
+      "habitat": "forest",
+      "diet": "herbivore",
+      "meaning": "A large, powerful ape with black fur that lives in African forests",
+      "example": "The gorilla pounds its chest to show how strong it is and to scare other animals.",
+      "kid_friendly_explanation": "Gorillas are big, strong apes. They are gentle when not scared.",
+      "fun_fact": "Gorillas can laugh and feel sad, just like humans!",
+      "sentence": "The gorilla built a nest on the ground to sleep."
     },
     {
-      "word": "shark",
-      "plural": "sharks",
-      "sound": "none",
-      "meaning": "A big fish with sharp teeth that lives in the ocean",
-      "example": "The shark swims fast and has many rows of teeth.",
-      "kid_friendly_explanation": "Sharks are fish with sharp teeth."
-    },
-    {
-      "word": "butterfly",
-      "plural": "butterflies",
-      "sound": "none",
-      "meaning": "A flying insect with colorful wings",
-      "example": "The butterfly lands on the flower to drink sweet nectar.",
-      "kid_friendly_explanation": "Butterflies have beautiful colored wings."
-    },
-    {
-      "word": "bee",
-      "plural": "bees",
-      "sound": "buzz",
-      "meaning": "A small flying insect that makes honey",
-      "example": "The bee buzzes from flower to flower collecting pollen.",
-      "kid_friendly_explanation": "Bees fly and make yummy honey."
-    },
-    {
-      "word": "rabbit",
-      "plural": "rabbits",
-      "sound": "none",
-      "meaning": "A small furry animal with long ears that hops",
-      "example": "The rabbit hops through the grass and eats carrots.",
-      "kid_friendly_explanation": "Rabbits are soft, fluffy animals that hop."
-    },
-    {
-      "word": "frog",
-      "plural": "frogs",
-      "sound": "ribbit",
-      "meaning": "A small green animal that jumps and lives near water",
-      "example": "The frog jumps into the pond with a splash.",
-      "kid_friendly_explanation": "Frogs are green, jumpy animals that say 'ribbit'."
-    },
-    {
-      "word": "snake",
-      "plural": "snakes",
-      "sound": "hiss",
-      "meaning": "A long animal with no legs that slides on the ground",
-      "example": "The snake slithers through the grass looking for food.",
-      "kid_friendly_explanation": "Snakes are long, slithery animals with no legs."
-    },
-    {
-      "word": "owl",
-      "plural": "owls",
-      "sound": "hoot",
-      "meaning": "A bird that sleeps during the day and stays awake at night",
-      "example": "The owl sits in the tree and says 'who, who' at night.",
-      "kid_friendly_explanation": "Owls are night birds that say 'hoot'."
+      "word": "kangaroo",
+      "plural": "kangaroos",
+      "sound": "chortle",
+      "habitat": "grassland, Australia",
+      "diet": "herbivore",
+      "meaning": "An Australian animal that jumps on powerful hind legs and carries babies in a pouch",
+      "example": "The mother kangaroo carries her baby, called a joey, in her pouch.",
+      "kid_friendly_explanation": "Kangaroos hop on their big back legs. Baby kangaroos live in a pouch.",
+      "fun_fact": "Kangaroos can jump 30 feet in one leap!",
+      "sentence": "The kangaroo hopped across the field."
     },
     {
       "word": "panda",
       "plural": "pandas",
       "sound": "bleat",
-      "meaning": "A black and white bear that eats bamboo",
-      "example": "The panda sits on the ground and munches on bamboo sticks.",
-      "kid_friendly_explanation": "Pandas are cute bears that eat bamboo."
-    }
-  ]
-}
+      "habitat": "bamboo forest, China",
+      "diet": "herbivore",
+      "meaning": "A black and white bear that eats almost nothing but bamboo",
+      "example": "The panda sits on the ground and munches on bamboo sticks for 12 hours a day.",
+      "kid_friendly_explanation": "Pandas are cute black and white bears that love to eat bamboo.",
+      "fun_fact": "Pandas spend 14 hours a day eating! That's a lot of bamboo!",
+      "sentence": "The panda rolled down the hill."
+    },
+    {
+      "word": "polar bear",
+      "plural": "polar bears",
+      "sound": "growl, roar",
+      "habitat": "Arctic",
+      "diet": "carnivore",
+      "meaning": "A large white bear that lives in the icy Arctic and swims in cold water",
+      "example": "The polar bear's white fur helps it hide in the snow while hunting for seals.",
+      "kid_friendly_explanation": "Polar bears are big white bears that live where it's very cold and snowy.",
+      "fun_fact": "A polar bear's skin is actually black, but its fur looks white!",
+      "sentence": "The polar bear swam in the freezing water."
+    },
+    {
+      "word": "penguin",
+      "plural": "penguins",
+      "sound": "honk, bray",
+      "habitat": "Antarctica",
+      "diet": "carnivore",
+      "meaning": "A black and white bird that swims but cannot fly, living in cold places",
+      "example": "Penguins slide on their bellies on the ice to move faster than walking.",
+      "kid_friendly_explanation": "Penguins are birds that love cold places and are expert swimmers.",
+      "fun_fact": "Penguins can jump 6 feet out of the water onto ice!",
+      "sentence": "The penguin waddled across the ice."
+    },
+    {
+      "word": "dolphin",
+      "plural": "dolphins",
+      "sound": "click, whistle",
+      "habitat": "ocean",
+      "diet": "carnivore",
+      "meaning": "A smart gray sea mammal that jumps, plays, and uses echolocation to find food",
+      "example": "The dolphin jumps out of the water and does flips in the air for fun.",
+      "kid_friendly_explanation": "Dolphins are smart, friendly animals in the ocean that love to play.",
+      "fun_fact": "Dolphins give each other names and call each other!",
+      "sentence": "The dolphin swam alongside the boat."
+    },
+    {
+      "word": "whale",
+      "plural": "whales",
+      "sound": "song",
+      "habitat": "ocean",
+      "diet": "carnivore or filter feeder",
+      "meaning": "A very large marine mammal that lives in the ocean and breathes air",
+      "example": "The blue whale is the biggest animal on Earth, even bigger than dinosaurs!",
+      "kid_friendly_explanation": "Whales are huge animals that live in the ocean. They sing to each other.",
+      "fun_fact": "A blue whale's heart is as big as a small car!",
+      "
