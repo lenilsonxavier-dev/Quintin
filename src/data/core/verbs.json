@@ -1,0 +1,144 @@
+{
+  "verbs": [
+    {
+      "word": "run",
+      "past_tense": "ran",
+      "meaning": "To move your legs very fast",
+      "example": "I run to the playground every day after school.",
+      "kid_friendly_explanation": "When you go fast with your feet, you run."
+    },
+    {
+      "word": "jump",
+      "past_tense": "jumped",
+      "meaning": "To push your body off the ground",
+      "example": "Can you jump over this puddle? I know you can!",
+      "kid_friendly_explanation": "Jump is when your feet leave the ground."
+    },
+    {
+      "word": "eat",
+      "past_tense": "ate",
+      "meaning": "To put food in your mouth and swallow",
+      "example": "I eat breakfast at 7 o'clock every morning.",
+      "kid_friendly_explanation": "When you put food in your mouth, you eat."
+    },
+    {
+      "word": "drink",
+      "past_tense": "drank",
+      "meaning": "To take liquid into your mouth and swallow",
+      "example": "You should drink water when you are thirsty.",
+      "kid_friendly_explanation": "Drink is when you take a sip of water, milk, or juice."
+    },
+    {
+      "word": "sleep",
+      "past_tense": "slept",
+      "meaning": "To rest with your eyes closed",
+      "example": "I sleep for 10 hours every night because I need energy.",
+      "kid_friendly_explanation": "Sleep is when your body rests at night."
+    },
+    {
+      "word": "wake up",
+      "past_tense": "woke up",
+      "meaning": "To stop sleeping",
+      "example": "I wake up when the sun comes through my window.",
+      "kid_friendly_explanation": "Wake up is when you open your eyes in the morning."
+    },
+    {
+      "word": "play",
+      "past_tense": "played",
+      "meaning": "To have fun doing an activity",
+      "example": "Let's play hide and seek! I'll count to twenty.",
+      "kid_friendly_explanation": "Play is when you have fun with toys or games."
+    },
+    {
+      "word": "read",
+      "past_tense": "read",
+      "meaning": "To look at and understand written words",
+      "example": "I read a story about a dragon every night before bed.",
+      "kid_friendly_explanation": "Read is when you look at words in a book and say them."
+    },
+    {
+      "word": "write",
+      "past_tense": "wrote",
+      "meaning": "To put words on paper using a pencil or pen",
+      "example": "I write letters to my grandma because she lives far away.",
+      "kid_friendly_explanation": "Write is when you use a pencil to make words."
+    },
+    {
+      "word": "draw",
+      "past_tense": "drew",
+      "meaning": "To make a picture using pencils, crayons, or markers",
+      "example": "I draw rainbow unicorns because they are beautiful.",
+      "kid_friendly_explanation": "Draw is when you make pictures with crayons."
+    },
+    {
+      "word": "sing",
+      "past_tense": "sang",
+      "meaning": "To make music with your voice",
+      "example": "I sing my favorite song in the shower every morning.",
+      "kid_friendly_explanation": "Sing is when you use your voice to make music."
+    },
+    {
+      "word": "dance",
+      "past_tense": "danced",
+      "meaning": "To move your body to music",
+      "example": "We dance at parties when happy music plays.",
+      "kid_friendly_explanation": "Dance is when you move your body to music."
+    },
+    {
+      "word": "laugh",
+      "past_tense": "laughed",
+      "meaning": "To make a happy sound with your mouth",
+      "example": "I laugh when my dad tells silly jokes.",
+      "kid_friendly_explanation": "Laugh is the sound you make when something is funny."
+    },
+    {
+      "word": "cry",
+      "past_tense": "cried",
+      "meaning": "To have tears come from your eyes because you are sad",
+      "example": "I cry when I miss my friend who moved away.",
+      "kid_friendly_explanation": "Cry is when tears fall from your eyes."
+    },
+    {
+      "word": "smile",
+      "past_tense": "smiled",
+      "meaning": "To turn up the corners of your mouth when happy",
+      "example": "I smile when I see my puppy running to me.",
+      "kid_friendly_explanation": "Smile is when your mouth makes a happy shape."
+    },
+    {
+      "word": "help",
+      "past_tense": "helped",
+      "meaning": "To do something nice for someone",
+      "example": "I help my little brother tie his shoes.",
+      "kid_friendly_explanation": "Help is when you do something nice for another person."
+    },
+    {
+      "word": "clean",
+      "past_tense": "cleaned",
+      "meaning": "To make something not dirty",
+      "example": "I clean my room every Saturday so it looks nice.",
+      "kid_friendly_explanation": "Clean is when you wash or pick up things to make them neat."
+    },
+    {
+      "word": "build",
+      "past_tense": "built",
+      "meaning": "To put things together to make something",
+      "example": "I build tall towers with my colorful blocks.",
+      "kid_friendly_explanation": "Build is when you put pieces together to make something new."
+    },
+    {
+      "word": "throw",
+      "past_tense": "threw",
+      "meaning": "To send something through the air using your hand",
+      "example": "I throw the ball to my friend during catch.",
+      "kid_friendly_explanation": "Throw is when you send a ball through the air."
+    },
+    {
+      "word": "catch",
+      "past_tense": "caught",
+      "meaning": "To grab something that is moving through the air",
+      "example": "I catch the ball with both hands so I don't drop it.",
+      "kid_friendly_explanation": "Catch is when you grab something before it hits the ground."
+    }
+  ]
+}
