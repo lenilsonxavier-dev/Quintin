@@ -1,0 +1,102 @@
+{
+  "greetings": [
+    {
+      "word": "Hello",
+      "pronunciation": "heh-LOH",
+      "meaning": "A friendly word to say when you see someone",
+      "example": "Hello, my name is Emma. What is your name?",
+      "kid_friendly_explanation": "Say 'hello' when you want to be friendly to someone."
+    },
+    {
+      "word": "Good morning",
+      "pronunciation": "gud MOR-ning",
+      "meaning": "A greeting used in the morning",
+      "example": "Good morning, Mom! Did you sleep well?",
+      "kid_friendly_explanation": "Say 'good morning' when you wake up or see someone before lunch."
+    },
+    {
+      "word": "Good afternoon",
+      "pronunciation": "gud af-ter-NOON",
+      "meaning": "A greeting used from noon until evening",
+      "example": "Good afternoon, teacher! Are we having art class today?",
+      "kid_friendly_explanation": "Say 'good afternoon' after 12 o'clock until dinner time."
+    },
+    {
+      "word": "Good evening",
+      "pronunciation": "gud EEV-ning",
+      "meaning": "A greeting used in the evening",
+      "example": "Good evening, Dad! What's for dinner?",
+      "kid_friendly_explanation": "Say 'good evening' when the sun starts to go down."
+    },
+    {
+      "word": "Hi",
+      "pronunciation": "hye",
+      "meaning": "A casual and friendly greeting",
+      "example": "Hi! Do you want to play with me?",
+      "kid_friendly_explanation": "'Hi' is a quick and happy way to say hello to a friend."
+    },
+    {
+      "word": "Hey",
+      "pronunciation": "hay",
+      "meaning": "An informal greeting to get attention",
+      "example": "Hey! Wait for me! I want to come too!",
+      "kid_friendly_explanation": "Say 'hey' when you want a friend to look at you."
+    },
+    {
+      "word": "How are you?",
+      "pronunciation": "how ar yoo",
+      "meaning": "A question asking about someone's well-being",
+      "example": "Hi Lily! How are you today? I hope you feel better.",
+      "kid_friendly_explanation": "Ask 'how are you' to show you care about your friend."
+    },
+    {
+      "word": "I'm fine, thank you",
+      "pronunciation": "eyem fyne THANK yoo",
+      "meaning": "A polite response to 'How are you?'",
+      "example": "How are you? I'm fine, thank you. And you?",
+      "kid_friendly_explanation": "Say this when someone asks how you feel and you feel good."
+    },
+    {
+      "word": "Nice to meet you",
+      "pronunciation": "neyss to meet yoo",
+      "meaning": "Said when meeting someone for the first time",
+      "example": "Hello, I'm Tom. Nice to meet you! Do you want to be friends?",
+      "kid_friendly_explanation": "Say 'nice to meet you' when you meet a new person."
+    },
+    {
+      "word": "See you later",
+      "pronunciation": "see yoo LAY-ter",
+      "meaning": "A friendly way to say goodbye",
+      "example": "I have to go home now. See you later, Alex!",
+      "kid_friendly_explanation": "Say 'see you later' when you will see your friend again soon."
+    },
+    {
+      "word": "Goodbye",
+      "pronunciation": "gud-BYE",
+      "meaning": "A word used when leaving someone",
+      "example": "Goodbye, Grandma! I love you! I will visit again next week.",
+      "kid_friendly_explanation": "Say 'goodbye' when you are leaving a place or person."
+    },
+    {
+      "word": "Bye bye",
+      "pronunciation": "bye bye",
+      "meaning": "A casual way to say goodbye",
+      "example": "Bye bye, puppy! Be a good dog!",
+      "kid_friendly_explanation": "'Bye bye' is a fun way to say goodbye to friends and family."
+    },
+    {
+      "word": "Take care",
+      "pronunciation": "tayk kair",
+      "meaning": "A kind goodbye wishing someone safety",
+      "example": "Have fun at the park! Take care!",
+      "kid_friendly_explanation": "Say 'take care' when you want your friend to be safe."
+    },
+    {
+      "word": "Welcome",
+      "pronunciation": "WEL-kum",
+      "meaning": "A greeting for someone who has arrived",
+      "example": "Welcome to my birthday party! I have cake and games!",
+      "kid_friendly_explanation": "Say 'welcome' when someone comes to your house or party."
+    }
+  ]
+}
