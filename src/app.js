@@ -628,11 +628,16 @@ function mostrarPensando() {
 
   div.innerHTML = `
 
-<img src="img/quintin.png">
+<span style="
+  font-size: 32px;
+">
+🦉
+</span>
 
 <span>
 🧠 Quinti is thinking...
 </span>
+
 `;
 
   chat.appendChild(div);
