@@ -1,0 +1,109 @@
+{
+  "classroom": [
+    {
+      "word": "desk",
+      "plural": "desks",
+      "meaning": "A table where a student sits to work",
+      "example": "I keep my pencils and books inside my wooden desk.",
+      "kid_friendly_explanation": "A desk is where you sit and do your schoolwork."
+    },
+    {
+      "word": "chair",
+      "plural": "chairs",
+      "meaning": "A piece of furniture for sitting",
+      "example": "My blue chair has four legs and a soft seat.",
+      "kid_friendly_explanation": "A chair is where you sit."
+    },
+    {
+      "word": "whiteboard",
+      "plural": "whiteboards",
+      "meaning": "A shiny white board you write on with markers",
+      "example": "The teacher writes math problems on the big whiteboard.",
+      "kid_friendly_explanation": "A whiteboard is where the teacher writes."
+    },
+    {
+      "word": "chalkboard",
+      "plural": "chalkboards",
+      "meaning": "A dark green or black board you write on with chalk",
+      "example": "The teacher uses white chalk on the chalkboard.",
+      "kid_friendly_explanation": "A chalkboard is a dark board you write on with chalk."
+    },
+    {
+      "word": "bookshelf",
+      "plural": "bookshelves",
+      "meaning": "A piece of furniture that holds books",
+      "example": "The bookshelf has many stories about animals and adventures.",
+      "kid_friendly_explanation": "A bookshelf holds all the classroom books."
+    },
+    {
+      "word": "carpet",
+      "plural": "carpets",
+      "meaning": "A soft floor covering",
+      "example": "We sit on the colorful carpet during story time.",
+      "kid_friendly_explanation": "A carpet is a soft rug on the floor."
+    },
+    {
+      "word": "window",
+      "plural": "windows",
+      "meaning": "An opening in the wall that lets in light and air",
+      "example": "I look out the window and see birds in the tree.",
+      "kid_friendly_explanation": "A window is glass you can see through."
+    },
+    {
+      "word": "door",
+      "plural": "doors",
+      "meaning": "A movable barrier for entering or leaving a room",
+      "example": "We line up by the door when it's time for recess.",
+      "kid_friendly_explanation": "A door is how you go in and out of a room."
+    },
+    {
+      "word": "clock",
+      "plural": "clocks",
+      "meaning": "A device that tells what time it is",
+      "example": "The clock says 12 o'clock, so it's time for lunch.",
+      "kid_friendly_explanation": "A clock tells you the time."
+    },
+    {
+      "word": "calendar",
+      "plural": "calendars",
+      "meaning": "A chart showing the days, weeks, and months",
+      "example": "We look at the calendar to see which day is Friday.",
+      "kid_friendly_explanation": "A calendar shows the days of the week."
+    },
+    {
+      "word": "pencil case",
+      "plural": "pencil cases",
+      "meaning": "A small bag or box that holds writing tools",
+      "example": "My pencil case has a zipper and holds ten pencils.",
+      "kid_friendly_explanation": "A pencil case keeps your pencils together."
+    },
+    {
+      "word": "trash can",
+      "plural": "trash cans",
+      "meaning": "A container for garbage and things you throw away",
+      "example": "I throw my apple core in the trash can after snack.",
+      "kid_friendly_explanation": "A trash can holds things you throw away."
+    },
+    {
+      "word": "computer",
+      "plural": "computers",
+      "meaning": "An electronic machine that can do many tasks",
+      "example": "We use the computer to play learning games.",
+      "kid_friendly_explanation": "A computer is a machine that helps you learn."
+    },
+    {
+      "word": "projector",
+      "plural": "projectors",
+      "meaning": "A machine that shows pictures on a big screen",
+      "example": "The teacher shows videos on the projector.",
+      "kid_friendly_explanation": "A projector makes pictures big on a screen."
+    },
+    {
+      "word": "bulletin board",
+      "plural": "bulletin boards",
+      "meaning": "A board where you pin papers and artwork",
+      "example": "My drawing of a cat is on the bulletin board for everyone to see.",
+      "kid_friendly_explanation": "A bulletin board shows off your art."
+    }
+  ]
+}
