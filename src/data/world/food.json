@@ -3,107 +3,274 @@
     {
       "word": "apple",
       "plural": "apples",
-      "meaning": "A round fruit that is red, green, or yellow",
-      "example": "I eat a red apple for a snack because it is sweet and crunchy.",
-      "kid_friendly_explanation": "An apple is a fruit that grows on trees."
+      "color": "red, green, or yellow",
+      "taste": "sweet or sour",
+      "meaning": "A round fruit with thin skin, white flesh, and a core with seeds",
+      "example": "I eat a red apple for a snack because it is sweet, crunchy, and healthy.",
+      "kid_friendly_explanation": "An apple is a fruit that grows on trees. An apple a day keeps the doctor away!",
+      "ways_to_eat": ["raw", "apple sauce", "apple juice", "apple pie"],
+      "sentence": "I bit into the juicy apple."
     },
     {
       "word": "banana",
       "plural": "bananas",
-      "meaning": "A long curved yellow fruit",
-      "example": "I peel the banana before I eat the soft inside.",
-      "kid_friendly_explanation": "Bananas are yellow fruits that monkeys love."
+      "color": "yellow when ripe",
+      "taste": "sweet",
+      "meaning": "A long curved yellow fruit with soft, creamy flesh inside a peel",
+      "example": "I peel the banana carefully before I eat the soft, sweet inside.",
+      "kid_friendly_explanation": "Bananas are yellow fruits that monkeys love. They give you energy!",
+      "ways_to_eat": ["raw", "banana bread", "smoothie", "frozen"],
+      "sentence": "The monkey peeled the banana and took a bite."
     },
     {
       "word": "orange",
       "plural": "oranges",
-      "meaning": "A round citrus fruit with orange skin",
-      "example": "The orange is juicy and tastes sweet and sour.",
-      "kid_friendly_explanation": "An orange is a fruit that has vitamin C."
+      "color": "orange",
+      "taste": "sweet and tangy",
+      "meaning": "A round citrus fruit with orange skin and juicy segments inside",
+      "example": "The orange is juicy and tastes sweet and sour. It has lots of vitamin C.",
+      "kid_friendly_explanation": "An orange is a fruit that has vitamin C to keep you from getting sick.",
+      "ways_to_eat": ["raw", "orange juice", "fruit salad", "marmalade"],
+      "sentence": "She squeezed the orange to make fresh juice."
     },
     {
       "word": "strawberry",
       "plural": "strawberries",
-      "meaning": "A small red fruit with tiny seeds on the outside",
-      "example": "I put strawberries on my cereal for breakfast.",
-      "kid_friendly_explanation": "Strawberries are sweet, red berries."
+      "color": "red",
+      "taste": "sweet",
+      "meaning": "A small red fruit with tiny seeds on the outside and a green leafy top",
+      "example": "I put fresh strawberries on my cereal and pancakes for breakfast.",
+      "kid_friendly_explanation": "Strawberries are sweet, red berries that are delicious with whipped cream.",
+      "ways_to_eat": ["raw", "jam", "strawberry shortcake", "smoothie"],
+      "sentence": "We picked strawberries at the farm."
+    },
+    {
+      "word": "grapes",
+      "plural": "grapes",
+      "color": "green, red, or purple",
+      "taste": "sweet",
+      "meaning": "Small round fruits that grow in bunches on vines",
+      "example": "I eat green grapes for a snack because they are sweet and pop in my mouth.",
+      "kid_friendly_explanation": "Grapes are small, sweet fruits that grow in bunches. You can eat them fresh or dried as raisins.",
+      "ways_to_eat": ["raw", "frozen", "raisins", "grape juice", "jelly"],
+      "sentence": "Mom cut the grapes in half so they were safe to eat."
+    },
+    {
+      "word": "watermelon",
+      "plural": "watermelons",
+      "color": "green outside, red inside",
+      "taste": "sweet and refreshing",
+      "meaning": "A large, round fruit with green skin, red juicy flesh, and black seeds",
+      "example": "On hot summer days, I eat cold watermelon to cool down and feel refreshed.",
+      "kid_friendly_explanation": "Watermelon is a big, juicy fruit that is perfect for hot days.",
+      "ways_to_eat": ["fresh", "smoothie", "fruit salad", "juice"],
+      "sentence": "Spit the watermelon seeds as far as you can!"
     },
     {
       "word": "pizza",
       "plural": "pizzas",
-      "meaning": "A round baked dish with cheese, sauce, and toppings",
-      "example": "My favorite pizza has cheese, pepperoni, and mushrooms.",
-      "kid_friendly_explanation": "Pizza is a yummy circle of bread with cheese on top."
+      "color": "golden brown, red, white",
+      "taste": "savory, cheesy",
+      "meaning": "A round baked dish with dough, tomato sauce, cheese, and various toppings",
+      "example": "My favorite pizza has cheese, pepperoni, mushrooms, and olives on top.",
+      "kid_friendly_explanation": "Pizza is a yummy circle of bread with tomato sauce and melted cheese on top.",
+      "toppings": ["pepperoni", "mushrooms", "olives", "bell peppers", "onions", "sausage"],
+      "sentence": "Let's order a large pepperoni pizza for dinner."
     },
     {
       "word": "hamburger",
       "plural": "hamburgers",
-      "meaning": "A sandwich with a cooked patty inside a bun",
-      "example": "My hamburger has lettuce, tomato, and ketchup on it.",
-      "kid_friendly_explanation": "A hamburger is a sandwich with meat in the middle."
+      "color": "brown",
+      "taste": "savory",
+      "meaning": "A sandwich with a cooked ground beef patty inside a sliced bun",
+      "example": "My hamburger has lettuce, tomato, onion, pickles, and ketchup on it.",
+      "kid_friendly_explanation": "A hamburger is a sandwich with a meat patty in the middle of a bun.",
+      "toppings": ["lettuce", "tomato", "onion", "pickles", "cheese", "ketchup", "mustard", "mayonnaise"],
+      "sentence": "Would you like a cheeseburger or a hamburger?"
+    },
+    {
+      "word": "hot dog",
+      "plural": "hot dogs",
+      "color": "brownish-red",
+      "taste": "savory",
+      "meaning": "A cooked sausage served in a long sliced bun",
+      "example": "I eat a hot dog with mustard and relish at baseball games and barbecues.",
+      "kid_friendly_explanation": "A hot dog is a sausage inside a bun. You can put ketchup or mustard on it.",
+      "toppings": ["ketchup", "mustard", "relish", "onions", "sauerkraut"],
+      "sentence": "Put the hot dog in the bun and add your favorite toppings."
     },
     {
       "word": "sandwich",
       "plural": "sandwiches",
-      "meaning": "Two slices of bread with food in between",
-      "example": "I eat a peanut butter and jelly sandwich for lunch.",
-      "kid_friendly_explanation": "A sandwich is bread with yummy things inside."
+      "color": "varies",
+      "taste": "savory or sweet",
+      "meaning": "Two slices of bread with fillings like meat, cheese, or peanut butter in between",
+      "example": "I eat a peanut butter and jelly sandwich for lunch almost every day.",
+      "kid_friendly_explanation": "A sandwich is bread with yummy things inside like cheese, meat, or peanut butter.",
+      "fillings": ["peanut butter and jelly", "ham and cheese", "turkey", "tuna salad", "egg salad"],
+      "sentence": "Cut the sandwich into triangles, please."
     },
     {
       "word": "spaghetti",
       "plural": "spaghetti",
-      "meaning": "Long thin noodles with sauce",
-      "example": "I twirl the spaghetti around my fork and eat it.",
-      "kid_friendly_explanation": "Spaghetti is long noodles with sauce."
+      "color": "yellow",
+      "taste": "savory",
+      "meaning": "Long, thin pasta noodles served with sauce, often tomato or meat sauce",
+      "example": "I twirl the spaghetti around my fork and eat it with meatballs and parmesan cheese.",
+      "kid_friendly_explanation": "Spaghetti is long noodles with sauce. You twirl it on your fork.",
+      "sauces": ["marinara", "meat sauce", "alfredo", "pesto", "bolognese"],
+      "sentence": "Don't slurp your spaghetti!"
+    },
+    {
+      "word": "macaroni and cheese",
+      "plural": "none",
+      "color": "yellow",
+      "taste": "cheesy, creamy",
+      "meaning": "A dish of macaroni pasta mixed with a creamy cheese sauce",
+      "example": "Macaroni and cheese is my favorite comfort food, especially when it's baked with a crunchy top.",
+      "kid_friendly_explanation": "Mac and cheese is noodles with yummy, gooey cheese sauce.",
+      "sentence": "The macaroni and cheese was warm and cheesy."
     },
     {
       "word": "soup",
       "plural": "soups",
-      "meaning": "A liquid food made with vegetables, meat, or noodles",
-      "example": "The chicken soup is warm and makes me feel better.",
-      "kid_friendly_explanation": "Soup is food in a bowl that you eat with a spoon."
+      "color": "varies",
+      "taste": "savory",
+      "meaning": "A liquid food made by boiling vegetables, meat, or fish in water or broth",
+      "example": "The chicken soup is warm and makes me feel better when I have a cold.",
+      "kid_friendly_explanation": "Soup is food in a bowl that you eat with a spoon. It can have noodles or vegetables.",
+      "types": ["chicken noodle", "tomato", "vegetable", "bean", "minestrone"],
+      "sentence": "Blow on the hot soup before you eat it."
     },
     {
       "word": "salad",
       "plural": "salads",
-      "meaning": "A mix of vegetables, sometimes with fruit or cheese",
-      "example": "My salad has lettuce, cucumber, tomatoes, and dressing.",
-      "kid_friendly_explanation": "Salad is a bowl of vegetables."
+      "color": "green",
+      "taste": "fresh, savory",
+      "meaning": "A mix of raw vegetables, sometimes with fruit, cheese, or meat, served with dressing",
+      "example": "My salad has lettuce, cucumber, tomatoes, carrots, and ranch dressing.",
+      "kid_friendly_explanation": "Salad is a bowl of vegetables. You can add dressing to make it taste good.",
+      "ingredients": ["lettuce", "spinach", "tomatoes", "cucumbers", "carrots", "croutons", "dressing"],
+      "sentence": "Toss the salad with the dressing."
     },
     {
       "word": "ice cream",
       "plural": "ice creams",
-      "meaning": "A frozen sweet dessert that comes in many flavors",
-      "example": "I eat chocolate ice cream in a cone on hot days.",
-      "kid_friendly_explanation": "Ice cream is a cold, sweet treat."
+      "color": "varies by flavor",
+      "taste": "sweet, cold",
+      "meaning": "A frozen sweet dessert made from milk, cream, sugar, and flavorings",
+      "example": "I eat chocolate ice cream in a waffle cone on hot summer days.",
+      "kid_friendly_explanation": "Ice cream is a cold, sweet treat. It comes in many flavors like chocolate and vanilla.",
+      "flavors": ["chocolate", "vanilla", "strawberry", "mint chocolate chip", "cookies and cream"],
+      "sentence": "My ice cream is melting!"
     },
     {
       "word": "cookie",
       "plural": "cookies",
-      "meaning": "A small sweet baked treat",
-      "example": "I dip my chocolate chip cookie in a glass of milk.",
-      "kid_friendly_explanation": "Cookies are sweet, crunchy snacks."
+      "color": "golden brown",
+      "taste": "sweet",
+      "meaning": "A small, sweet baked treat that can be soft or crunchy",
+      "example": "I dip my warm chocolate chip cookie in a cold glass of milk.",
+      "kid_friendly_explanation": "Cookies are sweet, yummy snacks. Chocolate chip cookies are the most popular.",
+      "types": ["chocolate chip", "sugar", "oatmeal raisin", "peanut butter", "snickerdoodle"],
+      "sentence": "The cookie was soft and chewy."
+    },
+    {
+      "word": "cake",
+      "plural": "cakes",
+      "color": "varies",
+      "taste": "sweet",
+      "meaning": "A sweet baked dessert often made with flour, sugar, eggs, and frosting",
+      "example": "The chocolate cake has sprinkles, a cherry on top, and a single candle for my birthday.",
+      "kid_friendly_explanation": "Cake is a sweet dessert with frosting. People eat it at birthday parties.",
+      "types": ["chocolate", "vanilla", "carrot", "red velvet", "cheesecake"],
+      "sentence": "Make a wish and blow out the candles on the cake."
     },
     {
       "word": "cereal",
       "plural": "cereals",
-      "meaning": "Dried grains eaten with milk for breakfast",
-      "example": "I eat crunchy cereal with milk and a banana.",
-      "kid_friendly_explanation": "Cereal is breakfast food in a bowl with milk."
+      "color": "varies",
+      "taste": "sweet or plain",
+      "meaning": "Dried grains or processed food eaten with milk, usually for breakfast",
+      "example": "I eat crunchy cereal with cold milk and sliced bananas on top.",
+      "kid_friendly_explanation": "Cereal is breakfast food in a bowl with milk. Some cereals are sweet, some are healthy.",
+      "sentence": "Pour the cereal into the bowl first, then add the milk."
+    },
+    {
+      "word": "pancake",
+      "plural": "pancakes",
+      "color": "golden brown",
+      "taste": "sweet",
+      "meaning": "A flat, round cake made from batter and cooked on a hot surface",
+      "example": "My dad makes fluffy pancakes with maple syrup and butter on Sunday mornings.",
+      "kid_friendly_explanation": "Pancakes are flat, round breakfast cakes. You put syrup on top!",
+      "toppings": ["maple syrup", "butter", "berries", "chocolate chips", "whipped cream"],
+      "sentence": "Flip the pancake when you see bubbles."
     },
     {
       "word": "eggs",
       "plural": "eggs",
-      "meaning": "Food from chickens that can be cooked in many ways",
-      "example": "I like my eggs scrambled with cheese for breakfast.",
-      "kid_friendly_explanation": "Eggs come from chickens and are good for breakfast."
+      "color": "yellow and white",
+      "taste": "savory",
+      "meaning": "Food from chickens that can be cooked in many ways like scrambled, fried, or boiled",
+      "example": "I like my eggs scrambled with cheese for breakfast on school days.",
+      "kid_friendly_explanation": "Eggs come from chickens. They are good for breakfast and give you protein.",
+      "ways_to_cook": ["scrambled", "fried", "boiled", "poached", "omelet"],
+      "sentence": "Crack the egg carefully so the shell doesn't fall in."
     },
     {
       "word": "milk",
       "plural": "none",
-      "meaning": "A white liquid from cows that is good for bones",
-      "example": "I drink a glass of cold milk with my cookies.",
-      "kid_friendly_explanation": "Milk is good for your bones and teeth."
+      "color": "white",
+      "taste": "creamy, slightly sweet",
+      "meaning": "A white liquid from cows that is rich in calcium for strong bones",
+      "example": "I drink a glass of cold milk with my cookies for a perfect snack.",
+      "kid_friendly_explanation": "Milk is good for your bones and teeth because it has calcium.",
+      "types": ["whole milk", "2% milk", "1% milk", "skim milk", "chocolate milk"],
+      "sentence": "Drink your milk so you grow strong bones."
+    },
+    {
+      "word": "juice",
+      "plural": "juices",
+      "color": "varies",
+      "taste": "sweet",
+      "meaning": "The liquid extracted from fruits or vegetables",
+      "example": "I drink a small cup of orange juice with my breakfast in the morning.",
+      "kid_friendly_explanation": "Juice is the liquid from fruits like oranges, apples, or grapes.",
+      "types": ["orange juice", "apple juice", "grape juice", "cranberry juice"],
+      "sentence": "Would you like apple juice or orange juice?"
+    },
+    {
+      "word": "bread",
+      "plural": "breads",
+      "color": "golden brown",
+      "taste": "plain or savory",
+      "meaning": "A food made from flour, water, and yeast, baked in an oven",
+      "example": "I toast my bread and put butter and strawberry jam on it.",
+      "kid_friendly_explanation": "Bread is a soft food made from flour. You use it to make sandwiches or toast.",
+      "types": ["white bread", "wheat bread", "sourdough", "rye", "baguette"],
+      "sentence": "The bread came out of the oven warm and soft."
+    },
+    {
+      "word": "cheese",
+      "plural": "cheeses",
+      "color": "yellow, white, orange",
+      "taste": "savory, salty",
+      "meaning": "A dairy food made from milk that can be soft or hard",
+      "example": "I put a slice of yellow cheese on my hamburger and watch it melt.",
+      "kid_friendly_explanation": "Cheese is made from milk. It comes in many types like cheddar, mozzarella, and Swiss.",
+      "types": ["cheddar", "mozzarella", "Swiss", "American", "provolone", "parmesan"],
+      "sentence": "The pizza has lots of melted cheese on top."
+    },
+    {
+      "word": "yogurt",
+      "plural": "yogurts",
+      "color": "white",
+      "taste": "tangy, sweet",
+      "meaning": "A thick, creamy dairy food made from fermented milk",
+      "example": "I eat strawberry yogurt with granola for a healthy snack.",
+      "kid_friendly_explanation": "Yogurt is a thick, creamy snack that is good for your tummy.",
+      "sentence": "Peel back the lid and lick the yogurt off it."
     }
   ]
 }
