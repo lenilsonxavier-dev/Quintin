@@ -1,0 +1,39 @@
+{
+  "animals": [
+    {
+      "word": "elephant",
+      "plural": "elephants",
+      "sound": "trumpet",
+      "meaning": "A very large gray animal with a long trunk and big ears",
+      "example": "The elephant uses its trunk to drink water and pick up food.",
+      "kid_friendly_explanation": "Elephants are the biggest animals on land."
+    },
+    {
+      "word": "lion",
+      "plural": "lions",
+      "sound": "roar",
+      "meaning": "A big wild cat with golden fur, called the king of the jungle",
+      "example": "The lion has a big mane and roars very loudly.",
+      "kid_friendly_explanation": "Lions are big cats that say 'roar'."
+    },
+    {
+      "word": "giraffe",
+      "plural": "giraffes",
+      "sound": "bleat",
+      "meaning": "A very tall animal with a long neck and spots",
+      "example": "The giraffe eats leaves from the tops of tall trees.",
+      "kid_friendly_explanation": "Giraffes have very long necks to reach high leaves."
+    },
+    {
+      "word": "monkey",
+      "plural": "monkeys",
+      "sound": "chatter",
+      "meaning": "A playful animal that climbs trees and swings on branches",
+      "example": "The monkey eats bananas and swings from vine to vine.",
+      "kid_friendly_explanation": "Monkeys are funny animals that love to climb."
+    },
+    {
+      "word": "zebra",
+      "plural": "zebras",
+      "sound": "neigh",
+      "meaning":
