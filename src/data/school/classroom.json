@@ -3,107 +3,242 @@
     {
       "word": "desk",
       "plural": "desks",
-      "meaning": "A table where a student sits to work",
-      "example": "I keep my pencils and books inside my wooden desk.",
-      "kid_friendly_explanation": "A desk is where you sit and do your schoolwork."
+      "meaning": "A piece of furniture with a flat surface where a student sits to work",
+      "example": "I keep my pencils, crayons, and notebooks inside my wooden desk.",
+      "kid_friendly_explanation": "A desk is like a table where you sit and do your schoolwork.",
+      "parts": ["top", "drawer", "leg", "cubby"],
+      "sentence": "Please put your books on top of your desk."
     },
     {
       "word": "chair",
       "plural": "chairs",
-      "meaning": "A piece of furniture for sitting",
-      "example": "My blue chair has four legs and a soft seat.",
-      "kid_friendly_explanation": "A chair is where you sit."
+      "meaning": "A piece of furniture with a seat, back, and legs for one person to sit on",
+      "example": "My blue chair has four legs and a comfortable seat for sitting all day.",
+      "kid_friendly_explanation": "A chair is where you sit at your desk or at a table.",
+      "parts": ["seat", "back", "leg", "armrest"],
+      "sentence": "Push your chair under your desk when you stand up."
+    },
+    {
+      "word": "table",
+      "plural": "tables",
+      "meaning": "A piece of furniture with a flat top and legs, used for activities",
+      "example": "Four students share one big table for art projects and group work.",
+      "kid_friendly_explanation": "A table is a flat surface where you can work, eat, or play.",
+      "sentence": "Gather around the table for our science experiment."
     },
     {
       "word": "whiteboard",
       "plural": "whiteboards",
-      "meaning": "A shiny white board you write on with markers",
-      "example": "The teacher writes math problems on the big whiteboard.",
-      "kid_friendly_explanation": "A whiteboard is where the teacher writes."
+      "meaning": "A shiny white board that you write on with dry-erase markers",
+      "example": "The teacher writes math problems on the big whiteboard and we solve them.",
+      "kid_friendly_explanation": "A whiteboard is where the teacher writes. You use special markers on it.",
+      "sentence": "Come to the whiteboard and write the answer."
     },
     {
       "word": "chalkboard",
       "plural": "chalkboards",
-      "meaning": "A dark green or black board you write on with chalk",
-      "example": "The teacher uses white chalk on the chalkboard.",
-      "kid_friendly_explanation": "A chalkboard is a dark board you write on with chalk."
+      "meaning": "A dark green or black board that you write on with chalk",
+      "example": "The teacher uses white chalk on the chalkboard and erases with an eraser.",
+      "kid_friendly_explanation": "A chalkboard is a dark board you write on with chalk. It can be dusty!",
+      "sentence": "Write the word 'cat' on the chalkboard with chalk."
     },
     {
-      "word": "bookshelf",
-      "plural": "bookshelves",
-      "meaning": "A piece of furniture that holds books",
-      "example": "The bookshelf has many stories about animals and adventures.",
-      "kid_friendly_explanation": "A bookshelf holds all the classroom books."
-    },
-    {
-      "word": "carpet",
-      "plural": "carpets",
-      "meaning": "A soft floor covering",
-      "example": "We sit on the colorful carpet during story time.",
-      "kid_friendly_explanation": "A carpet is a soft rug on the floor."
-    },
-    {
-      "word": "window",
-      "plural": "windows",
-      "meaning": "An opening in the wall that lets in light and air",
-      "example": "I look out the window and see birds in the tree.",
-      "kid_friendly_explanation": "A window is glass you can see through."
-    },
-    {
-      "word": "door",
-      "plural": "doors",
-      "meaning": "A movable barrier for entering or leaving a room",
-      "example": "We line up by the door when it's time for recess.",
-      "kid_friendly_explanation": "A door is how you go in and out of a room."
-    },
-    {
-      "word": "clock",
-      "plural": "clocks",
-      "meaning": "A device that tells what time it is",
-      "example": "The clock says 12 o'clock, so it's time for lunch.",
-      "kid_friendly_explanation": "A clock tells you the time."
-    },
-    {
-      "word": "calendar",
-      "plural": "calendars",
-      "meaning": "A chart showing the days, weeks, and months",
-      "example": "We look at the calendar to see which day is Friday.",
-      "kid_friendly_explanation": "A calendar shows the days of the week."
-    },
-    {
-      "word": "pencil case",
-      "plural": "pencil cases",
-      "meaning": "A small bag or box that holds writing tools",
-      "example": "My pencil case has a zipper and holds ten pencils.",
-      "kid_friendly_explanation": "A pencil case keeps your pencils together."
-    },
-    {
-      "word": "trash can",
-      "plural": "trash cans",
-      "meaning": "A container for garbage and things you throw away",
-      "example": "I throw my apple core in the trash can after snack.",
-      "kid_friendly_explanation": "A trash can holds things you throw away."
-    },
-    {
-      "word": "computer",
-      "plural": "computers",
-      "meaning": "An electronic machine that can do many tasks",
-      "example": "We use the computer to play learning games.",
-      "kid_friendly_explanation": "A computer is a machine that helps you learn."
-    },
-    {
-      "word": "projector",
-      "plural": "projectors",
-      "meaning": "A machine that shows pictures on a big screen",
-      "example": "The teacher shows videos on the projector.",
-      "kid_friendly_explanation": "A projector makes pictures big on a screen."
+      "word": "marker board",
+      "plural": "marker boards",
+      "meaning": "Another name for a whiteboard, used with dry-erase markers",
+      "example": "Each student has a small marker board to practice spelling words.",
+      "kid_friendly_explanation": "A marker board is the same as a whiteboard. You write and wipe away.",
+      "sentence": "Write your answer on your mini marker board and hold it up."
     },
     {
       "word": "bulletin board",
       "plural": "bulletin boards",
-      "meaning": "A board where you pin papers and artwork",
-      "example": "My drawing of a cat is on the bulletin board for everyone to see.",
-      "kid_friendly_explanation": "A bulletin board shows off your art."
+      "meaning": "A board on the wall where you pin papers, artwork, and announcements",
+      "example": "My drawing of a cat is on the bulletin board for everyone in class to see.",
+      "kid_friendly_explanation": "A bulletin board shows off your art and important school news.",
+      "sentence": "Look at the bulletin board to see the schedule."
+    },
+    {
+      "word": "corkboard",
+      "plural": "corkboards",
+      "meaning": "A board made of cork where you can pin things with pushpins",
+      "example": "The corkboard has reminders, lunch menus, and pictures of our class pet.",
+      "kid_friendly_explanation": "A corkboard is made of cork so you can stick pins in it to hold papers.",
+      "sentence": "Pin your permission slip to the corkboard."
+    },
+    {
+      "word": "bookshelf",
+      "plural": "bookshelves",
+      "meaning": "A piece of furniture with horizontal shelves for holding books",
+      "example": "The classroom bookshelf has many stories about animals, adventures, and friends.",
+      "kid_friendly_explanation": "A bookshelf holds all the classroom books so you can borrow them.",
+      "sentence": "Return the book to the bookshelf when you are done."
+    },
+    {
+      "word": "carpet",
+      "plural": "carpets",
+      "meaning": "A soft floor covering made of woven fabric",
+      "example": "We sit on the colorful carpet during story time and morning meeting.",
+      "kid_friendly_explanation": "A carpet is a soft rug on the floor where you can sit comfortably.",
+      "sentence": "Find your spot on the carpet and sit criss-cross applesauce."
+    },
+    {
+      "word": "rug",
+      "plural": "rugs",
+      "meaning": "A small carpet or floor covering",
+      "example": "The reading corner has a soft round rug with alphabet letters on it.",
+      "kid_friendly_explanation": "A rug is like a small carpet that makes the floor softer.",
+      "sentence": "Take off your shoes before you step on the rug."
+    },
+    {
+      "word": "window",
+      "plural": "windows",
+      "meaning": "An opening in the wall that has glass and lets in light and air",
+      "example": "I look out the window and see birds in the tree and clouds in the sky.",
+      "kid_friendly_explanation": "A window is glass you can see through. It brings sunshine into the room.",
+      "sentence": "Open the window to let fresh air come in."
+    },
+    {
+      "word": "door",
+      "plural": "doors",
+      "meaning": "A movable barrier used to close off an entrance to a room or building",
+      "example": "We line up by the door when it's time for recess, lunch, or going home.",
+      "kid_friendly_explanation": "A door is how you go in and out of a room. Knock before you open it!",
+      "parts": ["handle", "hinge", "lock", "knob"],
+      "sentence": "Close the door quietly so we don't disturb the other class."
+    },
+    {
+      "word": "wall",
+      "plural": "walls",
+      "meaning": "The vertical surface that encloses or divides a room",
+      "example": "The walls of our classroom are covered with posters, art, and vocabulary words.",
+      "kid_friendly_explanation": "Walls are the sides of a room. They hold up the ceiling.",
+      "sentence": "Hang your painting on the wall with tape."
+    },
+    {
+      "word": "floor",
+      "plural": "floors",
+      "meaning": "The bottom surface of a room that you walk on",
+      "example": "The floor is clean because the janitor mopped it after school yesterday.",
+      "kid_friendly_explanation": "The floor is what you walk on in a room. Keep it clean!",
+      "sentence": "Pick up the paper from the floor."
+    },
+    {
+      "word": "ceiling",
+      "plural": "ceilings",
+      "meaning": "The top inside surface of a room above your head",
+      "example": "The ceiling has lights, a fan, and sometimes hanging decorations for holidays.",
+      "kid_friendly_explanation": "The ceiling is the top of the room above your head.",
+      "sentence": "Look at the ceiling to see the stars we hung up."
+    },
+    {
+      "word": "light",
+      "plural": "lights",
+      "meaning": "A device that produces brightness so you can see",
+      "example": "The teacher turns on the lights when it is cloudy and dark outside.",
+      "kid_friendly_explanation": "Lights help you see when the room is dark or the sun goes away.",
+      "types": ["ceiling light", "lamp", "flashlight"],
+      "sentence": "Please turn off the lights when we leave the room."
+    },
+    {
+      "word": "lamp",
+      "plural": "lamps",
+      "meaning": "A portable light that stands on a desk or table",
+      "example": "The reading corner has a small lamp that makes it cozy to read books.",
+      "kid_friendly_explanation": "A lamp is a light that you can move around. It sits on a desk or table.",
+      "sentence": "Turn on the lamp when it gets dark outside."
+    },
+    {
+      "word": "computer",
+      "plural": "computers",
+      "meaning": "An electronic machine that stores, processes, and shows information",
+      "example": "We use the computer to play learning games, type stories, and research animals.",
+      "kid_friendly_explanation": "A computer is a machine that helps you learn, play games, and find information.",
+      "parts": ["screen", "keyboard", "mouse", "CPU"],
+      "sentence": "Log in to the computer with your username and password."
+    },
+    {
+      "word": "keyboard",
+      "plural": "keyboards",
+      "meaning": "A set of keys or buttons used to type information into a computer",
+      "example": "I use the keyboard to type my name and write sentences for my story.",
+      "kid_friendly_explanation": "A keyboard has letters and numbers you press to type on a computer.",
+      "keys": ["letters A-Z", "numbers 0-9", "space bar", "enter", "shift"],
+      "sentence": "Place your fingers on the home row keys."
+    },
+    {
+      "word": "mouse",
+      "plural": "mice",
+      "meaning": "A small device you move with your hand to control a computer cursor",
+      "example": "I move the mouse to point to the game I want to play, then click the button.",
+      "kid_friendly_explanation": "A computer mouse helps you point and click on things on the screen.",
+      "actions": ["click", "double-click", "right-click", "scroll"],
+      "sentence": "Click the mouse to open the program."
+    },
+    {
+      "word": "screen",
+      "plural": "screens",
+      "meaning": "The flat display surface of a computer, tablet, or TV where images appear",
+      "example": "The computer screen shows pictures, words, and videos for us to learn from.",
+      "kid_friendly_explanation": "The screen is the part you look at. It shows you everything.",
+      "sentence": "Don't touch the screen with dirty fingers."
+    },
+    {
+      "word": "projector",
+      "plural": "projectors",
+      "meaning": "A machine that projects images and videos onto a large screen or wall",
+      "example": "The teacher shows educational videos on the projector so everyone can see.",
+      "kid_friendly_explanation": "A projector makes pictures and movies big on a screen for the whole class.",
+      "sentence": "Turn off the lights so we can see the projector better."
+    },
+    {
+      "word": "screen",
+      "plural": "screens",
+      "meaning": "A large white surface where projector images are displayed",
+      "example": "The pull-down screen covers the whiteboard when the teacher uses the projector.",
+      "kid_friendly_explanation": "A projector screen is where you watch movies or lessons from the projector.",
+      "sentence": "Pull down the screen so the class can see the video."
+    },
+    {
+      "word": "trash can",
+      "plural": "trash cans",
+      "meaning": "A container for garbage, waste, and things you throw away",
+      "example": "I throw my apple core, banana peel, and used paper in the trash can.",
+      "kid_friendly_explanation": "A trash can holds things you throw away. Keep our classroom clean!",
+      "sentence": "Walk to the trash can and throw away your snack wrapper."
+    },
+    {
+      "word": "recycling bin",
+      "plural": "recycling bins",
+      "meaning": "A container for items that can be reused like paper, plastic, and glass",
+      "example": "We put empty water bottles, paper, and cardboard in the blue recycling bin.",
+      "kid_friendly_explanation": "A recycling bin is for things that can be made into new things.",
+      "items": ["paper", "plastic bottles", "cans", "cardboard"],
+      "sentence": "Is this paper trash or recycling? Put it in the recycling bin."
+    },
+    {
+      "word": "pencil case",
+      "plural": "pencil cases",
+      "meaning": "A small bag, box, or pouch that holds writing tools and supplies",
+      "example": "My pencil case has a zipper and holds ten pencils, an eraser, and a sharpener.",
+      "kid_friendly_explanation": "A pencil case keeps your pencils, erasers, and sharpeners all in one place.",
+      "sentence": "Take out your pencil case and find a sharp pencil."
+    },
+    {
+      "word": "cubbies",
+      "plural": "cubbies",
+      "meaning": "Small open storage compartments for each student's belongings",
+      "example": "I put my backpack, lunchbox, and coat in my cubby every morning.",
+      "kid_friendly_explanation": "Cubbies are little shelves where you keep your things at school.",
+      "sentence": "Hang your coat in your cubby."
+    },
+    {
+      "word": "coat hook",
+      "plural": "coat hooks",
+      "meaning": "A small hook on the wall for hanging coats and jackets",
+      "example": "Each student has a coat hook with their name written above it.",
+      "kid_friendly_explanation": "A coat hook is where you hang your jacket so it doesn't get lost.",
+      "sentence": "Hang your backpack on your coat hook."
     }
   ]
 }
