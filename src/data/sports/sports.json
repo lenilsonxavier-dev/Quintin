@@ -1,0 +1,142 @@
+{
+  "soccer": {
+    "pt": "futebol",
+    "emoji": "⚽",
+    "example": "I play soccer with my friends after school every day!",
+    "position": "forward, midfielder, defender, goalkeeper",
+    "equipment": "ball, cleats, shin guards"
+  },
+  "basketball": {
+    "pt": "basquete",
+    "emoji": "🏀",
+    "example": "Basketball is fun! I love shooting hoops at the park.",
+    "position": "point guard, shooting guard, center, forward",
+    "equipment": "ball, hoop, sneakers"
+  },
+  "tennis": {
+    "pt": "tênis",
+    "emoji": "🎾",
+    "example": "Tennis players hit the ball over a net with a racket.",
+    "position": "singles or doubles",
+    "equipment": "racket, ball, net"
+  },
+  "baseball": {
+    "pt": "beisebol",
+    "emoji": "⚾",
+    "example": "Baseball has batting, pitching, and running around the bases!",
+    "position": "pitcher, catcher, batter, fielder",
+    "equipment": "bat, ball, glove, helmet"
+  },
+  "swimming": {
+    "pt": "natação",
+    "emoji": "🏊",
+    "example": "Swimming is great exercise and feels like flying in the water!",
+    "styles": "freestyle, backstroke, breaststroke, butterfly",
+    "equipment": "goggles, swimsuit, cap"
+  },
+  "running": {
+    "pt": "corrida",
+    "emoji": "🏃",
+    "example": "Running makes my heart strong and my legs fast!",
+    "distances": "sprint, middle, long distance, marathon",
+    "equipment": "running shoes, shorts, shirt"
+  },
+  "gymnastics": {
+    "pt": "ginástica",
+    "emoji": "🤸",
+    "example": "Gymnasts do flips, handstands, and balance on beams.",
+    "events": "floor, vault, beam, bars, rings",
+    "equipment": "mat, leotard, chalk"
+  },
+  "volleyball": {
+    "pt": "vôlei",
+    "emoji": "🏐",
+    "example": "Volleyball players hit the ball over the net without letting it touch the ground.",
+    "position": "setter, spiker, blocker, libero",
+    "equipment": "ball, net, knee pads"
+  },
+  "skating": {
+    "pt": "patinação",
+    "emoji": "⛸️",
+    "example": "Ice skating is fun! You glide on the ice with special boots.",
+    "types": "ice skating, roller skating, skateboarding",
+    "equipment": "skates, helmet, pads"
+  },
+  "skiing": {
+    "pt": "esqui",
+    "emoji": "⛷️",
+    "example": "Skiing down a snowy mountain feels like flying!",
+    "types": "downhill, cross-country, freestyle",
+    "equipment": "skis, poles, boots, helmet"
+  },
+  "surfing": {
+    "pt": "surfe",
+    "emoji": "🏄",
+    "example": "Surfers ride big waves in the ocean on a surfboard.",
+    "equipment": "surfboard, wetsuit, leash",
+    "best_places": "Hawaii, Australia, Brazil"
+  },
+  "cycling": {
+    "pt": "ciclismo",
+    "emoji": "🚴",
+    "example": "Cycling is a fun way to explore new places!",
+    "types": "road, mountain, track, BMX",
+    "equipment": "bike, helmet, water bottle"
+  },
+  "martial_arts": {
+    "pt": "artes marciais",
+    "emoji": "🥋",
+    "example": "Martial arts teach discipline, respect, and self-defense.",
+    "types": "karate, judo, taekwondo, jiu-jitsu, kung fu",
+    "equipment": "gi, belt, pads"
+  },
+  "dancing": {
+    "pt": "dança",
+    "emoji": "💃",
+    "example": "Dancing is a sport and an art! It makes you strong and happy.",
+    "styles": "ballet, hip-hop, jazz, salsa, ballroom",
+    "equipment": "dance shoes, leotard, tights"
+  },
+  "climbing": {
+    "pt": "escalada",
+    "emoji": "🧗",
+    "example": "Rock climbers use their hands and feet to go up walls.",
+    "types": "rock climbing, bouldering, ice climbing",
+    "equipment": "rope, harness, helmet, chalk"
+  },
+  "hockey": {
+    "pt": "hóquei",
+    "emoji": "🏒",
+    "example": "Hockey players hit a puck with a stick to score goals.",
+    "types": "ice hockey, field hockey, roller hockey",
+    "equipment": "stick, puck, skates, helmet, pads"
+  },
+  "golf": {
+    "pt": "golfe",
+    "emoji": "🏌️",
+    "example": "Golf players hit a small ball into holes with different clubs.",
+    "equipment": "clubs, ball, tee, bag",
+    "holes": "18 holes on a course"
+  },
+  "boxing": {
+    "pt": "boxe",
+    "emoji": "🥊",
+    "example": "Boxing is a sport where two people punch each other with gloves.",
+    "equipment": "gloves, punching bag, ring, mouthguard",
+    "weight_classes": "heavyweight, lightweight, etc."
+  },
+  "fishing": {
+    "pt": "pesca",
+    "emoji": "🎣",
+    "example": "Fishing is a relaxing sport where you try to catch fish.",
+    "types": "freshwater, saltwater, fly fishing",
+    "equipment": "rod, reel, hook, bait"
+  },
+  "cheerleading": {
+    "pt": "cheerleading",
+    "emoji": "📣",
+    "example": "Cheerleaders shout, dance, and do stunts to cheer for teams.",
+    "equipment": "pom-poms, uniform, megaphone",
+    "moves": "jumps, pyramids, tumbling, chants"
+  }
+}
