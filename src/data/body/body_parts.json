@@ -1,0 +1,176 @@
+{
+  "head": {
+    "pt": "cabeça",
+    "emoji": "🙂",
+    "example": "My head sits on top of my neck.",
+    "function": "Your head holds your brain, eyes, ears, nose, and mouth."
+  },
+  "hair": {
+    "pt": "cabelo",
+    "emoji": "💇",
+    "example": "My hair keeps my head warm and looks nice.",
+    "function": "Hair protects your scalp and helps you look beautiful."
+  },
+  "eye": {
+    "pt": "olho",
+    "emoji": "👁️",
+    "example": "I see the world with my two eyes!",
+    "function": "Eyes let you see colors, shapes, and everything around you."
+  },
+  "ear": {
+    "pt": "orelha",
+    "emoji": "👂",
+    "example": "My ears help me hear music and my friends talking.",
+    "function": "Ears catch sound waves so you can hear."
+  },
+  "nose": {
+    "pt": "nariz",
+    "emoji": "👃",
+    "example": "I smell flowers and pizza with my nose.",
+    "function": "Your nose helps you smell and breathe."
+  },
+  "mouth": {
+    "pt": "boca",
+    "emoji": "👄",
+    "example": "I talk, eat, and smile with my mouth.",
+    "function": "Your mouth is for eating, speaking, and breathing."
+  },
+  "tooth": {
+    "pt": "dente",
+    "emoji": "🦷",
+    "example": "I brush my teeth every morning and night.",
+    "function": "Teeth help you chew food into small pieces."
+  },
+  "tongue": {
+    "pt": "língua",
+    "emoji": "👅",
+    "example": "My tongue tastes sweet, sour, salty, and bitter flavors.",
+    "function": "Your tongue helps you taste food and speak."
+  },
+  "neck": {
+    "pt": "pescoço",
+    "emoji": "🦒",
+    "example": "My neck connects my head to my body.",
+    "function": "Your neck holds your head and lets you look around."
+  },
+  "shoulder": {
+    "pt": "ombro",
+    "emoji": "🤷",
+    "example": "I carry my backpack on my shoulders.",
+    "function": "Shoulders connect your arms to your chest."
+  },
+  "arm": {
+    "pt": "braço",
+    "emoji": "💪",
+    "example": "I lift things with my strong arms.",
+    "function": "Arms let you reach, grab, lift, and throw."
+  },
+  "elbow": {
+    "pt": "cotovelo",
+    "emoji": "🦾",
+    "example": "My elbow bends so I can bring food to my mouth.",
+    "function": "Your elbow lets your arm bend in the middle."
+  },
+  "hand": {
+    "pt": "mão",
+    "emoji": "✋",
+    "example": "I write, draw, and clap with my hands.",
+    "function": "Hands have fingers to grab and hold things."
+  },
+  "finger": {
+    "pt": "dedo",
+    "emoji": "🖐️",
+    "example": "I have ten fingers, including two thumbs!",
+    "function": "Fingers help you pick up small things."
+  },
+  "thumb": {
+    "pt": "polegar",
+    "emoji": "👍",
+    "example": "My thumb is special because it can touch my other fingers.",
+    "function": "Your thumb helps you grip and hold objects."
+  },
+  "chest": {
+    "pt": "peito",
+    "emoji": "📦",
+    "example": "My chest holds my heart and lungs.",
+    "function": "Your chest protects your heart and lungs inside."
+  },
+  "belly": {
+    "pt": "barriga",
+    "emoji": "🤰",
+    "example": "My belly growls when I am hungry.",
+    "function": "Your belly holds your stomach and intestines."
+  },
+  "back": {
+    "pt": "costas",
+    "emoji": "🙆",
+    "example": "My back helps me sit up straight and bend over.",
+    "function": "Your back has your spine, which supports your body."
+  },
+  "leg": {
+    "pt": "perna",
+    "emoji": "🦵",
+    "example": "I walk, run, and jump with my legs.",
+    "function": "Legs let you move your body around."
+  },
+  "knee": {
+    "pt": "joelho",
+    "emoji": "🦵",
+    "example": "My knee bends so I can sit down.",
+    "function": "Your knee connects your upper and lower leg."
+  },
+  "foot": {
+    "pt": "pé",
+    "emoji": "🦶",
+    "example": "My feet keep me balanced when I stand.",
+    "function": "Feet support your weight and help you walk."
+  },
+  "toe": {
+    "pt": "dedo do pé",
+    "emoji": "🦶",
+    "example": "I have ten little toes, five on each foot.",
+    "function": "Toes help you balance when you walk."
+  },
+  "heart": {
+    "pt": "coração",
+    "emoji": "❤️",
+    "example": "My heart beats faster when I run.",
+    "function": "Your heart pumps blood all through your body."
+  },
+  "lung": {
+    "pt": "pulmão",
+    "emoji": "🫁",
+    "example": "My lungs fill with air when I breathe in.",
+    "function": "Lungs bring oxygen into your body."
+  },
+  "brain": {
+    "pt": "cérebro",
+    "emoji": "🧠",
+    "example": "My brain tells my body what to do.",
+    "function": "Your brain thinks, remembers, and controls everything."
+  },
+  "bone": {
+    "pt": "osso",
+    "emoji": "🦴",
+    "example": "My skeleton has 206 bones inside me!",
+    "function": "Bones give your body shape and support."
+  },
+  "skin": {
+    "pt": "pele",
+    "emoji": "🖐️",
+    "example": "My skin covers my whole body like a blanket.",
+    "function": "Skin protects your body from germs and injuries."
+  },
+  "muscle": {
+    "pt": "músculo",
+    "emoji": "💪",
+    "example": "My muscles help me lift and move things.",
+    "function": "Muscles pull on your bones to make you move."
+  },
+  "blood": {
+    "pt": "sangue",
+    "emoji": "🩸",
+    "example": "Blood flows through my body inside tubes called veins.",
+    "function": "Blood carries oxygen and food to all your cells."
+  }
+}
