@@ -87,6 +87,9 @@ memory.friendshipLevel =
 memory.totalMessages =
   memory.totalMessages || 0;
 
+memory.chatHistory =
+  memory.chatHistory || [];
+
 // ========================================
 // CONHECIMENTO
 // ========================================
@@ -110,24 +113,27 @@ You are ${personality.name},
 a magical owl teacher
 for Brazilian children.
 
+TEACHING RULES:
+
+- Use short sentences
+- Teach one idea at a time
+- Use simple English
+- Use emojis
+- Celebrate effort
+- Correct gently
+- Ask one playful question
+- Prefer glossary knowledge
+- Keep responses tiny
+
 STRICT RULES:
 
-- Speak only Portuguese + simple English
 - Never speak Spanish
-- Never loop responses
 - Never invent facts
 - Never create nonsense
 - Never be philosophical
+- Never write long paragraphs
 - Never act romantic
-- Keep answers tiny
-- Use at most 3 short sentences
-- Use emojis
 - Focus on English learning
-- Prefer educational answers
-- Prefer glossary context
-- Ask at most ONE playful question
-- If unsure, say:
-"I don't know yet 🌟"
 
 `;
 
@@ -139,8 +145,6 @@ function microResposta(texto) {
 
   texto =
     texto.trim();
-
-  // remove espanhol
 
   const proibidas = [
 
@@ -164,8 +168,6 @@ function microResposta(texto) {
       );
   }
 
-  // corta tamanho
-
   if (texto.length > 220) {
 
     texto =
@@ -188,6 +190,94 @@ function microResposta(texto) {
   }
 
   return texto;
+}
+
+// ========================================
+// DETECTOR DE INTENÇÃO
+// ========================================
+
+function detectarIntencao(
+  pergunta
+) {
+
+  const texto =
+    pergunta.toLowerCase();
+
+  // ========================================
+  // PIADAS
+  // ========================================
+
+  if (
+
+    texto.includes("piada")
+    ||
+    texto.includes("joke")
+    ||
+    texto.includes("riddle")
+
+  ) {
+
+    return "joke";
+  }
+
+  // ========================================
+  // CURIOSIDADES
+  // ========================================
+
+  if (
+
+    texto.includes("curiosidade")
+    ||
+    texto.includes("fact")
+    ||
+    texto.includes("fato")
+
+  ) {
+
+    return "fact";
+  }
+
+  // ========================================
+  // HISTÓRIA
+  // ========================================
+
+  if (
+
+    texto.includes("origem")
+    ||
+    texto.includes("história")
+    ||
+    texto.includes("history")
+    ||
+    texto.includes("vikings")
+    ||
+    texto.includes("celtas")
+    ||
+    texto.includes("romanos")
+
+  ) {
+
+    return "history";
+  }
+
+  // ========================================
+  // TRADUÇÃO
+  // ========================================
+
+  if (
+
+    texto.includes("como se diz")
+    ||
+    texto.includes("how do you say")
+    ||
+    texto.includes("significa")
+
+  ) {
+
+    return "translation";
+  }
+
+  return "general";
 }
 
 // ========================================
@@ -361,7 +451,7 @@ ${dados.pt
 
 ${dados.fact || ""}
 
-${dados.example || ""}
+${dados.example_en || ""}
 
 `;
 }
@@ -370,10 +460,80 @@ ${dados.example || ""}
 // RESPOSTAS CONTROLADAS
 // ========================================
 
-function respostaControlada(pergunta) {
+function respostaControlada(
+  pergunta
+) {
 
   const texto =
-    pergunta.toLowerCase().trim();
+
+    pergunta
+      .toLowerCase()
+      .trim();
+
+  const palavras =
+
+    texto.split(/\s+/);
+
+  // ========================================
+  // DETECTAR INTENÇÃO
+  // ========================================
+
+  const intencao =
+
+    detectarIntencao(
+      pergunta
+    );
+
+  // ========================================
+  // PIADAS
+  // ========================================
+
+  if (intencao === "joke") {
+
+    return `
+
+😂
+
+Why did the cat sleep all day?
+
+Because it was CAT-tired! 🐱
+
+`;
+  }
+
+  // ========================================
+  // CURIOSIDADES
+  // ========================================
+
+  if (intencao === "fact") {
+
+    return `
+
+🌟
+
+English has words from
+vikings, romans,
+and germanic tribes ✨
+
+`;
+  }
+
+  // ========================================
+  // HISTÓRIA
+  // ========================================
+
+  if (intencao === "history") {
+
+    return `
+
+🏰
+
+English began with
+Germanic tribes
+in Britain ✨
+
+`;
+  }
 
   // ========================================
   // GLOSSÁRIO
@@ -402,13 +562,15 @@ function respostaControlada(pergunta) {
         of categoria.words
       ) {
 
+        // ========================================
         // PT -> EN
+        // ========================================
 
         if (
 
           item.pt
           &&
-          texto.includes(
+          palavras.includes(
             item.pt.toLowerCase()
           )
 
@@ -428,13 +590,15 @@ ${item.example_en || ""}
 `;
         }
 
+        // ========================================
         // EN -> PT
+        // ========================================
 
         if (
 
           item.en
           &&
-          texto.includes(
+          palavras.includes(
             item.en.toLowerCase()
           )
 
@@ -475,7 +639,7 @@ ${item.example_pt || ""}
   }
 
   // ========================================
-  // CONVERSAS FIXAS
+  // RESPOSTAS FIXAS
   // ========================================
 
   const respostasFixas = {
@@ -494,15 +658,8 @@ ${item.example_pt || ""}
 
     "você fala espanhol":
 
-      "🌍 Não 😊 Eu ensino inglês e português ✨",
+      "🌍 Não 😊 Eu ensino inglês ✨"
 
-    "cat":
-
-      "🐱 Cat significa gato ✨",
-
-    "dog":
-
-      "🐶 Dog significa cachorro ✨"
   };
 
   if (
@@ -510,6 +667,24 @@ ${item.example_pt || ""}
   ) {
 
     return respostasFixas[texto];
+  }
+
+  // ========================================
+  // FALLBACK
+  // ========================================
+
+  if (
+    texto.length <= 20
+  ) {
+
+    return `
+
+🌟
+
+I am still learning
+that word ✨
+
+`;
   }
 
   return null;
@@ -599,6 +774,26 @@ window.enviar = async function () {
     memory.friendshipLevel++;
   }
 
+  // ========================================
+  // HISTÓRICO
+  // ========================================
+
+  memory.chatHistory.push({
+
+    role: "user",
+    content: pergunta
+
+  });
+
+  if (
+    memory.chatHistory.length > 12
+  ) {
+
+    memory.chatHistory =
+
+      memory.chatHistory.slice(-12);
+  }
+
   salvarMemoria();
 
   // ========================================
@@ -641,7 +836,7 @@ window.enviar = async function () {
     );
 
   // ========================================
-  // 80% CONTROLADO
+  // MODO CONTROLADO
   // ========================================
 
   if (respostaLocal) {
@@ -657,6 +852,15 @@ window.enviar = async function () {
       "bot"
     );
 
+    memory.chatHistory.push({
+
+      role: "assistant",
+      content: respostaLocal
+
+    });
+
+    salvarMemoria();
+
     inputPergunta.disabled =
       false;
 
@@ -664,6 +868,30 @@ window.enviar = async function () {
       false;
 
     inputPergunta.focus();
+
+    return;
+  }
+
+  // ========================================
+  // FALLBACK SEM MODELO
+  // ========================================
+
+  if (!modeloPronto) {
+
+    removerPensando();
+
+    adicionarMensagem(
+
+      "📚 Quinti is using knowledge mode ✨",
+
+      "bot"
+    );
+
+    inputPergunta.disabled =
+      false;
+
+    btnEnviar.disabled =
+      false;
 
     return;
   }
@@ -726,16 +954,13 @@ Answer with tiny educational responses.
             content: systemPrompt
           },
 
-          {
-            role: "user",
-            content: mensagemUsuario
-          }
+          ...memory.chatHistory
 
         ],
 
-        temperature: 0.1,
+        temperature: 0.05,
 
-        max_tokens: 50
+        max_tokens: 40
       });
 
     const texto =
@@ -753,6 +978,15 @@ Answer with tiny educational responses.
       respostaFinal,
       "bot"
     );
+
+    memory.chatHistory.push({
+
+      role: "assistant",
+      content: respostaFinal
+
+    });
+
+    salvarMemoria();
 
   } catch(err) {
 
@@ -894,8 +1128,19 @@ inputPergunta.addEventListener(
     conhecimentoGlobal
   );
 
-  const modeloOk =
-    await iniciarModelo();
+  let modeloOk = false;
+
+  try {
+
+    modeloOk =
+      await iniciarModelo();
+
+  } catch(err) {
+
+    console.warn(
+      "⚠️ WebLLM disabled"
+    );
+  }
 
   modeloPronto =
     modeloOk;
