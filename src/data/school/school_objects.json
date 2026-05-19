@@ -1,0 +1,109 @@
+{
+  "school_objects": [
+    {
+      "word": "backpack",
+      "plural": "backpacks",
+      "meaning": "A bag you wear on your back to carry school things",
+      "example": "My blue backpack holds my lunch box, books, and pencils.",
+      "kid_friendly_explanation": "A backpack is a bag you wear to carry your school stuff."
+    },
+    {
+      "word": "pencil",
+      "plural": "pencils",
+      "meaning": "A tool for writing and drawing that can be erased",
+      "example": "I use my yellow pencil to write my name on the paper.",
+      "kid_friendly_explanation": "A pencil is what you write with at school."
+    },
+    {
+      "word": "eraser",
+      "plural": "erasers",
+      "meaning": "A small object that removes pencil marks",
+      "example": "My eraser has a unicorn on it and smells like grapes.",
+      "kid_friendly_explanation": "An eraser rubs away pencil mistakes."
+    },
+    {
+      "word": "crayon",
+      "plural": "crayons",
+      "meaning": "A stick of colored wax for drawing",
+      "example": "I use a red crayon to draw a heart for my mom.",
+      "kid_friendly_explanation": "Crayons are colorful sticks for drawing pictures."
+    },
+    {
+      "word": "marker",
+      "plural": "markers",
+      "meaning": "A pen with a thick tip and bright ink",
+      "example": "The purple marker is my favorite for coloring flowers.",
+      "kid_friendly_explanation": "Markers are bright pens for coloring."
+    },
+    {
+      "word": "ruler",
+      "plural": "rulers",
+      "meaning": "A straight tool for measuring and drawing lines",
+      "example": "My ruler is 12 inches long and has a bumpy edge.",
+      "kid_friendly_explanation": "A ruler measures how long something is."
+    },
+    {
+      "word": "scissors",
+      "plural": "scissors",
+      "meaning": "A tool with two blades for cutting paper",
+      "example": "I use scissors carefully to cut out a star shape.",
+      "kid_friendly_explanation": "Scissors cut paper into shapes."
+    },
+    {
+      "word": "glue",
+      "plural": "glues",
+      "meaning": "A sticky substance that makes things stick together",
+      "example": "I put glue on the back of the picture and stick it to the paper.",
+      "kid_friendly_explanation": "Glue makes things stick."
+    },
+    {
+      "word": "notebook",
+      "plural": "notebooks",
+      "meaning": "A book of blank paper for writing",
+      "example": "My notebook has lines to help me write neatly.",
+      "kid_friendly_explanation": "A notebook is where you write in school."
+    },
+    {
+      "word": "folder",
+      "plural": "folders",
+      "meaning": "A folded piece of cardboard that holds papers",
+      "example": "I keep my homework in my red folder so I don't lose it.",
+      "kid_friendly_explanation": "A folder holds your papers together."
+    },
+    {
+      "word": "lunchbox",
+      "plural": "lunchboxes",
+      "meaning": "A container that holds your lunch food",
+      "example": "My lunchbox has a dinosaur on it and keeps my sandwich cold.",
+      "kid_friendly_explanation": "A lunchbox carries your food to school."
+    },
+    {
+      "word": "water bottle",
+      "plural": "water bottles",
+      "meaning": "A container for drinking water",
+      "example": "I fill my water bottle at the fountain when I am thirsty.",
+      "kid_friendly_explanation": "A water bottle holds your water."
+    },
+    {
+      "word": "calculator",
+      "plural": "calculators",
+      "meaning": "A small machine that does math problems",
+      "example": "I use my calculator to check if 5 plus 3 equals 8.",
+      "kid_friendly_explanation": "A calculator helps you do math."
+    },
+    {
+      "word": "globe",
+      "plural": "globes",
+      "meaning": "A round model of the Earth",
+      "example": "The globe spins so I can see all the countries.",
+      "kid_friendly_explanation": "A globe is a round map of the world."
+    },
+    {
+      "word": "sharpener",
+      "plural": "sharpeners",
+      "meaning": "A tool that makes pencils pointy again",
+      "example": "My pencil is dull, so I put it in the sharpener.",
+      "kid_friendly_explanation": "A sharpener makes pencils pointy."
+    }
+  ]
+}
