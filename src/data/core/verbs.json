@@ -3,142 +3,281 @@
     {
       "word": "run",
       "past_tense": "ran",
-      "meaning": "To move your legs very fast",
-      "example": "I run to the playground every day after school.",
-      "kid_friendly_explanation": "When you go fast with your feet, you run."
+      "present_participle": "running",
+      "meaning": "To move your legs very fast, faster than walking",
+      "example": "I run to the playground every day after school because I love the swings.",
+      "kid_friendly_explanation": "When you go fast with your feet, you run. Running is faster than walking.",
+      "dialog_example": "Let's run to the tree! Ready, set, go!"
+    },
+    {
+      "word": "walk",
+      "past_tense": "walked",
+      "present_participle": "walking",
+      "meaning": "To move at a normal speed using your feet",
+      "example": "I walk to school with my mom every morning. It takes fifteen minutes.",
+      "kid_friendly_explanation": "Walk is how you move your feet at a normal speed, not too fast.",
+      "dialog_example": "Please walk in the hallway. No running at school."
     },
     {
       "word": "jump",
       "past_tense": "jumped",
-      "meaning": "To push your body off the ground",
-      "example": "Can you jump over this puddle? I know you can!",
-      "kid_friendly_explanation": "Jump is when your feet leave the ground."
+      "present_participle": "jumping",
+      "meaning": "To push your body off the ground using your legs",
+      "example": "Can you jump over this small puddle? I know you can do it!",
+      "kid_friendly_explanation": "Jump is when your feet leave the ground and you go up in the air.",
+      "dialog_example": "Jump as high as you can! Wow, that was high!"
+    },
+    {
+      "word": "hop",
+      "past_tense": "hopped",
+      "present_participle": "hopping",
+      "meaning": "To jump on one foot",
+      "example": "The bunny rabbit hops through the grass looking for carrots to eat.",
+      "kid_friendly_explanation": "Hop is like a small jump, like how rabbits move.",
+      "dialog_example": "Hop on one foot like a kangaroo!"
+    },
+    {
+      "word": "skip",
+      "past_tense": "skipped",
+      "present_participle": "skipping",
+      "meaning": "To move forward with little jumps and steps",
+      "example": "I skip down the sidewalk when I am happy because it feels like flying.",
+      "kid_friendly_explanation": "Skip is a fun way to move - you step and hop, step and hop.",
+      "dialog_example": "Let's skip together! One, two, three - skip!"
     },
     {
       "word": "eat",
       "past_tense": "ate",
-      "meaning": "To put food in your mouth and swallow",
-      "example": "I eat breakfast at 7 o'clock every morning.",
-      "kid_friendly_explanation": "When you put food in your mouth, you eat."
+      "present_participle": "eating",
+      "meaning": "To put food in your mouth, chew it, and swallow it",
+      "example": "I eat breakfast at 7 o'clock every morning before I brush my teeth.",
+      "kid_friendly_explanation": "When you put food in your mouth and swallow it, you eat.",
+      "dialog_example": "Eat your vegetables. They are good for you!"
     },
     {
       "word": "drink",
       "past_tense": "drank",
-      "meaning": "To take liquid into your mouth and swallow",
-      "example": "You should drink water when you are thirsty.",
-      "kid_friendly_explanation": "Drink is when you take a sip of water, milk, or juice."
+      "present_participle": "drinking",
+      "meaning": "To take liquid into your mouth and swallow it",
+      "example": "You should drink water when you are thirsty, especially after playing outside.",
+      "kid_friendly_explanation": "Drink is when you take a sip of water, milk, juice, or any other liquid.",
+      "dialog_example": "Drink your milk so you can have strong bones."
     },
     {
       "word": "sleep",
       "past_tense": "slept",
-      "meaning": "To rest with your eyes closed",
-      "example": "I sleep for 10 hours every night because I need energy.",
-      "kid_friendly_explanation": "Sleep is when your body rests at night."
+      "present_participle": "sleeping",
+      "meaning": "To rest your body and mind with your eyes closed",
+      "example": "I sleep for 10 hours every night because my body needs energy to grow.",
+      "kid_friendly_explanation": "Sleep is when your body rests at night and you have dreams.",
+      "dialog_example": "It's time to sleep. Put on your pajamas."
     },
     {
       "word": "wake up",
       "past_tense": "woke up",
-      "meaning": "To stop sleeping",
-      "example": "I wake up when the sun comes through my window.",
-      "kid_friendly_explanation": "Wake up is when you open your eyes in the morning."
+      "present_participle": "waking up",
+      "meaning": "To stop sleeping and open your eyes",
+      "example": "I wake up when the sun comes through my window and the birds start singing.",
+      "kid_friendly_explanation": "Wake up is when you open your eyes in the morning after sleeping.",
+      "dialog_example": "Wake up, sleepyhead! It's time for school!"
     },
     {
       "word": "play",
       "past_tense": "played",
-      "meaning": "To have fun doing an activity",
-      "example": "Let's play hide and seek! I'll count to twenty.",
-      "kid_friendly_explanation": "Play is when you have fun with toys or games."
+      "present_participle": "playing",
+      "meaning": "To take part in an activity for fun and enjoyment",
+      "example": "Let's play hide and seek in the backyard! I'll count to twenty while you hide.",
+      "kid_friendly_explanation": "Play is when you have fun doing something you enjoy with toys or friends.",
+      "dialog_example": "Can I play too? Yes, come join us!"
     },
     {
       "word": "read",
       "past_tense": "read",
-      "meaning": "To look at and understand written words",
-      "example": "I read a story about a dragon every night before bed.",
-      "kid_friendly_explanation": "Read is when you look at words in a book and say them."
+      "present_participle": "reading",
+      "meaning": "To look at and understand written words in a book or on a screen",
+      "example": "I read a story about a friendly dragon every night before bed with my dad.",
+      "kid_friendly_explanation": "Read is when you look at words in a book and say them in your head or out loud.",
+      "dialog_example": "Let's read this book together. You read one page, I read one page."
     },
     {
       "word": "write",
       "past_tense": "wrote",
-      "meaning": "To put words on paper using a pencil or pen",
-      "example": "I write letters to my grandma because she lives far away.",
-      "kid_friendly_explanation": "Write is when you use a pencil to make words."
+      "present_participle": "writing",
+      "meaning": "To put words, letters, or numbers on paper using a pencil or pen",
+      "example": "I write letters to my grandma because she lives far away and misses me.",
+      "kid_friendly_explanation": "Write is when you use a pencil, pen, or crayon to make words or pictures on paper.",
+      "dialog_example": "Write your name at the top of the paper."
     },
     {
       "word": "draw",
       "past_tense": "drew",
-      "meaning": "To make a picture using pencils, crayons, or markers",
-      "example": "I draw rainbow unicorns because they are beautiful.",
-      "kid_friendly_explanation": "Draw is when you make pictures with crayons."
+      "present_participle": "drawing",
+      "meaning": "To make a picture using pencils, crayons, markers, or other tools",
+      "example": "I draw rainbow unicorns with sparkly pink manes because they are beautiful.",
+      "kid_friendly_explanation": "Draw is when you use crayons, markers, or pencils to make a picture.",
+      "dialog_example": "Draw a picture of your family. That's wonderful!"
+    },
+    {
+      "word": "color",
+      "past_tense": "colored",
+      "present_participle": "coloring",
+      "meaning": "To fill in a picture with different colors",
+      "example": "I color inside the lines of my coloring book with my new markers.",
+      "kid_friendly_explanation": "Color is when you add color to a black and white picture.",
+      "dialog_example": "Color the sky blue and the grass green."
     },
     {
       "word": "sing",
       "past_tense": "sang",
-      "meaning": "To make music with your voice",
-      "example": "I sing my favorite song in the shower every morning.",
-      "kid_friendly_explanation": "Sing is when you use your voice to make music."
+      "present_participle": "singing",
+      "meaning": "To make musical sounds with your voice",
+      "example": "I sing my favorite song in the shower every morning because the echo sounds good.",
+      "kid_friendly_explanation": "Sing is when you use your voice to make music with words and melodies.",
+      "dialog_example": "Sing along with me! La la la!"
     },
     {
       "word": "dance",
       "past_tense": "danced",
-      "meaning": "To move your body to music",
-      "example": "We dance at parties when happy music plays.",
-      "kid_friendly_explanation": "Dance is when you move your body to music."
+      "present_participle": "dancing",
+      "meaning": "To move your body rhythmically to music",
+      "example": "We dance at birthday parties when the DJ plays fun, happy music that makes us move.",
+      "kid_friendly_explanation": "Dance is when you move your body to music, like swaying or jumping to the beat.",
+      "dialog_example": "Let's dance! Move your arms and wiggle your hips!"
     },
     {
       "word": "laugh",
       "past_tense": "laughed",
-      "meaning": "To make a happy sound with your mouth",
-      "example": "I laugh when my dad tells silly jokes.",
-      "kid_friendly_explanation": "Laugh is the sound you make when something is funny."
+      "present_participle": "laughing",
+      "meaning": "To make a happy sound with your mouth when something is funny",
+      "example": "I laugh when my dad tells silly jokes like 'Why did the tomato turn red?'",
+      "kid_friendly_explanation": "Laugh is the happy 'ha ha' sound you make when something is funny.",
+      "dialog_example": "That joke made me laugh so hard! Ha ha ha!"
     },
     {
       "word": "cry",
       "past_tense": "cried",
-      "meaning": "To have tears come from your eyes because you are sad",
-      "example": "I cry when I miss my friend who moved away.",
-      "kid_friendly_explanation": "Cry is when tears fall from your eyes."
+      "present_participle": "crying",
+      "meaning": "To have tears come from your eyes because you are sad, hurt, or upset",
+      "example": "I cry when I miss my best friend who moved to a different city far away.",
+      "kid_friendly_explanation": "Cry is when tears fall from your eyes because you feel sad or hurt.",
+      "dialog_example": "Why are you crying? Can I help you feel better?"
     },
     {
       "word": "smile",
       "past_tense": "smiled",
-      "meaning": "To turn up the corners of your mouth when happy",
-      "example": "I smile when I see my puppy running to me.",
-      "kid_friendly_explanation": "Smile is when your mouth makes a happy shape."
+      "present_participle": "smiling",
+      "meaning": "To turn up the corners of your mouth to show happiness",
+      "example": "I smile when I see my puppy running to me with his tail wagging happily.",
+      "kid_friendly_explanation": "Smile is when your mouth makes a happy shape and you show your teeth a little.",
+      "dialog_example": "Give me a big smile! Cheese! Beautiful!"
+    },
+    {
+      "word": "frown",
+      "past_tense": "frowned",
+      "present_participle": "frowning",
+      "meaning": "To turn down the corners of your mouth to show unhappiness",
+      "example": "I frown when my little brother takes my toys without asking me first.",
+      "kid_friendly_explanation": "Frown is when your mouth makes a sad or upset shape, like an upside-down smile.",
+      "dialog_example": "Don't frown. Tell me what's wrong."
     },
     {
       "word": "help",
       "past_tense": "helped",
-      "meaning": "To do something nice for someone",
-      "example": "I help my little brother tie his shoes.",
-      "kid_friendly_explanation": "Help is when you do something nice for another person."
+      "present_participle": "helping",
+      "meaning": "To do something nice or useful for someone who needs assistance",
+      "example": "I help my little brother tie his shoes because he is still learning how.",
+      "kid_friendly_explanation": "Help is when you do something nice to make someone's life easier.",
+      "dialog_example": "Can you help me clean my room? Of course!"
     },
     {
       "word": "clean",
       "past_tense": "cleaned",
-      "meaning": "To make something not dirty",
-      "example": "I clean my room every Saturday so it looks nice.",
-      "kid_friendly_explanation": "Clean is when you wash or pick up things to make them neat."
+      "present_participle": "cleaning",
+      "meaning": "To remove dirt, dust, or mess from something to make it tidy",
+      "example": "I clean my room every Saturday morning so it looks nice and organized.",
+      "kid_friendly_explanation": "Clean is when you wash, wipe, or pick up things to make them neat and not dirty.",
+      "dialog_example": "Let's clean up the toys. Put them in the box."
     },
     {
       "word": "build",
       "past_tense": "built",
-      "meaning": "To put things together to make something",
-      "example": "I build tall towers with my colorful blocks.",
-      "kid_friendly_explanation": "Build is when you put pieces together to make something new."
+      "present_participle": "building",
+      "meaning": "To put pieces together to create something new",
+      "example": "I build tall towers with my colorful blocks, and then I knock them down!",
+      "kid_friendly_explanation": "Build is when you put pieces or parts together to make something new.",
+      "dialog_example": "Let's build a castle with these Legos!"
+    },
+    {
+      "word": "break",
+      "past_tense": "broke",
+      "present_participle": "breaking",
+      "meaning": "To separate something into pieces, often by accident",
+      "example": "I try to be careful because I don't want to break my mom's favorite vase.",
+      "kid_friendly_explanation": "Break is when something comes apart into pieces, like when you drop a glass.",
+      "dialog_example": "Oh no! Did you break your toy? Be careful next time."
+    },
+    {
+      "word": "fix",
+      "past_tense": "fixed",
+      "present_participle": "fixing",
+      "meaning": "To repair something that is broken or not working",
+      "example": "My dad can fix anything - he fixed my bike when the chain fell off.",
+      "kid_friendly_explanation": "Fix is when you make something work again after it breaks.",
+      "dialog_example": "Can you fix my doll's arm? I'll try my best."
     },
     {
       "word": "throw",
       "past_tense": "threw",
-      "meaning": "To send something through the air using your hand",
-      "example": "I throw the ball to my friend during catch.",
-      "kid_friendly_explanation": "Throw is when you send a ball through the air."
+      "present_participle": "throwing",
+      "meaning": "To send something through the air using your hand and arm",
+      "example": "I throw the ball to my friend during catch, and he throws it back to me.",
+      "kid_friendly_explanation": "Throw is when you use your hand to send something like a ball through the air.",
+      "dialog_example": "Throw the ball as far as you can!"
     },
     {
       "word": "catch",
       "past_tense": "caught",
+      "present_participle": "catching",
       "meaning": "To grab something that is moving through the air",
-      "example": "I catch the ball with both hands so I don't drop it.",
-      "kid_friendly_explanation": "Catch is when you grab something before it hits the ground."
+      "example": "I catch the ball with both hands so I don't drop it on the ground.",
+      "kid_friendly_explanation": "Catch is when you grab something with your hands before it hits the ground.",
+      "dialog_example": "Ready? I'll throw. Try to catch it!"
+    },
+    {
+      "word": "kick",
+      "past_tense": "kicked",
+      "present_participle": "kicking",
+      "meaning": "To hit or move something with your foot",
+      "example": "I kick the soccer ball into the goal and score a point for my team!",
+      "kid_friendly_explanation": "Kick is when you use your foot to hit or move something, like a ball.",
+      "dialog_example": "Kick the ball to me! Good job!"
+    },
+    {
+      "word": "paint",
+      "past_tense": "painted",
+      "present_participle": "painting",
+      "meaning": "To cover a surface with color using a brush and paint",
+      "example": "I paint pictures with watercolors, mixing blue and yellow to make green.",
+      "kid_friendly_explanation": "Paint is when you use a brush and colorful liquid to make art.",
+      "dialog_example": "Let's paint a beautiful sunset. Use orange and pink!"
+    },
+    {
+      "word": "cut",
+      "past_tense": "cut",
+      "present_participle": "cutting",
+      "meaning": "To separate something into pieces using scissors or a knife",
+      "example": "I cut paper into heart shapes to make valentines for my friends.",
+      "kid_friendly_explanation": "Cut is when you use scissors to separate paper or other things into pieces.",
+      "dialog_example": "Cut along the dotted line. Be careful with the scissors!"
+    },
+    {
+      "word": "paste",
+      "past_tense": "pasted",
+      "present_participle": "pasting",
+      "meaning": "To stick something onto something else using glue",
+      "example": "I paste the cut-out stars onto my paper to make a night sky picture.",
+      "kid_friendly_explanation": "Paste is when you use glue to stick one thing onto another.",
+      "dialog_example": "Paste the circle onto the square. Press it down gently."
     }
   ]
 }
