@@ -26,6 +26,7 @@ const arquivosJSON = [
   "world/food.json",
   "world/nature.json",
   "world/weather.json",
+  "world/history_of_english.json",
 
   // ========================================
   // FUN
