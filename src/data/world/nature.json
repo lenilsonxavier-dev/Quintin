@@ -1,0 +1,109 @@
+{
+  "nature": [
+    {
+      "word": "tree",
+      "plural": "trees",
+      "meaning": "A tall plant with a trunk, branches, and leaves",
+      "example": "The big oak tree gives shade on sunny days.",
+      "kid_friendly_explanation": "Trees are tall plants that give us shade and air."
+    },
+    {
+      "word": "flower",
+      "plural": "flowers",
+      "meaning": "A colorful plant part that makes seeds",
+      "example": "The yellow flower smells sweet and has soft petals.",
+      "kid_friendly_explanation": "Flowers are pretty, colorful plants."
+    },
+    {
+      "word": "grass",
+      "plural": "grass",
+      "meaning": "Green plants that cover the ground",
+      "example": "I run barefoot on the soft green grass.",
+      "kid_friendly_explanation": "Grass is the green carpet on the ground."
+    },
+    {
+      "word": "mountain",
+      "plural": "mountains",
+      "meaning": "A very high piece of land that goes up into the sky",
+      "example": "The mountain has snow on its top even in summer.",
+      "kid_friendly_explanation": "Mountains are very tall hills."
+    },
+    {
+      "word": "river",
+      "plural": "rivers",
+      "meaning": "A large natural flow of water",
+      "example": "The fish swim in the river and the water flows to the sea.",
+      "kid_friendly_explanation": "A river is water that moves across land."
+    },
+    {
+      "word": "ocean",
+      "plural": "oceans",
+      "meaning": "A very large body of salt water",
+      "example": "The ocean is so big you cannot see the other side.",
+      "kid_friendly_explanation": "The ocean is the big, salty water covering most of Earth."
+    },
+    {
+      "word": "cloud",
+      "plural": "clouds",
+      "meaning": "A white or gray fluffy thing in the sky made of water",
+      "example": "The cloud looks like a bunny floating in the sky.",
+      "kid_friendly_explanation": "Clouds are fluffy white things in the sky."
+    },
+    {
+      "word": "rain",
+      "plural": "none",
+      "meaning": "Water that falls from clouds to the ground",
+      "example": "I use my umbrella when the rain falls on my head.",
+      "kid_friendly_explanation": "Rain is water that falls from the sky."
+    },
+    {
+      "word": "snow",
+      "plural": "none",
+      "meaning": "White frozen water that falls like flakes in winter",
+      "example": "We build a snowman when the snow covers the ground.",
+      "kid_friendly_explanation": "Snow is white, fluffy cold stuff that falls in winter."
+    },
+    {
+      "word": "sun",
+      "plural": "suns",
+      "meaning": "The star that gives us light and heat",
+      "example": "The sun rises in the morning and sets at night.",
+      "kid_friendly_explanation": "The sun is the big bright thing in the sky."
+    },
+    {
+      "word": "moon",
+      "plural": "moons",
+      "meaning": "The round object in the night sky that shines",
+      "example": "The moon looks like a banana when it is a crescent.",
+      "kid_friendly_explanation": "The moon is the white circle in the night sky."
+    },
+    {
+      "word": "star",
+      "plural": "stars",
+      "meaning": "A tiny bright dot in the night sky",
+      "example": "I see a million stars twinkling in the dark sky.",
+      "kid_friendly_explanation": "Stars are little lights in the night sky."
+    },
+    {
+      "word": "rock",
+      "plural": "rocks",
+      "meaning": "A hard piece of earth or stone",
+      "example": "I collect smooth rocks from the beach.",
+      "kid_friendly_explanation": "Rocks are hard pieces of earth."
+    },
+    {
+      "word": "sand",
+      "plural": "sand",
+      "meaning": "Tiny grains of rock found on beaches",
+      "example": "I build a castle with wet sand at the beach.",
+      "kid_friendly_explanation": "Sand is tiny, soft grains on the beach."
+    },
+    {
+      "word": "sky",
+      "plural": "skies",
+      "meaning": "The space above the earth",
+      "example": "The sky is blue on a sunny day and gray when it rains.",
+      "kid_friendly_explanation": "The sky is what you see when you look up."
+    }
+  ]
+}
