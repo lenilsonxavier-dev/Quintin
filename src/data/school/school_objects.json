@@ -3,107 +3,224 @@
     {
       "word": "backpack",
       "plural": "backpacks",
-      "meaning": "A bag you wear on your back to carry school things",
-      "example": "My blue backpack holds my lunch box, books, and pencils.",
-      "kid_friendly_explanation": "A backpack is a bag you wear to carry your school stuff."
+      "meaning": "A bag with straps that you wear on your back to carry school supplies",
+      "example": "My blue backpack holds my lunch box, three books, pencils, and a water bottle.",
+      "kid_friendly_explanation": "A backpack is a bag you wear on your back to carry your school things.",
+      "parts": ["zipper", "pocket", "strap", "handle"],
+      "sentence": "I pack my backpack every night before school."
     },
     {
       "word": "pencil",
       "plural": "pencils",
-      "meaning": "A tool for writing and drawing that can be erased",
-      "example": "I use my yellow pencil to write my name on the paper.",
-      "kid_friendly_explanation": "A pencil is what you write with at school."
+      "meaning": "A long thin tool made of wood with a graphite center for writing and drawing",
+      "example": "I use my yellow pencil with an eraser on top to write my name on the paper.",
+      "kid_friendly_explanation": "A pencil is what you write with at school. You can erase mistakes!",
+      "parts": ["eraser", "wood", "lead", "tip"],
+      "sentence": "May I borrow a pencil, please?"
+    },
+    {
+      "word": "pen",
+      "plural": "pens",
+      "meaning": "A writing tool that uses ink instead of graphite",
+      "example": "My teacher says we can use blue or black pens when we write our final drafts.",
+      "kid_friendly_explanation": "A pen writes with ink. You cannot erase pen, so be careful!",
+      "parts": ["cap", "ink", "tip", "barrel"],
+      "sentence": "I wrote my story with a blue pen."
     },
     {
       "word": "eraser",
       "plural": "erasers",
-      "meaning": "A small object that removes pencil marks",
-      "example": "My eraser has a unicorn on it and smells like grapes.",
-      "kid_friendly_explanation": "An eraser rubs away pencil mistakes."
+      "meaning": "A small object that removes pencil marks from paper",
+      "example": "My pink eraser has a unicorn on it and smells like grapes when I use it.",
+      "kid_friendly_explanation": "An eraser rubs away pencil mistakes so you can try again.",
+      "types": ["pink eraser", "pencil-top eraser", "kneaded eraser"],
+      "sentence": "I used my eraser to fix the wrong answer."
+    },
+    {
+      "word": "sharpener",
+      "plural": "sharpeners",
+      "meaning": "A tool that makes dull pencils pointy again",
+      "example": "My pencil is dull and won't write well, so I put it in the sharpener.",
+      "kid_friendly_explanation": "A sharpener makes pencils pointy when they get dull from writing.",
+      "types": ["manual sharpener", "electric sharpener"],
+      "sentence": "I turn the handle of the sharpener to make my pencil pointy."
     },
     {
       "word": "crayon",
       "plural": "crayons",
-      "meaning": "A stick of colored wax for drawing",
-      "example": "I use a red crayon to draw a heart for my mom.",
-      "kid_friendly_explanation": "Crayons are colorful sticks for drawing pictures."
+      "meaning": "A stick of colored wax used for drawing and coloring",
+      "example": "I use a red crayon to draw a heart for my mom on her birthday card.",
+      "kid_friendly_explanation": "Crayons are colorful sticks for drawing pictures. They come in 64 colors!",
+      "colors": ["red", "blue", "yellow", "green", "purple", "orange", "pink", "brown", "black", "white"],
+      "sentence": "I colored the sun yellow with my crayon."
     },
     {
       "word": "marker",
       "plural": "markers",
-      "meaning": "A pen with a thick tip and bright ink",
-      "example": "The purple marker is my favorite for coloring flowers.",
-      "kid_friendly_explanation": "Markers are bright pens for coloring."
+      "meaning": "A pen with a thick tip and bright, colorful ink",
+      "example": "The purple marker is my favorite for coloring flowers and drawing rainbows.",
+      "kid_friendly_explanation": "Markers are bright pens for coloring. They have strong, vibrant colors.",
+      "types": ["washable marker", "permanent marker", "dry-erase marker"],
+      "sentence": "Don't forget to put the cap back on the marker."
+    },
+    {
+      "word": "colored pencil",
+      "plural": "colored pencils",
+      "meaning": "A pencil with colored wax inside instead of graphite",
+      "example": "I use colored pencils to draw detailed pictures because they don't smear like markers.",
+      "kid_friendly_explanation": "Colored pencils are like regular pencils but with colors inside.",
+      "sentence": "I need a green colored pencil for the grass."
     },
     {
       "word": "ruler",
       "plural": "rulers",
-      "meaning": "A straight tool for measuring and drawing lines",
-      "example": "My ruler is 12 inches long and has a bumpy edge.",
-      "kid_friendly_explanation": "A ruler measures how long something is."
+      "meaning": "A straight tool for measuring length and drawing straight lines",
+      "example": "My ruler is 12 inches long and has a bumpy edge for cutting paper shapes.",
+      "kid_friendly_explanation": "A ruler measures how long something is in inches or centimeters.",
+      "units": ["inches", "centimeters", "millimeters"],
+      "sentence": "I used my ruler to draw a straight line."
     },
     {
       "word": "scissors",
       "plural": "scissors",
-      "meaning": "A tool with two blades for cutting paper",
-      "example": "I use scissors carefully to cut out a star shape.",
-      "kid_friendly_explanation": "Scissors cut paper into shapes."
+      "meaning": "A tool with two blades and handles used for cutting paper and other materials",
+      "example": "I use scissors carefully to cut out a star shape from construction paper.",
+      "kid_friendly_explanation": "Scissors cut paper into shapes. Always be careful with the sharp blades!",
+      "parts": ["blade", "handle", "screw", "tip"],
+      "sentence": "These scissors are for left-handed people."
     },
     {
       "word": "glue",
       "plural": "glues",
       "meaning": "A sticky substance that makes things stick together",
-      "example": "I put glue on the back of the picture and stick it to the paper.",
-      "kid_friendly_explanation": "Glue makes things stick."
+      "example": "I put white glue on the back of the picture and stick it to the construction paper.",
+      "kid_friendly_explanation": "Glue makes things stick. A little bit goes a long way!",
+      "types": ["glue stick", "liquid glue", "white glue", "school glue"],
+      "sentence": "Wait for the glue to dry before you move your project."
+    },
+    {
+      "word": "glue stick",
+      "plural": "glue sticks",
+      "meaning": "A solid stick of glue that twists up from a tube",
+      "example": "The purple glue stick goes on purple but dries clear, so I can see where I put it.",
+      "kid_friendly_explanation": "A glue stick is solid glue in a tube. Twist it up and rub it on paper.",
+      "sentence": "My glue stick is empty. I need a new one."
+    },
+    {
+      "word": "tape",
+      "plural": "tapes",
+      "meaning": "A long thin strip with sticky adhesive on one or both sides",
+      "example": "I use clear tape to fix the torn page in my favorite book.",
+      "kid_friendly_explanation": "Tape is sticky on one side and helps you stick things together.",
+      "types": ["clear tape", "masking tape", "duct tape", "washi tape"],
+      "sentence": "Cut a piece of tape and stick it over the tear."
     },
     {
       "word": "notebook",
       "plural": "notebooks",
-      "meaning": "A book of blank paper for writing",
-      "example": "My notebook has lines to help me write neatly.",
-      "kid_friendly_explanation": "A notebook is where you write in school."
+      "meaning": "A book of blank or lined paper for writing notes and assignments",
+      "example": "My notebook has wide-ruled lines to help me write my letters neatly.",
+      "kid_friendly_explanation": "A notebook is where you write in school. It has many blank pages.",
+      "types": ["spiral notebook", "composition notebook", "graph notebook"],
+      "sentence": "Write today's date in your notebook."
     },
     {
       "word": "folder",
       "plural": "folders",
-      "meaning": "A folded piece of cardboard that holds papers",
-      "example": "I keep my homework in my red folder so I don't lose it.",
-      "kid_friendly_explanation": "A folder holds your papers together."
+      "meaning": "A folded piece of cardboard or plastic that holds loose papers",
+      "example": "I keep my homework in my red folder so I don't lose it on the way to school.",
+      "kid_friendly_explanation": "A folder holds your papers together so they don't get lost.",
+      "parts": ["pocket", "prong", "tab"],
+      "sentence": "Put your worksheet inside your folder."
+    },
+    {
+      "word": "binder",
+      "plural": "binders",
+      "meaning": "A hard cover with metal rings that hold hole-punched paper",
+      "example": "My three-ring binder has dividers for math, reading, science, and social studies.",
+      "kid_friendly_explanation": "A binder is like a big folder with rings that hold the paper in place.",
+      "parts": ["cover", "ring", "spine", "pocket"],
+      "sentence": "Open the rings to add more paper to your binder."
+    },
+    {
+      "word": "hole punch",
+      "plural": "hole punches",
+      "meaning": "A tool that makes round holes in paper so it can go in a binder",
+      "example": "I use the hole punch to make three holes in my paper for my binder.",
+      "kid_friendly_explanation": "A hole punch makes holes in paper so you can put it in a binder.",
+      "sentence": "Line up the paper carefully before you punch the holes."
     },
     {
       "word": "lunchbox",
       "plural": "lunchboxes",
-      "meaning": "A container that holds your lunch food",
-      "example": "My lunchbox has a dinosaur on it and keeps my sandwich cold.",
-      "kid_friendly_explanation": "A lunchbox carries your food to school."
+      "meaning": "A container that holds your lunch food to take to school",
+      "example": "My metal lunchbox has a dinosaur on it and keeps my sandwich cool until noon.",
+      "kid_friendly_explanation": "A lunchbox carries your food to school so you can eat at lunchtime.",
+      "parts": ["handle", "zipper", "compartment", "insulation"],
+      "sentence": "Don't forget to put your lunchbox in your backpack."
     },
     {
       "word": "water bottle",
       "plural": "water bottles",
-      "meaning": "A container for drinking water",
-      "example": "I fill my water bottle at the fountain when I am thirsty.",
-      "kid_friendly_explanation": "A water bottle holds your water."
+      "meaning": "A reusable container for carrying drinking water",
+      "example": "I fill my blue water bottle at the fountain when I am thirsty during recess.",
+      "kid_friendly_explanation": "A water bottle holds your water so you can stay hydrated at school.",
+      "parts": ["cap", "straw", "spout", "bottle", "carabiner"],
+      "sentence": "Please fill your water bottle before we go outside."
     },
     {
       "word": "calculator",
       "plural": "calculators",
-      "meaning": "A small machine that does math problems",
-      "example": "I use my calculator to check if 5 plus 3 equals 8.",
-      "kid_friendly_explanation": "A calculator helps you do math."
+      "meaning": "A small electronic machine that performs math calculations",
+      "example": "I use my calculator to check if 5 plus 3 equals 8 and 12 minus 4 equals 8.",
+      "kid_friendly_explanation": "A calculator helps you do math faster. It has number buttons and a screen.",
+      "buttons": ["0-9", "+", "-", "×", "÷", "=", "C", "AC"],
+      "sentence": "Use your calculator to solve the big multiplication problem."
     },
     {
       "word": "globe",
       "plural": "globes",
-      "meaning": "A round model of the Earth",
-      "example": "The globe spins so I can see all the countries.",
-      "kid_friendly_explanation": "A globe is a round map of the world."
+      "meaning": "A round model of the Earth showing continents, countries, and oceans",
+      "example": "The globe spins around so I can see all the countries and find where I live.",
+      "kid_friendly_explanation": "A globe is a round map of the whole world that you can spin.",
+      "parts": ["stand", "axis", "map", "ocean", "continent"],
+      "sentence": "Spin the globe and point to Africa."
     },
     {
-      "word": "sharpener",
-      "plural": "sharpeners",
-      "meaning": "A tool that makes pencils pointy again",
-      "example": "My pencil is dull, so I put it in the sharpener.",
-      "kid_friendly_explanation": "A sharpener makes pencils pointy."
+      "word": "map",
+      "plural": "maps",
+      "meaning": "A drawing of an area showing where places are located",
+      "example": "The map of our town shows my house, my school, the park, and the library.",
+      "kid_friendly_explanation": "A map helps you find where places are. It's like a picture of the world.",
+      "types": ["world map", "country map", "city map", "treasure map"],
+      "sentence": "Look at the map to find the treasure."
+    },
+    {
+      "word": "compass",
+      "plural": "compasses",
+      "meaning": "A tool that shows which direction is north, south, east, and west",
+      "example": "The compass needle always points north, so we can find our way in the forest.",
+      "kid_friendly_explanation": "A compass tells you which way is north so you don't get lost.",
+      "directions": ["North", "South", "East", "West"],
+      "sentence": "Follow the compass north to reach the campsite."
+    },
+    {
+      "word": "clock",
+      "plural": "clocks",
+      "meaning": "A device that tells what time it is, usually with numbers and hands",
+      "example": "The clock on the wall says 12 o'clock, so it is time to go to lunch.",
+      "kid_friendly_explanation": "A clock tells you what time it is so you know when to do things.",
+      "parts": ["face", "hour hand", "minute hand", "numbers", "tick marks"],
+      "sentence": "When the big hand is on 12 and the little hand is on 3, it is 3 o'clock."
+    },
+    {
+      "word": "calendar",
+      "plural": "calendars",
+      "meaning": "A chart showing the days, weeks, and months of the year",
+      "example": "We look at the calendar every morning to see which day it is and what we will learn.",
+      "kid_friendly_explanation": "A calendar shows the days of the week and months of the year.",
+      "parts": ["month", "week", "day", "date", "year"],
+      "sentence": "Circle your birthday on the calendar."
     }
   ]
 }
