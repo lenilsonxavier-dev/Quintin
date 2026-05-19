@@ -4,161 +4,241 @@
       "word": "big",
       "comparative": "bigger",
       "superlative": "biggest",
-      "meaning": "Large in size",
-      "example": "My dad has a big car that fits our whole family.",
-      "kid_friendly_explanation": "Big means large, not small."
+      "opposite": "small",
+      "meaning": "Large in size, not small",
+      "example": "My dad has a big blue car that fits our whole family of five people.",
+      "kid_friendly_explanation": "Big means large. An elephant is big. A mouse is not big.",
+      "sentence_builder": "The ______ is big. (The house is big.)"
     },
     {
       "word": "small",
       "comparative": "smaller",
       "superlative": "smallest",
-      "meaning": "Little in size",
-      "example": "I found a small ladybug on the green leaf.",
-      "kid_friendly_explanation": "Small means little, not big."
+      "opposite": "big",
+      "meaning": "Little in size, not big",
+      "example": "I found a small ladybug crawling on a green leaf in our garden.",
+      "kid_friendly_explanation": "Small means little, like an ant or a button.",
+      "sentence_builder": "The ______ is small. (The bug is small.)"
     },
     {
       "word": "happy",
       "comparative": "happier",
       "superlative": "happiest",
-      "meaning": "Feeling good and joyful",
-      "example": "I feel happy when I play with my friends at the park.",
-      "kid_friendly_explanation": "Happy is when you feel good and smile."
+      "opposite": "sad",
+      "meaning": "Feeling good, joyful, and pleased",
+      "example": "I feel happy when I play with my friends at the park on sunny days.",
+      "kid_friendly_explanation": "Happy is when you feel good and you smile a lot.",
+      "sentence_builder": "I am happy when ______. (I am happy when I play.)"
     },
     {
       "word": "sad",
       "comparative": "sadder",
       "superlative": "saddest",
-      "meaning": "Feeling unhappy",
-      "example": "I feel sad when my favorite toy breaks.",
-      "kid_friendly_explanation": "Sad is when you feel like crying."
+      "opposite": "happy",
+      "meaning": "Feeling unhappy, down, or upset",
+      "example": "I feel sad when my favorite toy breaks and I cannot fix it.",
+      "kid_friendly_explanation": "Sad is when you feel like crying or your mouth makes a frown.",
+      "sentence_builder": "I feel sad when ______. (I feel sad when I lose my toy.)"
     },
     {
       "word": "hot",
       "comparative": "hotter",
       "superlative": "hottest",
-      "meaning": "Having a high temperature",
-      "example": "The soup is hot, so I blow on it before I eat.",
-      "kid_friendly_explanation": "Hot means very warm, like fire or the sun."
+      "opposite": "cold",
+      "meaning": "Having a high temperature, very warm",
+      "example": "The soup is very hot, so I blow on it carefully before I take a bite.",
+      "kid_friendly_explanation": "Hot means very warm, like the sun, a fire, or soup from a pot.",
+      "sentence_builder": "The ______ is hot. (The stove is hot.)"
     },
     {
       "word": "cold",
       "comparative": "colder",
       "superlative": "coldest",
-      "meaning": "Having a low temperature",
-      "example": "The ice cream is cold and delicious on a summer day.",
-      "kid_friendly_explanation": "Cold means not warm, like ice."
+      "opposite": "hot",
+      "meaning": "Having a low temperature, not warm",
+      "example": "The ice cream is cold and delicious on a hot summer day at the beach.",
+      "kid_friendly_explanation": "Cold means not warm, like ice, snow, or a cold drink.",
+      "sentence_builder": "The ______ is cold. (The ice cube is cold.)"
     },
     {
       "word": "fast",
       "comparative": "faster",
       "superlative": "fastest",
-      "meaning": "Moving quickly",
-      "example": "The cheetah is fast and can run faster than a car.",
-      "kid_friendly_explanation": "Fast means moving quickly, not slow."
+      "opposite": "slow",
+      "meaning": "Moving or able to move quickly",
+      "example": "The cheetah is very fast and can run faster than a car on a highway.",
+      "kid_friendly_explanation": "Fast means moving quickly, like a race car or a rocket.",
+      "sentence_builder": "The ______ is fast. (The train is fast.)"
     },
     {
       "word": "slow",
       "comparative": "slower",
       "superlative": "slowest",
-      "meaning": "Moving at a low speed",
-      "example": "The turtle is slow but very cute.",
-      "kid_friendly_explanation": "Slow means not fast."
+      "opposite": "fast",
+      "meaning": "Moving at a low speed, not fast",
+      "example": "The turtle is very slow but very cute, and he always wins in the story!",
+      "kid_friendly_explanation": "Slow means not fast, like a snail or a turtle.",
+      "sentence_builder": "The ______ is slow. (The snail is slow.)"
     },
     {
       "word": "soft",
       "comparative": "softer",
       "superlative": "softest",
-      "meaning": "Pleasant to touch, not hard",
-      "example": "My blanket is soft and keeps me warm at night.",
-      "kid_friendly_explanation": "Soft means nice and squishy, like a pillow."
+      "opposite": "hard",
+      "meaning": "Pleasant to touch, squishy, not hard or rough",
+      "example": "My warm blanket is soft and keeps me cozy at night when I sleep.",
+      "kid_friendly_explanation": "Soft means nice and squishy to touch, like a pillow or a cat's fur.",
+      "sentence_builder": "The ______ is soft. (The teddy bear is soft.)"
     },
     {
       "word": "hard",
       "comparative": "harder",
       "superlative": "hardest",
-      "meaning": "Firm and solid, not soft",
-      "example": "The rock is hard and I cannot break it.",
-      "kid_friendly_explanation": "Hard means not soft, like a table."
+      "opposite": "soft",
+      "meaning": "Firm and solid, difficult to press or break",
+      "example": "The rock is so hard that I cannot break it, even if I try very hard.",
+      "kid_friendly_explanation": "Hard means not soft, like a table, a rock, or a floor.",
+      "sentence_builder": "The ______ is hard. (The floor is hard.)"
     },
     {
       "word": "loud",
       "comparative": "louder",
       "superlative": "loudest",
-      "meaning": "Making a lot of noise",
-      "example": "The fire truck makes a loud siren that wakes me up.",
-      "kid_friendly_explanation": "Loud means noisy, like a drum."
+      "opposite": "quiet",
+      "meaning": "Making a lot of noise, easy to hear",
+      "example": "The fire truck makes a loud siren that wakes me up in the morning.",
+      "kid_friendly_explanation": "Loud means noisy, like a drum, a fire alarm, or a cheering crowd.",
+      "sentence_builder": "The ______ is loud. (The bell is loud.)"
     },
     {
       "word": "quiet",
       "comparative": "quieter",
       "superlative": "quietest",
-      "meaning": "Making very little noise",
-      "example": "The library is quiet so people can read.",
-      "kid_friendly_explanation": "Quiet means not noisy, like a whisper."
+      "opposite": "loud",
+      "meaning": "Making very little noise, silent or almost silent",
+      "example": "The library is very quiet so that people can read their books peacefully.",
+      "kid_friendly_explanation": "Quiet means not noisy, like a whisper or a sleeping baby.",
+      "sentence_builder": "The ______ is quiet. (The mouse is quiet.)"
     },
     {
       "word": "bright",
       "comparative": "brighter",
       "superlative": "brightest",
-      "meaning": "Giving out a lot of light",
-      "example": "The flashlight is bright in the dark room.",
-      "kid_friendly_explanation": "Bright means shining a lot of light."
+      "opposite": "dark",
+      "meaning": "Giving out a lot of light, shining strongly",
+      "example": "The flashlight is very bright in the dark room and helps me see.",
+      "kid_friendly_explanation": "Bright means shining a lot of light, like the sun or a light bulb.",
+      "sentence_builder": "The ______ is bright. (The star is bright.)"
     },
     {
       "word": "dark",
       "comparative": "darker",
       "superlative": "darkest",
-      "meaning": "With little or no light",
-      "example": "It is dark outside when I go to bed.",
-      "kid_friendly_explanation": "Dark means no light, like night time."
+      "opposite": "bright",
+      "meaning": "With little or no light, hard to see",
+      "example": "It is very dark outside when I go to bed, so I use a night light.",
+      "kid_friendly_explanation": "Dark means no light, like night time or a closet with the door closed.",
+      "sentence_builder": "The ______ is dark. (The cave is dark.)"
     },
     {
       "word": "new",
       "comparative": "newer",
       "superlative": "newest",
-      "meaning": "Not old, recently made or bought",
-      "example": "I have new shoes that light up when I walk.",
-      "kid_friendly_explanation": "New means fresh and never used before."
+      "opposite": "old",
+      "meaning": "Not old, recently made, bought, or found",
+      "example": "I have new shoes that light up with bright colors when I take a step.",
+      "kid_friendly_explanation": "New means fresh and never used before, like a toy still in the box.",
+      "sentence_builder": "I have a new ______. (I have a new backpack.)"
     },
     {
       "word": "old",
       "comparative": "older",
       "superlative": "oldest",
-      "meaning": "Having existed for a long time",
-      "example": "My grandma has an old photo from when she was a kid.",
-      "kid_friendly_explanation": "Old means something that has been here a long time."
+      "opposite": "new",
+      "meaning": "Having existed for a long time, not new",
+      "example": "My grandma has an old photograph from when she was a little girl.",
+      "kid_friendly_explanation": "Old means something that has been here a long time, like a grandparent or an antique.",
+      "sentence_builder": "The ______ is old. (The tree is old.)"
     },
     {
       "word": "clean",
       "comparative": "cleaner",
       "superlative": "cleanest",
-      "meaning": "Not dirty, fresh",
-      "example": "I put on clean clothes after my bath.",
-      "kid_friendly_explanation": "Clean means not dirty."
+      "opposite": "dirty",
+      "meaning": "Not dirty, free from dirt or stains",
+      "example": "I put on clean clothes after I take a bath with soap and water.",
+      "kid_friendly_explanation": "Clean means not dirty. Your hands are clean after you wash them.",
+      "sentence_builder": "The ______ is clean. (The plate is clean.)"
     },
     {
       "word": "dirty",
       "comparative": "dirtier",
       "superlative": "dirtiest",
-      "meaning": "Not clean, with dirt or stains",
-      "example": "My hands are dirty after playing in the mud.",
-      "kid_friendly_explanation": "Dirty means messy or not clean."
+      "opposite": "clean",
+      "meaning": "Not clean, covered with dirt or stains",
+      "example": "My hands are dirty after playing in the mud and making mud pies.",
+      "kid_friendly_explanation": "Dirty means messy or not clean, like clothes after playing outside.",
+      "sentence_builder": "The ______ is dirty. (The shirt is dirty.)"
     },
     {
       "word": "sweet",
       "comparative": "sweeter",
       "superlative": "sweetest",
-      "meaning": "Tasting like sugar or honey",
-      "example": "Strawberries are sweet and yummy.",
-      "kid_friendly_explanation": "Sweet means tasting like candy."
+      "opposite": "sour",
+      "meaning": "Tasting like sugar, honey, or candy",
+      "example": "Fresh strawberries are sweet and yummy, especially with whipped cream.",
+      "kid_friendly_explanation": "Sweet means tasting like candy, cookies, or cake.",
+      "sentence_builder": "The ______ is sweet. (The apple is sweet.)"
     },
     {
       "word": "sour",
       "comparative": "sourer",
       "superlative": "sourest",
-      "meaning": "Having a sharp, tangy taste",
-      "example": "Lemons are sour and make my face scrunch up.",
-      "kid_friendly_explanation": "Sour means a sharp taste, like a lemon."
+      "opposite": "sweet",
+      "meaning": "Having a sharp, tangy taste that makes your mouth pucker",
+      "example": "Lemons are very sour and make my face scrunch up when I bite them.",
+      "kid_friendly_explanation": "Sour means a sharp taste, like a lemon, lime, or sour candy.",
+      "sentence_builder": "The ______ is sour. (The pickle is sour.)"
+    },
+    {
+      "word": "tall",
+      "comparative": "taller",
+      "superlative": "tallest",
+      "opposite": "short",
+      "meaning": "Having a greater than average height",
+      "example": "My big brother is tall and can reach things on the top shelf for me.",
+      "kid_friendly_explanation": "Tall means high up, like a giraffe or a skyscraper.",
+      "sentence_builder": "The ______ is tall. (The building is tall.)"
+    },
+    {
+      "word": "short",
+      "comparative": "shorter",
+      "superlative": "shortest",
+      "opposite": "tall",
+      "meaning": "Having a small height, not tall",
+      "example": "I am short compared to my dad, but I will grow taller someday.",
+      "kid_friendly_explanation": "Short means not tall, like a puppy or a pencil.",
+      "sentence_builder": "The ______ is short. (The grass is short.)"
+    },
+    {
+      "word": "heavy",
+      "comparative": "heavier",
+      "superlative": "heaviest",
+      "opposite": "light",
+      "meaning": "Weighing a lot, difficult to lift",
+      "example": "The box of books is heavy, so I need help from my dad to carry it.",
+      "kid_friendly_explanation": "Heavy means something weighs a lot and is hard to pick up.",
+      "sentence_builder": "The ______ is heavy. (The rock is heavy.)"
+    },
+    {
+      "word": "light",
+      "comparative": "lighter",
+      "superlative": "lightest",
+      "opposite": "heavy",
+      "meaning": "Weighing very little, easy to lift",
+      "example": "A feather is light and floats gently down to the ground.",
+      "kid_friendly_explanation": "Light means something is easy to lift, like a piece of paper.",
+      "sentence_builder": "The ______ is light. (The balloon is light.)"
     }
   ]
 }
