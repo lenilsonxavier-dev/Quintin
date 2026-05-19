@@ -1,0 +1,130 @@
+{
+  "history_of_english": {
+    "celtas": {
+      "emoji": "🏰",
+      "resposta_pt": "Os celtas foram os primeiros habitantes da Inglaterra. Eles viviam em tribos, adoravam a natureza e deixaram palavras como 'avon' (rio) e nomes de lugares como Londres!",
+      "resposta_en": "The Celts were the first inhabitants of England. They lived in tribes, worshipped nature, and left words like 'avon' (river) and place names like London!",
+      "exemplo_pt": "Rio Avon significa 'rio' em celta - então é 'Rio Rio'!",
+      "exemplo_en": "River Avon means 'river' in Celtic - so it's 'River River'!"
+    },
+    "romanos": {
+      "emoji": "🏛️",
+      "resposta_pt": "Os romanos chegaram em 43 d.C. e ficaram por 400 anos! Construíram estradas, muralhas e levaram o latim, que deu palavras como 'wall' (muralha) e 'street' (estrada).",
+      "resposta_en": "The Romans arrived in 43 AD and stayed for 400 years! They built roads, walls, and brought Latin, which gave words like 'wall' and 'street'.",
+      "exemplo_pt": "A palavra 'street' (rua) vem do latim 'strata'!",
+      "exemplo_en": "The word 'street' comes from Latin 'strata'!"
+    },
+    "anglos_saxoes": {
+      "emoji": "⚔️🛡️",
+      "resposta_pt": "Os anglos e saxões vieram da Alemanha por volta de 450 d.C. Eles deram o nome à Inglaterra ('Angle-land') e criaram o inglês antigo, com palavras como 'house', 'mother', 'father'!",
+      "resposta_en": "The Angles and Saxons came from Germany around 450 AD. They gave England its name ('Angle-land') and created Old English, with words like 'house', 'mother', 'father'!",
+      "exemplo_pt": "'England' vem de 'Angle-land' (terra dos anglos)!",
+      "exemplo_en": "'England' comes from 'Angle-land' (land of the Angles)!"
+    },
+    "vikings": {
+      "emoji": "⚔️🌊",
+      "resposta_pt": "Os vikings chegaram da Dinamarca e Noruega por volta de 800 d.C. Eles eram guerreiros e navegadores! Deram palavras como 'sky', 'egg', 'window' e 'husband'!",
+      "resposta_en": "The Vikings arrived from Denmark and Norway around 800 AD. They were warriors and sailors! They gave words like 'sky', 'egg', 'window', and 'husband'!",
+      "exemplo_pt": "'Window' vem do nórdico 'vindauga' - que significa 'olho do vento'!",
+      "exemplo_en": "'Window' comes from Old Norse 'vindauga' - which means 'wind's eye'!"
+    },
+    "normandos": {
+      "emoji": "👑⚔️",
+      "resposta_pt": "Em 1066, Guilherme, o Conquistador, veio da França e venceu a batalha de Hastings. Os normandos trouxeram o francês para a Inglaterra. Por 300 anos, os reis falavam francês e o povo falava inglês!",
+      "resposta_en": "In 1066, William the Conqueror came from France and won the Battle of Hastings. The Normans brought French to England. For 300 years, kings spoke French and common people spoke English!",
+      "exemplo_pt": "Animais têm nome em inglês (cow - vaca), mas a carne tem nome em francês (beef - carne de boi)!",
+      "exemplo_en": "Animals have English names (cow), but meat has French names (beef)!"
+    },
+    "chaucer": {
+      "emoji": "📖✍️",
+      "resposta_pt": "Geoffrey Chaucer viveu no século XIV e escreveu 'Os Contos da Cantuária' em inglês médio. Foi um dos primeiros a escrever livros em inglês em vez de francês ou latim!",
+      "resposta_en": "Geoffrey Chaucer lived in the 14th century and wrote 'The Canterbury Tales' in Middle English. He was one of the first to write books in English instead of French or Latin!",
+      "exemplo_pt": "Chaucer inventou muitas palavras e expressões que usamos até hoje!",
+      "exemplo_en": "Chaucer invented many words and expressions we still use today!"
+    },
+    "great_vowel_shift": {
+      "emoji": "🔊🔄",
+      "resposta_pt": "Entre 1400 e 1700, aconteceu a Grande Mudança das Vogais. As pessoas começaram a pronunciar as vogais de forma diferente! 'Mice' (camundongos) era 'mees', mas passou a ser 'mais'.",
+      "resposta_en": "Between 1400 and 1700, the Great Vowel Shift happened. People started pronouncing vowels differently! 'Mice' used to be 'mees', but became 'mais'.",
+      "exemplo_pt": "É como se todos resolvessem falar de um jeito novo da noite para o dia!",
+      "exemplo_en": "It's as if everyone decided to speak in a new way overnight!"
+    },
+    "shakespeare": {
+      "emoji": "🎭📜",
+      "resposta_pt": "William Shakespeare (1564-1616) é o escritor mais famoso do inglês! Ele inventou mais de 1.700 palavras novas, como 'lonely' (solitário), 'bump' (colisão) e 'eyeball' (globo ocular)!",
+      "resposta_en": "William Shakespeare (1564-1616) is the most famous English writer! He invented over 1,700 new words, like 'lonely', 'bump', and 'eyeball'!",
+      "exemplo_pt": "Você já usou 'break the ice' (quebrar o gelo)? Shakespeare inventou essa expressão!",
+      "exemplo_en": "Have you ever used 'break the ice'? Shakespeare invented that expression!"
+    },
+    "king_james_bible": {
+      "emoji": "📖👑",
+      "resposta_pt": "Em 1611, o Rei James mandou traduzir a Bíblia para o inglês. Essa tradução ajudou a espalhar o inglês por todo o mundo e fixou muitas palavras e frases que usamos hoje.",
+      "resposta_en": "In 1611, King James ordered the Bible to be translated into English. This translation helped spread English throughout the world and fixed many words and phrases we use today.",
+      "exemplo_pt": "Muitas expressões famosas, como 'a gota d'água' e 'o amor ao dinheiro é a raiz de todos os males' vêm dessa Bíblia!",
+      "exemplo_en": "Many famous expressions, like 'the writing on the wall' and 'the root of all evil', come from this Bible!"
+    },
+    "dicionarios": {
+      "emoji": "📚🔤",
+      "resposta_pt": "No século XVIII, Samuel Johnson (1755) e Noah Webster (1828) criaram dicionários de inglês. Eles organizaram as palavras, a grafia e os significados que usamos até hoje!",
+      "resposta_en": "In the 18th century, Samuel Johnson (1755) and Noah Webster (1828) created English dictionaries. They organized words, spelling, and meanings we still use today!",
+      "exemplo_pt": "Noah Webster é o 'pai' do inglês americano - ele mudou 'colour' para 'color'!",
+      "exemplo_en": "Noah Webster is the 'father' of American English - he changed 'colour' to 'color'!"
+    },
+    "english_in_america": {
+      "emoji": "🇺🇸🌎",
+      "resposta_pt": "Quando os ingleses foram morar na América, o inglês começou a mudar. Surgiu o inglês americano, com palavras novas como 'cookie', 'elevator' e 'truck'!",
+      "resposta_en": "When the English went to live in America, English began to change. American English emerged, with new words like 'cookie', 'elevator', and 'truck'!",
+      "exemplo_pt": "No Reino Unido se diz 'lift' (elevador) e 'lorry' (caminhão). Nos EUA se diz 'elevator' e 'truck'!",
+      "exemplo_en": "In the UK they say 'lift' and 'lorry'. In the US they say 'elevator' and 'truck'!"
+    },
+    "english_worldwide": {
+      "emoji": "🌍🗣️",
+      "resposta_pt": "Hoje, o inglês é falado em mais de 100 países! É a língua da internet, dos aviões, da ciência, dos videogames e da música pop. Cerca de 1,5 bilhão de pessoas falam inglês no mundo!",
+      "resposta_en": "Today, English is spoken in more than 100 countries! It's the language of the internet, airplanes, science, video games, and pop music. About 1.5 billion people speak English in the world!",
+      "exemplo_pt": "Quando você viaja de avião, os pilotos falam inglês com as torres de controle em qualquer lugar do mundo!",
+      "exemplo_en": "When you travel by plane, pilots speak English with control towers anywhere in the world!"
+    },
+    "modern_words": {
+      "emoji": "💻📱",
+      "resposta_pt": "O inglês continua mudando! A cada ano, novas palavras entram no dicionário, como 'selfie', 'emoji', 'google', 'app', 'streaming' e 'troll'!",
+      "resposta_en": "English keeps changing! Every year, new words enter the dictionary, like 'selfie', 'emoji', 'google', 'app', 'streaming', and 'troll'!",
+      "exemplo_pt": "A palavra 'selfie' entrou no dicionário em 2013! Antes disso, ninguém usava essa palavra.",
+      "exemplo_en": "The word 'selfie' entered the dictionary in 2013! Before that, no one used this word."
+    },
+    "loanwords_portuguese": {
+      "emoji": "🇵🇹🤝🇬🇧",
+      "resposta_pt": "O inglês também pegou palavras emprestadas do português! Palavras como 'cobra', 'piranha', 'flamingo', 'tucano', 'fetish' (feitiço) e 'marmalade' (marmelada) vieram do nosso idioma!",
+      "resposta_en": "English also borrowed words from Portuguese! Words like 'cobra', 'piranha', 'flamingo', 'toucan', 'fetish', and 'marmalade' came from our language!",
+      "exemplo_pt": "Flamingo em inglês é 'flamingo'! Os portugueses viram a ave no Brasil e o nome se espalhou pelo mundo.",
+      "exemplo_en": "Flamingo in English is 'flamingo'! The Portuguese saw the bird in Brazil and the name spread around the world."
+    },
+    "fun_fact_days": {
+      "emoji": "📅⭐",
+      "resposta_pt": "Os dias da semana em inglês têm nomes de deuses! Tuesday (terça) é do deus Tyr, Wednesday (quarta) é do deus Odin, Thursday (quinta) é do deus Thor e Friday (sexta) é da deusa Frigg!",
+      "resposta_en": "The days of the week in English are named after gods! Tuesday is for Tyr, Wednesday for Odin, Thursday for Thor, and Friday for the goddess Frigg!",
+      "exemplo_pt": "Thor é o deus do trovão em inglês! 'Thor's day' virou 'Thursday'!",
+      "exemplo_en": "Thor is the god of thunder! 'Thor's day' became 'Thursday'!"
+    },
+    "fun_fact_longest_word": {
+      "emoji": "📏🔡",
+      "resposta_pt": "A palavra mais longa do inglês tem 189.819 letras! É o nome químico de uma proteína. Levaria mais de 3 horas para falar essa palavra inteira!",
+      "resposta_en": "The longest word in English has 189,819 letters! It's the chemical name of a protein. It would take over 3 hours to say the whole word!",
+      "exemplo_pt": "A segunda maior palavra do dicionário é 'pneumonoultramicroscopicsilicovolcanoconiosis' (45 letras)!",
+      "exemplo_en": "The second longest word in the dictionary is 'pneumonoultramicroscopicsilicovolcanoconiosis' (45 letters)!"
+    },
+    "fun_fact_most_meanings": {
+      "emoji": "🎯📖",
+      "resposta_pt": "A palavra 'set' tem mais de 430 significados diferentes em inglês! Pode ser 'colocar', 'conjunto', 'cenário' e muitas outras coisas!",
+      "resposta_en": "The word 'set' has more than 430 different meanings in English! It can be 'to place', 'collection', 'scenery', and many other things!",
+      "exemplo_pt": "'Set' é a palavra com mais significados em qualquer idioma do mundo!",
+      "exemplo_en": "'Set' is the word with the most meanings in any language in the world!"
+    },
+    "why_learn": {
+      "emoji": "🌟🎮🎬",
+      "resposta_pt": "Aprender inglês é incrível! Você pode jogar Minecraft e Fortnite sem legendas, cantar músicas da Taylor Swift, viajar pelo mundo e fazer amigos em outros países!",
+      "resposta_en": "Learning English is awesome! You can play Minecraft and Fortnite without subtitles, sing Taylor Swift songs, travel the world, and make friends in other countries!",
+      "exemplo_pt": "Você já sabe algumas palavras em inglês sem nem perceber! 'Play', 'game', 'start', 'pause'...",
+      "exemplo_en": "You already know some English words without even realizing it! 'Play', 'game', 'start', 'pause'..."
+    }
+  }
+}
