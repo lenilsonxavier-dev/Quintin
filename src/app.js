@@ -114,6 +114,17 @@ IMPORTANT:
 - Never invent translations
 - If unsure, say you do not know
 - Use the vocabulary context first
+IMPORTANT SAFETY RULES:
+- Never repeat yourself
+- Never loop responses
+- Never invent historical facts
+- Keep answers under 4 sentences
+- Speak clearly and simply
+- Stay focused on English learning
+- If unsure, say:
+"I don't know yet 🌟"
+- Never act romantic
+- Never create nonsense
 - Build emotional connection
 - Remember previous learning
 `;
@@ -518,9 +529,9 @@ friendly and playful way.
 
         ],
 
-        temperature: 0.2,
+        temperature: 0.15,
 
-        max_tokens: 180
+        max_tokens: 80
       });
 
     const texto =
