@@ -1,0 +1,142 @@
+{
+  "t-rex": {
+    "pt": "Tiranossauro Rex",
+    "emoji": "🦖",
+    "fact": "T-Rex was one of the biggest meat-eating dinosaurs ever!",
+    "size": "40 feet long",
+    "diet": "carnivore (meat-eater)"
+  },
+  "triceratops": {
+    "pt": "Tricerátopo",
+    "emoji": "🦕",
+    "fact": "Triceratops had three horns on its face to fight predators.",
+    "size": "30 feet long",
+    "diet": "herbivore (plant-eater)"
+  },
+  "brontosaurus": {
+    "pt": "Brontossauro",
+    "emoji": "🦕",
+    "fact": "Brontosaurus had a very long neck to reach tall trees.",
+    "size": "75 feet long",
+    "diet": "herbivore (plant-eater)"
+  },
+  "stegosaurus": {
+    "pt": "Estegossauro",
+    "emoji": "🦕",
+    "fact": "Stegosaurus had plates on its back and spikes on its tail!",
+    "size": "30 feet long",
+    "diet": "herbivore (plant-eater)"
+  },
+  "velociraptor": {
+    "pt": "Velociraptor",
+    "emoji": "🦖",
+    "fact": "Velociraptor was fast and had sharp claws!",
+    "size": "6 feet long",
+    "diet": "carnivore (meat-eater)"
+  },
+  "ankylosaurus": {
+    "pt": "Anquilossauro",
+    "emoji": "🦕",
+    "fact": "Ankylosaurus had a club on its tail to hit enemies.",
+    "size": "30 feet long",
+    "diet": "herbivore (plant-eater)"
+  },
+  "pterodactyl": {
+    "pt": "Pterodáctilo",
+    "emoji": "🦇",
+    "fact": "Pterodactyl was a flying reptile, not a dinosaur!",
+    "size": "Wings up to 33 feet",
+    "diet": "carnivore (meat-eater)"
+  },
+  "diplodocus": {
+    "pt": "Diplodoco",
+    "emoji": "🦕",
+    "fact": "Diplodocus was one of the longest dinosaurs ever.",
+    "size": "90 feet long",
+    "diet": "herbivore (plant-eater)"
+  },
+  "allosaurus": {
+    "pt": "Alossauro",
+    "emoji": "🦖",
+    "fact": "Allosaurus was a fierce hunter before T-Rex existed.",
+    "size": "40 feet long",
+    "diet": "carnivore (meat-eater)"
+  },
+  "parasaurolophus": {
+    "pt": "Parassaurolofo",
+    "emoji": "🦕",
+    "fact": "Parasaurolophus had a long tube on its head to make sounds!",
+    "size": "30 feet long",
+    "diet": "herbivore (plant-eater)"
+  },
+  "spinosaurus": {
+    "pt": "Espinossauro",
+    "emoji": "🦖",
+    "fact": "Spinosaurus had a giant sail on its back and liked water.",
+    "size": "50 feet long",
+    "diet": "carnivore (meat-eater)"
+  },
+  "iguanodon": {
+    "pt": "Iguanodonte",
+    "emoji": "🦕",
+    "fact": "Iguanodon had thumb spikes to defend itself.",
+    "size": "33 feet long",
+    "diet": "herbivore (plant-eater)"
+  },
+  "carnotaurus": {
+    "pt": "Carnotauro",
+    "emoji": "🦖",
+    "fact": "Carnotaurus had two horns above its eyes!",
+    "size": "25 feet long",
+    "diet": "carnivore (meat-eater)"
+  },
+  "dilophosaurus": {
+    "pt": "Dilofossauro",
+    "emoji": "🦖",
+    "fact": "Dilophosaurus had two crests on its head.",
+    "size": "20 feet long",
+    "diet": "carnivore (meat-eater)"
+  },
+  "apatosaurus": {
+    "pt": "Apatossauro",
+    "emoji": "🦕",
+    "fact": "Apatosaurus is also known as Brontosaurus sometimes!",
+    "size": "75 feet long",
+    "diet": "herbivore (plant-eater)"
+  },
+  "compsognathus": {
+    "pt": "Compsognato",
+    "emoji": "🦖",
+    "fact": "Compsognathus was the size of a chicken!",
+    "size": "3 feet long",
+    "diet": "carnivore (meat-eater)"
+  },
+  "megalosaurus": {
+    "pt": "Megalossauro",
+    "emoji": "🦖",
+    "fact": "Megalosaurus was the first dinosaur ever named!",
+    "size": "30 feet long",
+    "diet": "carnivore (meat-eater)"
+  },
+  "pachycephalosaurus": {
+    "pt": "Paquicefalossauro",
+    "emoji": "🦕",
+    "fact": "Pachycephalosaurus had a thick, bony dome on its head!",
+    "size": "15 feet long",
+    "diet": "herbivore (plant-eater)"
+  },
+  "therizinosaurus": {
+    "pt": "Terizinossauro",
+    "emoji": "🦖",
+    "fact": "Therizinosaurus had the longest claws of any dinosaur!",
+    "size": "33 feet long",
+    "diet": "herbivore (plant-eater)"
+  },
+  "fossil": {
+    "pt": "fóssil",
+    "emoji": "🦴",
+    "fact": "Fossils are dinosaur bones that turned into stone over millions of years!",
+    "found": "all over the world",
+    "study": "paleontology"
+  }
+}
