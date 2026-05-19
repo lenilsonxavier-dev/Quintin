@@ -3,107 +3,210 @@
     {
       "word": "tree",
       "plural": "trees",
-      "meaning": "A tall plant with a trunk, branches, and leaves",
-      "example": "The big oak tree gives shade on sunny days.",
-      "kid_friendly_explanation": "Trees are tall plants that give us shade and air."
+      "meaning": "A tall plant with a wooden trunk, branches, and leaves that lives for many years",
+      "example": "The big oak tree in our backyard gives us shade on sunny summer days.",
+      "kid_friendly_explanation": "Trees are tall plants that give us shade, fruit, and clean air to breathe.",
+      "parts": ["roots", "trunk", "branches", "leaves", "bark"],
+      "sentence": "The tree's leaves turn orange and red in the fall."
     },
     {
       "word": "flower",
       "plural": "flowers",
-      "meaning": "A colorful plant part that makes seeds",
-      "example": "The yellow flower smells sweet and has soft petals.",
-      "kid_friendly_explanation": "Flowers are pretty, colorful plants."
+      "meaning": "The colorful part of a plant that makes seeds and attracts bees and butterflies",
+      "example": "The yellow sunflower is as tall as me and has soft yellow petals.",
+      "kid_friendly_explanation": "Flowers are pretty, colorful plants. They smell nice and make seeds.",
+      "parts": ["petal", "stem", "leaf", "pollen", "seeds"],
+      "sentence": "The flower opened its petals to the morning sun."
     },
     {
       "word": "grass",
       "plural": "grass",
-      "meaning": "Green plants that cover the ground",
-      "example": "I run barefoot on the soft green grass.",
-      "kid_friendly_explanation": "Grass is the green carpet on the ground."
+      "meaning": "Green plants with narrow leaves that cover the ground in lawns and fields",
+      "example": "I run barefoot on the soft green grass and feel the cool blades under my feet.",
+      "kid_friendly_explanation": "Grass is the green carpet on the ground. It grows in yards, parks, and fields.",
+      "sentence": "The grass is wet with morning dew."
+    },
+    {
+      "word": "leaf",
+      "plural": "leaves",
+      "meaning": "The flat, green part of a plant or tree that uses sunlight to make food",
+      "example": "I jump into a big pile of crunchy leaves that fell from the maple tree.",
+      "kid_friendly_explanation": "Leaves are the green parts of trees and plants. They change color in the fall.",
+      "sentence": "The leaf floated down from the tree."
     },
     {
       "word": "mountain",
       "plural": "mountains",
-      "meaning": "A very high piece of land that goes up into the sky",
-      "example": "The mountain has snow on its top even in summer.",
-      "kid_friendly_explanation": "Mountains are very tall hills."
+      "meaning": "A very high, steep piece of land that rises high above the surrounding area",
+      "example": "The mountain has snow on its top even in summer because it is so high and cold.",
+      "kid_friendly_explanation": "Mountains are very, very tall hills. Some have snow on top all year.",
+      "sentence": "We hiked to the top of the mountain."
+    },
+    {
+      "word": "hill",
+      "plural": "hills",
+      "meaning": "A raised area of land that is lower and less steep than a mountain",
+      "example": "We roll down the grassy hill and get dizzy but laugh the whole way.",
+      "kid_friendly_explanation": "A hill is like a small mountain. It's fun to roll down hills!",
+      "sentence": "The hill was perfect for sledding in winter."
     },
     {
       "word": "river",
       "plural": "rivers",
-      "meaning": "A large natural flow of water",
-      "example": "The fish swim in the river and the water flows to the sea.",
-      "kid_friendly_explanation": "A river is water that moves across land."
+      "meaning": "A large natural flow of water that moves across land toward the ocean or another river",
+      "example": "The fish swim in the river and the water flows quickly over the rocks.",
+      "kid_friendly_explanation": "A river is water that moves across land. It flows all the way to the ocean.",
+      "parts": ["source", "current", "bank", "mouth"],
+      "sentence": "The river was too deep to cross."
+    },
+    {
+      "word": "lake",
+      "plural": "lakes",
+      "meaning": "A large body of water surrounded by land on all sides",
+      "example": "We swim in the lake, fish from the dock, and have picnics by the shore.",
+      "kid_friendly_explanation": "A lake is like a big pond with water all around, surrounded by land.",
+      "sentence": "The lake was calm and still like a mirror."
     },
     {
       "word": "ocean",
       "plural": "oceans",
-      "meaning": "A very large body of salt water",
-      "example": "The ocean is so big you cannot see the other side.",
-      "kid_friendly_explanation": "The ocean is the big, salty water covering most of Earth."
+      "meaning": "A very large body of salt water that covers most of the Earth's surface",
+      "example": "The ocean is so big you cannot see the other side, only water everywhere.",
+      "kid_friendly_explanation": "The ocean is the big, salty water that covers most of our planet Earth.",
+      "oceans": ["Pacific", "Atlantic", "Indian", "Arctic", "Southern"],
+      "sentence": "The waves crashed against the shore."
+    },
+    {
+      "word": "pond",
+      "plural": "ponds",
+      "meaning": "A small body of still water, smaller than a lake",
+      "example": "The pond has lily pads, frogs, and tiny fish swimming near the edge.",
+      "kid_friendly_explanation": "A pond is a small pool of water where frogs, ducks, and fish live.",
+      "sentence": "The ducks swam in the pond."
     },
     {
       "word": "cloud",
       "plural": "clouds",
-      "meaning": "A white or gray fluffy thing in the sky made of water",
-      "example": "The cloud looks like a bunny floating in the sky.",
-      "kid_friendly_explanation": "Clouds are fluffy white things in the sky."
+      "meaning": "A white or gray fluffy mass in the sky made of tiny water droplets",
+      "example": "The cloud looks like a bunny, and that one looks like an ice cream cone!",
+      "kid_friendly_explanation": "Clouds are fluffy white things in the sky. They bring rain and snow.",
+      "types": ["cumulus", "stratus", "cirrus", "nimbus"],
+      "sentence": "The dark clouds mean a storm is coming."
     },
     {
       "word": "rain",
       "plural": "none",
-      "meaning": "Water that falls from clouds to the ground",
-      "example": "I use my umbrella when the rain falls on my head.",
-      "kid_friendly_explanation": "Rain is water that falls from the sky."
+      "meaning": "Water that falls from clouds in drops to the ground",
+      "example": "I use my colorful umbrella and wear boots when the rain falls on my head.",
+      "kid_friendly_explanation": "Rain is water that falls from the sky. It helps plants grow.",
+      "sentence": "The rain tapped on the window."
     },
     {
       "word": "snow",
       "plural": "none",
-      "meaning": "White frozen water that falls like flakes in winter",
-      "example": "We build a snowman when the snow covers the ground.",
-      "kid_friendly_explanation": "Snow is white, fluffy cold stuff that falls in winter."
+      "meaning": "White frozen water that falls from clouds in soft flakes in cold weather",
+      "example": "We build a snowman and have a snowball fight when the snow covers the ground.",
+      "kid_friendly_explanation": "Snow is white, fluffy, cold stuff that falls in winter. You can make snowballs!",
+      "sentence": "The snow sparkled like tiny diamonds."
+    },
+    {
+      "word": "ice",
+      "plural": "none",
+      "meaning": "Water that has frozen solid and become hard and cold",
+      "example": "I put ice cubes in my drink to make it cold on a hot summer day.",
+      "kid_friendly_explanation": "Ice is frozen water. It is hard and cold, like in an ice cube or on a frozen pond.",
+      "sentence": "The ice on the pond was slippery."
     },
     {
       "word": "sun",
       "plural": "suns",
-      "meaning": "The star that gives us light and heat",
-      "example": "The sun rises in the morning and sets at night.",
-      "kid_friendly_explanation": "The sun is the big bright thing in the sky."
+      "meaning": "The star at the center of our solar system that gives us light and heat",
+      "example": "The sun rises in the east every morning and sets in the west at night.",
+      "kid_friendly_explanation": "The sun is the big, bright, yellow thing in the sky that makes daytime warm and light.",
+      "sentence": "Don't look directly at the sun; it hurts your eyes."
     },
     {
       "word": "moon",
       "plural": "moons",
-      "meaning": "The round object in the night sky that shines",
-      "example": "The moon looks like a banana when it is a crescent.",
-      "kid_friendly_explanation": "The moon is the white circle in the night sky."
+      "meaning": "The round object in the night sky that shines by reflecting the sun's light",
+      "example": "The moon looks like a banana when it is a crescent and a circle when it is full.",
+      "kid_friendly_explanation": "The moon is the white or yellow circle in the night sky. It changes shape!",
+      "phases": ["new moon", "crescent", "quarter", "gibbous", "full moon"],
+      "sentence": "The moon followed us home in the car."
     },
     {
       "word": "star",
       "plural": "stars",
-      "meaning": "A tiny bright dot in the night sky",
-      "example": "I see a million stars twinkling in the dark sky.",
-      "kid_friendly_explanation": "Stars are little lights in the night sky."
+      "meaning": "A huge ball of burning gas in space that looks like a tiny dot of light in the night sky",
+      "example": "I see a million stars twinkling in the dark sky on a clear night.",
+      "kid_friendly_explanation": "Stars are little lights in the night sky. They are actually giant balls of fire far away.",
+      "sentence": "Make a wish on the first star you see."
+    },
+    {
+      "word": "sky",
+      "plural": "skies",
+      "meaning": "The space above the earth that you see when you look up",
+      "example": "The sky is blue on a sunny day, gray when it rains, and orange at sunset.",
+      "kid_friendly_explanation": "The sky is what you see when you look up. Clouds, the sun, and the moon are in the sky.",
+      "sentence": "The sky was painted with pink and orange at sunset."
     },
     {
       "word": "rock",
       "plural": "rocks",
       "meaning": "A hard piece of earth or stone",
-      "example": "I collect smooth rocks from the beach.",
-      "kid_friendly_explanation": "Rocks are hard pieces of earth."
+      "example": "I collect smooth, flat rocks from the beach and skip them across the water.",
+      "kid_friendly_explanation": "Rocks are hard pieces of earth. Some are big like boulders, some are small like pebbles.",
+      "types": ["igneous", "sedimentary", "metamorphic"],
+      "sentence": "The rock was too heavy to lift."
     },
     {
       "word": "sand",
       "plural": "sand",
-      "meaning": "Tiny grains of rock found on beaches",
-      "example": "I build a castle with wet sand at the beach.",
-      "kid_friendly_explanation": "Sand is tiny, soft grains on the beach."
+      "meaning": "Tiny grains of rock and mineral found on beaches and in deserts",
+      "example": "I build a sandcastle with wet sand at the beach and decorate it with shells.",
+      "kid_friendly_explanation": "Sand is tiny, soft, grainy stuff on the beach. You can build castles with it when it's wet.",
+      "sentence": "The sand squished between my toes."
     },
     {
-      "word": "sky",
-      "plural": "skies",
-      "meaning": "The space above the earth",
-      "example": "The sky is blue on a sunny day and gray when it rains.",
-      "kid_friendly_explanation": "The sky is what you see when you look up."
+      "word": "dirt",
+      "plural": "none",
+      "meaning": "Loose soil or earth, often used for planting",
+      "example": "I dig in the dirt with a shovel to plant flower seeds in our garden.",
+      "kid_friendly_explanation": "Dirt is soil on the ground where plants grow. Worms live in the dirt.",
+      "sentence": "My hands were covered in dirt after gardening."
+    },
+    {
+      "word": "mud",
+      "plural": "none",
+      "meaning": "Wet, soft, sticky dirt or clay",
+      "example": "We make mud pies in the puddle after it rains and let them dry in the sun.",
+      "kid_friendly_explanation": "Mud is dirt mixed with water. It's wet, squishy, and fun to play in!",
+      "sentence": "Don't step in the mud with your new shoes."
+    },
+    {
+      "word": "puddle",
+      "plural": "puddles",
+      "meaning": "A small pool of water on the ground, usually after rain",
+      "example": "I jump in every puddle with my rain boots and watch the water splash.",
+      "kid_friendly_explanation": "A puddle is a little pool of water on the ground after it rains. Jump in it!",
+      "sentence": "The puddle reflected the blue sky."
+    },
+    {
+      "word": "rainbow",
+      "plural": "rainbows",
+      "meaning": "A curved arc of colors that appears in the sky when sunlight shines through rain",
+      "example": "After the rain stopped, a beautiful rainbow appeared with red, orange, yellow, green, blue, indigo, and violet.",
+      "kid_friendly_explanation": "A rainbow has seven colors. It comes out after rain when the sun shines.",
+      "colors": ["red", "orange", "yellow", "green", "blue", "indigo", "violet"],
+      "sentence": "There's a pot of gold at the end of the rainbow!"
+    },
+    {
+      "word": "wind",
+      "plural": "none",
+      "meaning": "Moving air that you can feel but not see",
+      "example": "The wind blows the leaves off the trees and makes my kite fly high.",
+      "kid_friendly_explanation": "Wind is moving air. You can feel it on your face but you can't see it.",
+      "sentence": "The wind howled through the trees."
     }
   ]
 }
