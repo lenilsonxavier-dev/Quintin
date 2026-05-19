@@ -1,64 +1,184 @@
 {
   "jokes": [
     {
+      "id": 1,
       "setup": "Why did the banana go to the doctor?",
       "punchline": "Because it wasn't peeling well!",
       "explanation": "'Peeling' sounds like 'feeling'. The banana feels sick, so it goes to the doctor.",
-      "kid_friendly_explanation": "It's funny because 'peeling' sounds like 'feeling'."
+      "kid_friendly_explanation": "It's funny because 'peeling' sounds just like 'feeling'!",
+      "category": "food",
+      "difficulty": "easy"
     },
     {
+      "id": 2,
       "setup": "What do you call a sleeping bull?",
       "punchline": "A bulldozer!",
-      "explanation": "'Bull' + 'dozer' sounds like 'bulldozer', a big machine.",
-      "kid_friendly_explanation": "A bull that dozes (sleeps) is a bulldozer!"
+      "explanation": "'Bull' + 'dozer' (someone who dozes or sleeps) sounds like 'bulldozer', a big construction machine.",
+      "kid_friendly_explanation": "A bull that dozes (sleeps) is a bulldozer! Get it?",
+      "category": "animals",
+      "difficulty": "easy"
     },
     {
+      "id": 3,
       "setup": "Why did the cookie go to the hospital?",
       "punchline": "Because he felt crumbly!",
-      "explanation": "Cookies crumble into crumbs when they break.",
-      "kid_friendly_explanation": "The cookie felt crumbly, like when cookies break apart."
+      "explanation": "Cookies crumble into little crumbs when they break, so feeling 'crumbly' means feeling sick.",
+      "kid_friendly_explanation": "The cookie felt crumbly, just like when cookies break apart into crumbs.",
+      "category": "food",
+      "difficulty": "easy"
     },
     {
+      "id": 4,
       "setup": "What animal is always at a baseball game?",
       "punchline": "A bat!",
-      "explanation": "Bats are animals, but also the stick you hit the ball with in baseball.",
-      "kid_friendly_explanation": "A bat is an animal AND a baseball thing!"
+      "explanation": "Bats are flying animals, but also the wooden stick you hit the baseball with.",
+      "kid_friendly_explanation": "A bat is an animal AND the thing you hit the ball with in baseball!",
+      "category": "animals",
+      "difficulty": "easy"
     },
     {
+      "id": 5,
       "setup": "Why did the student eat his homework?",
       "punchline": "Because his teacher said it was a piece of cake!",
-      "explanation": "'Piece of cake' means easy, but the student thought it was real cake.",
-      "kid_friendly_explanation": "The teacher meant easy, but the student thought cake!"
+      "explanation": "'Piece of cake' means something is very easy, but the student thought it was real cake to eat.",
+      "kid_friendly_explanation": "The teacher meant the homework was easy, but the student thought it was real cake!",
+      "category": "school",
+      "difficulty": "medium"
     },
     {
+      "id": 6,
       "setup": "What has ears but cannot hear?",
       "punchline": "A cornfield!",
-      "explanation": "Corn has ears (the part you eat) but cannot hear sounds.",
-      "kid_friendly_explanation": "Corn has ears of corn, but not ears for hearing."
+      "explanation": "Corn has 'ears' (the part of the corn plant that you eat), but they cannot hear sounds.",
+      "kid_friendly_explanation": "Corn has ears of corn, but not ears for hearing sounds like we do.",
+      "category": "nature",
+      "difficulty": "medium"
     },
     {
+      "id": 7,
       "setup": "What do you call a bear with no teeth?",
       "punchline": "A gummy bear!",
-      "explanation": "Gummy bears are candy, and 'gummy' also means no teeth.",
-      "kid_friendly_explanation": "A bear with no teeth is soft like a gummy bear candy."
+      "explanation": "Gummy bears are soft, chewy candies. 'Gummy' also means having no teeth.",
+      "kid_friendly_explanation": "A bear with no teeth is soft like a gummy bear candy!",
+      "category": "animals",
+      "difficulty": "easy"
     },
     {
+      "id": 8,
       "setup": "Why did the bicycle fall over?",
       "punchline": "Because it was two-tired!",
-      "explanation": "'Two-tired' sounds like 'too tired'. The bike is tired and falls over.",
-      "kid_friendly_explanation": "Two-tired sounds like too tired, just like you after playing!"
+      "explanation": "'Two-tired' sounds exactly like 'too tired'. The bicycle has two tires and was exhausted!",
+      "kid_friendly_explanation": "Two-tired sounds like too tired. The bike was too tired to stand up!",
+      "category": "objects",
+      "difficulty": "medium"
     },
     {
+      "id": 9,
       "setup": "What do you call a fish with no eyes?",
       "punchline": "A fsh!",
       "explanation": "The word 'fish' without the letter 'i' (which sounds like 'eye') becomes 'fsh'.",
-      "kid_friendly_explanation": "No eyes means no letter 'I' in fish, so it's FSH!"
+      "kid_friendly_explanation": "No eyes means no letter 'I' in fish, so it's just FSH!",
+      "category": "animals",
+      "difficulty": "easy"
     },
     {
+      "id": 10,
       "setup": "Why did the scarecrow win an award?",
       "punchline": "Because he was outstanding in his field!",
-      "explanation": "'Outstanding in his field' means excellent at work, but a scarecrow stands in a field.",
-      "kid_friendly_explanation": "The scarecrow stands in a field AND did a great job!"
+      "explanation": "'Outstanding in his field' means excellent at your job. A scarecrow stands (is outstanding) in a field.",
+      "kid_friendly_explanation": "The scarecrow stands in a field AND he did a great job! Outstanding!",
+      "category": "nature",
+      "difficulty": "medium"
+    },
+    {
+      "id": 11,
+      "setup": "What has a face and two hands but no arms or legs?",
+      "punchline": "A clock!",
+      "explanation": "Clocks have a face (the front with numbers) and hands (the pointers), but no real body parts.",
+      "kid_friendly_explanation": "A clock has a face with numbers and hands that move, but no real arms or legs!",
+      "category": "objects",
+      "difficulty": "easy"
+    },
+    {
+      "id": 12,
+      "setup": "What kind of key opens a banana?",
+      "punchline": "A monkey!",
+      "explanation": "Monkeys are known for opening bananas with their hands, not a metal key.",
+      "kid_friendly_explanation": "Monkeys love bananas and they 'open' them, so they are the key!",
+      "category": "animals",
+      "difficulty": "easy"
+    },
+    {
+      "id": 13,
+      "setup": "Why did the math book look so sad?",
+      "punchline": "Because it had too many problems!",
+      "explanation": "Math books have 'problems' (math equations), but 'problems' can also mean worries or sadness.",
+      "kid_friendly_explanation": "The math book is sad because it has so many math problems to solve!",
+      "category": "school",
+      "difficulty": "easy"
+    },
+    {
+      "id": 14,
+      "setup": "What do you call a dinosaur that crashes his car?",
+      "punchline": "Tyrannosaurus Wrecks!",
+      "explanation": "'Tyrannosaurus Rex' sounds like 'Tyrannosaurus Wrecks' (crashes and breaks things).",
+      "kid_friendly_explanation": "Tyrannosaurus Rex sounds like Tyrannosaurus Wrecks - a dino who crashes!",
+      "category": "animals",
+      "difficulty": "medium"
+    },
+    {
+      "id": 15,
+      "setup": "Why can't your nose be 12 inches long?",
+      "punchline": "Because then it would be a foot!",
+      "explanation": "A 'foot' is a unit of measurement equal to 12 inches, but 'foot' is also a body part.",
+      "kid_friendly_explanation": "If your nose was 12 inches, it would be a foot (measurement) AND a foot (body part)!",
+      "category": "body",
+      "difficulty": "medium"
+    },
+    {
+      "id": 16,
+      "setup": "What do you get when you cross a snowman and a vampire?",
+      "punchline": "Frostbite!",
+      "explanation": "Frostbite is when skin freezes, but 'frost' (snowman) + 'bite' (vampire) make 'frostbite'.",
+      "kid_friendly_explanation": "Frost from the snowman plus bite from the vampire makes frostbite!",
+      "category": "holidays",
+      "difficulty": "medium"
+    },
+    {
+      "id": 17,
+      "setup": "Why did the cookie cry?",
+      "punchline": "Because his mother was a wafer too long!",
+      "explanation": "'A wafer too long' sounds like 'away for too long'. Wafers are thin cookies.",
+      "kid_friendly_explanation": "His mom was a wafer (cookie) and she was away too long!",
+      "category": "food",
+      "difficulty": "hard"
+    },
+    {
+      "id": 18,
+      "setup": "What do you call a pig that does karate?",
+      "punchline": "A pork chop!",
+      "explanation": "'Pork chop' is a cut of meat, but 'chop' is also a karate move.",
+      "kid_friendly_explanation": "A pig that chops (karate) is a pork chop!",
+      "category": "animals",
+      "difficulty": "easy"
+    },
+    {
+      "id": 19,
+      "setup": "What is a snake's favorite school subject?",
+      "punchline": "Hiss-tory!",
+      "explanation": "Snakes hiss, and 'hiss-tory' sounds like 'history'.",
+      "kid_friendly_explanation": "Snakes love HISS-tory because they hiss and history sounds like that!",
+      "category": "animals",
+      "difficulty": "easy"
+    },
+    {
+      "id": 20,
+      "setup": "Why did the student bring a ladder to school?",
+      "punchline": "Because she wanted to go to high school!",
+      "explanation": "'High school' is a type of school, but 'high' also means up in the air, so you need a ladder.",
+      "kid_friendly_explanation": "She wanted to go to HIGH school, so she needed a ladder to get up high!",
+      "category": "school",
+      "difficulty": "easy"
     }
   ]
 }
