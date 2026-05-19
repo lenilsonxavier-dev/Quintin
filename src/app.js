@@ -140,6 +140,32 @@ function microResposta(texto) {
   texto =
     texto.trim();
 
+  // remove espanhol
+
+  const proibidas = [
+
+    "hola",
+    "qué",
+    "cómo",
+    "amigo",
+    "pequeño"
+
+  ];
+
+  for (
+    const palavra
+    of proibidas
+  ) {
+
+    texto =
+      texto.replaceAll(
+        palavra,
+        ""
+      );
+  }
+
+  // corta tamanho
+
   if (texto.length > 220) {
 
     texto =
@@ -162,6 +188,182 @@ function microResposta(texto) {
   }
 
   return texto;
+}
+
+// ========================================
+// DETECTOR DE TEMA
+// ========================================
+
+function detectarTema(pergunta) {
+
+  const texto =
+    pergunta.toLowerCase();
+
+  // ========================================
+  // SPACE
+  // ========================================
+
+  if (
+
+    texto.includes("planet")
+    ||
+    texto.includes("moon")
+    ||
+    texto.includes("star")
+    ||
+    texto.includes("astronaut")
+    ||
+    texto.includes("space")
+
+  ) {
+
+    return "space";
+  }
+
+  // ========================================
+  // DINOSAURS
+  // ========================================
+
+  if (
+
+    texto.includes("dinosaur")
+    ||
+    texto.includes("t-rex")
+    ||
+    texto.includes("triceratops")
+
+  ) {
+
+    return "dinosaurs";
+  }
+
+  // ========================================
+  // SPORTS
+  // ========================================
+
+  if (
+
+    texto.includes("soccer")
+    ||
+    texto.includes("basketball")
+    ||
+    texto.includes("sport")
+
+  ) {
+
+    return "sports";
+  }
+
+  // ========================================
+  // BODY
+  // ========================================
+
+  if (
+
+    texto.includes("hand")
+    ||
+    texto.includes("head")
+    ||
+    texto.includes("eye")
+    ||
+    texto.includes("body")
+
+  ) {
+
+    return "body";
+  }
+
+  // ========================================
+  // HISTORY
+  // ========================================
+
+  if (
+
+    texto.includes("vikings")
+    ||
+    texto.includes("celtas")
+    ||
+    texto.includes("romanos")
+
+  ) {
+
+    return "history";
+  }
+
+  return "general";
+}
+
+// ========================================
+// BUSCA TEMÁTICA
+// ========================================
+
+function buscarTema(
+  pergunta
+) {
+
+  const texto =
+    pergunta.toLowerCase();
+
+  for (
+
+    const [key, value]
+
+    of Object.entries(
+      conhecimentoGlobal
+    )
+
+  ) {
+
+    if (
+      typeof value !== "object"
+    ) continue;
+
+    if (
+
+      texto.includes(
+        key.toLowerCase()
+      )
+
+    ) {
+
+      return {
+
+        palavra: key,
+        dados: value
+      };
+    }
+  }
+
+  return null;
+}
+
+// ========================================
+// TEMPLATE EDUCACIONAL
+// ========================================
+
+function criarTemplate(item) {
+
+  if (!item) return null;
+
+  const dados =
+    item.dados;
+
+  return `
+
+${dados.emoji || "✨"}
+
+${item.palavra}
+
+${dados.pt
+  ? `significa ${dados.pt}`
+  : ""
+}
+
+${dados.fact || ""}
+
+${dados.example || ""}
+
+`;
 }
 
 // ========================================
@@ -203,9 +405,13 @@ function respostaControlada(pergunta) {
         // PT -> EN
 
         if (
+
+          item.pt
+          &&
           texto.includes(
             item.pt.toLowerCase()
           )
+
         ) {
 
           return `
@@ -217,7 +423,6 @@ em inglês é:
 
 ${item.en}
 
-Example:
 ${item.example_en || ""}
 
 `;
@@ -226,9 +431,13 @@ ${item.example_en || ""}
         // EN -> PT
 
         if (
+
+          item.en
+          &&
           texto.includes(
             item.en.toLowerCase()
           )
+
         ) {
 
           return `
@@ -240,7 +449,6 @@ significa:
 
 ${item.pt}
 
-Exemplo:
 ${item.example_pt || ""}
 
 `;
@@ -250,49 +458,20 @@ ${item.example_pt || ""}
   }
 
   // ========================================
-  // HISTÓRIA
+  // TEMAS
   // ========================================
 
-  if (
+  const resultadoTema =
 
-    conhecimentoGlobal.celtas
+    buscarTema(
+      pergunta
+    );
 
-    &&
+  if (resultadoTema) {
 
-    texto.includes("celtas")
-
-  ) {
-
-    return `
-
-🏰
-
-${conhecimentoGlobal
-  .celtas
-  .resposta}
-
-`;
-  }
-
-  if (
-
-    conhecimentoGlobal.vikings
-
-    &&
-
-    texto.includes("vikings")
-
-  ) {
-
-    return `
-
-⚔️
-
-${conhecimentoGlobal
-  .vikings
-  .resposta}
-
-`;
+    return criarTemplate(
+      resultadoTema
+    );
   }
 
   // ========================================
@@ -423,7 +602,7 @@ window.enviar = async function () {
   salvarMemoria();
 
   // ========================================
-  // MODO
+  // INTENT
   // ========================================
 
   const intent =
@@ -460,6 +639,10 @@ window.enviar = async function () {
     respostaControlada(
       pergunta
     );
+
+  // ========================================
+  // 80% CONTROLADO
+  // ========================================
 
   if (respostaLocal) {
 
@@ -705,6 +888,10 @@ inputPergunta.addEventListener(
   adicionarMensagem(
     "📚 Knowledge loaded!",
     "bot"
+  );
+
+  console.log(
+    conhecimentoGlobal
   );
 
   const modeloOk =
