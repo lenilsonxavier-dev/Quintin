@@ -1,0 +1,227 @@
+{
+  "be": {
+    "pt": "ser / estar",
+    "en": "be",
+    "example_pt": "Eu quero ser feliz.",
+    "example_en": "I want to be happy.",
+    "emoji": "🌟",
+    "importance": "O verbo mais importante do inglês!",
+    "present_forms": "I am, you are, he/she/it is, we are, they are"
+  },
+  "have": {
+    "pt": "ter",
+    "en": "have",
+    "example_pt": "Eu tenho um cachorro.",
+    "example_en": "I have a dog.",
+    "emoji": "🌟",
+    "importance": "Verbo essencial para falar sobre posse",
+    "present_forms": "I have, you have, he/she/it has, we have, they have"
+  },
+  "see": {
+    "pt": "ver",
+    "en": "see",
+    "example_pt": "Eu vejo a lua.",
+    "example_en": "I see the moon.",
+    "emoji": "🌟",
+    "importance": "Verbo para visão e compreensão",
+    "past_tense": "saw"
+  },
+  "look": {
+    "pt": "olhar",
+    "en": "look",
+    "example_pt": "Olhe para o céu.",
+    "example_en": "Look at the sky.",
+    "emoji": "🌟",
+    "importance": "Verbo para direcionar o olhar",
+    "common_mistake": "Não esqueça a preposição 'at' - 'look at'"
+  },
+  "watch": {
+    "pt": "assistir",
+    "en": "watch",
+    "example_pt": "Eu assisto desenhos.",
+    "example_en": "I watch cartoons.",
+    "emoji": "🌟",
+    "importance": "Verbo para assistir algo que se move",
+    "common_mistake": "'Watch TV' ✅ / 'See TV' ❌"
+  },
+  "listen": {
+    "pt": "escutar",
+    "en": "listen",
+    "example_pt": "Eu escuto música.",
+    "example_en": "I listen to music.",
+    "emoji": "🌟",
+    "importance": "Verbo para prestar atenção com os ouvidos",
+    "common_mistake": "Sempre use 'to' depois de listen: 'listen to music'"
+  },
+  "speak": {
+    "pt": "falar",
+    "en": "speak",
+    "example_pt": "Eu falo inglês.",
+    "example_en": "I speak English.",
+    "emoji": "🌟",
+    "importance": "Verbo para falar idiomas",
+    "common_mistake": "'Speak English' ✅ / 'Talk English' ❌"
+  },
+  "say": {
+    "pt": "dizer",
+    "en": "say",
+    "example_pt": "Diga olá!",
+    "example_en": "Say hello!",
+    "emoji": "🌟",
+    "importance": "Verbo para citar palavras específicas",
+    "past_tense": "said"
+  },
+  "talk": {
+    "pt": "conversar",
+    "en": "talk",
+    "example_pt": "Nós conversamos na escola.",
+    "example_en": "We talk at school.",
+    "emoji": "🌟",
+    "importance": "Verbo para conversar com alguém",
+    "common_mistake": "Use 'to' ou 'with': 'talk to my friend'"
+  },
+  "like": {
+    "pt": "gostar",
+    "en": "like",
+    "example_pt": "Eu gosto de sorvete.",
+    "example_en": "I like ice cream.",
+    "emoji": "🌟",
+    "importance": "ESSENCIAL para crianças - expressar preferências!",
+    "common_mistake": "'I like to play' ✅ / 'I like play' ❌ (use 'to' antes de outro verbo)"
+  },
+  "love": {
+    "pt": "amar",
+    "en": "love",
+    "example_pt": "Eu amo minha família.",
+    "example_en": "I love my family.",
+    "emoji": "🌟",
+    "importance": "Verbo para sentimentos fortes e positivos",
+    "stronger_than": "love é mais forte que like"
+  },
+  "want": {
+    "pt": "querer",
+    "en": "want",
+    "example_pt": "Eu quero brincar.",
+    "example_en": "I want to play.",
+    "emoji": "🌟",
+    "importance": "Verbo para expressar desejos",
+    "common_mistake": "'I want to play' ✅ / 'I want play' ❌ (use 'to')"
+  },
+  "need": {
+    "pt": "precisar",
+    "en": "need",
+    "example_pt": "Eu preciso de água.",
+    "example_en": "I need water.",
+    "emoji": "🌟",
+    "importance": "Verbo para necessidades básicas",
+    "common_mistake": "'I need water' ✅ / 'I'm need water' ❌"
+  },
+  "know": {
+    "pt": "saber / conhecer",
+    "en": "know",
+    "example_pt": "Eu sei a resposta.",
+    "example_en": "I know the answer.",
+    "emoji": "🌟",
+    "importance": "Verbo para conhecimento e informação",
+    "past_tense": "knew"
+  },
+  "think": {
+    "pt": "pensar",
+    "en": "think",
+    "example_pt": "Eu penso em dinossauros.",
+    "example_en": "I think about dinosaurs.",
+    "emoji": "🌟",
+    "importance": "Verbo para opiniões e pensamentos",
+    "common_mistake": "Use 'about' depois de think: 'think about dinosaurs'"
+  },
+  "make": {
+    "pt": "fazer / criar",
+    "en": "make",
+    "example_pt": "Eu faço um desenho.",
+    "example_en": "I make a drawing.",
+    "emoji": "🌟",
+    "importance": "Verbo para criar ou produzir algo",
+    "past_tense": "made"
+  },
+  "do": {
+    "pt": "fazer",
+    "en": "do",
+    "example_pt": "Eu faço minha lição.",
+    "example_en": "I do my homework.",
+    "emoji": "🌟",
+    "importance": "Verbo para ações e tarefas",
+    "present_forms": "I do, you do, he/she/it does, we do, they do"
+  },
+  "give": {
+    "pt": "dar",
+    "en": "give",
+    "example_pt": "Eu dou um presente.",
+    "example_en": "I give a gift.",
+    "emoji": "🌟",
+    "importance": "Verbo para oferecer algo a alguém",
+    "past_tense": "gave"
+  },
+  "take": {
+    "pt": "pegar / levar",
+    "en": "take",
+    "example_pt": "Eu pego meu livro.",
+    "example_en": "I take my book.",
+    "emoji": "🌟",
+    "importance": "Verbo para agarrar ou transportar algo",
+    "past_tense": "took"
+  },
+  "come": {
+    "pt": "vir",
+    "en": "come",
+    "example_pt": "Venha aqui!",
+    "example_en": "Come here!",
+    "emoji": "🌟",
+    "importance": "Verbo para movimento em direção a quem fala",
+    "past_tense": "came"
+  },
+  "go": {
+    "pt": "ir",
+    "en": "go",
+    "example_pt": "Eu vou à escola.",
+    "example_en": "I go to school.",
+    "emoji": "🌟",
+    "importance": "Verbo para movimento para longe de quem fala",
+    "past_tense": "went"
+  },
+  "live": {
+    "pt": "morar / viver",
+    "en": "live",
+    "example_pt": "Eu moro no Brasil.",
+    "example_en": "I live in Brazil.",
+    "emoji": "🌟",
+    "importance": "Verbo para onde você mora",
+    "common_mistake": "Use 'in' para países e cidades: 'live in Brazil'"
+  },
+  "feel": {
+    "pt": "sentir",
+    "en": "feel",
+    "example_pt": "Eu me sinto feliz.",
+    "example_en": "I feel happy.",
+    "emoji": "🌟",
+    "importance": "Verbo para emoções e sensações físicas",
+    "past_tense": "felt"
+  },
+  "touch": {
+    "pt": "tocar",
+    "en": "touch",
+    "example_pt": "Não toque no fogo.",
+    "example_en": "Do not touch the fire.",
+    "emoji": "🌟",
+    "importance": "Verbo para contato físico",
+    "common_mistake": "'Touch the table' ✅ (sem preposição!)"
+  },
+  "hear": {
+    "pt": "ouvir",
+    "en": "hear",
+    "example_pt": "Eu ouço os pássaros.",
+    "example_en": "I hear the birds.",
+    "emoji": "🌟",
+    "importance": "Verbo para perceber sons com os ouvidos",
+    "past_tense": "heard"
+  }
+}
