@@ -1,3 +1,7 @@
+// ========================================
+// IMPORTS
+// ========================================
+
 import * as webllm
 from "https://esm.run/@mlc-ai/web-llm";
 
@@ -29,7 +33,7 @@ import { storyMode }
 from "./modes/storyMode.js";
 
 // ========================================
-// MEMÓRIA PERSISTENTE
+// MEMÓRIA
 // ========================================
 
 function salvarMemoria() {
@@ -53,18 +57,28 @@ function salvarMemoria() {
 }
 
 // ========================================
-// ELEMENTOS DA UI
+// UI
 // ========================================
 
 const chat =
   document.getElementById("chat");
+
+const inputPergunta =
+  document.getElementById("pergunta");
+
+const btnEnviar =
+  document.getElementById("btnEnviar");
+
+// ========================================
+// ENGINE
+// ========================================
 
 let engine = null;
 
 let modeloPronto = false;
 
 // ========================================
-// ESTADO EMOCIONAL
+// MEMÓRIA INICIAL
 // ========================================
 
 memory.friendshipLevel =
@@ -74,233 +88,48 @@ memory.totalMessages =
   memory.totalMessages || 0;
 
 // ========================================
-// BASE DE CONHECIMENTO
+// CONHECIMENTO
 // ========================================
 
 let conhecimentoGlobal = {};
 
 // ========================================
-// MODELO WEBLLM
+// MODELO
 // ========================================
 
 const MODEL_NAME =
   "Llama-3.2-1B-Instruct-q4f16_1-MLC";
 
 // ========================================
-// PROMPT DINÂMICO
+// SYSTEM PROMPT
 // ========================================
 
 const systemPrompt = `
+
 You are ${personality.name},
-a magical English teacher owl
+a magical owl teacher
 for Brazilian children.
 
-PERSONALITY:
-- ${personality.style}
+STRICT RULES:
 
-RULES:
-${personality.rules.map(
-  rule => `- ${rule}`
-).join("\n")}
-
-IMPORTANT:
-- Always answer in a fun way
-- Keep answers short
-- Use emojis
-- Encourage the child
-- Ask playful questions
-- Never refuse translations
-- Be warm and magical
-- Never invent translations
-- If unsure, say you do not know
-- Use the vocabulary context first
-IMPORTANT SAFETY RULES:
-- Never repeat yourself
+- Speak only Portuguese + simple English
+- Never speak Spanish
 - Never loop responses
-- Never invent historical facts
-- Keep answers under 4 sentences
-- Speak clearly and simply
-- Stay focused on English learning
+- Never invent facts
+- Never create nonsense
+- Never be philosophical
+- Never act romantic
+- Keep answers tiny
+- Use at most 3 short sentences
+- Use emojis
+- Focus on English learning
+- Prefer educational answers
+- Prefer glossary context
+- Ask at most ONE playful question
 - If unsure, say:
 "I don't know yet 🌟"
-- Never act romantic
-- Never create nonsense
-- Build emotional connection
-- Remember previous learning
+
 `;
-
-// ========================================
-// PALAVRAS DE TEMA
-// ========================================
-
-const animalWords = [
-  "dog",
-  "cat",
-  "lion",
-  "bird",
-  "cow",
-  "fish",
-  "horse",
-  "tiger",
-  "monkey",
-  "snake"
-];
-
-// ========================================
-// CONTEXTO DOS JSONS
-// ========================================
-
-function buscarContextoLocal(pergunta) {
-
-  const lower =
-    pergunta.toLowerCase();
-
-  const resultados = [];
-
-  for (
-    const [en, pt]
-    of Object.entries(conhecimentoGlobal)
-  ) {
-
-    if (
-
-      lower.includes(
-        en.toLowerCase()
-      )
-
-      ||
-
-      lower.includes(
-        String(pt).toLowerCase()
-      )
-
-    ) {
-
-      resultados.push(
-        `${en} = ${pt}`
-      );
-
-      // ========================================
-      // MEMÓRIA DE PALAVRAS
-      // ========================================
-
-      if (
-        !memory.learnedWords.includes(en)
-      ) {
-
-        memory.learnedWords.push(en);
-
-        // limite
-        if (
-          memory.learnedWords.length > 100
-        ) {
-
-          memory.learnedWords.shift();
-        }
-
-        salvarMemoria();
-      }
-
-      // ========================================
-      // TEMA FAVORITO
-      // ========================================
-
-      if (
-        animalWords.includes(
-          en.toLowerCase()
-        )
-      ) {
-
-        memory.favoriteTheme =
-          "animals";
-
-        salvarMemoria();
-      }
-
-      if (
-        resultados.length >= 6
-      ) break;
-    }
-  }
-
-  return resultados;
-}
-
-// ========================================
-// INICIAR WEBLLM
-// ========================================
-
-async function iniciarModelo() {
-
-  if (!navigator.gpu) {
-
-    adicionarMensagem(
-      "❌ WebGPU not supported.",
-      "bot"
-    );
-
-    return false;
-  }
-
-  adicionarMensagem(
-    "🦉 Quinti is opening his magical books...",
-    "bot"
-  );
-
-  const progressDiv =
-    document.createElement("div");
-
-  progressDiv.className =
-    "progress";
-
-  chat.appendChild(progressDiv);
-
-  try {
-
-   engine =
-  await webllm.CreateMLCEngine(
-
-    MODEL_NAME,
-
-    {
-      initProgressCallback:
-        (progress) => {
-
-          const percent =
-            Math.round(
-
-              (progress.progress || 0)
-              * 100
-            );
-
-          progressDiv.innerText =
-
-            `${progress.text || "Loading..."}
-
-(${percent}%)`;
-        }
-    }
-  );
-
-    adicionarMensagem(
-      "✅ Quinti is ready 🌍",
-      "bot"
-    );
-
-    return true;
-
-  } catch (err) {
-
-    console.error(err);
-
-    adicionarMensagem(
-      `❌ ${err.message}`,
-      "bot"
-    );
-
-    return false;
-  }
-}
 
 // ========================================
 // MICRO RESPOSTAS
@@ -308,16 +137,14 @@ async function iniciarModelo() {
 
 function microResposta(texto) {
 
-  // remove linhas vazias
-  texto = texto.trim();
+  texto =
+    texto.trim();
 
-  // corta respostas gigantes
   if (texto.length > 220) {
 
     texto =
       texto.slice(0, 220);
 
-    // corta na última frase
     const ultimoPonto =
 
       texto.lastIndexOf(".");
@@ -338,23 +165,250 @@ function microResposta(texto) {
 }
 
 // ========================================
+// RESPOSTAS CONTROLADAS
+// ========================================
+
+function respostaControlada(pergunta) {
+
+  const texto =
+    pergunta.toLowerCase().trim();
+
+  // ========================================
+  // GLOSSÁRIO
+  // ========================================
+
+  if (
+    conhecimentoGlobal.glossary
+  ) {
+
+    for (
+
+      const categoria of
+
+      Object.values(
+        conhecimentoGlobal.glossary
+      )
+
+    ) {
+
+      if (
+        !categoria.words
+      ) continue;
+
+      for (
+        const item
+        of categoria.words
+      ) {
+
+        // PT -> EN
+
+        if (
+          texto.includes(
+            item.pt.toLowerCase()
+          )
+        ) {
+
+          return `
+
+${item.emoji || "✨"}
+
+${item.pt}
+em inglês é:
+
+${item.en}
+
+Example:
+${item.example_en || ""}
+
+`;
+        }
+
+        // EN -> PT
+
+        if (
+          texto.includes(
+            item.en.toLowerCase()
+          )
+        ) {
+
+          return `
+
+${item.emoji || "✨"}
+
+${item.en}
+significa:
+
+${item.pt}
+
+Exemplo:
+${item.example_pt || ""}
+
+`;
+        }
+      }
+    }
+  }
+
+  // ========================================
+  // HISTÓRIA
+  // ========================================
+
+  if (
+
+    conhecimentoGlobal.celtas
+
+    &&
+
+    texto.includes("celtas")
+
+  ) {
+
+    return `
+
+🏰
+
+${conhecimentoGlobal
+  .celtas
+  .resposta}
+
+`;
+  }
+
+  if (
+
+    conhecimentoGlobal.vikings
+
+    &&
+
+    texto.includes("vikings")
+
+  ) {
+
+    return `
+
+⚔️
+
+${conhecimentoGlobal
+  .vikings
+  .resposta}
+
+`;
+  }
+
+  // ========================================
+  // CONVERSAS FIXAS
+  // ========================================
+
+  const respostasFixas = {
+
+    "hello":
+
+      "👋 Hello significa olá ✨",
+
+    "hi":
+
+      "👋 Hi significa oi ✨",
+
+    "how are you":
+
+      "😊 I'm fine, thank you!",
+
+    "você fala espanhol":
+
+      "🌍 Não 😊 Eu ensino inglês e português ✨",
+
+    "cat":
+
+      "🐱 Cat significa gato ✨",
+
+    "dog":
+
+      "🐶 Dog significa cachorro ✨"
+  };
+
+  if (
+    respostasFixas[texto]
+  ) {
+
+    return respostasFixas[texto];
+  }
+
+  return null;
+}
+
+// ========================================
+// INICIAR MODELO
+// ========================================
+
+async function iniciarModelo() {
+
+  if (!navigator.gpu) {
+
+    adicionarMensagem(
+      "❌ WebGPU not supported.",
+      "bot"
+    );
+
+    return false;
+  }
+
+  adicionarMensagem(
+    "🦉 Quinti is opening magical books...",
+    "bot"
+  );
+
+  try {
+
+    engine =
+
+      await webllm.CreateMLCEngine(
+
+        MODEL_NAME,
+
+        {
+          initProgressCallback:
+            (progress) => {
+
+              console.log(
+                progress
+              );
+            }
+        }
+      );
+
+    adicionarMensagem(
+      "✅ Quinti is ready ✨",
+      "bot"
+    );
+
+    return true;
+
+  } catch(err) {
+
+    console.error(err);
+
+    adicionarMensagem(
+      "❌ Model failed.",
+      "bot"
+    );
+
+    return false;
+  }
+}
+
+// ========================================
 // ENVIAR
 // ========================================
 
 window.enviar = async function () {
 
-  const input =
-    document.getElementById(
-      "pergunta"
-    );
-
   const pergunta =
-    input.value.trim();
+    inputPergunta.value.trim();
 
   if (!pergunta) return;
 
   // ========================================
-  // CONTADOR DE MENSAGENS
+  // MEMÓRIA
   // ========================================
 
   memory.totalMessages++;
@@ -369,7 +423,7 @@ window.enviar = async function () {
   salvarMemoria();
 
   // ========================================
-  // DETECTAR MODO
+  // MODO
   // ========================================
 
   const intent =
@@ -381,7 +435,7 @@ window.enviar = async function () {
   salvarMemoria();
 
   // ========================================
-  // MOSTRAR USUÁRIO
+  // UI
   // ========================================
 
   adicionarMensagem(
@@ -389,77 +443,47 @@ window.enviar = async function () {
     "user"
   );
 
-  input.value = "";
+  inputPergunta.value = "";
 
-  input.disabled = true;
+  inputPergunta.disabled = true;
 
-  document.getElementById(
-    "btnEnviar"
-  ).disabled = true;
+  btnEnviar.disabled = true;
 
   mostrarPensando();
 
   // ========================================
-  // CONTEXTO DOS JSONS
+  // RESPOSTA CONTROLADA
   // ========================================
 
-  const palavrasContexto =
-    buscarContextoLocal(pergunta);
+  const respostaLocal =
 
-  let contextoExtra = "";
+    respostaControlada(
+      pergunta
+    );
 
-  if (
-    palavrasContexto.length
-  ) {
+  if (respostaLocal) {
 
-    contextoExtra =
+    removerPensando();
 
-      "Relevant vocabulary:\n"
+    adicionarMensagem(
 
-      +
+      microResposta(
+        respostaLocal
+      ),
 
-      palavrasContexto.join("\n")
+      "bot"
+    );
 
-      +
+    inputPergunta.disabled =
+      false;
 
-      "\n\n";
+    btnEnviar.disabled =
+      false;
+
+    inputPergunta.focus();
+
+    return;
   }
-
-  // ========================================
-  // MEMÓRIA
-  // ========================================
-
-  let memoriaExtra = "";
-
-  if (
-    memory.learnedWords.length > 0
-  ) {
-
-    memoriaExtra =
-
-      `The child already learned:
-
-${memory.learnedWords.join(", ")}
-
-\n\n`;
-  }
-
-  // ========================================
-  // AMIZADE
-  // ========================================
-
-  let amizadeExtra = `
-
-Quinti already knows the child.
-
-Friendship level:
-${memory.friendshipLevel}
-
-Total conversations:
-${memory.totalMessages}
-
-Be warm and friendly.
-`;
 
   // ========================================
   // MODOS
@@ -492,59 +516,21 @@ Be warm and friendly.
   }
 
   // ========================================
-  // TEMA FAVORITO
-  // ========================================
-
-  let temaExtra = "";
-
-  if (
-    memory.favoriteTheme
-  ) {
-
-    temaExtra =
-
-      `Favorite theme:
-
-${memory.favoriteTheme}
-
-\n\n`;
-  }
-
-  // ========================================
   // PROMPT FINAL
   // ========================================
 
   const mensagemUsuario = `
 
-${contextoExtra}
-
-${memoriaExtra}
-
-${amizadeExtra}
-
 ${modoExtra}
-
-${temaExtra}
 
 Child asks:
 
 "${pergunta}"
 
-Quinti, answer in a magical,
-friendly and playful way.
+Answer with tiny educational responses.
 `;
 
   try {
-
-    if (
-      !engine ||
-      !modeloPronto
-    ) {
-
-      throw new Error(
-        "Model not loaded."
-      );
-    }
 
     const resposta =
 
@@ -564,9 +550,9 @@ friendly and playful way.
 
         ],
 
-        temperature: 0.15,
+        temperature: 0.1,
 
-        max_tokens: 80
+        max_tokens: 50
       });
 
     const texto =
@@ -575,7 +561,8 @@ friendly and playful way.
       .message.content.trim();
 
     const respostaFinal =
-  microResposta(texto);
+
+      microResposta(texto);
 
     removerPensando();
 
@@ -584,31 +571,7 @@ friendly and playful way.
       "bot"
     );
 
-    // ========================================
-    // DEBUG
-    // ========================================
-
-    console.log(
-      "📚 Learned:",
-      memory.learnedWords
-    );
-
-    console.log(
-      "🎮 Mode:",
-      memory.currentMode
-    );
-
-    console.log(
-      "🌈 Theme:",
-      memory.favoriteTheme
-    );
-
-    console.log(
-      "🦉 Friendship:",
-      memory.friendshipLevel
-    );
-
-  } catch (err) {
+  } catch(err) {
 
     removerPensando();
 
@@ -621,13 +584,13 @@ friendly and playful way.
 
   } finally {
 
-    input.disabled = false;
+    inputPergunta.disabled =
+      false;
 
-    document.getElementById(
-      "btnEnviar"
-    ).disabled = false;
+    btnEnviar.disabled =
+      false;
 
-    input.focus();
+    inputPergunta.focus();
   }
 };
 
@@ -706,11 +669,7 @@ function removerPensando() {
 // ENTER
 // ========================================
 
-document
-
-.getElementById("pergunta")
-
-.addEventListener(
+inputPergunta.addEventListener(
 
   "keydown",
 
@@ -720,13 +679,7 @@ document
 
       e.preventDefault();
 
-      if (
-
-        !document.getElementById(
-          "btnEnviar"
-        ).disabled
-
-      ) {
+      if (!btnEnviar.disabled) {
 
         enviar();
       }
@@ -745,15 +698,12 @@ document
     "bot"
   );
 
-  // ========================================
-  // CARREGAR CONHECIMENTO
-  // ========================================
-
   conhecimentoGlobal =
+
     await carregarConhecimento();
 
   adicionarMensagem(
-    "📚 Knowledge base loaded!",
+    "📚 Knowledge loaded!",
     "bot"
   );
 
@@ -763,76 +713,34 @@ document
   modeloPronto =
     modeloOk;
 
-  if (!modeloOk) {
+  if (
+
+    memory.learnedWords
+    &&
+    memory.learnedWords.length > 0
+
+  ) {
 
     adicionarMensagem(
-      "⚠️ Offline mode activated.",
-      "bot"
-    );
-
-  } else {
-
-    adicionarMensagem(
-
-      personality.greetings[
-
-        Math.floor(
-
-          Math.random()
-
-          *
-
-          personality.greetings.length
-        )
-      ],
-
-      "bot"
-    );
-
-    // ========================================
-    // MEMÓRIA DE RETORNO
-    // ========================================
-
-    if (
-      memory.learnedWords.length > 0
-    ) {
-
-      adicionarMensagem(
 
 `🌟 Welcome back!
 
-You already learned:
+You learned:
 
 ${memory.learnedWords
   .slice(0,5)
-  .join(", ")}`,
+  .join(", ")}
 
-        "bot"
-      );
-    }
+`,
 
-    if (
-      memory.friendshipLevel > 3
-    ) {
-
-      adicionarMensagem(
-
-`🦉 Quinti remembers you!
-
-Friendship level:
-${memory.friendshipLevel} ✨`,
-
-        "bot"
-      );
-    }
+      "bot"
+    );
   }
 
-  document.getElementById(
-    "pergunta"
-  ).disabled = false;
+  inputPergunta.disabled =
+    false;
 
-  document.getElementById(
-    "btnEnviar"
-  ).disabled = false;
+  btnEnviar.disabled =
+    false;
 
 })();
