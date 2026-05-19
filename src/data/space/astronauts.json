@@ -1,0 +1,122 @@
+{
+  "astronaut": {
+    "pt": "astronauta",
+    "emoji": "👨‍🚀",
+    "example": "The astronaut floats in space because there is no gravity!",
+    "fun_fact": "Astronauts train for years before going to space."
+  },
+  "spacesuit": {
+    "pt": "traje espacial",
+    "emoji": "🧑‍🚀",
+    "example": "The spacesuit protects astronauts from cold and radiation.",
+    "fun_fact": "A spacesuit costs about 12 million dollars!"
+  },
+  "rocket": {
+    "pt": "foguete",
+    "emoji": "🚀",
+    "example": "The rocket launches into space with fire and smoke!",
+    "fun_fact": "Rockets travel at over 17,000 miles per hour."
+  },
+  "spacecraft": {
+    "pt": "nave espacial",
+    "emoji": "🛸",
+    "example": "The spacecraft carries astronauts to the space station.",
+    "fun_fact": "Spacecraft have special heat shields for re-entry."
+  },
+  "spacestation": {
+    "pt": "estação espacial",
+    "emoji": "🛰️",
+    "example": "Astronauts live and work on the space station.",
+    "fun_fact": "The ISS is as big as a football field!"
+  },
+  "mission": {
+    "pt": "missão",
+    "emoji": "🎯",
+    "example": "The Apollo mission took humans to the Moon.",
+    "fun_fact": "The first Moon landing was in 1969."
+  },
+  "gravity": {
+    "pt": "gravidade",
+    "emoji": "⬇️",
+    "example": "Gravity keeps us on the ground and the Moon in orbit.",
+    "fun_fact": "There is less gravity on the Moon than on Earth."
+  },
+  "orbit": {
+    "pt": "órbita",
+    "emoji": "🔄",
+    "example": "The space station orbits Earth every 90 minutes!",
+    "fun_fact": "Things in orbit move very fast to stay up."
+  },
+  "telescope": {
+    "pt": "telescópio",
+    "emoji": "🔭",
+    "example": "The Hubble Telescope takes amazing pictures of space.",
+    "fun_fact": "Telescopes can see billions of light-years away."
+  },
+  "launch": {
+    "pt": "lançamento",
+    "emoji": "🚀",
+    "example": "The rocket launch was so loud and exciting!",
+    "fun_fact": "Rockets use special fuel to blast off."
+  },
+  "lunar": {
+    "pt": "lunar",
+    "emoji": "🌙",
+    "example": "The lunar module landed on the Moon's surface.",
+    "fun_fact": "'Lunar' means related to the Moon."
+  },
+  "earthrise": {
+    "pt": "nascer da Terra",
+    "emoji": "🌍⬆️",
+    "example": "Astronauts saw the beautiful Earthrise from the Moon.",
+    "fun_fact": "The first Earthrise photo was taken in 1968."
+  },
+  "spacewalk": {
+    "pt": "caminhada espacial",
+    "emoji": "👨‍🚀🪢",
+    "example": "During a spacewalk, astronauts float outside the spacecraft.",
+    "fun_fact": "Spacewalks can last over 8 hours!"
+  },
+  "satellite": {
+    "pt": "satélite",
+    "emoji": "📡",
+    "example": "Satellites help us watch TV and use GPS.",
+    "fun_fact": "There are thousands of satellites orbiting Earth."
+  },
+  "cosmonaut": {
+    "pt": "cosmonauta",
+    "emoji": "🧑‍🚀",
+    "example": "Cosmonaut is the Russian word for astronaut.",
+    "fun_fact": "The first person in space was a cosmonaut named Yuri Gagarin."
+  },
+  "spaceshuttle": {
+    "pt": "ônibus espacial",
+    "emoji": "🛸",
+    "example": "The space shuttle could land like an airplane.",
+    "fun_fact": "Space shuttles flew 135 missions!"
+  },
+  "rover": {
+    "pt": "robô explorador",
+    "emoji": "🤖",
+    "example": "The rover drives on Mars and takes pictures.",
+    "fun_fact": "The Mars rovers have lasted much longer than planned."
+  },
+  "landing": {
+    "pt": "aterrissagem",
+    "emoji": "🪂",
+    "example": "The landing was soft and safe in the ocean.",
+    "fun_fact": "Some rockets now land standing up like in cartoons!"
+  },
+  "apollo": {
+    "pt": "Apollo",
+    "emoji": "👨‍🚀🇺🇸",
+    "example": "Apollo 11 was the first mission to land on the Moon.",
+    "fun_fact": "Neil Armstrong was the first person on the Moon."
+  },
+  "nasa": {
+    "pt": "NASA",
+    "emoji": "🇺🇸🚀",
+    "example": "NASA is the American space agency.",
+    "fun_fact": "NASA was created in 1958."
+  }
+}
