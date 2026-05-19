@@ -303,6 +303,41 @@ async function iniciarModelo() {
 }
 
 // ========================================
+// MICRO RESPOSTAS
+// ========================================
+
+function microResposta(texto) {
+
+  // remove linhas vazias
+  texto = texto.trim();
+
+  // corta respostas gigantes
+  if (texto.length > 220) {
+
+    texto =
+      texto.slice(0, 220);
+
+    // corta na última frase
+    const ultimoPonto =
+
+      texto.lastIndexOf(".");
+
+    if (ultimoPonto > 80) {
+
+      texto =
+        texto.slice(
+          0,
+          ultimoPonto + 1
+        );
+    }
+
+    texto += " ✨";
+  }
+
+  return texto;
+}
+
+// ========================================
 // ENVIAR
 // ========================================
 
@@ -540,7 +575,7 @@ friendly and playful way.
       .message.content.trim();
 
     const respostaFinal =
-      texto.slice(0, 600);
+  microResposta(texto);
 
     removerPensando();
 
