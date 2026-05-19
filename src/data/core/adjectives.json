@@ -1,0 +1,164 @@
+{
+  "adjectives": [
+    {
+      "word": "big",
+      "comparative": "bigger",
+      "superlative": "biggest",
+      "meaning": "Large in size",
+      "example": "My dad has a big car that fits our whole family.",
+      "kid_friendly_explanation": "Big means large, not small."
+    },
+    {
+      "word": "small",
+      "comparative": "smaller",
+      "superlative": "smallest",
+      "meaning": "Little in size",
+      "example": "I found a small ladybug on the green leaf.",
+      "kid_friendly_explanation": "Small means little, not big."
+    },
+    {
+      "word": "happy",
+      "comparative": "happier",
+      "superlative": "happiest",
+      "meaning": "Feeling good and joyful",
+      "example": "I feel happy when I play with my friends at the park.",
+      "kid_friendly_explanation": "Happy is when you feel good and smile."
+    },
+    {
+      "word": "sad",
+      "comparative": "sadder",
+      "superlative": "saddest",
+      "meaning": "Feeling unhappy",
+      "example": "I feel sad when my favorite toy breaks.",
+      "kid_friendly_explanation": "Sad is when you feel like crying."
+    },
+    {
+      "word": "hot",
+      "comparative": "hotter",
+      "superlative": "hottest",
+      "meaning": "Having a high temperature",
+      "example": "The soup is hot, so I blow on it before I eat.",
+      "kid_friendly_explanation": "Hot means very warm, like fire or the sun."
+    },
+    {
+      "word": "cold",
+      "comparative": "colder",
+      "superlative": "coldest",
+      "meaning": "Having a low temperature",
+      "example": "The ice cream is cold and delicious on a summer day.",
+      "kid_friendly_explanation": "Cold means not warm, like ice."
+    },
+    {
+      "word": "fast",
+      "comparative": "faster",
+      "superlative": "fastest",
+      "meaning": "Moving quickly",
+      "example": "The cheetah is fast and can run faster than a car.",
+      "kid_friendly_explanation": "Fast means moving quickly, not slow."
+    },
+    {
+      "word": "slow",
+      "comparative": "slower",
+      "superlative": "slowest",
+      "meaning": "Moving at a low speed",
+      "example": "The turtle is slow but very cute.",
+      "kid_friendly_explanation": "Slow means not fast."
+    },
+    {
+      "word": "soft",
+      "comparative": "softer",
+      "superlative": "softest",
+      "meaning": "Pleasant to touch, not hard",
+      "example": "My blanket is soft and keeps me warm at night.",
+      "kid_friendly_explanation": "Soft means nice and squishy, like a pillow."
+    },
+    {
+      "word": "hard",
+      "comparative": "harder",
+      "superlative": "hardest",
+      "meaning": "Firm and solid, not soft",
+      "example": "The rock is hard and I cannot break it.",
+      "kid_friendly_explanation": "Hard means not soft, like a table."
+    },
+    {
+      "word": "loud",
+      "comparative": "louder",
+      "superlative": "loudest",
+      "meaning": "Making a lot of noise",
+      "example": "The fire truck makes a loud siren that wakes me up.",
+      "kid_friendly_explanation": "Loud means noisy, like a drum."
+    },
+    {
+      "word": "quiet",
+      "comparative": "quieter",
+      "superlative": "quietest",
+      "meaning": "Making very little noise",
+      "example": "The library is quiet so people can read.",
+      "kid_friendly_explanation": "Quiet means not noisy, like a whisper."
+    },
+    {
+      "word": "bright",
+      "comparative": "brighter",
+      "superlative": "brightest",
+      "meaning": "Giving out a lot of light",
+      "example": "The flashlight is bright in the dark room.",
+      "kid_friendly_explanation": "Bright means shining a lot of light."
+    },
+    {
+      "word": "dark",
+      "comparative": "darker",
+      "superlative": "darkest",
+      "meaning": "With little or no light",
+      "example": "It is dark outside when I go to bed.",
+      "kid_friendly_explanation": "Dark means no light, like night time."
+    },
+    {
+      "word": "new",
+      "comparative": "newer",
+      "superlative": "newest",
+      "meaning": "Not old, recently made or bought",
+      "example": "I have new shoes that light up when I walk.",
+      "kid_friendly_explanation": "New means fresh and never used before."
+    },
+    {
+      "word": "old",
+      "comparative": "older",
+      "superlative": "oldest",
+      "meaning": "Having existed for a long time",
+      "example": "My grandma has an old photo from when she was a kid.",
+      "kid_friendly_explanation": "Old means something that has been here a long time."
+    },
+    {
+      "word": "clean",
+      "comparative": "cleaner",
+      "superlative": "cleanest",
+      "meaning": "Not dirty, fresh",
+      "example": "I put on clean clothes after my bath.",
+      "kid_friendly_explanation": "Clean means not dirty."
+    },
+    {
+      "word": "dirty",
+      "comparative": "dirtier",
+      "superlative": "dirtiest",
+      "meaning": "Not clean, with dirt or stains",
+      "example": "My hands are dirty after playing in the mud.",
+      "kid_friendly_explanation": "Dirty means messy or not clean."
+    },
+    {
+      "word": "sweet",
+      "comparative": "sweeter",
+      "superlative": "sweetest",
+      "meaning": "Tasting like sugar or honey",
+      "example": "Strawberries are sweet and yummy.",
+      "kid_friendly_explanation": "Sweet means tasting like candy."
+    },
+    {
+      "word": "sour",
+      "comparative": "sourer",
+      "superlative": "sourest",
+      "meaning": "Having a sharp, tangy taste",
+      "example": "Lemons are sour and make my face scrunch up.",
+      "kid_friendly_explanation": "Sour means a sharp taste, like a lemon."
+    }
+  ]
+}
