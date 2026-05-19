@@ -1,0 +1,92 @@
+{
+  "mercury": {
+    "pt": "Mercúrio",
+    "emoji": "☿️",
+    "example": "Mercury is the closest planet to the Sun!",
+    "fun_fact": "Mercury has no moons and no atmosphere."
+  },
+  "venus": {
+    "pt": "Vênus",
+    "emoji": "🟡",
+    "example": "Venus is the hottest planet in our solar system!",
+    "fun_fact": "Venus spins backwards compared to other planets."
+  },
+  "earth": {
+    "pt": "Terra",
+    "emoji": "🌍",
+    "example": "Earth is our home! We live on this blue planet.",
+    "fun_fact": "Earth is the only planet with life that we know of."
+  },
+  "mars": {
+    "pt": "Marte",
+    "emoji": "🔴",
+    "example": "Mars is called the Red Planet because it looks red!",
+    "fun_fact": "Mars has the tallest volcano in the solar system."
+  },
+  "jupiter": {
+    "pt": "Júpiter",
+    "emoji": "🟠",
+    "example": "Jupiter is the biggest planet of all!",
+    "fun_fact": "Jupiter has a giant storm called the Great Red Spot."
+  },
+  "saturn": {
+    "pt": "Saturno",
+    "emoji": "🪐",
+    "example": "Saturn has beautiful rings around it!",
+    "fun_fact": "Saturn's rings are made of ice and rock."
+  },
+  "uranus": {
+    "pt": "Urano",
+    "emoji": "🟢",
+    "example": "Uranus spins on its side like a rolling ball!",
+    "fun_fact": "Uranus is sometimes called an 'ice giant'."
+  },
+  "neptune": {
+    "pt": "Netuno",
+    "emoji": "🔵",
+    "example": "Neptune is very blue and very windy!",
+    "fun_fact": "Neptune has the strongest winds in the solar system."
+  },
+  "moon": {
+    "pt": "Lua",
+    "emoji": "🌙",
+    "example": "The Moon shines at night and orbits Earth!",
+    "fun_fact": "The Moon is about 4.5 billion years old."
+  },
+  "sun": {
+    "pt": "Sol",
+    "emoji": "☀️",
+    "example": "The Sun gives us light and heat every day!",
+    "fun_fact": "The Sun is a star, not a planet!"
+  },
+  "pluto": {
+    "pt": "Plutão",
+    "emoji": "⚪",
+    "example": "Pluto is a dwarf planet far away from the Sun.",
+    "fun_fact": "Pluto is smaller than Earth's Moon."
+  },
+  "comet": {
+    "pt": "Cometa",
+    "emoji": "☄️",
+    "example": "Comets have long, shiny tails made of ice and dust!",
+    "fun_fact": "Comets orbit the Sun just like planets."
+  },
+  "asteroid": {
+    "pt": "Asteroide",
+    "emoji": "🪨",
+    "example": "Asteroids are big rocks that float in space.",
+    "fun_fact": "There is a belt of asteroids between Mars and Jupiter."
+  },
+  "galaxy": {
+    "pt": "Galáxia",
+    "emoji": "🌌",
+    "example": "Our galaxy is called the Milky Way!",
+    "fun_fact": "There are billions of galaxies in the universe."
+  },
+  "star": {
+    "pt": "Estrela",
+    "emoji": "⭐",
+    "example": "Stars twinkle in the night sky.",
+    "fun_fact": "Some stars are much bigger than our Sun."
+  }
+}
