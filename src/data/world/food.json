@@ -1,0 +1,109 @@
+{
+  "food": [
+    {
+      "word": "apple",
+      "plural": "apples",
+      "meaning": "A round fruit that is red, green, or yellow",
+      "example": "I eat a red apple for a snack because it is sweet and crunchy.",
+      "kid_friendly_explanation": "An apple is a fruit that grows on trees."
+    },
+    {
+      "word": "banana",
+      "plural": "bananas",
+      "meaning": "A long curved yellow fruit",
+      "example": "I peel the banana before I eat the soft inside.",
+      "kid_friendly_explanation": "Bananas are yellow fruits that monkeys love."
+    },
+    {
+      "word": "orange",
+      "plural": "oranges",
+      "meaning": "A round citrus fruit with orange skin",
+      "example": "The orange is juicy and tastes sweet and sour.",
+      "kid_friendly_explanation": "An orange is a fruit that has vitamin C."
+    },
+    {
+      "word": "strawberry",
+      "plural": "strawberries",
+      "meaning": "A small red fruit with tiny seeds on the outside",
+      "example": "I put strawberries on my cereal for breakfast.",
+      "kid_friendly_explanation": "Strawberries are sweet, red berries."
+    },
+    {
+      "word": "pizza",
+      "plural": "pizzas",
+      "meaning": "A round baked dish with cheese, sauce, and toppings",
+      "example": "My favorite pizza has cheese, pepperoni, and mushrooms.",
+      "kid_friendly_explanation": "Pizza is a yummy circle of bread with cheese on top."
+    },
+    {
+      "word": "hamburger",
+      "plural": "hamburgers",
+      "meaning": "A sandwich with a cooked patty inside a bun",
+      "example": "My hamburger has lettuce, tomato, and ketchup on it.",
+      "kid_friendly_explanation": "A hamburger is a sandwich with meat in the middle."
+    },
+    {
+      "word": "sandwich",
+      "plural": "sandwiches",
+      "meaning": "Two slices of bread with food in between",
+      "example": "I eat a peanut butter and jelly sandwich for lunch.",
+      "kid_friendly_explanation": "A sandwich is bread with yummy things inside."
+    },
+    {
+      "word": "spaghetti",
+      "plural": "spaghetti",
+      "meaning": "Long thin noodles with sauce",
+      "example": "I twirl the spaghetti around my fork and eat it.",
+      "kid_friendly_explanation": "Spaghetti is long noodles with sauce."
+    },
+    {
+      "word": "soup",
+      "plural": "soups",
+      "meaning": "A liquid food made with vegetables, meat, or noodles",
+      "example": "The chicken soup is warm and makes me feel better.",
+      "kid_friendly_explanation": "Soup is food in a bowl that you eat with a spoon."
+    },
+    {
+      "word": "salad",
+      "plural": "salads",
+      "meaning": "A mix of vegetables, sometimes with fruit or cheese",
+      "example": "My salad has lettuce, cucumber, tomatoes, and dressing.",
+      "kid_friendly_explanation": "Salad is a bowl of vegetables."
+    },
+    {
+      "word": "ice cream",
+      "plural": "ice creams",
+      "meaning": "A frozen sweet dessert that comes in many flavors",
+      "example": "I eat chocolate ice cream in a cone on hot days.",
+      "kid_friendly_explanation": "Ice cream is a cold, sweet treat."
+    },
+    {
+      "word": "cookie",
+      "plural": "cookies",
+      "meaning": "A small sweet baked treat",
+      "example": "I dip my chocolate chip cookie in a glass of milk.",
+      "kid_friendly_explanation": "Cookies are sweet, crunchy snacks."
+    },
+    {
+      "word": "cereal",
+      "plural": "cereals",
+      "meaning": "Dried grains eaten with milk for breakfast",
+      "example": "I eat crunchy cereal with milk and a banana.",
+      "kid_friendly_explanation": "Cereal is breakfast food in a bowl with milk."
+    },
+    {
+      "word": "eggs",
+      "plural": "eggs",
+      "meaning": "Food from chickens that can be cooked in many ways",
+      "example": "I like my eggs scrambled with cheese for breakfast.",
+      "kid_friendly_explanation": "Eggs come from chickens and are good for breakfast."
+    },
+    {
+      "word": "milk",
+      "plural": "none",
+      "meaning": "A white liquid from cows that is good for bones",
+      "example": "I drink a glass of cold milk with my cookies.",
+      "kid_friendly_explanation": "Milk is good for your bones and teeth."
+    }
+  ]
+}
