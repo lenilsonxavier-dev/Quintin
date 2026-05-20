@@ -1,26 +1,32 @@
 // ========================================
-// IMPORTS
+// IMPORTS CORRETOS
 // ========================================
 
 import * as webllm from "https://esm.run/@mlc-ai/web-llm";
 import { carregarConhecimento } from "./data/index.js";
 import { memory } from "./brain/memory.js";
-import { detectarHardware, iniciarFallback, perguntarFallback, isUsandoFallback } from "./fallback.js";
-import { verificarWebGPU, getNavegadorInfo, sugerirAcao } from "./webgpu-detector.js";
+
+// Importar TUDO do fallback.js (que já tem as funções que precisamos)
+import { 
+    detectarHardware, 
+    iniciarFallback, 
+    perguntarFallback, 
+    isUsandoFallback,
+    getNavegadorInfo,
+    sugerirAcao
+} from "./fallback.js";
 
 // ========================================
 // CONFIG
 // ========================================
 
-// Modelo principal (WebGPU)
+// Modelo principal (para WebGPU)
 const MODEL_ID = "Llama-3.2-1B-Instruct-q4f16_1-MLC";
-
-// Modelo alternativo para fallback
-const MODEL_ID_FALLBACK = "Llama-3.2-1B-Instruct-q3f16_1-MLC";
-
 const MAX_HISTORY = 6;
 const MAX_TOKENS = 120;
 const TEMPERATURE = 0.7;
+
+// ... todo o resto do seu código permanece IGUAL ...
 
 // ========================================
 // DOM
