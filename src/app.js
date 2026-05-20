@@ -24,10 +24,7 @@ from "./brain/memory.js";
 // que Llama 1B para crianças
 
 const MODEL_ID =
-  "Qwen2.5-3B-Instruct-q4f16_1-MLC";
-
-// você pode voltar depois:
-// "Llama-3.2-1B-Instruct-q4f16_1-MLC"
+ "Llama-3.2-1B-Instruct-q4f16_1-MLC";
 
 const MAX_HISTORY = 6;
 
