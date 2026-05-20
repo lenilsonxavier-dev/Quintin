@@ -56,9 +56,6 @@ const arquivosJSON = [
   // ========================================
 
   "school/classroom.json",
-  "school/objects.json",
-  "school/subjects.json",
-
   // ========================================
   // SPACE
   // ========================================
@@ -80,7 +77,6 @@ const arquivosJSON = [
   "world/food.json",
   "world/history_of_english.json",
   "world/nature.json",
-  "world/weather.json",
 
   // ========================================
   // GLOSSARY
