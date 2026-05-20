@@ -283,6 +283,198 @@ function detectarIntencao(
 }
 
 // ========================================
+// DETECTAR CATEGORIA
+// ========================================
+
+function detectarCategoria(
+  palavra
+) {
+
+  const p =
+    palavra.toLowerCase();
+
+  // ABOUT
+
+  if (
+
+    p.includes("english")
+    ||
+    p.includes("language")
+
+  ) {
+
+    return "about";
+  }
+
+  // BODY
+
+  if (
+
+    p.includes("hand")
+    ||
+    p.includes("head")
+    ||
+    p.includes("eye")
+    ||
+    p.includes("nose")
+
+  ) {
+
+    return "body";
+  }
+
+  // CONVERSATION
+
+  if (
+
+    p.includes("hello")
+    ||
+    p.includes("goodbye")
+    ||
+    p.includes("how are you")
+
+  ) {
+
+    return "conversation";
+  }
+
+  // DINOSAURS
+
+  if (
+
+    p.includes("dinosaur")
+    ||
+    p.includes("trex")
+    ||
+    p.includes("triceratops")
+
+  ) {
+
+    return "dinosaurs";
+  }
+
+  // FUN
+
+  if (
+
+    p.includes("joke")
+    ||
+    p.includes("riddle")
+
+  ) {
+
+    return "fun";
+  }
+
+  // SCHOOL
+
+  if (
+
+    p.includes("school")
+    ||
+    p.includes("classroom")
+    ||
+    p.includes("teacher")
+
+  ) {
+
+    return "school";
+  }
+
+  // SPACE
+
+  if (
+
+    p.includes("planet")
+    ||
+    p.includes("moon")
+    ||
+    p.includes("space")
+    ||
+    p.includes("astronaut")
+
+  ) {
+
+    return "space";
+  }
+
+  // SPORTS
+
+  if (
+
+    p.includes("soccer")
+    ||
+    p.includes("basketball")
+
+  ) {
+
+    return "sports";
+  }
+
+  // ANIMALS
+
+  if (
+
+    p.includes("cat")
+    ||
+    p.includes("dog")
+    ||
+    p.includes("lion")
+
+  ) {
+
+    return "animals";
+  }
+
+  // FOOD
+
+  if (
+
+    p.includes("pizza")
+    ||
+    p.includes("apple")
+    ||
+    p.includes("banana")
+
+  ) {
+
+    return "food";
+  }
+
+  // NATURE
+
+  if (
+
+    p.includes("tree")
+    ||
+    p.includes("river")
+    ||
+    p.includes("flower")
+
+  ) {
+
+    return "nature";
+  }
+
+  // HISTORY
+
+  if (
+
+    p.includes("vikings")
+    ||
+    p.includes("celtas")
+    ||
+    p.includes("romanos")
+
+  ) {
+
+    return "history";
+  }
+
+  return "glossary";
+}
+
+// ========================================
 // BUSCA GLOBAL
 // ========================================
 
@@ -344,6 +536,9 @@ function buscarTema(
             palavra:
               item.en,
 
+            categoria:
+              "glossary",
+
             dados: {
 
               pt: item.pt,
@@ -376,6 +571,9 @@ function buscarTema(
 
             palavra:
               item.en,
+
+            categoria:
+              "glossary",
 
             dados: {
 
@@ -435,7 +633,13 @@ function buscarTema(
       return {
 
         palavra: key,
-        dados: value
+
+        dados: value,
+
+        categoria:
+          detectarCategoria(
+            key
+          )
       };
     }
 
@@ -456,7 +660,13 @@ function buscarTema(
       return {
 
         palavra: key,
-        dados: value
+
+        dados: value,
+
+        categoria:
+          detectarCategoria(
+            key
+          )
       };
     }
 
@@ -477,7 +687,13 @@ function buscarTema(
       return {
 
         palavra: key,
-        dados: value
+
+        dados: value,
+
+        categoria:
+          detectarCategoria(
+            key
+          )
       };
     }
   }
@@ -486,34 +702,265 @@ function buscarTema(
 }
 
 // ========================================
-// TEMPLATE EDUCACIONAL
+// TEMPLATES POR TEMA
+// ========================================
+
+const templates = {
+
+  about: (item) => `
+
+🌍
+
+${item.palavra}
+
+${item.dados.fact || ""}
+
+✨ English is spoken in many countries!
+
+🌎 Do you like learning English?
+
+`,
+
+  body: (item) => `
+
+🖐️
+
+${item.palavra}
+
+significa ${item.dados.pt}
+
+${item.dados.example_en || ""}
+
+👀 Can you point to it?
+
+`,
+
+  conversation: (item) => `
+
+💬
+
+${item.palavra}
+
+${item.dados.pt
+  ? `significa ${item.dados.pt}`
+  : ""
+}
+
+${item.dados.example_en || ""}
+
+😊 Can you say it to me?
+
+`,
+
+  core: (item) => `
+
+✨
+
+${item.palavra}
+
+${item.dados.pt
+  ? `significa ${item.dados.pt}`
+  : ""
+}
+
+${item.dados.example_en || ""}
+
+🌟 Can you repeat the word?
+
+`,
+
+  dinosaurs: (item) => `
+
+🦖
+
+${item.palavra}
+
+${item.dados.fact || ""}
+
+🦕 What is your favorite dinosaur?
+
+`,
+
+  fun: (item) => `
+
+😂
+
+${item.dados.joke || item.dados.riddle || ""}
+
+🎉 Do you want another one?
+
+`,
+
+  phrases: (item) => `
+
+💬
+
+${item.palavra}
+
+${item.dados.example_en || ""}
+
+✨ When do you use this phrase?
+
+`,
+
+  school: (item) => `
+
+🎒
+
+${item.palavra}
+
+significa ${item.dados.pt}
+
+${item.dados.example_en || ""}
+
+📚 What is your favorite subject?
+
+`,
+
+  space: (item) => `
+
+🚀
+
+${item.palavra}
+
+significa ${item.dados.pt}
+
+${item.dados.example_en || ""}
+
+🌙 Would you like to visit space?
+
+`,
+
+  sports: (item) => `
+
+⚽
+
+${item.palavra}
+
+significa ${item.dados.pt}
+
+${item.dados.example_en || ""}
+
+🏀 What sport do you like?
+
+`,
+
+  animals: (item) => `
+
+🐾
+
+${item.palavra}
+
+significa ${item.dados.pt}
+
+${item.dados.example_en || ""}
+
+🐶 What is your favorite animal?
+
+`,
+
+  food: (item) => `
+
+🍎
+
+${item.palavra}
+
+significa ${item.dados.pt}
+
+${item.dados.example_en || ""}
+
+🍕 What food do you like?
+
+`,
+
+  nature: (item) => `
+
+🌳
+
+${item.palavra}
+
+significa ${item.dados.pt}
+
+${item.dados.example_en || ""}
+
+🌿 Do you like nature?
+
+`,
+
+  history: (item) => `
+
+🏰
+
+${item.palavra}
+
+${item.dados.fact || ""}
+
+⚔️ Vikings helped shape English!
+
+📖 Do you like history?
+
+`,
+
+  glossary: (item) => `
+
+${item.dados.emoji || "✨"}
+
+${item.palavra}
+
+significa ${item.dados.pt}
+
+${item.dados.example_en || ""}
+
+${item.dados.example_pt || ""}
+
+✨ Can you say the word again?
+
+`,
+
+  default: (item) => `
+
+✨
+
+${item.palavra}
+
+${item.dados.pt
+  ? `significa ${item.dados.pt}`
+  : ""
+}
+
+${item.dados.example_en || ""}
+
+🌟 Tell me another word!
+
+`
+};
+
+// ========================================
+// CRIAR TEMPLATE
 // ========================================
 
 function criarTemplate(item) {
 
-  if (!item) return null;
+  if (!item) {
 
-  const dados =
-    item.dados;
+    return null;
+  }
 
-  return `
+  const categoria =
 
-${dados.emoji || "✨"}
+    item.categoria
+    ||
+    detectarCategoria(
+      item.palavra
+    );
 
-${item.palavra}
+  const template =
 
-${dados.pt
-  ? `significa ${dados.pt}`
-  : ""
-}
+    templates[categoria]
+    ||
+    templates.default;
 
-${dados.fact || ""}
-
-${dados.example_en || ""}
-
-${dados.example_pt || ""}
-
-`;
+  return template(item);
 }
 
 // ========================================
@@ -626,6 +1073,14 @@ in Britain ✨
 
       "😊 I'm fine, thank you!",
 
+    "boa noite":
+
+      "🌙 Good night! Did you learn a new English word today? ✨",
+
+    "good night":
+
+      "🌙 Sleep well, little star ✨",
+
     "você fala espanhol":
 
       "🌍 Não 😊 Eu ensino inglês ✨"
@@ -653,6 +1108,8 @@ in Britain ✨
 
 I am still learning
 that word ✨
+
+Can you teach me more?
 
 `;
   }
@@ -731,10 +1188,6 @@ window.enviar = async function () {
 
   if (!pergunta) return;
 
-  // ========================================
-  // MEMÓRIA
-  // ========================================
-
   memory.totalMessages++;
 
   if (
@@ -743,10 +1196,6 @@ window.enviar = async function () {
 
     memory.friendshipLevel++;
   }
-
-  // ========================================
-  // HISTÓRICO
-  // ========================================
 
   memory.chatHistory.push({
 
@@ -766,10 +1215,6 @@ window.enviar = async function () {
 
   salvarMemoria();
 
-  // ========================================
-  // INTENT
-  // ========================================
-
   const intent =
     detectIntent(pergunta);
 
@@ -777,10 +1222,6 @@ window.enviar = async function () {
     intent;
 
   salvarMemoria();
-
-  // ========================================
-  // UI
-  // ========================================
 
   adicionarMensagem(
     pergunta,
@@ -794,10 +1235,6 @@ window.enviar = async function () {
   btnEnviar.disabled = true;
 
   mostrarPensando();
-
-  // ========================================
-  // RESPOSTA CONTROLADA
-  // ========================================
 
   const respostaLocal =
 
@@ -895,21 +1332,6 @@ window.enviar = async function () {
     modoExtra =
       storyMode(pergunta);
   }
-
-  // ========================================
-  // PROMPT FINAL
-  // ========================================
-
-  const mensagemUsuario = `
-
-${modoExtra}
-
-Child asks:
-
-"${pergunta}"
-
-Answer with tiny educational responses.
-`;
 
   try {
 
