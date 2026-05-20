@@ -2,850 +2,371 @@
 // IMPORTS
 // ========================================
 
-import * as webllm
-from "https://esm.run/@mlc-ai/web-llm";
-
-import {
-  carregarConhecimento
-}
-from "./data/index.js";
-
-// ✅ CAMINHO CORRIGIDO
-import {
-  memory
-}
-from "./brain/memory.js";
+import * as webllm from "https://esm.run/@mlc-ai/web-llm";
+import { carregarConhecimento } from "./data/index.js";
+import { memory } from "./brain/memory.js";
+import { detectarHardware, iniciarFallback, perguntarFallback, isUsandoFallback } from "./fallback.js";
+import { verificarWebGPU, getNavegadorInfo, sugerirAcao } from "./webgpu-detector.js";
 
 // ========================================
 // CONFIG
 // ========================================
 
-// 🌟 Qwen conversa MUITO melhor
-// que Llama 1B para crianças
+// Modelo principal (WebGPU)
+const MODEL_ID = "Llama-3.2-1B-Instruct-q4f16_1-MLC";
 
-const MODEL_ID =
- "Llama-3.2-1B-Instruct-q4f16_1-MLC";
+// Modelo alternativo para fallback
+const MODEL_ID_FALLBACK = "Llama-3.2-1B-Instruct-q3f16_1-MLC";
 
 const MAX_HISTORY = 6;
-
 const MAX_TOKENS = 120;
-
 const TEMPERATURE = 0.7;
 
 // ========================================
 // DOM
 // ========================================
 
-const chat =
-  document.getElementById(
-    "chat"
-  );
+const chat = document.getElementById("chat");
+const inputPergunta = document.getElementById("pergunta");
+const btnEnviar = document.getElementById("btnEnviar");
+const statusEl = document.getElementById("status");
+const progressBar = document.getElementById("progress");
 
-const inputPergunta =
-  document.getElementById(
-    "pergunta"
-  );
-
-// ✅ ID CORRIGIDO
-const btnEnviar =
-  document.getElementById(
-    "btnEnviar"
-  );
-
-inputPergunta.disabled =
-  true;
-
-btnEnviar.disabled =
-  true;
+inputPergunta.disabled = true;
+btnEnviar.disabled = true;
 
 // ========================================
 // ESTADO
 // ========================================
 
 let engine = null;
-
 let modeloOk = false;
-
 let modeloPronto = false;
+let modoFallback = false;
+let hardwareInfo = null;
 
 // ========================================
 // MEMÓRIA
 // ========================================
 
-memory.chatHistory =
-  memory.chatHistory || [];
-
-memory.learnedWords =
-  memory.learnedWords || [];
+memory.chatHistory = memory.chatHistory || [];
+memory.learnedWords = memory.learnedWords || [];
 
 // ========================================
-// SYSTEM PROMPT
+// SYSTEM PROMPT (igual ao seu)
 // ========================================
 
-const systemPrompt = `
-
-You are Quinti,
-a magical purple owl
-who teaches English
-to Brazilian children
-aged 6 to 10.
-
-PERSONALITY
-
-- Warm
-- Playful
-- Patient
-- Encouraging
-
-Use emojis:
-🦉✨⭐🌙🚀🌈🎉🍎🐱
-
-TEACHING RULES
-
-- ALWAYS reply in English
-- If the child uses Portuguese,
-  translate the key word
-- Use SHORT sentences
-- ONE idea per response
-- Teach gently
-- Ask ONE playful question
-- Use animals, toys,
-  school, dinosaurs,
-  colors, space and games
-- Never write long paragraphs
-
-IMPORTANT
-
-- Never speak Spanish
-- Never create nonsense
-- Never become philosophical
-- Never talk about adult topics
-- Never generate huge texts
-
-GOOD RESPONSE EXAMPLES
-
-Child: hello
-Quinti:
-Hello, little star! 🌟
-What is YOUR name? 🦉
-
-Child: gato
-Quinti:
-🐱 Cat means gato!
-
-What color is your cat? 🌈
-
-Child: soccer
-Quinti:
-⚽ Soccer means futebol!
-
-Do you play soccer? 🌟
-
-Child: moon
-Quinti:
-🌙 Moon means lua!
-
-Would you like to visit space? 🚀
-
-`;
+const systemPrompt = `[seu system prompt existente - mantenha igual]`;
 
 // ========================================
 // UI HELPERS
 // ========================================
 
-function adicionarMensagem(
-  texto,
-  autor
-) {
-
-  const div =
-    document.createElement("div");
-
-  div.className =
-    `msg ${autor}`;
-
-  div.textContent =
-    texto;
-
-  chat.appendChild(div);
-
-  chat.scrollTop =
-    chat.scrollHeight;
-
-  return div;
+function atualizarStatus(texto, progresso = null) {
+    statusEl.textContent = texto;
+    if (progresso !== null) {
+        progressBar.style.width = `${progresso * 100}%`;
+    }
 }
 
-// ========================================
-// PENSANDO
-// ========================================
+function adicionarMensagem(texto, autor) {
+    const div = document.createElement("div");
+    div.className = `msg ${autor}`;
+    div.textContent = texto;
+    chat.appendChild(div);
+    chat.scrollTop = chat.scrollHeight;
+    return div;
+}
 
 function mostrarPensando() {
-
-  removerPensando();
-
-  const div =
-    document.createElement("div");
-
-  div.className =
-    "pensando";
-
-  div.id =
-    "pensando";
-
-  div.innerHTML = `
-
-<span style="
-  font-size: 32px;
-">
-🦉
-</span>
-
-<span>
-Quinti is thinking...
-</span>
-
-`;
-
-  chat.appendChild(div);
-
-  chat.scrollTop =
-    chat.scrollHeight;
+    removerPensando();
+    const div = document.createElement("div");
+    div.className = "pensando";
+    div.id = "pensando";
+    div.innerHTML = `<span style="font-size: 32px;">🦉</span><span>Quinti is thinking...</span>`;
+    chat.appendChild(div);
+    chat.scrollTop = chat.scrollHeight;
 }
 
 function removerPensando() {
-
-  const el =
-    document.getElementById(
-      "pensando"
-    );
-
-  if (el) {
-
-    el.remove();
-  }
+    const el = document.getElementById("pensando");
+    if (el) el.remove();
 }
 
 // ========================================
-// RESPOSTAS FIXAS
+// RESPOSTAS FIXAS (seu código existente)
 // ========================================
 
 const respostasFixas = {
-
-  // greetings
-
-  "hello":
-
-`👋 Hello, little star!
-
-What is YOUR name? ✨`,
-
-  "hi":
-
-`🌟 Hi, friend!
-
-How are you today?`,
-
-  "good night":
-
-`🌙 Good night!
-
-Sleep well, little star ✨`,
-
-  "boa noite":
-
-`🌙 Good night!
-
-Did you learn a new word today? ✨`,
-
-  "bye":
-
-`👋 Bye bye!
-
-See you soon ✨`,
-
-  "tchau":
-
-`👋 Bye bye!
-
-Keep practicing English 🌟`,
-
-  // name
-
-  "qual é o seu nome":
-
-`🦉 My name is Quinti!
-
-What is YOUR name? ✨`,
-
-  "what is your name":
-
-`🦉 My name is Quinti! ✨`,
-
-  // subjects
-
-  "arte":
-
-`🎨 Art means arte!
-
-Do you like drawing? ✨`,
-
-  "matemática":
-
-`➕ Math means matemática! ✨`,
-
-  "português":
-
-`📚 Portuguese means português! ✨`,
-
-  // family
-
-  "bisavô":
-
-`👴 Great-grandfather
-means bisavô ✨`,
-
-  "bisavó":
-
-`👵 Great-grandmother
-means bisavó ✨`,
-
-  // phrases
-
-  "nós somos felizes":
-
-`😊 We are happy ✨`,
-
-  "nos somos felizes":
-
-`😊 We are happy ✨`,
-
-  // verb
-
-  "verbo to be":
-
-`✨ TO BE means
-ser ou estar ✨`
-
+    "hello": `👋 Hello, little star!\n\nWhat is YOUR name? ✨`,
+    "hi": `🌟 Hi, friend!\n\nHow are you today?`,
+    "good night": `🌙 Good night!\n\nSleep well, little star ✨`,
+    "boa noite": `🌙 Good night!\n\nDid you learn a new word today? ✨`,
+    "bye": `👋 Bye bye!\n\nSee you soon ✨`,
+    "tchau": `👋 Bye bye!\n\nKeep practicing English 🌟`,
+    "qual é o seu nome": `🦉 My name is Quinti!\n\nWhat is YOUR name? ✨`,
+    "what is your name": `🦉 My name is Quinti! ✨`,
+    "arte": `🎨 Art means arte!\n\nDo you like drawing? ✨`,
+    "matemática": `➕ Math means matemática! ✨`,
+    "português": `📚 Portuguese means português! ✨`,
+    "bisavô": `👴 Great-grandfather means bisavô ✨`,
+    "bisavó": `👵 Great-grandmother means bisavó ✨`,
+    "nós somos felizes": `😊 We are happy ✨`,
+    "nos somos felizes": `😊 We are happy ✨`,
+    "verbo to be": `✨ TO BE means ser ou estar ✨`
 };
 
-// ========================================
-// BUSCA NO GLOSSÁRIO
-// ========================================
-
-function buscarGlossario(
-  pergunta
-) {
-
-  if (
-    !window.conhecimentoGlobal
-      ?.glossary
-  ) {
-
+function buscarGlossario(pergunta) {
+    if (!window.conhecimentoGlobal?.glossary) return null;
+    const texto = pergunta.toLowerCase().trim();
+    const palavras = texto.split(/\s+/);
+    
+    for (const categoria of Object.values(window.conhecimentoGlobal.glossary)) {
+        if (!categoria.words) continue;
+        for (const item of categoria.words) {
+            if (item.pt && palavras.includes(item.pt.toLowerCase())) {
+                return `\n${item.emoji || "✨"}\n${item.en}\nmeans ${item.pt}\n${item.example_en || ""}\n${item.example_pt || ""}\n✨ Can you say "${item.en}" again?\n`;
+            }
+            if (item.en && palavras.includes(item.en.toLowerCase())) {
+                return `\n${item.emoji || "✨"}\n${item.en}\nmeans ${item.pt}\n${item.example_en || ""}\n${item.example_pt || ""}\n✨ Do you like this word?\n`;
+            }
+        }
+    }
     return null;
-  }
+}
 
-  const texto =
-
-    pergunta
-      .toLowerCase()
-      .trim();
-
-  const palavras =
-
-    texto.split(/\s+/);
-
-  for (
-
-    const categoria of
-
-    Object.values(
-      conhecimentoGlobal.glossary
-    )
-
-  ) {
-
-    if (
-      !categoria.words
-    ) continue;
-
-    for (
-      const item
-      of categoria.words
-    ) {
-
-      // PT → EN
-
-      if (
-
-        item.pt
-        &&
-        palavras.includes(
-          item.pt.toLowerCase()
-        )
-
-      ) {
-
-        return `
-
-${item.emoji || "✨"}
-
-${item.en}
-
-means ${item.pt}
-
-${item.example_en || ""}
-
-${item.example_pt || ""}
-
-✨ Can you say
-"${item.en}" again?
-
-`;
-      }
-
-      // EN → PT
-
-      if (
-
-        item.en
-        &&
-        palavras.includes(
-          item.en.toLowerCase()
-        )
-
-      ) {
-
-        return `
-
-${item.emoji || "✨"}
-
-${item.en}
-
-means ${item.pt}
-
-${item.example_en || ""}
-
-${item.example_pt || ""}
-
-✨ Do you like this word?
-
-`;
-      }
+function respostaControlada(pergunta) {
+    const texto = pergunta.toLowerCase().trim();
+    for (const chave of Object.keys(respostasFixas)) {
+        if (texto.includes(chave)) return respostasFixas[chave];
     }
-  }
-
-  return null;
+    const glossario = buscarGlossario(pergunta);
+    if (glossario) return glossario;
+    return null;
 }
 
 // ========================================
-// RESPOSTA CONTROLADA
-// ========================================
-
-function respostaControlada(
-  pergunta
-) {
-
-  const texto =
-
-    pergunta
-      .toLowerCase()
-      .trim();
-
-  // ========================================
-  // MATCH FLEXÍVEL
-  // ========================================
-
-  for (
-
-    const chave of
-
-    Object.keys(
-      respostasFixas
-    )
-
-  ) {
-
-    if (
-
-      texto.includes(chave)
-
-    ) {
-
-      return respostasFixas[
-        chave
-      ];
-    }
-  }
-
-  // ========================================
-  // GLOSSÁRIO
-  // ========================================
-
-  const glossario =
-
-    buscarGlossario(
-      pergunta
-    );
-
-  if (glossario) {
-
-    return glossario;
-  }
-
-  return null;
-}
-
-// ========================================
-// CARREGAR MODELO
+// INICIAR MODELO COM FALLBACK INTELIGENTE
 // ========================================
 
 async function iniciarModelo() {
-
-  const loader =
-
-    adicionarMensagem(
-
-      "🦉 Waking up Quinti...",
-
-      "bot"
-    );
-
-  engine =
-
-    await webllm.CreateMLCEngine(
-
-      MODEL_ID,
-
-      {
-
-        initProgressCallback:
-          (p) => {
-
-            loader.textContent =
-
-              `🦉 ${p.text}`;
-          }
-      }
-    );
-
-  loader.textContent =
-
-    "✨ Quinti is ready!";
-
-  modeloOk = true;
-}
-
-// ========================================
-// CHAT COM STREAM
-// ========================================
-
-async function perguntarQuinti(
-  userText
-) {
-
-  memory.chatHistory.push({
-
-    role: "user",
-
-    content: userText
-
-  });
-
-  const recent =
-
-    memory.chatHistory.slice(
-      -MAX_HISTORY
-    );
-
-  const messages = [
-
-    {
-      role: "system",
-
-      content:
-        systemPrompt
-    },
-
-    ...recent
-  ];
-
-  removerPensando();
-
-  const bubble =
-
-    adicionarMensagem(
-      "",
-      "bot"
-    );
-
-  let fullText = "";
-
-  const stream =
-
-    await engine.chat.completions.create({
-
-      messages,
-
-      temperature:
-        TEMPERATURE,
-
-      max_tokens:
-        MAX_TOKENS,
-
-      top_p: 0.9,
-
-      stream: true
-    });
-
-  for await (
-
-    const chunk
-    of stream
-
-  ) {
-
-    const delta =
-
-      chunk.choices?.[0]
-      ?.delta?.content || "";
-
-    if (delta) {
-
-      fullText += delta;
-
-      bubble.textContent =
-        fullText;
-
-      chat.scrollTop =
-        chat.scrollHeight;
+    // Detectar hardware primeiro
+    hardwareInfo = await detectarHardware();
+    const webGpuStatus = await verificarWebGPU();
+    const navegadorInfo = getNavegadorInfo();
+    
+    console.log("Hardware:", hardwareInfo);
+    console.log("WebGPU:", webGpuStatus);
+    console.log("Navegador:", navegadorInfo);
+    
+    // Decidir qual modo usar
+    const usarWebGPU = webGpuStatus.disponivel && hardwareInfo.memory >= 4;
+    
+    if (!usarWebGPU) {
+        const dica = sugerirAcao(navegadorInfo, webGpuStatus);
+        if (dica) {
+            adicionarMensagem(dica, "bot");
+        }
+        
+        atualizarStatus("⚡ Modo compatível (CPU) - pode ser mais lento", 0);
+        return await iniciarModoFallback();
     }
-  }
+    
+    // Tentar WebGPU
+    atualizarStatus("🚀 Inicializando Quinti (modo GPU)...", 0);
+    return await iniciarModoWebGPU();
+}
 
-  memory.chatHistory.push({
+async function iniciarModoWebGPU() {
+    try {
+        const loader = adicionarMensagem("🦉 Waking up Quinti...", "bot");
+        
+        engine = await webllm.CreateMLCEngine(MODEL_ID, {
+            initProgressCallback: (p) => {
+                loader.textContent = `🦉 ${p.text}`;
+                atualizarStatus(p.text, p.progress || 0);
+            }
+        });
+        
+        loader.textContent = "✨ Quinti is ready! (Modo Turbo)";
+        atualizarStatus("✨ Pronto! Modo acelerado por GPU", 1);
+        modeloOk = true;
+        modoFallback = false;
+        
+        return true;
+        
+    } catch (err) {
+        console.warn("WebGPU falhou, tentando fallback:", err);
+        adicionarMensagem("🔄 Mudando para modo compatível...", "bot");
+        return await iniciarModoFallback();
+    }
+}
 
-    role: "assistant",
-
-    content: fullText
-
-  });
-
-  return fullText;
+async function iniciarModoFallback() {
+    try {
+        atualizarStatus("⚡ Modo compatível ativado...", 0.2);
+        
+        await iniciarFallback((progresso) => {
+            atualizarStatus(progresso.text, progresso.progress);
+        });
+        
+        modoFallback = true;
+        modeloOk = true;
+        atualizarStatus("✨ Quinti está pronto (modo compatível)!", 1);
+        
+        // Adicionar aviso na UI
+        adicionarMensagem(
+            "⚡ Quinti está no modo compatível!\n\n" +
+            "As respostas podem ser mais lentas neste computador.\n\n" +
+            "Para melhor performance, use Chrome ou Edge atualizados! ✨",
+            "bot"
+        );
+        
+        return true;
+        
+    } catch (err) {
+        console.error("Fallback também falhou:", err);
+        atualizarStatus("❌ Não foi possível carregar o Quinti", 0);
+        adicionarMensagem(
+            "🌙 Desculpe! Seu navegador não é compatível com o Quinti.\n\n" +
+            "Tente usar o Google Chrome ou Microsoft Edge atualizados.",
+            "bot"
+        );
+        return false;
+    }
 }
 
 // ========================================
-// ENVIAR
+// PERGUNTAR (compatível com fallback)
+// ========================================
+
+async function perguntarQuinti(userText) {
+    memory.chatHistory.push({ role: "user", content: userText });
+    const recent = memory.chatHistory.slice(-MAX_HISTORY);
+    const messages = [{ role: "system", content: systemPrompt }, ...recent];
+    
+    removerPensando();
+    const bubble = adicionarMensagem("", "bot");
+    let fullText = "";
+    
+    if (modoFallback) {
+        // Usar fallback (WASM/CPU)
+        await perguntarFallback(messages, (token) => {
+            if (typeof token === 'string') {
+                fullText = token;
+                bubble.textContent = fullText;
+                chat.scrollTop = chat.scrollHeight;
+            } else {
+                fullText += token;
+                bubble.textContent = fullText;
+                chat.scrollTop = chat.scrollHeight;
+            }
+        });
+    } else {
+        // Usar WebGPU (MLC)
+        const stream = await engine.chat.completions.create({
+            messages,
+            temperature: TEMPERATURE,
+            max_tokens: MAX_TOKENS,
+            top_p: 0.9,
+            stream: true
+        });
+        
+        for await (const chunk of stream) {
+            const delta = chunk.choices?.[0]?.delta?.content || "";
+            if (delta) {
+                fullText += delta;
+                bubble.textContent = fullText;
+                chat.scrollTop = chat.scrollHeight;
+            }
+        }
+    }
+    
+    if (fullText.trim()) {
+        memory.chatHistory.push({ role: "assistant", content: fullText });
+    } else {
+        bubble.textContent = "✨ Tell me more, little star! ✨";
+        memory.chatHistory.push({ role: "assistant", content: bubble.textContent });
+    }
+    
+    return fullText;
+}
+
+// ========================================
+// ENVIAR (seu código original adaptado)
 // ========================================
 
 async function enviar() {
-
-  const texto =
-
-    inputPergunta.value
-      .trim();
-
-  if (!texto) return;
-
-  adicionarMensagem(
-    texto,
-    "user"
-  );
-
-  inputPergunta.value =
-    "";
-
-  inputPergunta.disabled =
-    true;
-
-  btnEnviar.disabled =
-    true;
-
-  mostrarPensando();
-
-  try {
-
-    // ========================================
-    // MODO CONTROLADO
-    // ========================================
-
-    const respostaLocal =
-
-      respostaControlada(
-        texto
-      );
-
-    if (respostaLocal) {
-
-      removerPensando();
-
-      adicionarMensagem(
-
-        respostaLocal,
-
-        "bot"
-      );
-
-      return;
+    const texto = inputPergunta.value.trim();
+    if (!texto) return;
+    
+    adicionarMensagem(texto, "user");
+    inputPergunta.value = "";
+    inputPergunta.disabled = true;
+    btnEnviar.disabled = true;
+    mostrarPensando();
+    
+    try {
+        const respostaLocal = respostaControlada(texto);
+        if (respostaLocal) {
+            removerPensando();
+            adicionarMensagem(respostaLocal, "bot");
+            return;
+        }
+        
+        if (modeloOk) {
+            await perguntarQuinti(texto);
+        } else {
+            removerPensando();
+            adicionarMensagem("🦉 Quinti is still waking up!\n\nTry again soon ✨", "bot");
+        }
+        
+    } catch (err) {
+        console.error(err);
+        removerPensando();
+        adicionarMensagem("🌙 Oops! Quinti got sleepy ✨", "bot");
+    } finally {
+        inputPergunta.disabled = false;
+        btnEnviar.disabled = false;
+        inputPergunta.focus();
     }
-
-    // ========================================
-    // IA
-    // ========================================
-
-    if (modeloOk) {
-
-      await perguntarQuinti(
-        texto
-      );
-
-    } else {
-
-      removerPensando();
-
-      adicionarMensagem(
-
-`🦉 Quinti is still waking up!
-
-Try again soon ✨`,
-
-        "bot"
-      );
-    }
-
-  } catch(err) {
-
-    console.error(err);
-
-    removerPensando();
-
-    adicionarMensagem(
-
-`🌙 Oops!
-
-Quinti got sleepy ✨`,
-
-      "bot"
-    );
-
-  } finally {
-
-    inputPergunta.disabled =
-      false;
-
-    btnEnviar.disabled =
-      false;
-
-    inputPergunta.focus();
-  }
 }
 
 // ========================================
-// EVENTS
+// EVENTOS
 // ========================================
 
-btnEnviar.addEventListener(
-  "click",
-  enviar
-);
-
-inputPergunta.addEventListener(
-
-  "keydown",
-
-  (e) => {
-
-    if (
-
-      e.key === "Enter"
-      &&
-      !e.shiftKey
-
-    ) {
-
-      e.preventDefault();
-
-      enviar();
+btnEnviar.addEventListener("click", enviar);
+inputPergunta.addEventListener("keydown", (e) => {
+    if (e.key === "Enter" && !e.shiftKey) {
+        e.preventDefault();
+        enviar();
     }
-  }
-);
+});
 
 // ========================================
 // BOOT
 // ========================================
 
 (async () => {
-
-  adicionarMensagem(
-
-    "🌍 Loading Quinti...",
-
-    "bot"
-  );
-
-  try {
-
-    window.conhecimentoGlobal =
-
-      await carregarConhecimento();
-
-    adicionarMensagem(
-
-      "📚 Knowledge loaded!",
-
-      "bot"
-    );
-
-  } catch (e) {
-
-    console.warn(
-      "Knowledge error",
-      e
-    );
-  }
-
-  try {
-
+    adicionarMensagem("🌍 Loading Quinti...", "bot");
+    
+    try {
+        window.conhecimentoGlobal = await carregarConhecimento();
+        adicionarMensagem("📚 Knowledge loaded!", "bot");
+    } catch (e) {
+        console.warn("Knowledge error", e);
+    }
+    
     await iniciarModelo();
-
-  } catch (err) {
-
-    console.warn(
-      "⚠️ WebLLM disabled",
-      err
-    );
-  }
-
-  modeloPronto =
-    modeloOk;
-
-  if (
-
-    memory.learnedWords
-    ?.length > 0
-
-  ) {
-
-    adicionarMensagem(
-
-`🌟 Welcome back!
-
-You learned:
-
-${memory.learnedWords
-  .slice(0,5)
-  .join(", ")}
-
-`,
-
-      "bot"
-    );
-  }
-
-  inputPergunta.disabled =
-    false;
-
-  btnEnviar.disabled =
-    false;
-
-  inputPergunta.focus();
-
+    
+    modeloPronto = modeloOk;
+    
+    if (memory.learnedWords?.length > 0) {
+        adicionarMensagem(`🌟 Welcome back!\n\nYou learned:\n${memory.learnedWords.slice(0,5).join(", ")}\n`, "bot");
+    }
+    
+    inputPergunta.disabled = false;
+    btnEnviar.disabled = false;
+    inputPergunta.focus();
 })();
