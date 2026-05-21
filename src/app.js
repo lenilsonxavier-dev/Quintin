@@ -722,7 +722,7 @@ btnMic.addEventListener(
     );
   }
 
- adicionarMensagem(
+adicionarMensagem(
 `🦉 Hello!
 
 I am Quinti Lite ✨
