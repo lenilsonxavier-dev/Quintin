@@ -565,7 +565,7 @@ if (SpeechRecognition) {
     enviar();
   };
 
- recognition.onerror = (event) => {
+recognition.onerror = (event) => {
 
   console.log(
     "ERRO MICROFONE:",
