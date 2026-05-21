@@ -744,3 +744,4 @@ Let's learn English together!`,
   inputPergunta.focus();
 
 })();
+  console.log("QUINTI OK");
