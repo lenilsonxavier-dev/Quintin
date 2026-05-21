@@ -517,6 +517,68 @@ Quinti got sleepy ✨`,
 }
 
 // ========================================
+// MICROFONE
+// ========================================
+
+const SpeechRecognition =
+  window.SpeechRecognition ||
+  window.webkitSpeechRecognition;
+
+let recognition = null;
+
+if (SpeechRecognition) {
+
+  recognition =
+    new SpeechRecognition();
+
+  recognition.lang = "pt-BR";
+
+  recognition.continuous = false;
+
+  recognition.interimResults = false;
+
+  recognition.maxAlternatives = 1;
+
+  recognition.onstart = () => {
+
+    btnMic.textContent = "🔴";
+
+    adicionarMensagem(
+      "🎤 Listening...",
+      "bot"
+    );
+  };
+
+  recognition.onend = () => {
+
+    btnMic.textContent = "🎤";
+  };
+
+  recognition.onresult = (event) => {
+
+    const texto =
+      event.results[0][0].transcript;
+
+    inputPergunta.value =
+      texto;
+
+    enviar();
+  };
+
+  recognition.onerror = (event) => {
+
+    console.error(event);
+
+    adicionarMensagem(
+      "🎤 Microphone error!",
+      "bot"
+    );
+
+    btnMic.textContent = "🎤";
+  };
+}
+
+// ========================================
 // EVENTOS
 // ========================================
 
@@ -538,6 +600,24 @@ inputPergunta.addEventListener(
 
       enviar();
     }
+  }
+);
+
+btnMic.addEventListener(
+  "click",
+  () => {
+
+    if (!recognition) {
+
+      adicionarMensagem(
+        "🎤 Voice not supported!",
+        "bot"
+      );
+
+      return;
+    }
+
+    recognition.start();
   }
 );
 
