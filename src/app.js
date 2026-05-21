@@ -722,12 +722,25 @@ btnMic.addEventListener(
     );
   }
 
-adicionarMensagem(
+// ========================================
+// BOOT
+// ========================================
+
+(async () => {
+
+  adicionarMensagem(
 `🦉 Hello!
 
 I am Quinti Lite ✨
 
 Let's learn English together!`,
 "bot"
-);
+  );
+
+  inputPergunta.disabled = false;
+
+  btnEnviar.disabled = false;
+
+  inputPergunta.focus();
+
 })();
