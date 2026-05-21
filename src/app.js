@@ -565,19 +565,81 @@ if (SpeechRecognition) {
     enviar();
   };
 
-  recognition.onerror = (event) => {
+ recognition.onerror = (event) => {
 
-    console.error(event);
+  console.log(
+    "ERRO MICROFONE:",
+    event
+  );
 
-    adicionarMensagem(
-      "🎤 Microphone error!",
-      "bot"
-    );
+  console.log(
+    "TIPO ERRO:",
+    event.error
+  );
 
-    btnMic.textContent = "🎤";
-  };
-}
+  console.log(
+    "MENSAGEM:",
+    event.message
+  );
 
+  let mensagem =
+    "🎤 Microphone error!";
+
+  if (
+    event.error ===
+    "not-allowed"
+  ) {
+
+    mensagem =
+      "🎤 Please allow microphone access.";
+  }
+
+  else if (
+    event.error ===
+    "no-speech"
+  ) {
+
+    mensagem =
+      "🎤 I couldn't hear you.";
+  }
+
+  else if (
+    event.error ===
+    "network"
+  ) {
+
+    mensagem =
+      "🌐 Network error in voice recognition.";
+  }
+
+  else if (
+    event.error ===
+    "audio-capture"
+  ) {
+
+    mensagem =
+      "🎤 No microphone detected.";
+  }
+
+  else if (
+    event.error ===
+    "service-not-allowed"
+  ) {
+
+    mensagem =
+      "🚫 Voice service blocked by browser.";
+  }
+
+  adicionarMensagem(
+    mensagem,
+    "bot"
+  );
+
+  btnMic.textContent = "🎤";
+
+  ouvindo = false;
+};
+  
 // ========================================
 // EVENTOS
 // ========================================
