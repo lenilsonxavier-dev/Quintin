@@ -20,12 +20,14 @@ const inputPergunta = document.getElementById("pergunta");
 const btnEnviar = document.getElementById("btnEnviar");
 const statusEl = document.getElementById("status");
 const progressBar = document.getElementById("progress");
+const btnMic = document.getElementById("btnMic"); // ADICIONADO - estava faltando!
 
 // ========================================
 // ESTADO
 // ========================================
 
 let modeloOk = true;
+let ouvindo = false; // ADICIONADO - estava faltando!
 
 // ========================================
 // MEMÓRIA
@@ -565,81 +567,82 @@ if (SpeechRecognition) {
     enviar();
   };
 
-recognition.onerror = (event) => {
+  recognition.onerror = (event) => {
 
-  console.log(
-    "ERRO MICROFONE:",
-    event
-  );
+    console.log(
+      "ERRO MICROFONE:",
+      event
+    );
 
-  console.log(
-    "TIPO ERRO:",
-    event.error
-  );
+    console.log(
+      "TIPO ERRO:",
+      event.error
+    );
 
-  console.log(
-    "MENSAGEM:",
-    event.message
-  );
+    console.log(
+      "MENSAGEM:",
+      event.message
+    );
 
-  let mensagem =
-    "🎤 Microphone error!";
+    let mensagem =
+      "🎤 Microphone error!";
 
-  if (
-    event.error ===
-    "not-allowed"
-  ) {
+    if (
+      event.error ===
+      "not-allowed"
+    ) {
 
-    mensagem =
-      "🎤 Please allow microphone access.";
-  }
+      mensagem =
+        "🎤 Please allow microphone access.";
+    }
 
-  else if (
-    event.error ===
-    "no-speech"
-  ) {
+    else if (
+      event.error ===
+      "no-speech"
+    ) {
 
-    mensagem =
-      "🎤 I couldn't hear you.";
-  }
+      mensagem =
+        "🎤 I couldn't hear you.";
+    }
 
-  else if (
-    event.error ===
-    "network"
-  ) {
+    else if (
+      event.error ===
+      "network"
+    ) {
 
-    mensagem =
-      "🌐 Network error in voice recognition.";
-  }
+      mensagem =
+        "🌐 Network error in voice recognition.";
+    }
 
-  else if (
-    event.error ===
-    "audio-capture"
-  ) {
+    else if (
+      event.error ===
+      "audio-capture"
+    ) {
 
-    mensagem =
-      "🎤 No microphone detected.";
-  }
+      mensagem =
+        "🎤 No microphone detected.";
+    }
 
-  else if (
-    event.error ===
-    "service-not-allowed"
-  ) {
+    else if (
+      event.error ===
+      "service-not-allowed"
+    ) {
 
-    mensagem =
-      "🚫 Voice service blocked by browser.";
-  }
+      mensagem =
+        "🚫 Voice service blocked by browser.";
+    }
 
-  adicionarMensagem(
-    mensagem,
-    "bot"
-  );
+    adicionarMensagem(
+      mensagem,
+      "bot"
+    );
 
-  btnMic.textContent = "🎤";
+    btnMic.textContent = "🎤";
 
-  ouvindo = false;
-};
-  
+    ouvindo = false;
+  };
+}
+
 // ========================================
 // EVENTOS
 // ========================================
@@ -684,7 +687,7 @@ btnMic.addEventListener(
 );
 
 // ========================================
-// BOOT
+// BOOT (CORRIGIDO - removido o bloco duplicado)
 // ========================================
 
 (async () => {
@@ -722,12 +725,7 @@ btnMic.addEventListener(
     );
   }
 
-// ========================================
-// BOOT
-// ========================================
-
-(async () => {
-
+  // Mensagem de boas-vindas após o carregamento
   adicionarMensagem(
 `🦉 Hello!
 
@@ -743,5 +741,6 @@ Let's learn English together!`,
 
   inputPergunta.focus();
 
-})();
   console.log("QUINTI OK");
+
+})();
