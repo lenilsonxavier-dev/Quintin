@@ -152,65 +152,63 @@ function respostaControlada(pergunta) {
 }
 
 // ========================================
-// INICIAR MODELO COM FALLBACK INTELIGENTE
+// INICIAR MODELO COM FALLBACK (CORRIGIDO)
 // ========================================
 
 async function iniciarModelo() {
-    // Detectar hardware primeiro
-    hardwareInfo = await detectarHardware();
-    const webGpuStatus = await verificarWebGPU();
+    // Usa a função detectarHardware do fallback.js (que já faz tudo)
+    const hardwareInfo = await detectarHardware();
     const navegadorInfo = getNavegadorInfo();
     
-    console.log("Hardware:", hardwareInfo);
-    console.log("WebGPU:", webGpuStatus);
+    console.log("Hardware detectado:", hardwareInfo);
     console.log("Navegador:", navegadorInfo);
     
-    // Decidir qual modo usar
-    const usarWebGPU = webGpuStatus.disponivel && hardwareInfo.memory >= 4;
-    
-    if (!usarWebGPU) {
-        const dica = sugerirAcao(navegadorInfo, webGpuStatus);
-        if (dica) {
-            adicionarMensagem(dica, "bot");
-        }
-        
-        atualizarStatus("⚡ Modo compatível (CPU) - pode ser mais lento", 0);
-        return await iniciarModoFallback();
+    // Mostrar dica se necessário
+    const dica = sugerirAcao(navegadorInfo, hardwareInfo.precisaFallback);
+    if (dica && hardwareInfo.precisaFallback) {
+        adicionarMensagem(dica, "bot");
+        await new Promise(resolve => setTimeout(resolve, 1500));
     }
     
-    // Tentar WebGPU
-    atualizarStatus("🚀 Inicializando Quinti (modo GPU)...", 0);
-    return await iniciarModoWebGPU();
+    // Decidir qual modo usar baseado na detecção
+    if (hardwareInfo.precisaFallback) {
+        atualizarStatus("⚡ Modo compatível (CPU) - otimizado para este PC", 0);
+        return await iniciarModoFallback();
+    } else {
+        atualizarStatus("🚀 Inicializando Quinti (modo turbo)...", 0);
+        return await iniciarModoWebGPU();
+    }
 }
 
 async function iniciarModoWebGPU() {
     try {
-        const loader = adicionarMensagem("🦉 Waking up Quinti...", "bot");
+        const loader = adicionarMensagem("🦉 Inicializando Quinti (modo turbo)...", "bot");
         
         engine = await webllm.CreateMLCEngine(MODEL_ID, {
             initProgressCallback: (p) => {
-                loader.textContent = `🦉 ${p.text}`;
+                loader.textContent = `🚀 ${p.text}`;
                 atualizarStatus(p.text, p.progress || 0);
             }
         });
         
-        loader.textContent = "✨ Quinti is ready! (Modo Turbo)";
+        loader.textContent = "✨ Quinti está pronto! (Modo Turbo)";
         atualizarStatus("✨ Pronto! Modo acelerado por GPU", 1);
         modeloOk = true;
         modoFallback = false;
         
+        adicionarMensagem("🚀 Modo turbo ativado! As respostas serão bem rápidas ✨", "bot");
         return true;
         
     } catch (err) {
         console.warn("WebGPU falhou, tentando fallback:", err);
-        adicionarMensagem("🔄 Mudando para modo compatível...", "bot");
+        adicionarMensagem("🔄 Ajustando para modo compatível com seu computador...", "bot");
         return await iniciarModoFallback();
     }
 }
 
 async function iniciarModoFallback() {
     try {
-        atualizarStatus("⚡ Modo compatível ativado...", 0.2);
+        atualizarStatus("⚡ Preparando modo compatível...", 0.2);
         
         await iniciarFallback((progresso) => {
             atualizarStatus(progresso.text, progresso.progress);
@@ -220,14 +218,6 @@ async function iniciarModoFallback() {
         modeloOk = true;
         atualizarStatus("✨ Quinti está pronto (modo compatível)!", 1);
         
-        // Adicionar aviso na UI
-        adicionarMensagem(
-            "⚡ Quinti está no modo compatível!\n\n" +
-            "As respostas podem ser mais lentas neste computador.\n\n" +
-            "Para melhor performance, use Chrome ou Edge atualizados! ✨",
-            "bot"
-        );
-        
         return true;
         
     } catch (err) {
@@ -235,13 +225,13 @@ async function iniciarModoFallback() {
         atualizarStatus("❌ Não foi possível carregar o Quinti", 0);
         adicionarMensagem(
             "🌙 Desculpe! Seu navegador não é compatível com o Quinti.\n\n" +
-            "Tente usar o Google Chrome ou Microsoft Edge atualizados.",
+            "Tente usar o Google Chrome ou Microsoft Edge atualizados.\n\n" +
+            `Erro: ${err.message}`,
             "bot"
         );
         return false;
     }
 }
-
 // ========================================
 // PERGUNTAR (compatível com fallback)
 // ========================================
