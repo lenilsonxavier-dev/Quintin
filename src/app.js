@@ -147,26 +147,186 @@ function similarity(a, b) {
 }
 
 // ========================================
-// RESPOSTAS FIXAS (mantidas)
+// BASE A1/A2 — INTENÇÕES CONVERSACIONAIS
+// (cada item: padrões que disparam + respostas variadas)
 // ========================================
-const respostasFixas = {
-  "hello": `👋 Hello, little star!\n\nWhat is YOUR name? ✨`,
-  "hi": `🌟 Hi, friend!\n\nHow are you today? ✨`,
-  "good night": `🌙 Good night!\n\nSleep well, little star ✨`,
-  "boa noite": `🌙 Good night!\n\nDid you learn a new word today? ✨`,
-  "bye": `👋 Bye bye!\n\nSee you soon ✨`,
-  "tchau": `👋 Bye bye!\n\nKeep practicing English 🌟`,
-  "qual é o seu nome": `🦉 My name is Quinti!\n\nWhat is YOUR name? ✨`,
-  "what is your name": `🦉 My name is Quinti! ✨`,
-  "arte": `🎨 Art means arte!\n\nDo you like drawing? ✨`,
-  "matemática": `➕ Math means matemática! ✨`,
-  "português": `📚 Portuguese means português! ✨`,
-  "bisavô": `👴 Great-grandfather means bisavô ✨`,
-  "bisavó": `👵 Great-grandmother means bisavó ✨`,
-  "nós somos felizes": `😊 We are happy ✨`,
-  "nos somos felizes": `😊 We are happy ✨`,
-  "verbo to be": `✨ TO BE means ser ou estar ✨`,
-};
+const intencoes = [
+  // ---------- GREETINGS ----------
+  {
+    nome: "greeting",
+    padroes: [/\b(hi|hello|hey|olá|ola|oi)\b/i],
+    respostas: [
+      "👋 Hello, little star! What's your name? ✨",
+      "🌟 Hi friend! How are you today?",
+      "🦉 Hey there! Ready to learn English? ✨"
+    ]
+  },
+  {
+    nome: "goodbye",
+    padroes: [/\b(bye|goodbye|tchau|see you|good night|boa noite)\b/i],
+    respostas: [
+      "👋 Bye bye! See you soon ✨",
+      "🌙 Good night, little star! Sweet dreams 💫"
+    ]
+  },
+
+  // ---------- IDENTITY ----------
+  {
+    nome: "ask_name_bot",
+    padroes: [/what(?:'s| is) your name/i, /who are you/i, /qual.*seu nome/i, /quem.*você/i],
+    respostas: [
+      "🦉 My name is Quinti! I'm a magical owl ✨ What's YOUR name?",
+      "✨ I am Quinti, your English friend! And you?"
+    ]
+  },
+  {
+    nome: "user_says_name",
+    padroes: [/\b(my name is|i am|i'm|me chamo|meu nome é)\s+([a-záéíóúâêôãõç]+)/i],
+    respostaFn: (m) => `🌟 Nice to meet you, ${m[2]}! What a beautiful name! Do you like animals? 🐱`
+  },
+
+  // ---------- FEELINGS ----------
+  {
+    nome: "how_are_you",
+    padroes: [/how are you/i, /how do you feel/i, /tudo bem/i, /como.*você.*está/i],
+    respostas: [
+      "😊 I am happy! And you? Are you HAPPY or SAD today?",
+      "🌈 I feel great! How about you?"
+    ]
+  },
+  {
+    nome: "user_happy",
+    padroes: [/\b(i('m| am) happy|estou feliz|happy|feliz)\b/i],
+    respostas: ["😊 Yay! HAPPY means feliz! Me too! 🌟"]
+  },
+  {
+    nome: "user_sad",
+    padroes: [/\b(i('m| am) sad|estou triste|sad|triste)\b/i],
+    respostas: ["🤗 SAD means triste. A big hug for you! 💛 Let's play to feel better!"]
+  },
+
+  // ---------- AGE ----------
+  {
+    nome: "ask_age",
+    padroes: [/how old are you/i, /your age/i, /quantos anos/i],
+    respostas: ["🦉 I am 1000 stars old! ✨ How old are YOU?"]
+  },
+  {
+    nome: "user_age",
+    padroes: [/\bi(?:'m| am)\s+(\d{1,2})\b/i, /\btenho\s+(\d{1,2})\s+anos\b/i],
+    respostaFn: (m) => `🎉 Wow, ${m[1]} years old! That's amazing! Say: "I am ${m[1]} years old" 🌟`
+  },
+
+  // ---------- COMPREHENSION ----------
+  {
+    nome: "do_you_understand",
+    padroes: [/do you understand/i, /você.*entende/i, /entendeu/i],
+    respostas: [
+      "✅ Yes! I understand! Tell me more 🦉",
+      "👂 I'm listening! Keep going, little star ✨"
+    ]
+  },
+  {
+    nome: "i_dont_understand",
+    padroes: [/i don'?t understand/i, /não entendi/i, /nao entendi/i],
+    respostas: ["🤔 No problem! Try a small word: dog, cat, apple, mom 🍎🐱"]
+  },
+
+  // ---------- LIKES ----------
+  {
+    nome: "do_you_like",
+    padroes: [/do you like (.+?)[\?\.!]?$/i, /você gosta de (.+?)[\?\.!]?$/i],
+    respostaFn: (m) => `✨ Yes! I LOVE ${m[1]}! Do YOU like ${m[1]}? Say YES or NO 🌟`
+  },
+  {
+    nome: "i_like",
+    padroes: [/i like (.+)/i, /eu gosto de (.+)/i],
+    respostaFn: (m) => `❤️ Cool! "I like ${m[1]}" means "eu gosto de ${m[1]}". Awesome! 🌟`
+  },
+
+  // ---------- COLORS ----------
+  {
+    nome: "colors_intro",
+    padroes: [/\b(color|colour|cor|cores)\b/i],
+    respostas: [
+      "🌈 Colors! RED 🔴 BLUE 🔵 YELLOW 🟡 GREEN 🟢. What's your favorite?",
+      "🎨 Let's learn colors! Say: RED, BLUE, GREEN, YELLOW 🌟"
+    ]
+  },
+
+  // ---------- NUMBERS ----------
+  {
+    nome: "numbers_intro",
+    padroes: [/\b(number|numbers|número|numero|count|contar)\b/i],
+    respostas: ["🔢 Let's count! ONE 1, TWO 2, THREE 3, FOUR 4, FIVE 5 ✨ Try it!"]
+  },
+
+  // ---------- FAMILY ----------
+  {
+    nome: "family_intro",
+    padroes: [/\b(family|família|familia|mom|dad|mother|father|sister|brother)\b/i],
+    respostas: ["👨‍👩‍👧 Family! MOM 👩 DAD 👨 SISTER 👧 BROTHER 👦. Tell me about YOUR family!"]
+  },
+
+  // ---------- ANIMALS ----------
+  {
+    nome: "animals_intro",
+    padroes: [/\b(animal|animals|animais|pet|pets)\b/i],
+    respostas: ["🐶 Animals! DOG 🐶 CAT 🐱 BIRD 🐦 FISH 🐠. Which one do you like?"]
+  },
+
+  // ---------- FOOD ----------
+  {
+    nome: "food_intro",
+    padroes: [/\b(food|comida|hungry|fome|eat|comer)\b/i],
+    respostas: ["🍎 Yummy! APPLE 🍎 BANANA 🍌 BREAD 🍞 MILK 🥛. What's your favorite food?"]
+  },
+
+  // ---------- WEATHER ----------
+  {
+    nome: "weather",
+    padroes: [/\b(weather|sunny|rain|cold|hot|tempo|chuva|sol|frio|calor)\b/i],
+    respostas: ["☀️ SUNNY = sol! 🌧️ RAINY = chuva! ❄️ COLD = frio! How is the weather today?"]
+  },
+
+  // ---------- THANKS ----------
+  {
+    nome: "thanks",
+    padroes: [/\b(thank|thanks|obrigad)/i],
+    respostas: ["💛 You're welcome! That means 'de nada' 🌟"]
+  },
+
+  // ---------- YES / NO ----------
+  {
+    nome: "yes",
+    padroes: [/^(yes|yeah|sim|yep)\b/i],
+    respostas: ["🎉 Great! YES means SIM! ✨ Tell me more!"]
+  },
+  {
+    nome: "no",
+    padroes: [/^(no|nope|não|nao)\b/i],
+    respostas: ["👌 OK! NO means NÃO ✨ What DO you like?"]
+  },
+
+  // ---------- HELP ----------
+  {
+    nome: "help",
+    padroes: [/\b(help|ajuda|socorro)\b/i],
+    respostas: [
+      "🦉 I can help! Try: 'hello', 'my name is...', 'I like cats', 'quiz', 'colors', 'animals' ✨"
+    ]
+  },
+];
+
+// Pequenos diálogos para "puxar conversa" quando não há match
+const conversaPuxadores = [
+  "🦉 Tell me: do you have a pet? 🐶🐱",
+  "🌟 What's your favorite color? RED, BLUE or GREEN?",
+  "✨ Can you count to FIVE in English? 1...2...3...",
+  "🍎 What do you like to eat? Apple? Bread? Pizza?",
+  "🎨 Do you like to draw? Drawing means desenhar!",
+  "🌈 Say a word in English and I'll teach you more!"
+];
 
 // ========================================
 // GLOSSÁRIO (usando dados carregados)
@@ -311,22 +471,37 @@ function iniciarPronuncia(palavraAlvo) {
 }
 
 // ========================================
-// MOTOR PRINCIPAL DE RESPOSTAS
+// MOTOR PRINCIPAL DE RESPOSTAS (substitui respostaControlada)
 // ========================================
 function respostaControlada(pergunta) {
-  const texto = pergunta.toLowerCase().trim();
-  for (const chave of Object.keys(respostasFixas)) {
-    if (texto.includes(chave)) return respostasFixas[chave];
-  }
-  if (texto.includes("quiz") || texto.includes("jogo")) {
+  const texto = pergunta.trim();
+
+  // 1) Comandos especiais
+  if (/\b(quiz|jogo|game)\b/i.test(texto)) {
     gerarQuiz();
-    return "🎮 Quiz generated! Answer below.";
+    return "🎮 Quiz time! Answer below ⬇️";
   }
-  const glossario = buscarGlossario(pergunta);
+
+  // 2) Intenções conversacionais (A1/A2)
+  for (const intent of intencoes) {
+    for (const regex of intent.padroes) {
+      const m = texto.match(regex);
+      if (m) {
+        if (intent.respostaFn) return intent.respostaFn(m);
+        return intent.respostas[Math.floor(Math.random() * intent.respostas.length)];
+      }
+    }
+  }
+
+  // 3) Glossário (palavra solta)
+  const glossario = buscarGlossario(texto);
   if (glossario) return glossario;
-  // Fallback
-  return `🌟 I am still learning that word.\nCan you teach me more? ✨`;
+
+  // 4) Fallback inteligente: puxa conversa em vez de "I'm still learning"
+  const puxador = conversaPuxadores[Math.floor(Math.random() * conversaPuxadores.length)];
+  return `🌟 Interesting! Let me ask you something:\n\n${puxador}`;
 }
+
 
 // ========================================
 // ENVIAR MENSAGEM DO CHAT
