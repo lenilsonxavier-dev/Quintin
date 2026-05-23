@@ -619,6 +619,19 @@ btnMic.addEventListener("click", () => {
 });
 
 // ========================================
+// ENTER PARA ENVIAR
+// ========================================
+inputPergunta.addEventListener("keydown", (e) => {
+
+  if (e.key === "Enter" && !e.shiftKey) {
+
+    e.preventDefault();
+
+    enviar();
+  }
+});
+
+// ========================================
 // INICIALIZAÇÃO
 // ========================================
 (async () => {
