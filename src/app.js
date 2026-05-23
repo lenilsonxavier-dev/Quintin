@@ -22,11 +22,20 @@ const btnMic = document.getElementById("btnMic");
 // ========================================
 // UI HELPERS
 // ========================================
-function atualizarStatus(texto, progresso = null) {
+function atualizarStatus(
+  texto,
+  progresso = null
+) {
 
-  statusEl.textContent = texto;
+  if (statusEl) {
+    statusEl.textContent =
+      texto;
+  }
 
-  if (progresso !== null) {
+  if (
+    progresso !== null &&
+    progressBar
+  ) {
     progressBar.style.width =
       `${progresso * 100}%`;
   }
