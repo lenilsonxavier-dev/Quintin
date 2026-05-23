@@ -589,59 +589,114 @@ if (SpeechRecognition && btnMic) {
 // ========================================
 // CHAT & EVENTOS
 // ========================================
+
 async function enviar() {
-  const texto = inputPergunta.value.trim();
+
+  const texto =
+    inputPergunta?.value?.trim();
+
   if (!texto) return;
-  adicionarMensagem(texto, "user");
-  inputPergunta.value = "";
+
+  adicionarMensagem(
+    texto,
+    "user"
+  );
+
+  inputPergunta.value =
+    "";
+
   mostrarPensando();
-  await new Promise(r => setTimeout(r, 500));
+
+  await new Promise(
+    r => setTimeout(r, 500)
+  );
+
   removerPensando();
-  const resp = respostaControlada(texto);
-  adicionarMensagem(resp, "bot");
+
+  const resp =
+    respostaControlada(
+      texto
+    );
+
+  adicionarMensagem(
+    resp,
+    "bot"
+  );
+
   falar(resp);
 }
 
-btnEnviar.addEventListener(
-  "click",
-  enviar
-);
 
-// ENTER
-inputPergunta.addEventListener(
-  "keydown",
-  (e) => {
+// ========================================
+// EVENTOS
+// ========================================
 
+window.addEventListener(
+  "DOMContentLoaded",
+  () => {
+
+    // BOTÃO ENVIAR
+    if (btnEnviar) {
+
+      btnEnviar.addEventListener(
+        "click",
+        (e) => {
+
+          e.preventDefault();
+
+          enviar();
+        }
+      );
+    }
+
+    // ENTER
+    if (inputPergunta) {
+
+      inputPergunta.addEventListener(
+        "keydown",
+        (e) => {
+
+          if (
+            e.key === "Enter" &&
+            !e.shiftKey
+          ) {
+
+            e.preventDefault();
+
+            enviar();
+          }
+        }
+      );
+    }
+
+    // MICROFONE
     if (
-      e.key === "Enter" &&
-      !e.shiftKey
+      btnMic &&
+      recognition
     ) {
 
-      e.preventDefault();
+      btnMic.addEventListener(
+        "click",
+        (e) => {
 
-      enviar();
+          e.preventDefault();
+
+          try {
+
+            recognition.start();
+
+          } catch(err) {
+
+            console.log(
+              err
+            );
+          }
+        }
+      );
     }
   }
 );
 
-// BOTÃO MICROFONE
-if (btnMic && recognition) {
-
-  btnMic.addEventListener(
-    "click",
-    () => {
-
-      try {
-
-        recognition.start();
-
-      } catch (err) {
-
-        console.log(err);
-      }
-    }
-  );
-}
 // ========================================
 // INICIALIZAÇÃO
 // ========================================
