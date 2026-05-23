@@ -602,9 +602,6 @@ async function enviar() {
   falar(resp);
 }
 
-// ========================================
-// CHAT & EVENTOS
-// ========================================
 btnEnviar.addEventListener(
   "click",
   enviar
