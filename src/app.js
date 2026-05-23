@@ -12,12 +12,23 @@ const MAX_HISTORY = 6;
 // ========================================
 // DOM
 // ========================================
-const chat = document.getElementById("chat");
-const inputPergunta = document.getElementById("pergunta");
-const btnEnviar = document.getElementById("btnEnviar");
-const progressBar = document.getElementById("progress");
-const btnMic = document.getElementById("btnMic");
+const chat =
+  document.getElementById("chat");
 
+const inputPergunta =
+  document.getElementById("pergunta");
+
+const btnEnviar =
+  document.getElementById("btnEnviar");
+
+const progressBar =
+  document.getElementById("progress");
+
+const btnMic =
+  document.getElementById("btnMic");
+
+const statusEl =
+  document.getElementById("status");
 
 // ========================================
 // UI HELPERS
