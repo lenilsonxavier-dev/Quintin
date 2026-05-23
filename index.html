@@ -1,415 +1,45 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
-
     <meta charset="UTF-8">
-
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
-
-    <link rel="icon"
-          href="./img/quintin.png">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="https://i.imgur.com/hZrlJFb.png">
     <title>Quinti - Professor de Inglês</title>
-    <!-- Adicione antes do </head> -->
-<meta name="cross-origin-embedder-policy" content="require-corp">
-<meta name="cross-origin-opener-policy" content="same-origin">
-
-    <style>
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-
-            font-family: 'Segoe UI',
-                         Tahoma,
-                         Geneva,
-                         Verdana,
-                         sans-serif;
-
-            background:
-                linear-gradient(
-                    135deg,
-                    #0f2027,
-                    #203a43,
-                    #2c5364
-                );
-
-            min-height: 100vh;
-
-            display: flex;
-
-            justify-content: center;
-
-            align-items: center;
-
-            padding: 20px;
-        }
-
-        .container {
-
-            width: 100%;
-            max-width: 900px;
-
-            background: #1e2a3a;
-
-            border-radius: 28px;
-
-            box-shadow:
-                0 20px 40px
-                rgba(0,0,0,0.4);
-
-            overflow: hidden;
-        }
-
-        .topo {
-
-            background: #0d1b2a;
-
-            padding: 20px 25px;
-
-            display: flex;
-
-            align-items: center;
-
-            gap: 18px;
-
-            border-bottom:
-                3px solid #ffb347;
-        }
-
-        .avatar {
-
-            width: 70px;
-            height: 70px;
-
-            border-radius: 50%;
-
-            background: #ffb347;
-
-            display: flex;
-
-            align-items: center;
-
-            justify-content: center;
-
-            overflow: hidden;
-        }
-
-        .avatar img {
-
-            width: 100%;
-            height: 100%;
-
-            object-fit: cover;
-        }
-
-        .info-topo {
-
-            flex: 1;
-        }
-
-        .titulo {
-
-            color: #ffb347;
-
-            font-size: 1.8rem;
-
-            font-weight: bold;
-        }
-
-        .subtitulo {
-
-            color: #cbd5e0;
-
-            font-size: 0.85rem;
-
-            margin-top: 4px;
-        }
-
-        .status-area {
-
-            padding: 12px 25px;
-
-            background: #0f1724;
-
-            display: flex;
-
-            justify-content: space-between;
-
-            align-items: center;
-
-            border-bottom:
-                1px solid #2d3e50;
-        }
-
-        #status {
-
-            color: #ffb347;
-
-            font-weight: 500;
-
-            font-size: 0.85rem;
-        }
-
-        .progress-container {
-
-            width: 200px;
-
-            background: #2d3e50;
-
-            border-radius: 20px;
-
-            height: 8px;
-
-            overflow: hidden;
-        }
-
-        .progress-bar {
-
-            width: 0%;
-            height: 100%;
-
-            background:
-                linear-gradient(
-                    90deg,
-                    #ffb347,
-                    #ff7e05
-                );
-
-            transition: width 0.3s;
-        }
-
-        #chat {
-
-            height: 450px;
-
-            overflow-y: auto;
-
-            padding: 20px;
-
-            background: #1a2a36;
-
-            display: flex;
-
-            flex-direction: column;
-
-            gap: 15px;
-        }
-
-        .msg {
-
-            max-width: 80%;
-
-            padding: 12px 18px;
-
-            border-radius: 24px;
-
-            line-height: 1.4;
-
-            font-size: 0.95rem;
-
-            word-wrap: break-word;
-        }
-
-        .user {
-
-            background: #2c5f8a;
-
-            color: white;
-
-            align-self: flex-end;
-
-            border-bottom-right-radius: 6px;
-        }
-
-        .bot {
-
-            background: #2d3e50;
-
-            color: #f0f0f0;
-
-            align-self: flex-start;
-
-            border-bottom-left-radius: 6px;
-
-            border-left:
-                3px solid #ffb347;
-        }
-
-        .pensando {
-
-            display: flex;
-
-            align-items: center;
-
-            gap: 12px;
-
-            background: #2d3e50;
-
-            padding: 10px 18px;
-
-            border-radius: 30px;
-
-            width: fit-content;
-
-            color: #ffb347;
-        }
-
-        .input-area {
-
-            padding: 20px;
-
-            background: #0d1b2a;
-
-            display: flex;
-
-            gap: 12px;
-
-            border-top:
-                1px solid #2d3e50;
-        }
-
-        input {
-
-            flex: 1;
-
-            padding: 14px 18px;
-
-            border: none;
-
-            border-radius: 40px;
-
-            font-size: 1rem;
-
-            background: #2d3e50;
-
-            color: white;
-
-            outline: none;
-        }
-
-        button {
-
-            background: #ffb347;
-
-            border: none;
-
-            padding: 0 24px;
-
-            border-radius: 40px;
-
-            font-weight: bold;
-
-            color: #1e2a3a;
-
-            cursor: pointer;
-
-            transition: 0.2s;
-        }
-
-        button:hover:not(:disabled) {
-
-            background: #ff9f1a;
-        }
-
-        button:disabled {
-
-            background: #5a6e7a;
-
-            cursor: not-allowed;
-        }
-
-    </style>
-
+    <meta name="cross-origin-embedder-policy" content="require-corp">
+    <meta name="cross-origin-opener-policy" content="same-origin">
+    <link rel="stylesheet" href="src/style.css">
 </head>
-
 <body>
-
     <div class="container">
-
-        <div class="topo">
-
-            <div class="avatar">
-
-                <img src="img/quintin.png"
-                     alt="Quinti">
-
-            </div>
-
-            <div class="info-topo">
-
-                <div class="titulo">
-                    Quinti
-                </div>
-
-                <div class="subtitulo">
-                    English for curious kids from Osasco ✨
-                </div>
-
-            </div>
-
+        <div class="header">
+            <img src="https://i.imgur.com/hZrlJFb.png"
+                 alt="Quinti"
+                 class="avatar">
+            <h1>Quinti ✨</h1>
+            <div id="status">🌍 Carregando...</div>
+            <progress id="progress" value="0" max="1"></progress>
         </div>
 
-        <div class="status-area">
-
-            <span id="status">
-                🔍 Inicializando...
-            </span>
-
-            <div class="progress-container">
-
-                <div id="progress"
-                     class="progress-bar">
-                </div>
-
-            </div>
-
-        </div>
-
-        <div id="chat">
-
-            <div class="msg bot">
-
-                Olá! Sou o Quinti 🌍<br>
+        <div id="chat" class="chat">
+            <div class="loading">
+                🌍<br>
                 Estou abrindo os meus livros...
-
             </div>
-
         </div>
 
         <div class="input-area">
-
-         <input type="text"
-       id="pergunta"
-       placeholder="Ex: como se diz gato em inglês?"
-       disabled>
-
-<button id="btnEnviar"
-        disabled>
-
-    Enviar ✨
-
-</button>
-
-<button id="btnMic">
-
-    🎤
-
-</button>
-
+            <input type="text"
+                   id="pergunta"
+                   placeholder="Ex: como se diz gato em inglês?">
+            <button id="btnEnviar" type="button">
+                Enviar ✨
+            </button>
+            <button id="btnMic" type="button">
+                🎤
+            </button>
         </div>
-
     </div>
 
-    <script type="module"
-            src="src/app.js"></script>
-
+    <script type="module" src="src/app.js"></script>
 </body>
-
 </html>
