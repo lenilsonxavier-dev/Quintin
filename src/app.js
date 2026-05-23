@@ -15,104 +15,193 @@ const MAX_HISTORY = 6;
 const chat = document.getElementById("chat");
 const inputPergunta = document.getElementById("pergunta");
 const btnEnviar = document.getElementById("btnEnviar");
-const statusEl = document.getElementById("status");
 const progressBar = document.getElementById("progress");
 const btnMic = document.getElementById("btnMic");
-const starsEl = document.getElementById("stars"); 
-const streakEl = document.getElementById("streak"); 
-const learnedListEl = document.getElementById("learnedList"); 
-const glossaryContainer = document.getElementById("glossary");
-const quizContainer = document.getElementById("quizContainer");
 
-// ========================================
-// ESTADO GLOBAL
-// ========================================
-let stars = parseInt(localStorage.getItem("quinti_stars") || "0", 10);
-let streak = parseInt(localStorage.getItem("quinti_streak") || "0", 10);
-let learnedWords = [];
-let quizWord = null;
-let quizOptions = [];
-let quizAnswered = false;
 
 // ========================================
 // UI HELPERS
 // ========================================
 function atualizarStatus(texto, progresso = null) {
+
   statusEl.textContent = texto;
-  if (progresso !== null) progressBar.style.width = `${progresso * 100}%`;
+
+  if (progresso !== null) {
+    progressBar.style.width =
+      `${progresso * 100}%`;
+  }
 }
 
 function adicionarMensagem(texto, autor) {
-  const div = document.createElement("div");
-  div.className = `msg ${autor}`;
-  div.textContent = texto;
+
+  const div =
+    document.createElement("div");
+
+  div.className =
+    `msg ${autor}`;
+
+  div.textContent =
+    texto;
+
   chat.appendChild(div);
-  chat.scrollTop = chat.scrollHeight;
-  memory.chatHistory.push({ role: autor, content: texto, timestamp: new Date().toISOString() });
-  if (memory.chatHistory.length > MAX_HISTORY * 2) memory.chatHistory = memory.chatHistory.slice(-MAX_HISTORY * 2);
+
+  chat.scrollTop =
+    chat.scrollHeight;
+
+  memory.chatHistory.push({
+    role: autor,
+    content: texto,
+    timestamp:
+      new Date().toISOString()
+  });
+
+  if (
+    memory.chatHistory.length >
+    MAX_HISTORY * 2
+  ) {
+    memory.chatHistory =
+      memory.chatHistory.slice(
+        -MAX_HISTORY * 2
+      );
+  }
+
   return div;
 }
 
 function mostrarPensando() {
+
   removerPensando();
-  const div = document.createElement("div");
-  div.className = "pensando";
-  div.id = "pensando";
-  div.innerHTML = `<span style="font-size:32px;">🦉</span><span>Quinti is thinking...</span>`;
+
+  const div =
+    document.createElement("div");
+
+  div.className =
+    "pensando";
+
+  div.id =
+    "pensando";
+
+  div.innerHTML =
+    `<span style="font-size:32px;">🦉</span>
+     <span>Quinti is thinking...</span>`;
+
   chat.appendChild(div);
-  chat.scrollTop = chat.scrollHeight;
+
+  chat.scrollTop =
+    chat.scrollHeight;
 }
 
 function removerPensando() {
-  const el = document.getElementById("pensando");
-  if (el) el.remove();
-}
 
-function atualizarProgresso() {
-  starsEl.textContent = stars;
-  streakEl.textContent = streak;
-  localStorage.setItem("quinti_stars", stars.toString());
-  localStorage.setItem("quinti_streak", streak.toString());
-  memory.learnedWords = [...learnedWords];
-}
+  const el =
+    document.getElementById(
+      "pensando"
+    );
 
-function exibirListaAprendidas() {
-  learnedListEl.innerHTML = "";
-  if (learnedWords.length === 0) {
-    learnedListEl.innerHTML = "<li>Nenhuma palavra estudada ainda</li>";
-    return;
+  if (el) {
+    el.remove();
   }
-  learnedWords.forEach(word => {
-    const li = document.createElement("li");
-    li.textContent = `⭐ ${word}`;
-    li.onclick = () => falar(word);
-    learnedListEl.appendChild(li);
-  });
 }
 
 function falar(texto) {
-  if (!window.speechSynthesis) return;
-  const cleanText = texto.replace(/[\uE000-\uF8FF]|\uD83C[\uDC00-\uDFFF]|\uD83D[\uDC00-\uDFFF]|[\u2011-\u26FF]|\uD83E[\uDD10-\uDDFF]/g, "");
-  const utter = new SpeechSynthesisUtterance(cleanText);
-  utter.lang = "en-US";
-  utter.rate = 0.82;
-  speechSynthesis.speak(utter);
+
+  if (
+    !window.speechSynthesis
+  ) return;
+
+  const cleanText =
+    texto.replace(
+      /[\uE000-\uF8FF]|\uD83C[\uDC00-\uDFFF]|\uD83D[\uDC00-\uDFFF]|[\u2011-\u26FF]|\uD83E[\uDD10-\uDDFF]/g,
+      ""
+    );
+
+  const utter =
+    new SpeechSynthesisUtterance(
+      cleanText
+    );
+
+  utter.lang =
+    "en-US";
+
+  utter.rate =
+    0.82;
+
+  speechSynthesis.speak(
+    utter
+  );
 }
 
 function similarity(a, b) {
-  const levenshtein = (a, b) => {
-    const matrix = Array.from({ length: a.length + 1 }, () => []);
-    for (let i = 0; i <= a.length; i++) matrix[i][0] = i;
-    for (let j = 0; j <= b.length; j++) matrix[0][j] = j;
-    for (let i = 1; i <= a.length; i++) {
-      for (let j = 1; j <= b.length; j++) {
-        matrix[i][j] = Math.min(matrix[i-1][j]+1, matrix[i][j-1]+1, matrix[i-1][j-1] + (a[i-1] === b[j-1] ? 0 : 1));
+
+  const levenshtein =
+    (a, b) => {
+
+      const matrix =
+        Array.from(
+          {
+            length:
+              a.length + 1
+          },
+          () => []
+        );
+
+      for (
+        let i = 0;
+        i <= a.length;
+        i++
+      ) {
+        matrix[i][0] = i;
       }
-    }
-    return matrix[a.length][b.length];
-  };
-  const maxLen = Math.max(a.length, b.length);
-  return maxLen === 0 ? 1.0 : 1.0 - levenshtein(a, b) / maxLen;
+
+      for (
+        let j = 0;
+        j <= b.length;
+        j++
+      ) {
+        matrix[0][j] = j;
+      }
+
+      for (
+        let i = 1;
+        i <= a.length;
+        i++
+      ) {
+
+        for (
+          let j = 1;
+          j <= b.length;
+          j++
+        ) {
+
+          matrix[i][j] =
+            Math.min(
+              matrix[i - 1][j] + 1,
+              matrix[i][j - 1] + 1,
+              matrix[i - 1][j - 1] +
+                (
+                  a[i - 1] ===
+                  b[j - 1]
+                ? 0
+                : 1
+                )
+            );
+        }
+      }
+
+      return matrix[a.length][b.length];
+    };
+
+  const maxLen =
+    Math.max(
+      a.length,
+      b.length
+    );
+
+  return maxLen === 0
+    ? 1.0
+    : 1.0 -
+      levenshtein(a, b) /
+      maxLen;
 }
 
 // ========================================
@@ -194,41 +283,183 @@ const conversaPuxadores = [
 // ========================================
 // MOTOR DE RESPOSTAS
 // ========================================
+
 function buscarGlossario(pergunta) {
-  if (!window.conhecimentoGlobal?.glossary) return null;
-  const texto = pergunta.toLowerCase().trim();
-  for (const categoria of Object.values(window.conhecimentoGlobal.glossary)) {
-    for (const item of categoria.words) {
-      if (texto.includes(item.pt.toLowerCase()) || texto.includes(item.en.toLowerCase())) {
-        if (!learnedWords.includes(item.en)) {
-          learnedWords.push(item.en);
-          atualizarProgresso();
-          exibirListaAprendidas();
-        }
+
+  if (!window.conhecimentoGlobal?.glossary) {
+    return null;
+  }
+
+  const texto =
+    pergunta.toLowerCase().trim();
+
+  for (
+    const categoria of Object.values(
+      window.conhecimentoGlobal.glossary
+    )
+  ) {
+
+    if (!categoria.words) continue;
+
+    for (
+      const item of categoria.words
+    ) {
+
+      const en =
+        item.en?.toLowerCase() || "";
+
+      const pt =
+        item.pt?.toLowerCase() || "";
+
+      if (
+        texto.includes(en) ||
+        texto.includes(pt)
+      ) {
+
         falar(item.en);
-        return `${item.emoji || "✨"} **${item.en}** means **${item.pt}**!\n\n🌟 *"${item.example_en}"* (${item.example_pt})`;
+
+        return `
+${item.emoji || "✨"} ${item.en}
+
+${item.en} means ${item.pt}
+
+${item.example_en || ""}
+
+${item.example_pt || ""}
+`;
       }
     }
   }
+
   return null;
 }
 
-function respostaControlada(pergunta) {
-  const texto = pergunta.trim();
-  if (/\b(quiz|jogo|game)\b/i.test(texto)) { gerarQuiz(); return "🎮 Quiz time! Answer below ⬇️"; }
 
-  for (const intent of intencoes) {
-    for (const regex of intent.padroes) {
-      if (regex.test(texto)) return intent.respostas[Math.floor(Math.random() * intent.respostas.length)];
+// ========================================
+// BUSCA EM TODA BASE DE CONHECIMENTO
+// ========================================
+
+function buscarConhecimento(
+  pergunta
+) {
+
+  const texto =
+    pergunta.toLowerCase();
+
+  const base =
+    window.conhecimentoGlobal;
+
+  if (!base) return null;
+
+  for (
+    const [nomeCategoria, categoria]
+    of Object.entries(base)
+  ) {
+
+    if (
+      !categoria ||
+      typeof categoria !== "object"
+    ) {
+      continue;
+    }
+
+    // percorre tudo do JSON
+    const itens =
+      JSON.stringify(categoria)
+        .toLowerCase();
+
+    // procura palavras-chave
+    if (
+      itens.includes(texto)
+    ) {
+
+      // retorna um resumo amigável
+      return `
+🦉 I found something about:
+
+${pergunta}
+
+✨ Let's learn together!
+
+(Category: ${nomeCategoria})
+`;
     }
   }
 
-  const glossario = buscarGlossario(texto);
-  if (glossario) return glossario;
-
-  return `🌟 I'm learning! Let me ask you:\n\n${conversaPuxadores[Math.floor(Math.random() * conversaPuxadores.length)]}`;
+  return null;
 }
 
+
+function respostaControlada(
+  pergunta
+) {
+
+  const texto =
+    pergunta.trim();
+
+  // ========================================
+  // INTENÇÕES A1
+  // ========================================
+
+  for (
+    const intent of intencoes
+  ) {
+
+    for (
+      const regex of intent.padroes
+    ) {
+
+      if (
+        regex.test(texto)
+      ) {
+
+        return intent.respostas[
+          Math.floor(
+            Math.random() *
+            intent.respostas.length
+          )
+        ];
+      }
+    }
+  }
+
+  // ========================================
+  // GLOSSÁRIO
+  // ========================================
+
+  const glossario =
+    buscarGlossario(texto);
+
+  if (glossario) {
+    return glossario;
+  }
+
+  // ========================================
+  // BASE DE CONHECIMENTO
+  // ========================================
+
+  const conhecimento =
+    buscarConhecimento(texto);
+
+  if (conhecimento) {
+    return conhecimento;
+  }
+
+  // ========================================
+  // FALLBACK
+  // ========================================
+
+  return `
+🌟 I'm learning!
+
+${conversaPuxadores[
+  Math.floor(
+    Math.random() *
+    conversaPuxadores.length
+  )
+]}
+`;
+}
 // ========================================
 // CHAT & EVENTOS
 // ========================================
@@ -249,36 +480,37 @@ btnEnviar.onclick = enviar;
 inputPergunta.onkeydown = (e) => { if (e.key === "Enter") enviar(); };
 
 // ========================================
-// GLOSSÁRIO INTERATIVO
-// ========================================
-function popularGlossario() {
-  if (!window.conhecimentoGlobal?.glossary) return;
-  const categorias = Object.entries(window.conhecimentoGlobal.glossary);
-  glossaryContainer.innerHTML = `<div class="glossary-tabs">${categorias.map(([id, cat], i) => 
-    `<button class="tab-btn ${i===0?'active':''}" onclick="selecionarCategoria('${id}')">${cat.title}</button>`).join('')}</div>
-    <div id="wordList" class="word-list"></div>`;
-  if (categorias.length > 0) selecionarCategoria(categorias[0][0]);
-}
-
-window.selecionarCategoria = function(catId) {
-  const cat = window.conhecimentoGlobal.glossary[catId];
-  document.getElementById("wordList").innerHTML = cat.words.map(item => `
-    <div class="word-card" onclick="falar('${item.en}')">
-      <span>${item.emoji}</span><strong>${item.en}</strong><small>${item.pt}</small>
-    </div>`).join("");
-};
-
-// ========================================
 // INICIALIZAÇÃO
 // ========================================
 (async () => {
-  atualizarStatus("🌍 Loading Quinti A1...", 0.5);
+
+  atualizarStatus(
+    "🌍 Loading Quinti A1...",
+    0.5
+  );
+
   try {
-    window.conhecimentoGlobal = await carregarConhecimento();
-    popularGlossario();
-    atualizarStatus("✅ Quinti Ready!", 1);
-  } catch (e) { console.error(e); }
-  adicionarMensagem("🦉 Hello! I am Quinti ✨ Ready for English A1?", "bot");
-  atualizarProgresso();
-  exibirListaAprendidas();
+
+    window.conhecimentoGlobal =
+      await carregarConhecimento();
+
+    atualizarStatus(
+      "✅ Quinti Ready!",
+      1
+    );
+
+  } catch (e) {
+
+    console.error(e);
+  }
+
+  adicionarMensagem(
+`🦉 Hello!
+
+I am Quinti ✨
+
+Ready for English A1?`,
+    "bot"
+  );
+
 })();
