@@ -1,3 +1,22 @@
+export const GLOSSARY_DATA = {
+  glossary: {
+    animals: {
+      title: "Animals 🐶",
+      words: [
+        { en: "Dog", pt: "Cachorro", emoji: "🐶", example_en: "The dog is big.", example_pt: "O cachorro é grande." },
+        { en: "Cat", pt: "Gato", emoji: "🐱", example_en: "I like my cat.", example_pt: "Eu gosto do meu gato." }
+      ]
+    },
+    actions: {
+      title: "Actions 🏃‍♂️",
+      words: [
+        { en: "Swim", pt: "Nadar", emoji: "🏊‍♂️", example_en: "I can swim.", example_pt: "Eu consigo nadar." },
+        { en: "Run", pt: "Correr", emoji: "🏃‍♂️", example_en: "She runs fast.", example_pt: "Ela corre rápido." }
+      ]
+    }
+  }
+};
+
 // ========================================
 // ARQUIVOS JSON
 // ========================================
