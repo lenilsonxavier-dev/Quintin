@@ -713,7 +713,7 @@ window.addEventListener(
       await carregarConhecimento();
 
     atualizarStatus(
-      "✅ Quinti Ready!",
+      "✅ Quinti is Ready!",
       1
     );
 
@@ -727,7 +727,7 @@ window.addEventListener(
 
 I am Quinti ✨
 
-Ready for English A1?`,
+Ready for English Lessons?`,
     "bot"
   );
 
