@@ -480,6 +480,112 @@ ${conversaPuxadores[
 ]}
 `;
 }
+
+// ========================================
+// MICROFONE
+// ========================================
+const SpeechRecognition =
+  window.SpeechRecognition ||
+  window.webkitSpeechRecognition;
+
+let recognition = null;
+
+if (SpeechRecognition && btnMic) {
+
+  recognition =
+    new SpeechRecognition();
+
+  recognition.lang =
+    "pt-BR";
+
+  recognition.continuous =
+    false;
+
+  recognition.interimResults =
+    false;
+
+  recognition.maxAlternatives =
+    1;
+
+  recognition.onstart =
+    () => {
+
+      btnMic.textContent =
+        "🔴";
+
+      adicionarMensagem(
+        "🎤 Estou ouvindo... Speak to me!",
+        "bot"
+      );
+    };
+
+  recognition.onend =
+    () => {
+
+      btnMic.textContent =
+        "🎤";
+    };
+
+  recognition.onresult =
+    (event) => {
+
+      const texto =
+        event.results[0][0]
+          .transcript;
+
+      inputPergunta.value =
+        texto;
+
+      enviar();
+    };
+
+  recognition.onerror =
+    (event) => {
+
+      console.log(
+        "MIC ERROR:",
+        event.error
+      );
+
+      let mensagem =
+        "🎤 Microphone error!";
+
+      if (
+        event.error ===
+        "not-allowed"
+      ) {
+
+        mensagem =
+          "🎤 Please allow microphone access.\nPermita acesso ao microfone ✨";
+      }
+
+      else if (
+        event.error ===
+        "no-speech"
+      ) {
+
+        mensagem =
+          "🎤 I couldn't hear you.\nNão consegui ouvir você ✨";
+      }
+
+      else if (
+        event.error ===
+        "audio-capture"
+      ) {
+
+        mensagem =
+          "🎤 No microphone detected.\nNenhum microfone encontrado ✨";
+      }
+
+      adicionarMensagem(
+        mensagem,
+        "bot"
+      );
+
+      btnMic.textContent =
+        "🎤";
+    };
+}
 // ========================================
 // CHAT & EVENTOS
 // ========================================
@@ -496,9 +602,49 @@ async function enviar() {
   falar(resp);
 }
 
-btnEnviar.onclick = enviar;
-inputPergunta.onkeydown = (e) => { if (e.key === "Enter") enviar(); };
+// ========================================
+// CHAT & EVENTOS
+// ========================================
+btnEnviar.addEventListener(
+  "click",
+  enviar
+);
 
+// ENTER
+inputPergunta.addEventListener(
+  "keydown",
+  (e) => {
+
+    if (
+      e.key === "Enter" &&
+      !e.shiftKey
+    ) {
+
+      e.preventDefault();
+
+      enviar();
+    }
+  }
+);
+
+// BOTÃO MICROFONE
+if (btnMic && recognition) {
+
+  btnMic.addEventListener(
+    "click",
+    () => {
+
+      try {
+
+        recognition.start();
+
+      } catch (err) {
+
+        console.log(err);
+      }
+    }
+  );
+}
 // ========================================
 // INICIALIZAÇÃO
 // ========================================
