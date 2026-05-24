@@ -73,14 +73,14 @@ function procurarNoDicionario(texto) {
 function extrairTermoParaTraducao(pergunta) {
   const texto = pergunta.trim();
 
-  // Padrões português
-  const padraoPt1 = /(?:como\s+(?:se\s+)?(?:diz|fala)\s+)?["'`]?([\w\s]+?)["'`]?\s+(?:em\s+inglês|in\s+english)/i;
-  const padraoPt2 = /traduz[ir]?\s+["'`]?([\w\s]+)/i;
-  const padraoPt3 = /o\s+que\s+significa\s+["'`]?([\w\s]+)/i;
+  // Padrões português – agora a parte inicial é obrigatória
+  const padraoPt1 = /como\s+(?:se\s+)?(?:diz|fala)\s+(.+?)\s+(?:em\s+inglês|in\s+english)/i;
+  const padraoPt2 = /traduz(?:ir)?\s+(.+)/i;
+  const padraoPt3 = /o\s+que\s+significa\s+(.+)/i;
 
   // Padrões inglês
-  const padraoEn1 = /(?:how\s+do\s+(?:i|you)\s+say\s+)?["'`]?([\w\s]+?)["'`]?\s+(?:in\s+english|em\s+inglês)/i;
-  const padraoEn2 = /(?:what\s+is\s+)?["'`]?([\w\s]+?)["'`]?\s+(?:in\s+english|em\s+inglês)/i;
+  const padraoEn1 = /how\s+do\s+(?:i|you)\s+say\s+(.+?)\s+(?:in\s+english|em\s+inglês)/i;
+  const padraoEn2 = /what\s+is\s+(.+?)\s+(?:in\s+english|em\s+inglês)/i;
 
   const todos = [padraoPt1, padraoPt2, padraoPt3, padraoEn1, padraoEn2];
 
@@ -538,6 +538,16 @@ const intencoes = [
 ];
 
 // ========================================
+// FRASES PUXADORAS (para o fallback)
+// ========================================
+const conversaPuxadores = [
+  "🦉 Tell me: Can you swim? (I can swim!) 🏊‍♂️",
+  "🌟 What are you doing now? (Present Continuous!) ✍️",
+  "✨ Do you have a dog or a cat? 🐶🐱",
+  "🍎 Is there an apple in your house? (There is/There are)"
+];
+
+// ========================================
 // MOTOR DE RESPOSTAS
 // ========================================
 
@@ -630,15 +640,13 @@ function buscarConhecimento(
       itens.includes(texto)
     ) {
 
-      // retorna um resumo amigável
+      // retorna um resumo amigável, SEM a categoria
       return `
 🦉 I found something about:
 
 ${pergunta}
 
 ✨ Let's learn together!
-
-(Category: ${nomeCategoria})
 `;
     }
   }
