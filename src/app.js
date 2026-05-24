@@ -13,7 +13,7 @@ let enPt = [];
 async function carregarDicionarios() {
   try {
     const [ptRes, enRes] = await Promise.all([
-      fetch("./data/pt_en.json"),
+      fetch("./data/pt_en.json"),   // relativo à página atual
       fetch("./data/en_pt.json")
     ]);
 
