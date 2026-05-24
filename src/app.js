@@ -49,52 +49,54 @@ async function carregarDicionarios() {
       }
     });
 
+    // 👇 COLOQUE AQUI
+    enPt = EN_PT;
+    ptEn = PT_EN;
+
     console.log("📚 Dicionários prontos!");
 
     return { EN_PT, PT_EN };
 
   } catch (erro) {
     console.error("Erro ao carregar dicionários:", erro);
+
     return {
       EN_PT: {},
       PT_EN: {}
     };
   }
 }
-function procurarNoDicionario(texto) {
 
+function procurarNoDicionario(texto) {
   texto = texto.toLowerCase().trim();
 
-  console.log("Pergunta:", texto);
-
-  // limpa palavras de comando
-  const palavra = texto
-    .replace("quinti", "")
-    .replace("como se diz", "")
-    .replace("o que significa", "")
-    .replace("what means", "")
-    .replace("what is", "")
-    .replace("how do you say", "")
-    .replace("em inglês", "")
-    .replace("em ingles", "")
-    .replace("in english", "")
-    .replace("?", "")
+  let palavra = texto
+    .replace(/quinti/g, "")
+    .replace(/como se diz/g, "")
+    .replace(/o que significa/g, "")
+    .replace(/what means/g, "")
+    .replace(/what is/g, "")
+    .replace(/how do you say/g, "")
+    .replace(/em inglês/g, "")
+    .replace(/em ingles/g, "")
+    .replace(/in english/g, "")
+    .replace(/[?.!,]/g, "")
     .trim();
 
   console.log("Palavra limpa:", palavra);
 
-  // português → inglês
-  if (ptEn[palavra]) {
-    return `✨ ${palavra} em inglês é ${ptEn[palavra]}`;
-  }
+  // tenta direto
+  if (ptEn[palavra]) return `✨ ${palavra} em inglês é ${ptEn[palavra]}`;
+  if (enPt[palavra]) return `✨ ${palavra} significa ${enPt[palavra]}`;
 
-  // inglês → português
-  if (enPt[palavra]) {
-    return `✨ ${palavra} significa ${enPt[palavra]}`;
-  }
+  // tenta sem acentos (caso o dicionário esteja sem acentos)
+  const semAcento = palavra.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+  if (ptEn[semAcento]) return `✨ ${palavra} em inglês é ${ptEn[semAcento]}`;
+  if (enPt[semAcento]) return `✨ ${palavra} significa ${enPt[semAcento]}`;
 
   return null;
 }
+
 function extrairTermoParaTraducao(pergunta) {
   const texto = pergunta.trim();
 
