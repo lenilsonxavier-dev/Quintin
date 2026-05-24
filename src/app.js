@@ -12,20 +12,21 @@ let enPt = [];
 
 async function carregarDicionarios() {
   try {
-    const [ptRes, enRes] = await Promise.all([
-      fetch("./data/pt_en.json"),   // relativo à página atual
-      fetch("./data/en_pt.json")
+    const [enRes, ptRes] = await Promise.all([
+      fetch("./public/data/en_pt.json"),
+      fetch("./public/data/pt_en.json")
     ]);
 
-    ptEn = await ptRes.json();
-    enPt = await enRes.json();
+    const EN_PT = await enRes.json();
+    const PT_EN = await ptRes.json();
 
-    console.log("Dicionários carregados!");
+    console.log("📚 Dicionários carregados!");
+    return { EN_PT, PT_EN };
+
   } catch (erro) {
     console.error("Erro ao carregar dicionários:", erro);
   }
 }
-
 function procurarNoDicionario(texto) {
   const frase = texto.toLowerCase().trim();
 
