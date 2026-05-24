@@ -215,34 +215,8 @@ function removerPensando() {
   }
 }
 
-// ========== FUNÇÃO FALAR ORIGINAL RESTAURADA ==========
-function falar(texto) {
-
-  if (
-    !window.speechSynthesis
-  ) return;
-
-  const cleanText =
-    texto.replace(
-      /[\uE000-\uF8FF]|\uD83C[\uDC00-\uDFFF]|\uD83D[\uDC00-\uDFFF]|[\u2011-\u26FF]|\uD83E[\uDD10-\uDDFF]/g,
-      ""
-    );
-
-  const utter =
-    new SpeechSynthesisUtterance(
-      cleanText
-    );
-
-  utter.lang =
-    "en-US";
-
-  utter.rate =
-    0.82;
-
-  speechSynthesis.speak(
-    utter
-  );
-}
+// ❌ FUNÇÃO FALAR REMOVIDA – sem síntese de voz
+// (o bloco inteiro foi excluído)
 
 function similarity(a, b) {
 
@@ -584,7 +558,7 @@ function buscarGlossario(pergunta) {
         texto.includes(pt)
       ) {
 
-        falar(item.en);
+        // ❌ REMOVIDA a chamada a falar(item.en)
 
         return `
 ${item.emoji || "✨"} ${item.en}
@@ -747,7 +721,7 @@ ${conversaPuxadores[
 }
 
 // ========================================
-// MICROFONE
+// MICROFONE (mantido normalmente)
 // ========================================
 const SpeechRecognition =
   window.SpeechRecognition ||
@@ -888,7 +862,7 @@ async function enviar() {
     "bot"
   );
 
-  falar(resp);
+  // ❌ REMOVIDA a chamada a falar(resp)
 }
 
 
