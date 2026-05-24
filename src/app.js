@@ -5,6 +5,83 @@ import { carregarConhecimento } from "./data/index.js";
 import { memory } from "./brain/memory.js";
 
 // ========================================
+// DICIONÁRIOS (Português ↔ Inglês)
+// ========================================
+let ptEn = [];
+let enPt = [];
+
+async function carregarDicionarios() {
+  try {
+    const [ptRes, enRes] = await Promise.all([
+      fetch("/dictionary/pt_en.json"),
+      fetch("/dictionary/en_pt.json")
+    ]);
+
+    ptEn = await ptRes.json();
+    enPt = await enRes.json();
+
+    console.log("Dicionários carregados!");
+  } catch (erro) {
+    console.error("Erro ao carregar dicionários:", erro);
+  }
+}
+
+function procurarNoDicionario(texto) {
+  const frase = texto.toLowerCase().trim();
+
+  // tenta achar português → inglês
+  const pt = ptEn.find(item =>
+    item.portuguese?.toLowerCase() === frase
+  );
+
+  if (pt) {
+    return `🇺🇸 ${pt.portuguese} → ${pt.english}`;
+  }
+
+  // tenta achar inglês → português
+  const en = enPt.find(item =>
+    item.english?.toLowerCase() === frase
+  );
+
+  if (en) {
+    return `🇧🇷 ${en.english} → ${en.portuguese}`;
+  }
+
+  return null;
+}
+
+/**
+ * Detecta perguntas naturais de tradução e retorna o termo extraído.
+ * Ex.: "como fala gato em inglês", "what is casa in english", "traduz cachorro"
+ * Retorna o termo limpo ou null se não detectado.
+ */
+function extrairTermoParaTraducao(pergunta) {
+  const texto = pergunta.trim();
+
+  // Padrões português
+  const padraoPt1 = /(?:como\s+(?:se\s+)?(?:diz|fala)\s+)?["'`]?([\w\s]+?)["'`]?\s+(?:em\s+inglês|in\s+english)/i;
+  const padraoPt2 = /traduz[ir]?\s+["'`]?([\w\s]+)/i;
+  const padraoPt3 = /o\s+que\s+significa\s+["'`]?([\w\s]+)/i;
+
+  // Padrões inglês
+  const padraoEn1 = /(?:how\s+do\s+(?:i|you)\s+say\s+)?["'`]?([\w\s]+?)["'`]?\s+(?:in\s+english|em\s+inglês)/i;
+  const padraoEn2 = /(?:what\s+is\s+)?["'`]?([\w\s]+?)["'`]?\s+(?:in\s+english|em\s+inglês)/i;
+
+  const todos = [padraoPt1, padraoPt2, padraoPt3, padraoEn1, padraoEn2];
+
+  for (const regex of todos) {
+    const match = texto.match(regex);
+    if (match && match[1]) {
+      let termo = match[1].trim();
+      // Remove aspas extras se existirem
+      termo = termo.replace(/^["'`]|["'`]$/g, '').trim();
+      if (termo) return termo;
+    }
+  }
+  return null;
+}
+
+// ========================================
 // CONFIGURAÇÃO
 // ========================================
 const MAX_HISTORY = 6;
@@ -418,7 +495,26 @@ function respostaControlada(
     pergunta.trim();
 
   // ========================================
-  // INTENÇÕES A1
+  // 1. DICIONÁRIO (prioridade máxima)
+  // ========================================
+  // Tenta achar a frase exata
+  const traducaoExata = procurarNoDicionario(texto);
+  if (traducaoExata) {
+    return traducaoExata;
+  }
+
+  // Tenta detectar pergunta natural de tradução e extrair o termo
+  const termo = extrairTermoParaTraducao(texto);
+  if (termo) {
+    const traducaoNatural = procurarNoDicionario(termo);
+    if (traducaoNatural) {
+      return traducaoNatural;
+    }
+    // Se não encontrou no dicionário, deixa cair para o fallback normal
+  }
+
+  // ========================================
+  // 2. INTENÇÕES A1
   // ========================================
 
   for (
@@ -444,7 +540,7 @@ function respostaControlada(
   }
 
   // ========================================
-  // GLOSSÁRIO
+  // 3. GLOSSÁRIO
   // ========================================
 
   const glossario =
@@ -455,7 +551,7 @@ function respostaControlada(
   }
 
   // ========================================
-  // BASE DE CONHECIMENTO
+  // 4. BASE DE CONHECIMENTO
   // ========================================
 
   const conhecimento =
@@ -466,7 +562,7 @@ function respostaControlada(
   }
 
   // ========================================
-  // FALLBACK
+  // 5. FALLBACK
   // ========================================
 
   return `
@@ -711,6 +807,9 @@ window.addEventListener(
 
     window.conhecimentoGlobal =
       await carregarConhecimento();
+
+    // Carrega os dicionários depois do conhecimento principal
+    await carregarDicionarios();
 
     atualizarStatus(
       "✅ Quinti is Ready!",
