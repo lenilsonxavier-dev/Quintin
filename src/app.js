@@ -622,6 +622,17 @@ ${pergunta}
   return null;
 }
 
+function detectarApresentacao(pergunta) {
+  const texto = pergunta.trim();
+  // Padrões: "my name is ...", "meu nome é ...", "i am ...", "eu sou ..."
+  const regex = /(?:my name is|meu nome é|i am|eu sou)\s+([a-zA-Záàâãéèêíïóôõúüç]+(?:\s+[a-zA-Záàâãéèêíïóôõúüç]+)?)/i;
+  const match = texto.match(regex);
+  if (match && match[1]) {
+    const nome = match[1].trim();
+    return `Nice to meet you, ${nome}! ✨ I'm Quinti, your English tutor. How can I help you today?`;
+  }
+  return null;
+}
 
 function respostaControlada(
   pergunta
@@ -648,6 +659,23 @@ function respostaControlada(
     }
     // Se não encontrou no dicionário, deixa cair para o fallback normal
   }
+
+  function respostaControlada(pergunta) {
+  const texto = pergunta.trim();
+
+  // 1. DICIONÁRIO
+  const traducaoExata = procurarNoDicionario(texto);
+  if (traducaoExata) return traducaoExata;
+
+  const termo = extrairTermoParaTraducao(texto);
+  if (termo) {
+    const traducaoNatural = procurarNoDicionario(termo);
+    if (traducaoNatural) return traducaoNatural;
+  }
+
+  // *** NOVO: Detecção de apresentação pessoal ***
+  const apresentacao = detectarApresentacao(texto);
+  if (apresentacao) return apresentacao;
 
   // ========================================
   // 2. INTENÇÕES A1
