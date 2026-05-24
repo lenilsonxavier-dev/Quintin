@@ -63,21 +63,35 @@ async function carregarDicionarios() {
 }
 function procurarNoDicionario(texto) {
 
-  const palavra = texto.toLowerCase().trim();
+  texto = texto.toLowerCase().trim();
+
+  console.log("Pergunta:", texto);
+
+  // remove frases comuns
+  const palavra = texto
+    .replace("o que significa", "")
+    .replace("como se diz", "")
+    .replace("what means", "")
+    .replace("em inglês", "")
+    .replace("em ingles", "")
+    .replace("in english", "")
+    .replace("?", "")
+    .trim();
+
+  console.log("Palavra limpa:", palavra);
 
   // português → inglês
   if (ptEn[palavra]) {
-    return `✨ ${palavra} em inglês é: ${ptEn[palavra]}`;
+    return `✨ ${palavra} em inglês é ${ptEn[palavra]}`;
   }
 
   // inglês → português
   if (enPt[palavra]) {
-    return `✨ ${palavra} significa: ${enPt[palavra]}`;
+    return `✨ ${palavra} significa ${enPt[palavra]}`;
   }
 
   return null;
 }
-
 function extrairTermoParaTraducao(pergunta) {
   const texto = pergunta.trim();
 
