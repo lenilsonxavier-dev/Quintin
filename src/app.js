@@ -11,55 +11,48 @@ let ptEn = [];
 let enPt = [];
 
 async function carregarDicionarios() {
-
   try {
+    const [ptRes, enRes] = await Promise.all([
+      // *** CORREÇÃO: caminho para ./data/ ***
+      fetch("./data/pt_en.json"),
+      fetch("./data/en_pt.json")
+    ]);
 
-    const [ptRes, enRes] =
-      await Promise.all([
+    ptEn = await ptRes.json();
+    enPt = await enRes.json();
 
-        fetch("./dictionary/pt_en.json"),
-        fetch("./dictionary/en_pt.json")
-
-      ]);
-
-    ptEn =
-      await ptRes.json();
-
-    enPt =
-      await enRes.json();
-
-    console.log(
-      "Dicionários carregados!"
-    );
-
+    console.log("Dicionários carregados!");
   } catch (erro) {
-
-    console.error(
-      "Erro ao carregar dicionários:",
-      erro
-    );
+    console.error("Erro ao carregar dicionários:", erro);
   }
 }
 
 function procurarNoDicionario(texto) {
   const frase = texto.toLowerCase().trim();
 
+  // *** CORREÇÃO: limpa os valores antes de comparar ***
   // tenta achar português → inglês
-  const pt = ptEn.find(item =>
-    item.portuguese?.toLowerCase() === frase
-  );
+  const pt = ptEn.find(item => {
+    if (!item.portuguese) return false;
+    const palavraPt = item.portuguese.split(':')[0].trim().toLowerCase();
+    return palavraPt === frase;
+  });
 
   if (pt) {
-    return `🇺🇸 ${pt.portuguese} → ${pt.english}`;
+    const traducao = pt.english.split(/[,:]/)[0].trim();
+    return `🇺🇸 ${pt.portuguese.split(':')[0].trim()} → ${traducao}`;
   }
 
   // tenta achar inglês → português
-  const en = enPt.find(item =>
-    item.english?.toLowerCase() === frase
-  );
+  const en = enPt.find(item => {
+    if (!item.english) return false;
+    const palavraEn = item.english.split(':')[0].trim().toLowerCase();
+    return palavraEn === frase;
+  });
 
   if (en) {
-    return `🇧🇷 ${en.english} → ${en.portuguese}`;
+    const traducao = en.portuguese.split(/[,:]/)[0].trim();
+    return `🇧🇷 ${en.english.split(':')[0].trim()} → ${traducao}`;
   }
 
   return null;
