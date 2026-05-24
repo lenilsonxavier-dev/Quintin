@@ -7,24 +7,58 @@ import { memory } from "./brain/memory.js";
 // ========================================
 // DICIONÁRIOS (Português ↔ Inglês)
 // ========================================
-let ptEn = [];
-let enPt = [];
+let ptEn = {};
+let enPt = {};
 
 async function carregarDicionarios() {
   try {
+
     const [enRes, ptRes] = await Promise.all([
       fetch("./public/data/en_pt.json"),
       fetch("./public/data/pt_en.json")
     ]);
 
-    const EN_PT = await enRes.json();
-    const PT_EN = await ptRes.json();
+    if (!enRes.ok) {
+      throw new Error(`Erro EN_PT: ${enRes.status}`);
+    }
 
-    console.log("📚 Dicionários carregados!");
+    if (!ptRes.ok) {
+      throw new Error(`Erro PT_EN: ${ptRes.status}`);
+    }
+
+    // Carrega os arrays
+    const EN_PT_ARRAY = await enRes.json();
+    const PT_EN_ARRAY = await ptRes.json();
+
+    console.log("EN_PT carregado:", EN_PT_ARRAY.length);
+    console.log("PT_EN carregado:", PT_EN_ARRAY.length);
+
+    // Converte array -> objeto rápido de busca
+    const EN_PT = {};
+    const PT_EN = {};
+
+    EN_PT_ARRAY.forEach(item => {
+      if (item.english) {
+        EN_PT[item.english.toLowerCase()] = item.portuguese;
+      }
+    });
+
+    PT_EN_ARRAY.forEach(item => {
+      if (item.portuguese) {
+        PT_EN[item.portuguese.toLowerCase()] = item.english;
+      }
+    });
+
+    console.log("📚 Dicionários prontos!");
+
     return { EN_PT, PT_EN };
 
   } catch (erro) {
     console.error("Erro ao carregar dicionários:", erro);
+    return {
+      EN_PT: {},
+      PT_EN: {}
+    };
   }
 }
 function procurarNoDicionario(texto) {
