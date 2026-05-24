@@ -67,11 +67,14 @@ function procurarNoDicionario(texto) {
 
   console.log("Pergunta:", texto);
 
-  // remove frases comuns
+  // limpa palavras de comando
   const palavra = texto
-    .replace("o que significa", "")
+    .replace("quinti", "")
     .replace("como se diz", "")
+    .replace("o que significa", "")
     .replace("what means", "")
+    .replace("what is", "")
+    .replace("how do you say", "")
     .replace("em inglês", "")
     .replace("em ingles", "")
     .replace("in english", "")
