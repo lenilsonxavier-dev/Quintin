@@ -216,31 +216,30 @@ function removerPensando() {
 }
 
 function falar(texto) {
+  const utterance =
+    new SpeechSynthesisUtterance(texto);
 
-  if (
-    !window.speechSynthesis
-  ) return;
+  const vozes = speechSynthesis.getVoices();
 
-  const cleanText =
-    texto.replace(
-      /[\uE000-\uF8FF]|\uD83C[\uDC00-\uDFFF]|\uD83D[\uDC00-\uDFFF]|[\u2011-\u26FF]|\uD83E[\uDD10-\uDDFF]/g,
-      ""
-    );
+  console.log(vozes);
 
-  const utter =
-    new SpeechSynthesisUtterance(
-      cleanText
-    );
+  // tenta pegar uma voz mais leve/infantil
+  utterance.voice =
+    vozes.find(v =>
+      v.lang.includes("pt") &&
+      (
+        v.name.includes("Google português") ||
+        v.name.includes("Maria") ||
+        v.name.includes("Luciana")
+      )
+    ) || vozes[0];
 
-  utter.lang =
-    "en-US";
+  // deixa mais infantil
+  utterance.pitch = 1.6; // voz mais aguda
+  utterance.rate = 0.95; // fala levemente mais calma
+  utterance.volume = 1;
 
-  utter.rate =
-    0.82;
-
-  speechSynthesis.speak(
-    utter
-  );
+  speechSynthesis.speak(utterance);
 }
 
 function similarity(a, b) {
