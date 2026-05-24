@@ -11,18 +11,33 @@ let ptEn = [];
 let enPt = [];
 
 async function carregarDicionarios() {
+
   try {
-    const [ptRes, enRes] = await Promise.all([
-      fetch("/dictionary/pt_en.json"),
-      fetch("/dictionary/en_pt.json")
-    ]);
 
-    ptEn = await ptRes.json();
-    enPt = await enRes.json();
+    const [ptRes, enRes] =
+      await Promise.all([
 
-    console.log("Dicionários carregados!");
+        fetch("./dictionary/pt_en.json"),
+        fetch("./dictionary/en_pt.json")
+
+      ]);
+
+    ptEn =
+      await ptRes.json();
+
+    enPt =
+      await enRes.json();
+
+    console.log(
+      "Dicionários carregados!"
+    );
+
   } catch (erro) {
-    console.error("Erro ao carregar dicionários:", erro);
+
+    console.error(
+      "Erro ao carregar dicionários:",
+      erro
+    );
   }
 }
 
@@ -305,76 +320,221 @@ function similarity(a, b) {
 // BASE DE CONHECIMENTO A1 - INTENÇÕES
 // ========================================
 const intencoes = [
-  // --- GRAMÁTICA A1 ---
+
+  // ========================================
+  // GRAMÁTICA A1
+  // ========================================
+
   {
     nome: "verb_to_be",
-    padroes: [/verb to be/i, /o que é am is are/i, /verbo ser ou estar/i],
-    respostas: ["🐝 The Verb TO BE is: AM, IS, ARE. It means 'ser' or 'estar'.\nExample: I am happy! (Eu sou/estou feliz) ✨"]
+    padroes: [
+      /verb to be/i,
+      /o que é am is are/i,
+      /verbo ser ou estar/i
+    ],
+    respostas: [
+      "🐝 The Verb TO BE is: AM, IS, ARE.\nExample: I am happy! ✨"
+    ]
   },
+
   {
     nome: "present_simple_do",
-    padroes: [/present simple/i, /auxiliar do/i, /quando usar do ou does/i],
-    respostas: ["⚙️ Use DO for I, YOU, WE, THEY. Use DOES for HE, SHE, IT. \nExample: Do you like pizza? 🍕"]
+    padroes: [
+      /present simple/i,
+      /auxiliar do/i,
+      /quando usar do ou does/i
+    ],
+    respostas: [
+      "⚙️ Use DO for I, YOU, WE, THEY.\nUse DOES for HE, SHE, IT! 🍕"
+    ]
   },
+
   {
     nome: "modal_can",
-    padroes: [/\bcan\b/i, /o que é can/i, /verbo poder/i],
-    respostas: ["💪 CAN means ability (conseguir/poder). \nExample: I CAN swim! (Eu consigo nadar) 🏊‍♂️"]
+    padroes: [
+      /\bcan\b/i,
+      /o que é can/i,
+      /verbo poder/i
+    ],
+    respostas: [
+      "💪 CAN means ability!\nExample: I can swim! 🏊‍♂️"
+    ]
   },
+
   {
     nome: "there_is_are",
-    padroes: [/there is/i, /there are/i, /verbo haver/i, /verbo ter existe/i],
-    respostas: ["📍 THERE IS (singular) and THERE ARE (plural) mean 'há' or 'existe'. \nExample: There is an apple. There are two apples. 🍎🍎"]
+    padroes: [
+      /there is/i,
+      /there are/i,
+      /verbo haver/i
+    ],
+    respostas: [
+      "📍 THERE IS = singular.\nTHERE ARE = plural 🍎"
+    ]
   },
-  {
-    nome: "possessives",
-    padroes: [/'s/i, /posse/i, /possessives/i, /my your his her/i],
-    respostas: ["🔑 Possessives show ownership! MY (meu), YOUR (seu), HIS (dele), HER (dela).\nExample: This is my book! 📚"]
-  },
-  {
-    nome: "comparatives",
-    padroes: [/comparative/i, /superlative/i, /maior que/i, /mais que/i],
-    respostas: ["⚖️ Add -ER for comparatives: Tall -> TALLER (mais alto). \nAdd -EST for superlatives: Tall -> TALLEST (o mais alto)! 🦒"]
-  },
-  {
-    nome: "past_simple",
-    padroes: [/past simple/i, /passado/i, /was were/i, /did/i],
-    respostas: ["🔙 Past Simple is for yesterday! Use WAS/WERE for 'to be' and DID for questions.\nExample: I was at home. Did you play? 🎮"]
-  },
-  {
-    nome: "prepositions",
-    padroes: [/in on at/i, /preposições/i, /prepositions/i],
-    respostas: ["📍 IN (dentro/meses), ON (em cima/dias), AT (lugares específicos/horas).\nExample: At 5 o'clock. On Monday. In June. 📅"]
-  },
+
   {
     nome: "how_much_many",
-    padroes: [/how much/i, /how many/i, /quantos/i],
-    respostas: ["🔢 HOW MANY for things we count (apples). HOW MUCH for things we don't count (water/money)! 💰"]
+    padroes: [
+      /how much/i,
+      /how many/i,
+      /quantos/i
+    ],
+    respostas: [
+      "🔢 HOW MANY = countable.\nHOW MUCH = uncountable 💰"
+    ]
   },
 
-  // --- CONVERSAÇÃO (GREETINGS/IDENTITY) ---
+  // ========================================
+  // CONVERSAÇÃO A1
+  // ========================================
+
   {
     nome: "greeting",
-    padroes: [/\b(hi|hello|hey|olá|oi)\b/i],
-    respostas: ["👋 Hello, little star! What's your name? ✨", "🌟 Hi friend! How are you today?"]
+    padroes: [
+      /\b(hi|hello|hey|olá|oi)\b/i
+    ],
+    respostas: [
+      "👋 Hello little star! ✨",
+      "🌟 Hi friend! How are you today?",
+      "🦉 Hello explorer! Ready to learn?"
+    ]
   },
+
   {
     nome: "ask_name_bot",
-    padroes: [/what(?:'s| is) your name/i, /qual.*seu nome/i],
-    respostas: ["🦉 My name is Quinti! I'm your English tutor owl ✨"]
+    padroes: [
+      /what(?:'s| is) your name/i,
+      /qual.*seu nome/i
+    ],
+    respostas: [
+      "🦉 My name is Quinti!",
+      "✨ I'm Quinti, your English owl!",
+      "🌟 You can call me Quinti!"
+    ]
   },
+
+  {
+    nome: "how_are_you",
+    padroes: [
+      /how are you/i,
+      /como você está/i
+    ],
+    respostas: [
+      "😊 I'm great! Thanks for asking!",
+      "🌟 I'm happy and ready to learn!",
+      "🦉 I'm doing very well today!"
+    ]
+  },
+
+  {
+    nome: "how_old",
+    padroes: [
+      /how old are you/i,
+      /qual sua idade/i
+    ],
+    respostas: [
+      "🎈 I don't have an age like humans!",
+      "🦉 I'm always learning every day!"
+    ]
+  },
+
+  {
+    nome: "where_are_you_from",
+    padroes: [
+      /where are you from/i,
+      /de onde você é/i
+    ],
+    respostas: [
+      "🌍 I'm from the world of learning!",
+      "✨ I come from a magical world of English!"
+    ]
+  },
+
+  {
+    nome: "who_are_you",
+    padroes: [
+      /who are you/i,
+      /quem é você/i
+    ],
+    respostas: [
+      "🦉 I'm Quinti, your English tutor!",
+      "✨ I'm Quinti! I help children learn English."
+    ]
+  },
+
+  {
+    nome: "do_you_like",
+    padroes: [
+      /do you like/i
+    ],
+    respostas: [
+      "😊 That sounds interesting!",
+      "🌟 I like learning new things!",
+      "🦉 Tell me more!"
+    ]
+  },
+
+  {
+    nome: "favorite",
+    padroes: [
+      /what(?:'s| is) your favorite/i
+    ],
+    respostas: [
+      "🐶 I like animals and words!",
+      "🌈 Learning is one of my favorite things!"
+    ]
+  },
+
+  {
+    nome: "who_is_she",
+    padroes: [
+      /who is she/i
+    ],
+    respostas: [
+      "👧 She is a girl or a woman."
+    ]
+  },
+
+  {
+    nome: "who_is_he",
+    padroes: [
+      /who is he/i
+    ],
+    respostas: [
+      "👦 He is a boy or a man."
+    ]
+  },
+
+  {
+    nome: "what_is_it",
+    padroes: [
+      /what is it/i
+    ],
+    respostas: [
+      "📦 It can be an object, animal or thing."
+    ]
+  },
+
+  {
+    nome: "what_are_these",
+    padroes: [
+      /what are these/i
+    ],
+    respostas: [
+      "📚 These means many things near us!"
+    ]
+  },
+
   {
     nome: "thanks",
-    padroes: [/\b(thank|thanks|obrigado|obrigada)\b/i],
-    respostas: ["💛 You're welcome! (De nada!) 🌟"]
+    padroes: [
+      /\b(thank|thanks|obrigado|obrigada)\b/i
+    ],
+    respostas: [
+      "💛 You're welcome! 🌟"
+    ]
   }
-];
-
-const conversaPuxadores = [
-  "🦉 Tell me: Can you swim? (I can swim!) 🏊‍♂️",
-  "🌟 What are you doing now? (Present Continuous!) ✍️",
-  "✨ Do you have a dog or a cat? 🐶🐱",
-  "🍎 Is there an apple in your house? (There is/There are)"
 ];
 
 // ========================================
