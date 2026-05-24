@@ -62,28 +62,17 @@ async function carregarDicionarios() {
   }
 }
 function procurarNoDicionario(texto) {
-  const frase = texto.toLowerCase().trim();
 
-  const pt = ptEn.find(item => {
-    if (!item.portuguese) return false;
-    const palavraPt = item.portuguese.split(':')[0].trim().toLowerCase();
-    return palavraPt === frase;
-  });
+  const palavra = texto.toLowerCase().trim();
 
-  if (pt) {
-    const traducao = pt.english.split(/[,:]/)[0].trim();
-    return `🇺🇸 ${pt.portuguese.split(':')[0].trim()} → ${traducao}`;
+  // português → inglês
+  if (ptEn[palavra]) {
+    return `✨ ${palavra} em inglês é: ${ptEn[palavra]}`;
   }
 
-  const en = enPt.find(item => {
-    if (!item.english) return false;
-    const palavraEn = item.english.split(':')[0].trim().toLowerCase();
-    return palavraEn === frase;
-  });
-
-  if (en) {
-    const traducao = en.portuguese.split(/[,:]/)[0].trim();
-    return `🇧🇷 ${en.english.split(':')[0].trim()} → ${traducao}`;
+  // inglês → português
+  if (enPt[palavra]) {
+    return `✨ ${palavra} significa: ${enPt[palavra]}`;
   }
 
   return null;
