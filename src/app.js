@@ -80,28 +80,25 @@ function procurarExemplo(palavra) {
 const LIBRE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/translate';
 
 async function traduzirComLibreTranslate(texto, source = 'pt', target = 'en') {
-  try {
-    const response = await fetch(LIBRE_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        q: texto,
-        source: source,
-        target: target,
-        format: 'text'
-      })
-    });
-    const data = await response.json();
-    if (data && data.translatedText) {
-      return data.translatedText;
-    } else {
-      console.warn("Resposta inesperada do LibreTranslate:", data);
-      return null;
+    try {
+        // Usamos a API do MyMemory com um email de contato para melhorar o limite
+        const url = `https://api.mymemory.translated.net/get?q=${encodeURIComponent(texto)}&langpair=${source}|${target}&de=lenilsonxavier@gmail.com`;
+        const response = await fetch(url);
+        const data = await response.json();
+
+        if (data && data.responseData && data.responseData.translatedText) {
+            let traducao = data.responseData.translatedText;
+            // O MyMemory devolve a frase original se não achar a tradução, prevenimos isso.
+            if (traducao && traducao !== texto) {
+                return traducao;
+            }
+            return null;
+        }
+        return null;
+    } catch (error) {
+        console.error("Erro na tradução via MyMemory:", error);
+        return null;
     }
-  } catch (error) {
-    console.error("Erro na tradução via LibreTranslate:", error);
-    return null;
-  }
 }
 
 // ========================================
