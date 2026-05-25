@@ -130,19 +130,41 @@ if (palavra.includes(" ")) {
   const palavras =
     palavra.split(/\s+/);
 
-  const ignorar = [
-    "de", "do", "da",
-    "dos", "das"
-  ];
+  // mini gramática do Quinti
+  const mapaFixos = {
+    "eu": "i",
+    "você": "you",
+    "voce": "you",
+    "ele": "he",
+    "ela": "she",
+    "nós": "we",
+    "nos": "we",
+    "eles": "they",
+
+    "amo": "love",
+    "gosto": "like",
+    "quero": "want",
+    "tenho": "have",
+    "sou": "am",
+    "é": "is",
+    "esta": "is",
+    "está": "is",
+    "te": "you",
+    "me": "me",
+    "uma": "a",
+    "um": "a"
+  };
 
   const traduzidas =
     palavras.map(p => {
 
-      p = p.trim();
+      p = p.toLowerCase().trim();
 
       if (!p) return "";
-      if (ignorar.includes(p))
-        return p;
+
+      // mini gramática primeiro
+      if (mapaFixos[p])
+        return mapaFixos[p];
 
       const semAcento = p
         .normalize("NFD")
@@ -158,38 +180,19 @@ if (palavra.includes(" ")) {
       traducao =
         limparTraducao(traducao);
 
-      // pega só primeira palavra limpa
-      traducao =
-        traducao.split(/\s+/)[0];
+      // pega só a última palavra
+      // "mamãe: n. mom" -> mom
+      const palavrasLimpas =
+        traducao.split(/\s+/);
 
-      return traducao || p;
+      return palavrasLimpas[
+        palavrasLimpas.length - 1
+      ];
     });
 
   return `✨ ${traduzidas
     .filter(Boolean)
     .join(" ")}`;
-}
-
-  // procura frase exemplo
-function procurarExemplo(p) {
-
-  p = p.toLowerCase().trim();
-
-  return exemplos.find(ex => {
-
-    const en =
-      ex.english?.toLowerCase() || "";
-
-    const pt =
-      ex.portuguese?.toLowerCase() || "";
-
-    // procura palavra inteira
-    const regex =
-      new RegExp(`\\b${p}\\b`, "i");
-
-    return regex.test(en)
-      || regex.test(pt);
-  });
 }
 
   // ==========================
