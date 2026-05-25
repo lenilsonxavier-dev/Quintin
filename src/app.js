@@ -13,7 +13,6 @@ let exemplos = [];
 
 async function carregarDicionarios() {
   try {
-
     const [enRes, ptRes] = await Promise.all([
       fetch("./public/data/en_pt.json"),
       fetch("./public/data/pt_en.json")
@@ -27,14 +26,12 @@ async function carregarDicionarios() {
       throw new Error(`Erro PT_EN: ${ptRes.status}`);
     }
 
-    // Carrega os arrays
     const EN_PT_ARRAY = await enRes.json();
     const PT_EN_ARRAY = await ptRes.json();
 
     console.log("EN_PT carregado:", EN_PT_ARRAY.length);
     console.log("PT_EN carregado:", PT_EN_ARRAY.length);
 
-    // Converte array -> objeto rápido de busca
     const EN_PT = {};
     const PT_EN = {};
 
@@ -50,47 +47,261 @@ async function carregarDicionarios() {
       }
     });
 
-    // 👇 COLOQUE AQUI
     enPt = EN_PT;
     ptEn = PT_EN;
 
     console.log("📚 Dicionários prontos!");
-
     return { EN_PT, PT_EN };
-
   } catch (erro) {
     console.error("Erro ao carregar dicionários:", erro);
-
-    return {
-      EN_PT: {},
-      PT_EN: {}
-    };
+    return { EN_PT: {}, PT_EN: {} };
   }
 }
 
 async function carregarExemplos() {
   try {
-
-    const res = await fetch(
-      "./public/data/examples.json"
-    );
-
+    const res = await fetch("./public/data/examples.json");
     exemplos = await res.json();
-
-    console.log(
-      `📚 ${exemplos.length} exemplos carregados`
-    );
-
+    console.log(`📚 ${exemplos.length} exemplos carregados`);
   } catch (erro) {
-    console.error(
-      "Erro ao carregar exemplos:",
-      erro
-    );
+    console.error("Erro ao carregar exemplos:", erro);
   }
 }
 
-function procurarNoDicionario(texto) {
+function limparTraducao(txt) {
+  if (!txt) return "";
+  return txt
+    .replace(/<[^>]*>/g, "")
+    .replace(/^.*?:\s*/, "")
+    .replace(/\b(n|v|adj|adv|pron)\.\s*/gi, "")
+    .split(/[;,]/)[0]
+    .trim();
+}
 
+function procurarExemplo(palavra) {
+  if (!exemplos || exemplos.length === 0) return null;
+  return exemplos.find(ex => 
+    ex.english?.toLowerCase().includes(palavra.toLowerCase()) ||
+    ex.portuguese?.toLowerCase().includes(palavra.toLowerCase())
+  );
+}
+
+// ========================================
+// FASE 1 & 2: DETECTOR DE INTENTO
+// ========================================
+function extrairTermoParaTraducao(texto) {
+  texto = texto.toLowerCase().trim();
+  
+  const padroes = [
+    /como se diz\s+(.+?)(?:\s+em inglês|\s+em ingles|$)/i,
+    /como se diz\s+(.+)/i,
+    /traduz(?:ir)?\s+(.+)/i,
+    /o que significa\s+(.+)/i,
+    /what(?:'s| is)\s+(.+)/i,
+    /how do you say\s+(.+)/i
+  ];
+  
+  for (const padrao of padroes) {
+    const match = texto.match(padrao);
+    if (match && match[1]) {
+      return match[1]
+        .replace(/[?.!,:]/g, '')
+        .replace(/em inglês|em ingles|in english/gi, '')
+        .trim();
+    }
+  }
+  
+  return null;
+}
+
+function detectarIntento(texto) {
+  texto = texto.toLowerCase().trim();
+
+  // Tradução de palavra ou frase
+  if (
+    texto.includes("como se diz") ||
+    texto.includes("em inglês") ||
+    texto.includes("em ingles") ||
+    texto.includes("traduz") ||
+    texto.includes("o que significa") ||
+    texto.includes("what means") ||
+    texto.includes("how do you say")
+  ) {
+    const termo = extrairTermoParaTraducao(texto);
+    
+    if (termo && termo.trim().includes(" ")) {
+      return "traducao_frase";
+    }
+    
+    return "traducao_palavra";
+  }
+
+  // Conteúdo educativo
+  if (
+    texto.includes("curiosidade") ||
+    texto.includes("atividade") ||
+    texto.includes("piada") ||
+    texto.includes("conte algo") ||
+    texto.includes("me ensine") ||
+    texto.includes("explique")
+  ) {
+    return "conteudo";
+  }
+
+  // Conversa social
+  if (
+    texto.match(/\b(hi|hello|hey|olá|oi)\b/i) ||
+    texto.includes("como você está") ||
+    texto.includes("how are you") ||
+    texto.includes("qual seu nome") ||
+    texto.includes("what's your name")
+  ) {
+    return "social";
+  }
+
+  return "chat";
+}
+
+// ========================================
+// FASE 3: RESPONDEDORES ESPECIALIZADOS
+// ========================================
+
+function pegarAleatorio(array) {
+  return array[Math.floor(Math.random() * array.length)];
+}
+
+// RESPONDER PALAVRA
+function responderPalavra(texto) {
+  const termo = extrairTermoParaTraducao(texto) || texto;
+  const traducao = procurarNoDicionario(termo);
+  
+  if (traducao) return traducao;
+  
+  // Fallback específico para palavra
+  return pegarAleatorio([
+    "🦉 I'm still learning! ✨\n\nCan you try spelling it differently?",
+    "🌟 Let's learn together!\n\nTry: 'How do you say gato in English?'",
+    "🍎 I don't know that word yet!\n\nCan you show me an example?"
+  ]);
+}
+
+// RESPONDER FRASE
+function responderFrase(texto) {
+  const termo = extrairTermoParaTraducao(texto) || texto;
+  
+  // Tenta tradução palavra por palavra primeiro
+  const palavras = termo.toLowerCase().trim().split(/\s+/);
+  const mapaFixos = {
+    "eu": "i", "você": "you", "voce": "you", "ele": "he", "ela": "she",
+    "nós": "we", "nos": "we", "eles": "they",
+    "amo": "love", "gosto": "like", "quero": "want", "tenho": "have",
+    "sou": "am", "é": "is", "esta": "is", "está": "is", "te": "you",
+    "me": "me", "uma": "a", "um": "a", "o": "the", "a": "the"
+  };
+
+  const traduzidas = palavras.map(p => {
+    p = p.toLowerCase().trim();
+    if (!p) return "";
+    
+    if (mapaFixos[p]) return mapaFixos[p];
+    
+    const semAcento = p.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    let traducao = ptEn[p] || ptEn[semAcento];
+    
+    if (traducao) {
+      traducao = limparTraducao(traducao);
+      const palavrasLimpas = traducao.split(/\s+/);
+      return palavrasLimpas[palavrasLimpas.length - 1];
+    }
+    
+    return p;
+  });
+
+  const resultado = traduzidas.filter(Boolean).join(" ");
+  
+  if (resultado && resultado !== termo && !resultado.includes("undefined")) {
+    return `✨ ${resultado}`;
+  }
+  
+  // Fallback pedagógico para frases complexas
+  return pegarAleatorio([
+    "🦉 I'm still learning complete sentences! ✨\n\nCan you try a simpler sentence?",
+    "🌟 Let's learn word by word first!\n\nHow do you say 'cat' in English?",
+    "🎯 Great try! Let me help:\n\nTry separating into smaller parts.",
+    "💪 Learning step by step!\n\nCan you ask with 'Como se diz [palavra]?'"
+  ]);
+}
+
+// RESPONDER CONHECIMENTO
+function responderConhecimento(texto) {
+  const conhecimento = buscarConhecimento(texto);
+  if (conhecimento) return conhecimento;
+  
+  const glossario = buscarGlossario(texto);
+  if (glossario) return glossario;
+  
+  return pegarAleatorio([
+    "🦉 Did you know?\n\n🐝 The Verb TO BE is: AM, IS, ARE!\n\nExample: I am happy! ✨",
+    "🌟 Fun fact!\n\n💪 CAN means ability!\n\nExample: I can swim! 🏊‍♂️",
+    "📚 Learning English is fun!\n\nTry using 'How do you say...' to learn new words!"
+  ]);
+}
+
+// RESPONDER SOCIAL
+function responderSocial(texto) {
+  for (const intent of intencoes) {
+    for (const regex of intent.padroes) {
+      if (regex.test(texto)) {
+        return intent.respostas[Math.floor(Math.random() * intent.respostas.length)];
+      }
+    }
+  }
+  
+  return pegarAleatorio([
+    "👋 Hello little star! ✨\n\nHow can I help you today?",
+    "🌟 Hi friend!\n\nWould you like to learn a new word?",
+    "🦉 Hello explorer!\n\nTry: 'Como se diz coruja em inglês?'"
+  ]);
+}
+
+// FALLBACK PEDAGÓGICO
+function fallbackPedagogico() {
+  return pegarAleatorio([
+    "🦉 I'm still learning! ✨\n\nHow do you say 'cat' in English?",
+    "🌟 Let's learn together!\n\nCan you try another word?",
+    "🍎 Try: 'How do you say apple in English?'",
+    "💪 Keep practicing!\n\nAsk me: 'Como se diz [palavra] em inglês?'"
+  ]);
+}
+
+// ========================================
+// MOTOR PRINCIPAL (FASE 4)
+// ========================================
+function respostaControlada(pergunta) {
+  const tipo = detectarIntento(pergunta);
+  
+  switch(tipo) {
+    case "traducao_palavra":
+      return responderPalavra(pergunta);
+      
+    case "traducao_frase":
+      return responderFrase(pergunta);
+      
+    case "conteudo":
+      return responderConhecimento(pergunta);
+      
+    case "social":
+      return responderSocial(pergunta);
+      
+    default:
+      return fallbackPedagogico();
+  }
+}
+
+// ========================================
+// FUNÇÃO ORIGINAL PROcurarNoDicionario (REFATORADA)
+// ========================================
+function procurarNoDicionario(texto) {
   texto = texto.toLowerCase().trim();
 
   let palavra = texto
@@ -104,140 +315,31 @@ function procurarNoDicionario(texto) {
     .replace(/em inglês/g, "")
     .replace(/em ingles/g, "")
     .replace(/in english/g, "")
-    .replace(/\be\b/g, "") // remove "e dragão"
+    .replace(/\be\b/g, "")
     .replace(/[?.!,:]/g, "")
     .trim();
 
   console.log("Palavra limpa:", palavra);
 
-  // remove sujeira do dicionário
-  function limparTraducao(txt) {
-
-    if (!txt) return "";
-
-    return txt
-      .replace(/<[^>]*>/g, "") // remove html
-      .replace(/^.*?:\s*/, "") // remove "dragão:"
-      .replace(/\b(n|v|adj|adv|pron)\.\s*/gi, "")
-      .split(/[;,]/)[0]
-      .trim();
-  }
-// ==========================
-// FRASE (várias palavras)
-// ==========================
-if (palavra.includes(" ")) {
-
-  const palavras =
-    palavra.split(/\s+/);
-
-  // mini gramática do Quinti
-  const mapaFixos = {
-    "eu": "i",
-    "você": "you",
-    "voce": "you",
-    "ele": "he",
-    "ela": "she",
-    "nós": "we",
-    "nos": "we",
-    "eles": "they",
-
-    "amo": "love",
-    "gosto": "like",
-    "quero": "want",
-    "tenho": "have",
-    "sou": "am",
-    "é": "is",
-    "esta": "is",
-    "está": "is",
-    "te": "you",
-    "me": "me",
-    "uma": "a",
-    "um": "a"
-  };
-
-  const traduzidas =
-    palavras.map(p => {
-
-      p = p.toLowerCase().trim();
-
-      if (!p) return "";
-
-      // mini gramática primeiro
-      if (mapaFixos[p])
-        return mapaFixos[p];
-
-      const semAcento = p
-        .normalize("NFD")
-        .replace(/[\u0300-\u036f]/g, "");
-
-      let traducao =
-        ptEn[p] ||
-        ptEn[semAcento];
-
-      if (!traducao)
-        return p;
-
-      traducao =
-        limparTraducao(traducao);
-
-      // pega só a última palavra
-      // "mamãe: n. mom" -> mom
-      const palavrasLimpas =
-        traducao.split(/\s+/);
-
-      return palavrasLimpas[
-        palavrasLimpas.length - 1
-      ];
-    });
-
-  return `✨ ${traduzidas
-    .filter(Boolean)
-    .join(" ")}`;
-}
-
-  // ==========================
   // português -> inglês
-  // ==========================
   if (ptEn[palavra]) {
-
-    const traducao =
-      limparTraducao(ptEn[palavra]);
-
-    const exemplo =
-      procurarExemplo(traducao);
+    const traducao = limparTraducao(ptEn[palavra]);
+    const exemplo = procurarExemplo(traducao);
 
     if (exemplo) {
-      return `✨ ${palavra} em inglês é ${traducao}
-
-📚 Example:
-${exemplo.english}
-
-🇧🇷 ${exemplo.portuguese}`;
+      return `✨ ${palavra} em inglês é ${traducao}\n\n📚 Example:\n${exemplo.english}\n\n🇧🇷 ${exemplo.portuguese}`;
     }
-
     return `✨ ${palavra} em inglês é ${traducao}`;
   }
 
-  // ==========================
   // inglês -> português
-  // ==========================
   if (enPt[palavra]) {
-
-    const traducao =
-      limparTraducao(enPt[palavra]);
-
-    const exemplo =
-      procurarExemplo(palavra);
+    const traducao = limparTraducao(enPt[palavra]);
+    const exemplo = procurarExemplo(palavra);
 
     if (exemplo) {
-      return `✨ ${palavra} significa ${traducao}
-
-📚 Example:
-${exemplo.english}
-
-🇧🇷 ${exemplo.portuguese}`;
+      return `✨ ${palavra} significa ${traducao}\n\n📚 Example:\n${exemplo.english}\n\n🇧🇷 ${exemplo.portuguese}`;
     }
-
     return `✨ ${palavra} significa ${traducao}`;
   }
 
@@ -247,16 +349,12 @@ ${exemplo.english}
     .replace(/[\u0300-\u036f]/g, "");
 
   if (ptEn[semAcento]) {
-    const traducao =
-      limparTraducao(ptEn[semAcento]);
-
+    const traducao = limparTraducao(ptEn[semAcento]);
     return `✨ ${palavra} em inglês é ${traducao}`;
   }
 
   if (enPt[semAcento]) {
-    const traducao =
-      limparTraducao(enPt[semAcento]);
-
+    const traducao = limparTraducao(enPt[semAcento]);
     return `✨ ${palavra} significa ${traducao}`;
   }
 
@@ -264,83 +362,36 @@ ${exemplo.english}
 }
 
 // ========================================
-// CONFIGURAÇÃO
+// FUNÇÕES AUXILIARES
 // ========================================
-const MAX_HISTORY = 6;
-
-// ========================================
-// DOM
-// ========================================
-const chat = document.getElementById("chat");
-const inputPergunta = document.getElementById("pergunta");
-const btnEnviar = document.getElementById("btnEnviar");
-const progressBar = document.getElementById("progress");
-const btnMic = document.getElementById("btnMic");
-const statusEl = document.getElementById("status");
-
-// ========================================
-// UI HELPERS
-// ========================================
-function atualizarStatus(texto, progresso = null) {
-  if (statusEl) statusEl.textContent = texto;
-  if (progresso !== null && progressBar) {
-    progressBar.style.width = `${progresso * 100}%`;
-  }
-}
-
-function adicionarMensagem(texto, autor) {
-  const div = document.createElement("div");
-  div.className = `msg ${autor}`;
-  div.textContent = texto;
-  chat.appendChild(div);
-  chat.scrollTop = chat.scrollHeight;
-
-  memory.chatHistory.push({
-    role: autor,
-    content: texto,
-    timestamp: new Date().toISOString()
-  });
-
-  if (memory.chatHistory.length > MAX_HISTORY * 2) {
-    memory.chatHistory = memory.chatHistory.slice(-MAX_HISTORY * 2);
-  }
-
-  return div;
-}
-
-function mostrarPensando() {
-  removerPensando();
-  const div = document.createElement("div");
-  div.className = "pensando";
-  div.id = "pensando";
-  div.innerHTML = `<span style="font-size:32px;">🦉</span> <span>Quinti is thinking...</span>`;
-  chat.appendChild(div);
-  chat.scrollTop = chat.scrollHeight;
-}
-
-function removerPensando() {
-  const el = document.getElementById("pensando");
-  if (el) el.remove();
-}
-
-function similarity(a, b) {
-  const levenshtein = (a, b) => {
-    const matrix = Array.from({ length: a.length + 1 }, () => []);
-    for (let i = 0; i <= a.length; i++) matrix[i][0] = i;
-    for (let j = 0; j <= b.length; j++) matrix[0][j] = j;
-    for (let i = 1; i <= a.length; i++) {
-      for (let j = 1; j <= b.length; j++) {
-        matrix[i][j] = Math.min(
-          matrix[i - 1][j] + 1,
-          matrix[i][j - 1] + 1,
-          matrix[i - 1][j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1)
-        );
+function buscarGlossario(pergunta) {
+  if (!window.conhecimentoGlobal?.glossary) return null;
+  const texto = pergunta.toLowerCase().trim();
+  for (const categoria of Object.values(window.conhecimentoGlobal.glossary)) {
+    if (!categoria.words) continue;
+    for (const item of categoria.words) {
+      const en = item.en?.toLowerCase() || "";
+      const pt = item.pt?.toLowerCase() || "";
+      if (texto.includes(en) || texto.includes(pt)) {
+        return `${item.emoji || "✨"} ${item.en}\n\n${item.en} means ${item.pt}\n\n${item.example_en || ""}\n\n${item.example_pt || ""}`;
       }
     }
-    return matrix[a.length][b.length];
-  };
-  const maxLen = Math.max(a.length, b.length);
-  return maxLen === 0 ? 1.0 : 1.0 - levenshtein(a, b) / maxLen;
+  }
+  return null;
+}
+
+function buscarConhecimento(pergunta) {
+  const texto = pergunta.toLowerCase();
+  const base = window.conhecimentoGlobal;
+  if (!base) return null;
+  for (const [nomeCategoria, categoria] of Object.entries(base)) {
+    if (!categoria || typeof categoria !== "object") continue;
+    const itens = JSON.stringify(categoria).toLowerCase();
+    if (itens.includes(texto)) {
+      return `🦉 I found something about:\n\n${pergunta}\n\n✨ Let's learn together!`;
+    }
+  }
+  return null;
 }
 
 // ========================================
@@ -468,98 +519,63 @@ const intencoes = [
 ];
 
 // ========================================
-// FRASES PUXADORAS
+// CONFIGURAÇÃO
 // ========================================
-const conversaPuxadores = [
-  "🦉 Tell me: Can you swim? (I can swim!) 🏊‍♂️",
-  "🌟 What are you doing now? (Present Continuous!) ✍️",
-  "✨ Do you have a dog or a cat? 🐶🐱",
-  "🍎 Is there an apple in your house? (There is/There are)"
-];
+const MAX_HISTORY = 6;
 
 // ========================================
-// MOTOR DE RESPOSTAS
+// DOM
 // ========================================
-function buscarGlossario(pergunta) {
-  if (!window.conhecimentoGlobal?.glossary) return null;
-  const texto = pergunta.toLowerCase().trim();
-  for (const categoria of Object.values(window.conhecimentoGlobal.glossary)) {
-    if (!categoria.words) continue;
-    for (const item of categoria.words) {
-      const en = item.en?.toLowerCase() || "";
-      const pt = item.pt?.toLowerCase() || "";
-      if (texto.includes(en) || texto.includes(pt)) {
-        return `${item.emoji || "✨"} ${item.en}\n\n${item.en} means ${item.pt}\n\n${item.example_en || ""}\n\n${item.example_pt || ""}`;
-      }
-    }
+const chat = document.getElementById("chat");
+const inputPergunta = document.getElementById("pergunta");
+const btnEnviar = document.getElementById("btnEnviar");
+const progressBar = document.getElementById("progress");
+const btnMic = document.getElementById("btnMic");
+const statusEl = document.getElementById("status");
+
+// ========================================
+// UI HELPERS
+// ========================================
+function atualizarStatus(texto, progresso = null) {
+  if (statusEl) statusEl.textContent = texto;
+  if (progresso !== null && progressBar) {
+    progressBar.style.width = `${progresso * 100}%`;
   }
-  return null;
 }
 
-function buscarConhecimento(pergunta) {
-  const texto = pergunta.toLowerCase();
-  const base = window.conhecimentoGlobal;
-  if (!base) return null;
-  for (const [nomeCategoria, categoria] of Object.entries(base)) {
-    if (!categoria || typeof categoria !== "object") continue;
-    const itens = JSON.stringify(categoria).toLowerCase();
-    if (itens.includes(texto)) {
-      return `🦉 I found something about:\n\n${pergunta}\n\n✨ Let's learn together!`;
-    }
+function adicionarMensagem(texto, autor) {
+  const div = document.createElement("div");
+  div.className = `msg ${autor}`;
+  div.textContent = texto;
+  chat.appendChild(div);
+  chat.scrollTop = chat.scrollHeight;
+
+  memory.chatHistory.push({
+    role: autor,
+    content: texto,
+    timestamp: new Date().toISOString()
+  });
+
+  if (memory.chatHistory.length > MAX_HISTORY * 2) {
+    memory.chatHistory = memory.chatHistory.slice(-MAX_HISTORY * 2);
   }
-  return null;
+
+  return div;
 }
 
-function detectarApresentacao(pergunta) {
-  const texto = pergunta.trim();
-  const regex = /(?:my name is|meu nome é|i am|eu sou)\s+([a-zA-Záàâãéèêíïóôõúüç]+(?:\s+[a-zA-Záàâãéèêíïóôõúüç]+)?)/i;
-  const match = texto.match(regex);
-  if (match && match[1]) {
-    const nome = match[1].trim();
-    return `Nice to meet you, ${nome}! ✨ I'm Quinti, your English tutor. How can I help you today?`;
-  }
-  return null;
+function mostrarPensando() {
+  removerPensando();
+  const div = document.createElement("div");
+  div.className = "pensando";
+  div.id = "pensando";
+  div.innerHTML = `<span style="font-size:32px;">🦉</span> <span>Quinti is thinking...</span>`;
+  chat.appendChild(div);
+  chat.scrollTop = chat.scrollHeight;
 }
 
-// ========================================
-// FUNÇÃO PRINCIPAL (única, sem duplicação)
-// ========================================
-function respostaControlada(pergunta) {
-  const texto = pergunta.trim();
-
-  // 1. DICIONÁRIO
-  const traducaoExata = procurarNoDicionario(texto);
-  if (traducaoExata) return traducaoExata;
-
-  const termo = extrairTermoParaTraducao(texto);
-  if (termo) {
-    const traducaoNatural = procurarNoDicionario(termo);
-    if (traducaoNatural) return traducaoNatural;
-  }
-
-  // 2. APRESENTAÇÃO PESSOAL
-  const apresentacao = detectarApresentacao(texto);
-  if (apresentacao) return apresentacao;
-
-  // 3. INTENÇÕES A1
-  for (const intent of intencoes) {
-    for (const regex of intent.padroes) {
-      if (regex.test(texto)) {
-        return intent.respostas[Math.floor(Math.random() * intent.respostas.length)];
-      }
-    }
-  }
-
-  // 4. GLOSSÁRIO
-  const glossario = buscarGlossario(texto);
-  if (glossario) return glossario;
-
-  // 5. BASE DE CONHECIMENTO
-  const conhecimento = buscarConhecimento(texto);
-  if (conhecimento) return conhecimento;
-
-  // 6. FALLBACK
-  return `🌟 I'm learning!\n\n${conversaPuxadores[Math.floor(Math.random() * conversaPuxadores.length)]}`;
+function removerPensando() {
+  const el = document.getElementById("pensando");
+  if (el) el.remove();
 }
 
 // ========================================
@@ -589,7 +605,7 @@ if (SpeechRecognition && btnMic) {
     console.log("MIC ERROR:", event.error);
     let mensagem = "🎤 Microphone error!";
     if (event.error === "not-allowed") mensagem = "🎤 Please allow microphone access.\nPermita acesso ao microfone ✨";
-    else if (event.error === "no-speech") mensagem = "🎤 I couldn't hear you.\nNão consegui ouvir você ✨";
+    else if (event.error === "no-speech") mensagem = "🎤 I couldn't hear you.\nNÃ£o consegui ouvir você ✨";
     else if (event.error === "audio-capture") mensagem = "🎤 No microphone detected.\nNenhum microfone encontrado ✨";
     adicionarMensagem(mensagem, "bot");
     btnMic.textContent = "🎤";
@@ -643,37 +659,16 @@ window.addEventListener("DOMContentLoaded", () => {
 // INICIALIZAÇÃO
 // ========================================
 (async () => {
-
-  atualizarStatus(
-    "🌍 Loading Quinti A1...",
-    0.5
-  );
+  atualizarStatus("🌍 Loading Quinti A1...", 0.5);
 
   try {
-
-    // conhecimento
-    window.conhecimentoGlobal =
-      await carregarConhecimento();
-
-    // dicionários
-    const dicts =
-      await carregarDicionarios();
-
+    window.conhecimentoGlobal = await carregarConhecimento();
+    const dicts = await carregarDicionarios();
     enPt = dicts.EN_PT;
     ptEn = dicts.PT_EN;
-
-    // exemplos do Tatoeba
     await carregarExemplos();
-
-    atualizarStatus(
-      "✅ Quinti is Ready!",
-      1
-    );
-
-    console.log(
-      "🦉 Quinti pronto!"
-    );
-
+    atualizarStatus("✅ Quinti is Ready!", 1);
+    console.log("🦉 Quinti pronto!");
   } catch (e) {
     console.error(e);
   }
@@ -682,5 +677,4 @@ window.addEventListener("DOMContentLoaded", () => {
     "🦉 Hello!\n\nI am Quinti ✨\n\nReady for English Lessons?",
     "bot"
   );
-
 })();
