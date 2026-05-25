@@ -1,382 +1,316 @@
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-body{
-    font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;
-
-    background:linear-gradient(
-        135deg,
-        #0f2027,
-        #203a43,
-        #2c5364
-    );
-
-    min-height:100vh;
-
-    display:flex;
-    justify-content:center;
-
-    /* REMOVE O CENTER VERTICAL */
-    align-items:flex-start;
-
-    padding:12px;
-
-    overflow-y:auto;
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center; /* centraliza verticalmente em telas grandes */
+    padding: 16px;
+    overflow-y: auto;
 }
 
-/* CONTAINER */
-
-.container{
-    width:100%;
-    max-width:1100px;
-
-    min-height:95vh;
-    height:auto;
-
-    background:#102030;
-
-    border-radius:30px;
-
-    /* IMPORTANTE */
-    overflow:hidden;
-
-    display:flex;
-    flex-direction:column;
+/* CONTAINER PRINCIPAL – ocupa toda a altura disponível, sem cortar */
+.container {
+    width: 100%;
+    max-width: 1100px;
+    height: 90vh;          /* altura relativa à viewport, responsiva */
+    max-height: 800px;     /* limita em telas muito grandes */
+    background: #102030;
+    border-radius: 30px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
 }
 
-/* TOPO */
-
-.topo{
-    background:#0d1b2a;
-
-    padding:20px;
-
-    display:flex;
-    flex-direction:column;
-
-    justify-content:center;
-    align-items:center;
-
-    text-align:center;
-
-    border-bottom:
-        3px solid #ffb347;
-}
-.avatar{
-    width:90px;
-    height:90px;
-
-    border-radius:50%;
-
-    overflow:hidden;
-
-    background:#ffb347;
-
-    display:flex;
-    justify-content:center;
-    align-items:center;
-
-    margin:0 auto 12px auto;
-}
-.avatar img{
-    width:100%;
-    height:100%;
-
-    object-fit:cover;
-    object-position:center;
-
-    display:block;
-}
-.info-topo{
-    width:100%;
-
-    display:flex;
-    flex-direction:column;
-
-    align-items:center;
-    justify-content:center;
-
-    text-align:center;
-}
-.titulo{
-    color:#ffcc66 !important;
-
-    font-size:2.5rem;
-
-    font-weight:800;
-
-    text-align:center;
-
-    margin:0 auto;
-
-    text-shadow:
-        0 0 10px rgba(255,204,102,.35);
+/* TOPO – fixo no topo */
+.topo {
+    background: #0d1b2a;
+    padding: 16px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border-bottom: 3px solid #ffb347;
+    flex-shrink: 0;        /* não encolhe */
 }
 
-.subtitulo{
-    color:#d9e2ec;
-    margin-top:4px;
-    font-size:.9rem;
+.avatar {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    overflow: hidden;
+    background: #ffb347;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto 8px auto;
 }
 
-/* STATUS */
-
-.status-area{
-    background:#0f1724;
-
-    padding:12px 25px;
-
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-
-    border-bottom:
-        1px solid #2d3e50;
+.avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
 }
 
-#status{
-    color:#ffb347;
-    font-size:.9rem;
+.info-topo {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-.progress-container{
-    width:220px;
-    height:8px;
-
-    background:#2d3e50;
-
-    border-radius:20px;
-
-    overflow:hidden;
+.titulo {
+    color: #ffcc66 !important;
+    font-size: 2rem;
+    font-weight: 800;
+    text-shadow: 0 0 10px rgba(255,204,102,0.35);
 }
 
-.progress-bar{
-    width:0%;
-    height:100%;
-
-    background:
-        linear-gradient(
-            90deg,
-            #ffb347,
-            #ff7e05
-        );
-
-    transition:.3s;
+#status {
+    color: #ffb347;
+    font-size: 0.8rem;
+    margin-top: 4px;
 }
 
-/* CHAT */
-
-#chat{
-    flex:1;
-
-    min-height:300px;
-
-    overflow-y:auto;
-    padding:20px;
-
-    display:flex;
-    flex-direction:column;
-    gap:15px;
-
-    background:#1a2a36;
+.progress-container {
+    width: 180px;
+    height: 6px;
+    background: #2d3e50;
+    border-radius: 20px;
+    overflow: hidden;
+    margin-top: 8px;
 }
 
-.msg{
-    max-width:80%;
-
-    padding:14px 18px;
-
-    border-radius:24px;
-
-    line-height:1.5;
-
-    font-size:.95rem;
-
-    word-wrap:break-word;
+.progress-bar {
+    width: 0%;
+    height: 100%;
+    background: linear-gradient(90deg, #ffb347, #ff7e05);
+    transition: 0.3s;
 }
 
-.user{
-    background:#2c5f8a;
-    color:white;
-
-    align-self:flex-end;
-
-    border-bottom-right-radius:6px;
+/* CHAT – área flexível que preenche o espaço restante */
+#chat {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    background: #1a2a36;
+    scroll-behavior: smooth;
 }
 
-.bot{
-    background:#2d3e50;
-
-    color:#f0f0f0;
-
-    align-self:flex-start;
-
-    border-bottom-left-radius:6px;
-
-    border-left:4px solid #ffb347;
+/* MENSAGENS */
+.msg {
+    max-width: 85%;
+    padding: 12px 16px;
+    border-radius: 24px;
+    line-height: 1.4;
+    font-size: 0.95rem;
+    word-wrap: break-word;
 }
 
-.pensando{
-    display:flex;
-    align-items:center;
-
-    gap:12px;
-
-    background:#2d3e50;
-
-    color:#ffb347;
-
-    padding:10px 18px;
-
-    border-radius:30px;
-
-    width:fit-content;
+.user {
+    background: #2c5f8a;
+    color: white;
+    align-self: flex-end;
+    border-bottom-right-radius: 6px;
 }
 
-/* INPUT */
-
-.input-area{
-    background:#0d1b2a;
-
-    padding:20px;
-
-    display:flex;
-    gap:12px;
-
-    border-top:1px solid #2d3e50;
-
-    align-items:center;
+.bot {
+    background: #2d3e50;
+    color: #f0f0f0;
+    align-self: flex-start;
+    border-bottom-left-radius: 6px;
+    border-left: 4px solid #ffb347;
 }
 
-#pergunta{
-    flex:1;
-
-    padding:15px 20px;
-
-    border:none;
-
-    border-radius:40px;
-
-    background:#2d3e50;
-
-    color:white;
-
-    font-size:1rem;
-
-    outline:none;
-
-    min-width:0;
+.pensando {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #2d3e50;
+    color: #ffb347;
+    padding: 10px 18px;
+    border-radius: 30px;
+    width: fit-content;
 }
 
-#pergunta::placeholder{
-    color:#b9c6d3;
+/* ÁREA DE INPUT – flexível e adaptável */
+.input-area {
+    background: #0d1b2a;
+    padding: 16px 20px;
+    display: flex;
+    gap: 12px;
+    border-top: 1px solid #2d3e50;
+    align-items: center;
+    flex-shrink: 0;
+    flex-wrap: wrap;
 }
 
-button{
-    border:none;
-
-    border-radius:40px;
-
-    padding:0 24px;
-
-    min-height:54px;
-
-    background:#ffb347;
-
-    color:#1e2a3a;
-
-    font-weight:bold;
-
-    cursor:pointer;
-
-    transition:.2s;
-
-    flex-shrink:0;
+#pergunta {
+    flex: 1;
+    padding: 14px 18px;
+    border: none;
+    border-radius: 40px;
+    background: #2d3e50;
+    color: white;
+    font-size: 1rem;
+    outline: none;
+    min-width: 120px;
 }
 
-button:hover{
-    transform:scale(1.03);
+#pergunta::placeholder {
+    color: #b9c6d3;
 }
 
-#btnMic{
-    width:60px;
-    font-size:1.3rem;
+/* Botões – mesmo estilo para enviar, microfone e alto-falante */
+button {
+    border: none;
+    border-radius: 40px;
+    padding: 0 20px;
+    min-height: 50px;
+    background: #ffb347;
+    color: #1e2a3a;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+    flex-shrink: 0;
+    font-size: 1rem;
 }
 
-h1,
-.header h1,
-.titulo{
-    color:#ffcc66 !important;
-    text-align:center !important;
+button:hover {
+    transform: scale(1.02);
+    background: #ffa01e;
 }
 
-/* =========================
-   TABLET
-========================= */
+#btnMic,
+#btnSpeaker {
+    width: 54px;
+    font-size: 1.3rem;
+    padding: 0;
+}
 
-@media (max-width: 900px){
-
-    #chat{
-        height:60vh;
-        padding:16px;
+/* TABLET (largura ≤ 900px) */
+@media (max-width: 900px) {
+    body {
+        padding: 12px;
     }
-
-    .msg{
-        max-width:90%;
-        font-size:0.95rem;
+    .container {
+        height: 92vh;           /* um pouco maior em tablet */
+        max-height: none;
     }
-
-    .input-area{
-        padding:16px;
+    .avatar {
+        width: 60px;
+        height: 60px;
+    }
+    .titulo {
+        font-size: 1.8rem;
+    }
+    .msg {
+        max-width: 90%;
+        font-size: 0.9rem;
+    }
+    .input-area {
+        gap: 10px;
+        padding: 12px 16px;
+    }
+    #pergunta {
+        padding: 12px 16px;
+        font-size: 0.95rem;
+    }
+    button {
+        min-height: 48px;
+        padding: 0 18px;
+    }
+    #btnMic, #btnSpeaker {
+        width: 50px;
     }
 }
 
-/* =========================
-   CELULAR
-========================= */
-
-@media (max-width: 600px){
-
-    #chat{
-        height:62vh;
-        padding:12px;
-        gap:12px;
+/* CELULAR (largura ≤ 600px) */
+@media (max-width: 600px) {
+    body {
+        padding: 8px;
+        align-items: flex-start; /* evita centralizar em telas pequenas */
     }
-
-    .msg{
-        max-width:95%;
-        font-size:0.92rem;
-        padding:12px 14px;
+    .container {
+        height: 96vh;            /* praticamente tela cheia */
+        border-radius: 20px;
     }
-
-    .input-area{
-        padding:12px;
-        gap:10px;
-
-        flex-wrap:wrap;
+    .topo {
+        padding: 12px;
     }
-
-    #pergunta{
-        width:100%;
-        font-size:16px; /* evita zoom no iPhone */
+    .avatar {
+        width: 50px;
+        height: 50px;
+        margin-bottom: 4px;
     }
-
-    button{
-        flex:1;
-        min-height:50px;
-        padding:12px 16px;
+    .titulo {
+        font-size: 1.5rem;
     }
-
-    #btnMic{
-        width:55px;
-        flex:none;
+    #status {
+        font-size: 0.7rem;
     }
-
-    h1,
-    .header h1{
-        font-size:2rem;
+    .progress-container {
+        width: 140px;
+        height: 5px;
+    }
+    #chat {
+        padding: 12px;
+        gap: 10px;
+    }
+    .msg {
+        max-width: 95%;
+        padding: 10px 14px;
+        font-size: 0.85rem;
+    }
+    .input-area {
+        padding: 10px 12px;
+        gap: 8px;
+        flex-wrap: wrap;
+    }
+    #pergunta {
+        width: 100%;
+        flex: auto;
+        font-size: 16px;        /* evita zoom automático no iOS */
+        padding: 12px 14px;
+        order: 1;               /* coloca o input em cima */
+    }
+    button {
+        flex: 1;                /* botões dividem espaço */
+        min-height: 46px;
+        padding: 0 12px;
+        font-size: 0.9rem;
+    }
+    #btnMic, #btnSpeaker {
+        flex: 0 0 48px;         /* largura fixa, não estica */
+        width: 48px;
+        font-size: 1.2rem;
+    }
+    /* Reordena os botões: enviar, microfone, alto-falante lado a lado */
+    .input-area {
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: stretch;
+    }
+    #btnEnviar {
+        order: 2;
+        flex: 2;
+    }
+    #btnMic {
+        order: 3;
+    }
+    #btnSpeaker {
+        order: 4;
     }
 }
