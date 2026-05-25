@@ -761,5 +761,5 @@ window.addEventListener("DOMContentLoaded", () => {
   } catch (e) {
     console.error(e);
   }
-  adicionarMensagem("🦉 Hello!\n\nI am Quinti ✨\n\nReady for English Lessons?\n\n🔊 Tenho voz! Clique no alto-falante se quiser me desligar.", "bot");
+  adicionarMensagem("🦉 Hello!\n\nI am Quinti ✨\n\nReady for English Lessons?\n\n🔊, "bot");
 })();
