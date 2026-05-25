@@ -138,8 +138,11 @@ if (palavra.includes(" ")) {
   const traduzidas =
     palavras.map(p => {
 
+      p = p.trim();
+
+      if (!p) return "";
       if (ignorar.includes(p))
-        return "";
+        return p;
 
       const semAcento = p
         .normalize("NFD")
@@ -147,19 +150,17 @@ if (palavra.includes(" ")) {
 
       let traducao =
         ptEn[p] ||
-        ptEn[semAcento] ||
-        enPt[p] ||
-        enPt[semAcento] ||
-        p;
+        ptEn[semAcento];
+
+      if (!traducao)
+        return p;
 
       traducao =
         limparTraducao(traducao);
 
-      // remove sujeira residual
-      traducao = traducao
-        .replace(/^.*?:\s*/, "")
-        .replace(/\b(n|v|adj|adv)\b/gi, "")
-        .trim();
+      // pega só primeira palavra limpa
+      traducao =
+        traducao.split(/\s+/)[0];
 
       return traducao || p;
     });
@@ -170,13 +171,26 @@ if (palavra.includes(" ")) {
 }
 
   // procura frase exemplo
-  function procurarExemplo(p) {
+function procurarExemplo(p) {
 
-    return exemplos.find(ex =>
-      ex.english?.toLowerCase().includes(p.toLowerCase()) ||
-      ex.portuguese?.toLowerCase().includes(p.toLowerCase())
-    );
-  }
+  p = p.toLowerCase().trim();
+
+  return exemplos.find(ex => {
+
+    const en =
+      ex.english?.toLowerCase() || "";
+
+    const pt =
+      ex.portuguese?.toLowerCase() || "";
+
+    // procura palavra inteira
+    const regex =
+      new RegExp(`\\b${p}\\b`, "i");
+
+    return regex.test(en)
+      || regex.test(pt);
+  });
+}
 
   // ==========================
   // português -> inglês
