@@ -9,6 +9,7 @@ import { memory } from "./brain/memory.js";
 // ========================================
 let ptEn = {};
 let enPt = {};
+let exemplos = [];
 
 async function carregarDicionarios() {
   try {
@@ -64,6 +65,27 @@ async function carregarDicionarios() {
       EN_PT: {},
       PT_EN: {}
     };
+  }
+}
+
+async function carregarExemplos() {
+  try {
+
+    const res = await fetch(
+      "./public/data/examples.json"
+    );
+
+    exemplos = await res.json();
+
+    console.log(
+      `📚 ${exemplos.length} exemplos carregados`
+    );
+
+  } catch (erro) {
+    console.error(
+      "Erro ao carregar exemplos:",
+      erro
+    );
   }
 }
 
@@ -500,13 +522,44 @@ window.addEventListener("DOMContentLoaded", () => {
 // INICIALIZAÇÃO
 // ========================================
 (async () => {
-  atualizarStatus("🌍 Loading Quinti A1...", 0.5);
+
+  atualizarStatus(
+    "🌍 Loading Quinti A1...",
+    0.5
+  );
+
   try {
-    window.conhecimentoGlobal = await carregarConhecimento();
-    await carregarDicionarios();
-    atualizarStatus("✅ Quinti is Ready!", 1);
+
+    // conhecimento
+    window.conhecimentoGlobal =
+      await carregarConhecimento();
+
+    // dicionários
+    const dicts =
+      await carregarDicionarios();
+
+    enPt = dicts.EN_PT;
+    ptEn = dicts.PT_EN;
+
+    // exemplos do Tatoeba
+    await carregarExemplos();
+
+    atualizarStatus(
+      "✅ Quinti is Ready!",
+      1
+    );
+
+    console.log(
+      "🦉 Quinti pronto!"
+    );
+
   } catch (e) {
     console.error(e);
   }
-  adicionarMensagem("🦉 Hello!\n\nI am Quinti ✨\n\nReady for English Lessons?", "bot");
+
+  adicionarMensagem(
+    "🦉 Hello!\n\nI am Quinti ✨\n\nReady for English Lessons?",
+    "bot"
+  );
+
 })();
