@@ -90,6 +90,7 @@ async function carregarExemplos() {
 }
 
 function procurarNoDicionario(texto) {
+
   texto = texto.toLowerCase().trim();
 
   let palavra = texto
@@ -99,46 +100,103 @@ function procurarNoDicionario(texto) {
     .replace(/what means/g, "")
     .replace(/what is/g, "")
     .replace(/how do you say/g, "")
+    .replace(/traduz(?:ir)?/g, "")
     .replace(/em inglês/g, "")
     .replace(/em ingles/g, "")
     .replace(/in english/g, "")
-    .replace(/[?.!,]/g, "")
+    .replace(/\be\b/g, "") // remove "e dragão"
+    .replace(/[?.!,:]/g, "")
     .trim();
 
   console.log("Palavra limpa:", palavra);
 
-  // tenta direto
-  if (ptEn[palavra]) return `✨ ${palavra} em inglês é ${ptEn[palavra]}`;
-  if (enPt[palavra]) return `✨ ${palavra} significa ${enPt[palavra]}`;
+  // remove sujeira do dicionário
+  function limparTraducao(txt) {
 
-  // tenta sem acentos (caso o dicionário esteja sem acentos)
-  const semAcento = palavra.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-  if (ptEn[semAcento]) return `✨ ${palavra} em inglês é ${ptEn[semAcento]}`;
-  if (enPt[semAcento]) return `✨ ${palavra} significa ${enPt[semAcento]}`;
+    if (!txt) return "";
 
-  return null;
-}
-
-function extrairTermoParaTraducao(pergunta) {
-  const texto = pergunta.trim();
-
-  const padraoPt1 = /como\s+(?:se\s+)?(?:diz|fala)\s+(.+?)\s+(?:em\s+inglês|in\s+english)/i;
-  const padraoPt2 = /traduz(?:ir)?\s+(.+)/i;
-  const padraoPt3 = /o\s+que\s+significa\s+(.+)/i;
-
-  const padraoEn1 = /how\s+do\s+(?:i|you)\s+say\s+(.+?)\s+(?:in\s+english|em\s+inglês)/i;
-  const padraoEn2 = /what\s+is\s+(.+?)\s+(?:in\s+english|em\s+inglês)/i;
-
-  const todos = [padraoPt1, padraoPt2, padraoPt3, padraoEn1, padraoEn2];
-
-  for (const regex of todos) {
-    const match = texto.match(regex);
-    if (match && match[1]) {
-      let termo = match[1].trim();
-      termo = termo.replace(/^["'`]|["'`]$/g, '').trim();
-      if (termo) return termo;
-    }
+    return txt
+      .replace(/<[^>]*>/g, "") // remove html
+      .replace(/^.*?:\s*/, "") // remove "dragão:"
+      .replace(/\b(n|v|adj|adv|pron)\.\s*/gi, "")
+      .split(/[;,]/)[0]
+      .trim();
   }
+
+  // procura frase exemplo
+  function procurarExemplo(p) {
+
+    return exemplos.find(ex =>
+      ex.english?.toLowerCase().includes(p.toLowerCase()) ||
+      ex.portuguese?.toLowerCase().includes(p.toLowerCase())
+    );
+  }
+
+  // ==========================
+  // português -> inglês
+  // ==========================
+  if (ptEn[palavra]) {
+
+    const traducao =
+      limparTraducao(ptEn[palavra]);
+
+    const exemplo =
+      procurarExemplo(traducao);
+
+    if (exemplo) {
+      return `✨ ${palavra} em inglês é ${traducao}
+
+📚 Example:
+${exemplo.english}
+
+🇧🇷 ${exemplo.portuguese}`;
+    }
+
+    return `✨ ${palavra} em inglês é ${traducao}`;
+  }
+
+  // ==========================
+  // inglês -> português
+  // ==========================
+  if (enPt[palavra]) {
+
+    const traducao =
+      limparTraducao(enPt[palavra]);
+
+    const exemplo =
+      procurarExemplo(palavra);
+
+    if (exemplo) {
+      return `✨ ${palavra} significa ${traducao}
+
+📚 Example:
+${exemplo.english}
+
+🇧🇷 ${exemplo.portuguese}`;
+    }
+
+    return `✨ ${palavra} significa ${traducao}`;
+  }
+
+  // tenta sem acento
+  const semAcento = palavra
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "");
+
+  if (ptEn[semAcento]) {
+    const traducao =
+      limparTraducao(ptEn[semAcento]);
+
+    return `✨ ${palavra} em inglês é ${traducao}`;
+  }
+
+  if (enPt[semAcento]) {
+    const traducao =
+      limparTraducao(enPt[semAcento]);
+
+    return `✨ ${palavra} significa ${traducao}`;
+  }
+
   return null;
 }
 
