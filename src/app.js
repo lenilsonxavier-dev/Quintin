@@ -122,6 +122,52 @@ function procurarNoDicionario(texto) {
       .split(/[;,]/)[0]
       .trim();
   }
+// ==========================
+// FRASE (várias palavras)
+// ==========================
+if (palavra.includes(" ")) {
+
+  const palavras =
+    palavra.split(/\s+/);
+
+  const ignorar = [
+    "de", "do", "da",
+    "dos", "das"
+  ];
+
+  const traduzidas =
+    palavras.map(p => {
+
+      if (ignorar.includes(p))
+        return "";
+
+      const semAcento = p
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "");
+
+      let traducao =
+        ptEn[p] ||
+        ptEn[semAcento] ||
+        enPt[p] ||
+        enPt[semAcento] ||
+        p;
+
+      traducao =
+        limparTraducao(traducao);
+
+      // remove sujeira residual
+      traducao = traducao
+        .replace(/^.*?:\s*/, "")
+        .replace(/\b(n|v|adj|adv)\b/gi, "")
+        .trim();
+
+      return traducao || p;
+    });
+
+  return `✨ ${traduzidas
+    .filter(Boolean)
+    .join(" ")}`;
+}
 
   // procura frase exemplo
   function procurarExemplo(p) {
