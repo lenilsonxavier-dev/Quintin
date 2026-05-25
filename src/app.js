@@ -11,6 +11,23 @@ let ptEn = {};
 let enPt = {};
 let exemplos = [];
 
+// ========================================
+// FRASES ESPECIAIS (Tradução completa)
+// ========================================
+const FRASES_ESPECIAIS = {
+   "mamae eu te amo": "Mom, I love you ❤️",
+   "eu te amo": "I love you ❤️",
+   "bom dia": "Good morning ☀️",
+   "boa tarde": "Good afternoon 🌅",
+   "boa noite": "Good night 🌙",
+   "como vai voce": "How are you? 😊",
+   "tudo bem": "Everything is fine ✨",
+   "ate logo": "See you later 👋",
+   "parabens": "Congratulations 🎉",
+   "obrigado": "Thank you 🙏",
+   "de nada": "You're welcome 💛"
+};
+
 async function carregarDicionarios() {
   try {
     const [enRes, ptRes] = await Promise.all([
@@ -68,6 +85,19 @@ async function carregarExemplos() {
   }
 }
 
+// ========================================
+// FUNÇÃO CORRETA DE LIMPEZA (FIX)
+// ========================================
+function limparTexto(texto) {
+  if (!texto) return "";
+  return texto
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "") // remove acentos corretamente
+    .replace(/[?.!,:;]/g, '')
+    .trim();
+}
+
 function limparTraducao(txt) {
   if (!txt) return "";
   return txt
@@ -87,49 +117,79 @@ function procurarExemplo(palavra) {
 }
 
 // ========================================
-// FASE 1 & 2: DETECTOR DE INTENTO
+// DETECTOR DE INTENÇÃO MELHORADO (FIX)
 // ========================================
-function extrairTermoParaTraducao(texto) {
-  texto = texto.toLowerCase().trim();
+function ehPedidoTraducao(texto) {
+  const textoLimpo = limparTexto(texto);
   
-  const padroes = [
-    /como se diz\s+(.+?)(?:\s+em inglês|\s+em ingles|$)/i,
-    /como se diz\s+(.+)/i,
-    /traduz(?:ir)?\s+(.+)/i,
-    /o que significa\s+(.+)/i,
-    /what(?:'s| is)\s+(.+)/i,
-    /how do you say\s+(.+)/i
-  ];
-  
-  for (const padrao of padroes) {
-    const match = texto.match(padrao);
-    if (match && match[1]) {
-      return match[1]
-        .replace(/[?.!,:]/g, '')
-        .replace(/em inglês|em ingles|in english/gi, '')
-        .trim();
-    }
-  }
-  
-  return null;
-}
-
-function detectarIntento(texto) {
-  texto = texto.toLowerCase().trim();
-
-  // Tradução de palavra ou frase
-  if (
-    texto.includes("como se diz") ||
+  return (
+    textoLimpo.includes("como se diz") ||
+    textoLimpo.includes("como se diz") ||
+    textoLimpo.includes("em ingles") ||
+    textoLimpo.includes("in english") ||
+    textoLimpo.includes("traduz") ||
+    textoLimpo.includes("translate") ||
     texto.includes("em inglês") ||
-    texto.includes("em ingles") ||
-    texto.includes("traduz") ||
     texto.includes("o que significa") ||
     texto.includes("what means") ||
     texto.includes("how do you say")
-  ) {
+  );
+}
+
+function extrairTermoParaTraducao(texto) {
+  const textoOriginal = texto;
+  texto = texto.toLowerCase();
+  
+  // Remove os padrões de pergunta
+  const padroesRemover = [
+    /como se diz\s+/i,
+    /traduz(?:ir)?\s+/i,
+    /o que significa\s+/i,
+    /what(?:'s| is)\s+/i,
+    /how do you say\s+/i,
+    /em inglês\s*/i,
+    /em ingles\s*/i,
+    /in english\s*/i,
+    /\?$/,
+    /\.$/
+  ];
+  
+  let termo = texto;
+  for (const padrao of padroesRemover) {
+    termo = termo.replace(padrao, '');
+  }
+  
+  termo = termo.trim();
+  
+  // Se ainda tiver palavras como "em inglês" no final, remove
+  termo = termo.replace(/\s+em inglês$/i, '');
+  termo = termo.replace(/\s+em ingles$/i, '');
+  termo = termo.replace(/\s+in english$/i, '');
+  
+  console.log("🔍 Termo extraído:", termo);
+  return termo || textoOriginal;
+}
+
+function detectarIntento(texto) {
+  const textoLimpo = limparTexto(texto);
+
+  // Verifica frase especial primeiro
+  if (FRASES_ESPECIAIS[textoLimpo]) {
+    return "traducao_frase_especial";
+  }
+
+  // Tradução de palavra ou frase
+  if (ehPedidoTraducao(texto)) {
     const termo = extrairTermoParaTraducao(texto);
     
-    if (termo && termo.trim().includes(" ")) {
+    // Verifica se o termo é uma frase especial
+    const termoLimpo = limparTexto(termo);
+    if (FRASES_ESPECIAIS[termoLimpo]) {
+      return "traducao_frase_especial";
+    }
+    
+    // Verifica se é uma frase (tem espaços)
+    if (termo && termo.includes(" ")) {
       return "traducao_frase";
     }
     
@@ -163,7 +223,62 @@ function detectarIntento(texto) {
 }
 
 // ========================================
-// FASE 3: RESPONDEDORES ESPECIALIZADOS
+// TRADUÇÃO DE FRASES (FIX)
+// ========================================
+function traduzirFrase(frase) {
+  const fraseLimpa = limparTexto(frase);
+  
+  // Verifica se é uma frase especial
+  if (FRASES_ESPECIAIS[fraseLimpa]) {
+    return FRASES_ESPECIAIS[fraseLimpa];
+  }
+  
+  const palavras = fraseLimpa.split(" ");
+  
+  // Mapa de palavras comuns
+  const mapaFixos = {
+    "eu": "I", "voce": "you", "você": "you", 
+    "ele": "he", "ela": "she", "nos": "we", "nós": "we",
+    "eles": "they", "elas": "they",
+    "me": "me", "te": "you", "se": "yourself",
+    "um": "a", "uma": "a", "o": "the", "a": "the",
+    "para": "to", "por": "for", "com": "with",
+    "e": "and", "ou": "or", "mas": "but",
+    "muito": "very", "pouco": "little",
+    "bom": "good", "ruim": "bad",
+    "grande": "big", "pequeno": "small"
+  };
+  
+  const palavrasTraduzidas = palavras.map(palavra => {
+    if (!palavra) return "";
+    
+    // Verifica no mapa fixo
+    if (mapaFixos[palavra]) {
+      return mapaFixos[palavra];
+    }
+    
+    // Verifica no dicionário
+    const traducao = ptEn[palavra];
+    if (traducao) {
+      const traducaoLimpa = limparTraducao(traducao);
+      // Pega apenas a primeira palavra da tradução
+      return traducaoLimpa.split(" ")[0];
+    }
+    
+    return palavra;
+  });
+  
+  // Capitaliza primeira letra
+  let resultado = palavrasTraduzidas.join(" ");
+  if (resultado) {
+    resultado = resultado.charAt(0).toUpperCase() + resultado.slice(1);
+  }
+  
+  return resultado;
+}
+
+// ========================================
+// RESPONDEDORES ESPECIALIZADOS
 // ========================================
 
 function pegarAleatorio(array) {
@@ -185,51 +300,51 @@ function responderPalavra(texto) {
   ]);
 }
 
-// RESPONDER FRASE
+// RESPONDER FRASE (MELHORADO)
 function responderFrase(texto) {
   const termo = extrairTermoParaTraducao(texto) || texto;
+  const termoLimpo = limparTexto(termo);
   
-  // Tenta tradução palavra por palavra primeiro
-  const palavras = termo.toLowerCase().trim().split(/\s+/);
-  const mapaFixos = {
-    "eu": "i", "você": "you", "voce": "you", "ele": "he", "ela": "she",
-    "nós": "we", "nos": "we", "eles": "they",
-    "amo": "love", "gosto": "like", "quero": "want", "tenho": "have",
-    "sou": "am", "é": "is", "esta": "is", "está": "is", "te": "you",
-    "me": "me", "uma": "a", "um": "a", "o": "the", "a": "the"
-  };
-
-  const traduzidas = palavras.map(p => {
-    p = p.toLowerCase().trim();
-    if (!p) return "";
-    
-    if (mapaFixos[p]) return mapaFixos[p];
-    
-    const semAcento = p.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-    let traducao = ptEn[p] || ptEn[semAcento];
-    
-    if (traducao) {
-      traducao = limparTraducao(traducao);
-      const palavrasLimpas = traducao.split(/\s+/);
-      return palavrasLimpas[palavrasLimpas.length - 1];
-    }
-    
-    return p;
-  });
-
-  const resultado = traduzidas.filter(Boolean).join(" ");
-  
-  if (resultado && resultado !== termo && !resultado.includes("undefined")) {
-    return `✨ ${resultado}`;
+  // Tenta frase especial primeiro
+  if (FRASES_ESPECIAIS[termoLimpo]) {
+    return `✨ ${FRASES_ESPECIAIS[termoLimpo]}`;
   }
   
-  // Fallback pedagógico para frases complexas
+  // Tenta tradução completa
+  const traducaoCompleta = traduzirFrase(termo);
+  
+  // Verifica se a tradução é diferente do original
+  if (traducaoCompleta && traducaoCompleta !== termo && !traducaoCompleta.includes("undefined")) {
+    return `✨ ${traducaoCompleta}`;
+  }
+  
+  // Fallback para frases complexas
   return pegarAleatorio([
-    "🦉 I'm still learning complete sentences! ✨\n\nCan you try a simpler sentence?",
-    "🌟 Let's learn word by word first!\n\nHow do you say 'cat' in English?",
-    "🎯 Great try! Let me help:\n\nTry separating into smaller parts.",
-    "💪 Learning step by step!\n\nCan you ask with 'Como se diz [palavra]?'"
+    "🦁 Let me help you!\n\nTry separating: 'Como se diz [palavra] em inglês?'",
+    "🌟 Great question!\n\nLet's learn word by word first.\n\nWhich word do you want to know?",
+    "📚 Learning complete sentences takes practice!\n\nTry asking about one word at a time. 💪"
   ]);
+}
+
+// RESPONDER FRASE ESPECIAL
+function responderFraseEspecial(texto) {
+  const textoLimpo = limparTexto(texto);
+  
+  // Tenta encontrar a frase especial diretamente
+  if (FRASES_ESPECIAIS[textoLimpo]) {
+    return `✨ ${FRASES_ESPECIAIS[textoLimpo]}`;
+  }
+  
+  // Extrai termo e tenta novamente
+  const termo = extrairTermoParaTraducao(texto);
+  const termoLimpo = limparTexto(termo);
+  
+  if (FRASES_ESPECIAIS[termoLimpo]) {
+    return `✨ ${FRASES_ESPECIAIS[termoLimpo]}`;
+  }
+  
+  // Tenta tradução palavra por palavra como fallback
+  return responderFrase(texto);
 }
 
 // RESPONDER CONHECIMENTO
@@ -281,6 +396,9 @@ function respostaControlada(pergunta) {
   const tipo = detectarIntento(pergunta);
   
   switch(tipo) {
+    case "traducao_frase_especial":
+      return responderFraseEspecial(pergunta);
+      
     case "traducao_palavra":
       return responderPalavra(pergunta);
       
@@ -302,9 +420,9 @@ function respostaControlada(pergunta) {
 // FUNÇÃO ORIGINAL PROcurarNoDicionario (REFATORADA)
 // ========================================
 function procurarNoDicionario(texto) {
-  texto = texto.toLowerCase().trim();
-
-  let palavra = texto
+  const textoLimpo = limparTexto(texto);
+  
+  let palavra = textoLimpo
     .replace(/quinti/g, "")
     .replace(/como se diz/g, "")
     .replace(/o que significa/g, "")
@@ -316,7 +434,6 @@ function procurarNoDicionario(texto) {
     .replace(/em ingles/g, "")
     .replace(/in english/g, "")
     .replace(/\be\b/g, "")
-    .replace(/[?.!,:]/g, "")
     .trim();
 
   console.log("Palavra limpa:", palavra);
@@ -343,19 +460,15 @@ function procurarNoDicionario(texto) {
     return `✨ ${palavra} significa ${traducao}`;
   }
 
-  // tenta sem acento
-  const semAcento = palavra
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "");
-
-  if (ptEn[semAcento]) {
-    const traducao = limparTraducao(ptEn[semAcento]);
-    return `✨ ${palavra} em inglês é ${traducao}`;
+  // tenta com remoção de acentos (já foi feito pelo limparTexto)
+  if (ptEn[palavra]) {
+    const traducao = limparTraducao(ptEn[palavra]);
+    return `✨ ${texto} em inglês é ${traducao}`;
   }
 
-  if (enPt[semAcento]) {
-    const traducao = limparTraducao(enPt[semAcento]);
-    return `✨ ${palavra} significa ${traducao}`;
+  if (enPt[palavra]) {
+    const traducao = limparTraducao(enPt[palavra]);
+    return `✨ ${texto} significa ${traducao}`;
   }
 
   return null;
