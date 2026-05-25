@@ -573,29 +573,86 @@ const intencoes = [
 ];
 
 // ========================================
-// MÓDULO DE TEXTO PARA FALA (SPEECH)
+// TEXTO PARA FALA (COM VOZ FEMININA + VELOCIDADE AJUSTADA)
 // ========================================
 let speechEnabled = true;
-const btnSpeaker = document.getElementById("btnSpeaker");
+let vozFeminina = null;
 
-if (btnSpeaker) {
-  btnSpeaker.addEventListener("click", () => {
-    speechEnabled = !speechEnabled;
-    btnSpeaker.textContent = speechEnabled ? "🔊" : "🔇";
-  });
+// Função para carregar a melhor voz feminina em português
+function carregarVozFeminina() {
+    return new Promise((resolve) => {
+        if (!window.speechSynthesis) {
+            resolve(null);
+            return;
+        }
+        // Aguarda as vozes serem carregadas
+        let vozes = window.speechSynthesis.getVoices();
+        if (vozes.length === 0) {
+            window.speechSynthesis.onvoiceschanged = () => {
+                vozes = window.speechSynthesis.getVoices();
+                const voz = encontrarMelhorVozFeminina(vozes);
+                resolve(voz);
+            };
+        } else {
+            const voz = encontrarMelhorVozFeminina(vozes);
+            resolve(voz);
+        }
+    });
+}
+
+function encontrarMelhorVozFeminina(vozes) {
+    // Prioridades:
+    // 1. Voz feminina Google Português do Brasil (ex: "Google UK English Female" ou "Google português do Brasil feminina")
+    // 2. Microsoft Maria (Windows)
+    // 3. Qualquer voz com 'female' no nome e idioma pt-BR
+    // 4. Qualquer voz pt-BR
+    // 5. Voz feminina em inglês (fallback)
+    const prioridades = [
+        (v) => v.lang === 'pt-BR' && v.name.toLowerCase().includes('female'),
+        (v) => v.lang === 'pt-BR' && v.name.toLowerCase().includes('google'),
+        (v) => v.lang === 'pt-BR' && v.name.toLowerCase().includes('maria'),
+        (v) => v.lang === 'pt-BR',
+        (v) => v.name.toLowerCase().includes('female') && v.lang.startsWith('pt'),
+        (v) => v.name.toLowerCase().includes('google') && v.lang.startsWith('pt'),
+        (v) => v.name.toLowerCase().includes('female')
+    ];
+    for (const criterio of prioridades) {
+        const encontrada = vozes.find(criterio);
+        if (encontrada) return encontrada;
+    }
+    return vozes.find(v => v.lang.startsWith('pt')) || vozes[0] || null;
 }
 
 function falarTexto(texto) {
-  if (!speechEnabled) return;
-  if (!window.speechSynthesis) return;
-  let textoLimpo = texto.replace(/[*_`~]/g, "").replace(/[\u{1F600}-\u{1F6FF}]/gu, "");
-  const utterance = new SpeechSynthesisUtterance(textoLimpo);
-  utterance.lang = "pt-BR";
-  utterance.rate = 0.9;
-  utterance.pitch = 1.1;
-  window.speechSynthesis.cancel();
-  window.speechSynthesis.speak(utterance);
+    if (!speechEnabled) return;
+    if (!window.speechSynthesis) return;
+    
+    // Remove emojis e markdown para leitura limpa
+    let textoLimpo = texto.replace(/[*_`~]/g, '').replace(/[\u{1F600}-\u{1F6FF}]/gu, '');
+    
+    const utterance = new SpeechSynthesisUtterance(textoLimpo);
+    utterance.lang = 'pt-BR';
+    utterance.rate = 1.05;    // Velocidade: 1.0 é normal, 1.05 é um pouco mais rápida (antes 0.9)
+    utterance.pitch = 1.2;     // Tom um pouco mais agudo (ajuda a soar mais feminino/natural)
+    
+    // Usa a voz feminina carregada (se disponível)
+    if (vozFeminina) {
+        utterance.voice = vozFeminina;
+    }
+    
+    window.speechSynthesis.cancel();
+    window.speechSynthesis.speak(utterance);
 }
+
+// Carrega a voz feminina assim que a página iniciar
+carregarVozFeminina().then(voz => {
+    if (voz) {
+        vozFeminina = voz;
+        console.log(`✅ Voz feminina carregada: ${voz.name} (${voz.lang})`);
+    } else {
+        console.warn('⚠️ Nenhuma voz feminina encontrada, usando padrão do sistema.');
+    }
+});
 
 // ========================================
 // UI e EVENTOS
