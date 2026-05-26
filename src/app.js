@@ -746,5 +746,5 @@ window.addEventListener("DOMContentLoaded", () => {
   } catch (e) {
     console.error(e);
   }
-  adicionarMensagem("🦉 Hello!\n\nI am Quinti ✨\n\nReady for English Lessons?\n\n🔊, "bot");
+  adicionarMensagem("🦉 Hello!\n\nI am Quinti ✨\n\nReady for English Lessons?\n\n🔊", "bot");
 })();
