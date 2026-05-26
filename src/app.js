@@ -570,26 +570,46 @@ const intencoes = [
 ];
 
 // ========================================
-// MÓDULO DE TEXTO PARA FALA (SPEECH) - CORRIGIDO
+// MÓDULO DE VOZ (COM TOGGLER FUNCIONAL)
 // ========================================
 let speechEnabled = true;
 let vozFeminina = null;
 
-// Função para carregar a melhor voz feminina em português
+// Função para alternar o estado e o ícone
+function toggleSpeaker() {
+    speechEnabled = !speechEnabled;
+    const btn = document.getElementById("btnSpeaker");
+    if (btn) {
+        btn.textContent = speechEnabled ? "🔊" : "🔇";
+        console.log(`🦉 Voz ${speechEnabled ? "ativada" : "desativada"}`);
+    }
+}
+
+// Configura o evento de clique (garantindo que o botão já existe)
+document.addEventListener("DOMContentLoaded", () => {
+    const btnSpeaker = document.getElementById("btnSpeaker");
+    if (btnSpeaker) {
+        btnSpeaker.addEventListener("click", toggleSpeaker);
+        btnSpeaker.textContent = speechEnabled ? "🔊" : "🔇";
+        console.log("✅ Botão alto-falante configurado");
+    } else {
+        console.warn("⚠️ Botão #btnSpeaker não encontrado");
+    }
+});
+
+// Carrega a melhor voz feminina disponível
 async function carregarVozFeminina() {
     if (!window.speechSynthesis) return null;
     return new Promise((resolve) => {
-        let vozes = window.speechSynthesis.getVoices();
-        if (vozes.length === 0) {
-            window.speechSynthesis.onvoiceschanged = () => {
-                vozes = window.speechSynthesis.getVoices();
-                const voz = encontrarMelhorVozFeminina(vozes);
-                resolve(voz);
-            };
-        } else {
-            const voz = encontrarMelhorVozFeminina(vozes);
-            resolve(voz);
-        }
+        const obterVoz = () => {
+            const vozes = window.speechSynthesis.getVoices();
+            if (vozes.length === 0) {
+                setTimeout(obterVoz, 50);
+                return;
+            }
+            resolve(encontrarMelhorVozFeminina(vozes));
+        };
+        obterVoz();
     });
 }
 
@@ -599,47 +619,46 @@ function encontrarMelhorVozFeminina(vozes) {
         (v) => v.lang === 'pt-BR' && v.name.toLowerCase().includes('google'),
         (v) => v.lang === 'pt-BR' && v.name.toLowerCase().includes('maria'),
         (v) => v.lang === 'pt-BR',
-        (v) => v.name.toLowerCase().includes('female') && v.lang.startsWith('pt'),
-        (v) => v.name.toLowerCase().includes('google') && v.lang.startsWith('pt'),
-        (v) => v.name.toLowerCase().includes('female')
+        (v) => v.name.toLowerCase().includes('female') && v.lang.startsWith('pt')
     ];
-    for (const criterio of prioridades) {
-        const encontrada = vozes.find(criterio);
-        if (encontrada) return encontrada;
+    for (const test of prioridades) {
+        const found = vozes.find(test);
+        if (found) return found;
     }
-    return vozes.find(v => v.lang.startsWith('pt')) || vozes[0] || null;
+    return vozes.find(v => v.lang.startsWith('pt')) || null;
 }
 
+// Função que fala (só executa se speechEnabled for true)
 function falarTexto(texto) {
-    if (!speechEnabled) return;
+    if (!speechEnabled) {
+        console.log("🔇 Voz desligada – não vou falar");
+        return;
+    }
     if (!window.speechSynthesis) return;
-    
-    let textoLimpo = texto.replace(/[*_`~]/g, '').replace(/[\u{1F600}-\u{1F6FF}]/gu, '');
-    
+
+    // Remove emojis e markdown para leitura limpa
+    let textoLimpo = texto.replace(/[*_`~#]/g, '').replace(/[\u{1F600}-\u{1F6FF}]/gu, '');
     const utterance = new SpeechSynthesisUtterance(textoLimpo);
     utterance.lang = 'pt-BR';
     utterance.rate = 1.05;
     utterance.pitch = 1.2;
-    
-    if (vozFeminina) {
-        utterance.voice = vozFeminina;
-    }
-    
+    if (vozFeminina) utterance.voice = vozFeminina;
+
     window.speechSynthesis.cancel();
     window.speechSynthesis.speak(utterance);
 }
 
-// Inicializa a voz feminina
+// Inicializa a voz assim que possível
 carregarVozFeminina().then(voz => {
     if (voz) {
         vozFeminina = voz;
-        console.log(`✅ Voz feminina carregada: ${voz.name} (${voz.lang})`);
+        console.log(`✅ Voz carregada: ${voz.name} (${voz.lang})`);
     } else {
-        console.warn('⚠️ Nenhuma voz feminina encontrada, usando padrão do sistema.');
+        console.warn("⚠️ Usando voz padrão do sistema");
     }
 });
 
-// ========================================
+   ======================
 // UI e EVENTOS
 // ========================================
 const MAX_HISTORY = 6;
