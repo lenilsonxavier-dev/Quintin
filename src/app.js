@@ -77,7 +77,7 @@ function procurarExemplo(palavra) {
 // ========================================
 // INTEGRAÇÃO COM LIBRETRANSLATE (DOCKER)
 // ========================================
-const LIBRE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/translate';
+const LIBRE_URL = 'http://localhost:5000/translate';
 
 async function traduzirComLibreTranslate(texto, source = 'pt', target = 'en') {
     try {
