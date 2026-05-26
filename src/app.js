@@ -570,19 +570,15 @@ const intencoes = [
 ];
 
 // ========================================
-// TEXTO PARA FALA (COM VOZ FEMININA + VELOCIDADE AJUSTADA)
+// MÓDULO DE TEXTO PARA FALA (SPEECH) - CORRIGIDO
 // ========================================
 let speechEnabled = true;
 let vozFeminina = null;
 
 // Função para carregar a melhor voz feminina em português
-function carregarVozFeminina() {
+async function carregarVozFeminina() {
+    if (!window.speechSynthesis) return null;
     return new Promise((resolve) => {
-        if (!window.speechSynthesis) {
-            resolve(null);
-            return;
-        }
-        // Aguarda as vozes serem carregadas
         let vozes = window.speechSynthesis.getVoices();
         if (vozes.length === 0) {
             window.speechSynthesis.onvoiceschanged = () => {
@@ -598,12 +594,6 @@ function carregarVozFeminina() {
 }
 
 function encontrarMelhorVozFeminina(vozes) {
-    // Prioridades:
-    // 1. Voz feminina Google Português do Brasil (ex: "Google UK English Female" ou "Google português do Brasil feminina")
-    // 2. Microsoft Maria (Windows)
-    // 3. Qualquer voz com 'female' no nome e idioma pt-BR
-    // 4. Qualquer voz pt-BR
-    // 5. Voz feminina em inglês (fallback)
     const prioridades = [
         (v) => v.lang === 'pt-BR' && v.name.toLowerCase().includes('female'),
         (v) => v.lang === 'pt-BR' && v.name.toLowerCase().includes('google'),
@@ -624,15 +614,13 @@ function falarTexto(texto) {
     if (!speechEnabled) return;
     if (!window.speechSynthesis) return;
     
-    // Remove emojis e markdown para leitura limpa
     let textoLimpo = texto.replace(/[*_`~]/g, '').replace(/[\u{1F600}-\u{1F6FF}]/gu, '');
     
     const utterance = new SpeechSynthesisUtterance(textoLimpo);
     utterance.lang = 'pt-BR';
-    utterance.rate = 1.05;    // Velocidade: 1.0 é normal, 1.05 é um pouco mais rápida (antes 0.9)
-    utterance.pitch = 1.2;     // Tom um pouco mais agudo (ajuda a soar mais feminino/natural)
+    utterance.rate = 1.05;
+    utterance.pitch = 1.2;
     
-    // Usa a voz feminina carregada (se disponível)
     if (vozFeminina) {
         utterance.voice = vozFeminina;
     }
@@ -641,7 +629,7 @@ function falarTexto(texto) {
     window.speechSynthesis.speak(utterance);
 }
 
-// Carrega a voz feminina assim que a página iniciar
+// Inicializa a voz feminina
 carregarVozFeminina().then(voz => {
     if (voz) {
         vozFeminina = voz;
