@@ -270,12 +270,30 @@ function detectarIntento(texto) {
     return "traducao_palavra";
   }
 
+  // WH-Questions (Mapeamento específico)
+  if (
+    texto.includes("wh question") ||
+    texto.includes("wh-question") ||
+    texto.includes("perguntas com wh") ||
+    (texto.match(/\b(what|who|where|when|why|how)\b/) && 
+     (texto.includes("significa") || texto.includes("traduz") || texto.includes("como usar") || texto.includes("o que é") || texto.includes("o que sao")))
+  ) {
+    return "wh_questions";
+  }
+
+  // Verbos (Mapeamento para busca no data)
+  if (texto.includes("verbo") || texto.includes("verbs") || texto.includes("conjugar")) {
+    return "verbos";
+  }
+
   // Conteúdo educativo / curiosidade
   if (
     texto.includes("curiosidade") ||
     texto.includes("piada") ||
     texto.includes("conte algo") ||
-    texto.includes("me ensine")
+    texto.includes("me ensine") ||
+    texto.includes("trivia") ||
+    texto.includes("fato")
   ) return "conteudo";
 
   // Explicação gramatical
@@ -294,13 +312,19 @@ function detectarIntento(texto) {
     texto.includes("vamos praticar")
   ) return "pratica";
 
-  // Conversa social
+  // Conversa social (Expandida para camadas conversacionais nível A)
   if (
     texto.match(/\b(hi|hello|hey|olá|oi)\b/i) ||
     texto.includes("como você está") ||
     texto.includes("how are you") ||
     texto.includes("qual seu nome") ||
-    texto.includes("what's your name")
+    texto.includes("what's your name") ||
+    texto.match(/\b(animal|animals|dog|cat|lion|monkey|pet|coruja|pets)\b/i) ||
+    texto.match(/\b(color|colors|blue|red|green|yellow|pink|black|white)\b/i) ||
+    texto.match(/\b(family|mother|father|brother|sister|mom|dad|parent|parents)\b/i) ||
+    texto.match(/\b(happy|sad|tired|hungry|angry|feeling|feelings|sick|excited)\b/i) ||
+    texto.match(/\b(food|pizza|apple|chocolate|banana|eat|delicious|ice cream|cookie)\b/i) ||
+    texto.match(/\b(weather|sunny|rainy|cold|hot|sun|rain|windy|cloudy)\b/i)
   ) return "social";
 
   // Inglês escrito (correção suave)
@@ -382,15 +406,156 @@ async function responderFrase(texto) {
   ]);
 }
 
+// Resposta sobre Verbos usando recursão nos dados locais
+function responderVerbos(pergunta) {
+  const base = window.conhecimentoGlobal;
+  const texto = pergunta.toLowerCase().trim();
+  let verbosEncontrados = [];
+  
+  function buscarVerboRecursivo(obj) {
+    if (!obj || typeof obj !== 'object') return;
+    for (const [key, val] of Object.entries(obj)) {
+      const kLower = key.toLowerCase();
+      if ((kLower.includes('verb') || kLower.includes('verbo')) && typeof val === 'object') {
+        if (Array.isArray(val)) {
+          verbosEncontrados.push(...val);
+        } else {
+          for (const [vName, vData] of Object.entries(val)) {
+            if (typeof vData === 'object') {
+              verbosEncontrados.push({ nome: vName, ...vData });
+            } else {
+              verbosEncontrados.push({ nome: vName, traducao: vData });
+            }
+          }
+        }
+      } else {
+        buscarVerboRecursivo(val);
+      }
+    }
+  }
+  
+  if (base) {
+    buscarVerboRecursivo(base);
+  }
+  
+  if (verbosEncontrados.length > 0) {
+    const verboMencionado = verbosEncontrados.find(v => {
+      const nome = (v.en || v.name || v.english || v.nome || "").toLowerCase();
+      const pt = (v.pt || v.portuguese || v.traducao || "").toLowerCase();
+      return (nome && texto.includes(nome)) || (pt && texto.includes(pt));
+    });
+    
+    if (verboMencionado) {
+      const en = verboMencionado.en || verboMencionado.name || verboMencionado.english || verboMencionado.nome || "Verbo";
+      const pt = verboMencionado.pt || verboMencionado.portuguese || verboMencionado.traducao || "Ação";
+      const exEn = verboMencionado.example_en || verboMencionado.ex_en || verboMencionado.ex || verboMencionado.example || "";
+      const exPt = verboMencionado.example_pt || verboMencionado.ex_pt || verboMencionado.traducao_ex || "";
+      let desc = `✨ Encontrei o verbo *${en}* (${pt}) nos meus arquivos! 🦉\n\n`;
+      if (exEn) {
+        desc += `📚 Exemplo:\n"${exEn}"\n🇧🇷 (${exPt || "Tradução pendente"})\n\n`;
+      }
+      desc += "Que tal tentar criar uma frase divertida com ele? 😉";
+      return desc;
+    }
+    
+    const listaNomes = verbosEncontrados.slice(0, 5).map(v => {
+      const en = v.en || v.name || v.english || v.nome || "";
+      const pt = v.pt || v.portuguese || v.traducao || "";
+      return `• **${en}** (${pt})`;
+    }).filter(Boolean).join("\n");
+    
+    if (listaNomes) {
+      return `📚 Olha só alguns verbos super divertidos que eu encontrei na minha biblioteca:\n\n${listaNomes}\n\nPergunte sobre qualquer um deles ou me diga "prática"! 🦉`;
+    }
+  }
+  
+  return `🦉 Eu adoro verbos! Verbos são ações como **run** (correr), **play** (brincar) e **eat** (comer).\n\nQual dessas ações você quer aprender hoje? Me pergunte! 🌟`;
+}
+
+// Respostas para WH-Questions no nível A
+function responderWhQuestions(pergunta) {
+  const texto = pergunta.toLowerCase().trim();
+  
+  if (texto.includes("what")) {
+    return `🎨 **WHAT** significa **"O que"** ou **"Qual"**.\n\nUsamos para fazer perguntas sobre coisas, objetos ou ações!\n\n👉 Exemplo:\n* "What is your name?" (Qual é o seu nome?)\n* "What is this?" (O que é isso?)\n\nQue tal tentar me perguntar: *"What is your favorite animal?"* 🐶`;
+  }
+  if (texto.includes("who")) {
+    return `👩‍🏫 **WHO** significa **"Quem"**.\n\nUsamos sempre para perguntar sobre pessoas!\n\n👉 Exemplo:\n* "Who is your teacher?" (Quem é seu professor?)\n* "Who is she?" (Quem é ela?)\n\nMe diga: *Who is your favorite superhero?* 🦸‍♂️`;
+  }
+  if (texto.includes("where")) {
+    return `🗺️ **WHERE** significa **"Onde"**.\n\nUsamos para perguntar sobre lugares e localizações!\n\n👉 Exemplo:\n* "Where are you from?" (De onde você é?)\n* "Where is my book?" (Onde está meu livro?)\n\nMe pergunte: *"Where is Quinti?"* 🦉`;
+  }
+  if (texto.includes("when")) {
+    return `📅 **WHEN** significa **"Quando"**.\n\nUsamos para perguntar sobre o tempo, datas ou momentos especiais!\n\n👉 Exemplo:\n* "When is your birthday?" (Quando é seu aniversário?)\n* "When do you study?" (Quando você estuda?)\n\nVocê sabe responder: *When is your birthday?* 🎂`;
+  }
+  if (texto.includes("why")) {
+    return `❓ **WHY** significa **"Por que"** (para fazer perguntas).\n\nUsamos para saber o motivo de algo. E a resposta quase sempre começa com **Because** (Porque)!\n\n👉 Exemplo:\n* "Why are you happy?" (Por que você está feliz?)\n* Resposta: "Because I like English!" (Porque eu gosto de inglês!)\n\nWhy are you studying English today? 😊`;
+  }
+  if (texto.includes("how")) {
+    return `🌟 **HOW** significa **"Como"** ou **"Quanto"** (dependendo de como usamos).\n\nUsamos para saber o estado, modo ou a idade!\n\n👉 Exemplo:\n* "How are you?" (Como você está?)\n* "How old are you?" (Quantos anos você tem?)\n\nLet's practice! Responda para mim: *How are you today?* 😊`;
+  }
+
+  return `🦉 **As "WH- Questions" são palavras mágicas usadas para fazer perguntas em inglês!** 🌟\n\nOlha só a nossa lista de ouro:\n\n1️⃣ **What** (O que / Qual) ➡️ Coisas e ações\n2️⃣ **Who** (Quem) ➡️ Pessoas\n3️⃣ **Where** (Onde) ➡️ Lugares\n4️⃣ **When** (Quando) ➡️ Tempo/datas\n5️⃣ **Why** (Por que) ➡️ Motivo (Responda com *Because*!)\n6️⃣ **How** (Como) ➡️ Modo ou idade\n\nQual delas você quer praticar hoje? Escolha uma ou tente me fazer uma pergunta! 😊`;
+}
+
 function responderConhecimento(texto) {
+  const base = window.conhecimentoGlobal;
+  const textoLower = texto.toLowerCase().trim();
+  let curiosidadesEncontradas = [];
+  
+  function buscarCuriosidadesRecursivo(obj) {
+    if (!obj || typeof obj !== 'object') return;
+    for (const [key, val] of Object.entries(obj)) {
+      const kLower = key.toLowerCase();
+      if ((kLower.includes('curios') || kLower.includes('trivia') || kLower.includes('fact') || kLower.includes('dica') || kLower.includes('piada')) && typeof val === 'object') {
+        if (Array.isArray(val)) {
+          curiosidadesEncontradas.push(...val);
+        } else {
+          for (const [cName, cData] of Object.entries(val)) {
+            if (typeof cData === 'object') {
+              curiosidadesEncontradas.push({ titulo: cName, ...cData });
+            } else {
+              curiosidadesEncontradas.push({ fato: cData });
+            }
+          }
+        }
+      } else {
+        buscarCuriosidadesRecursivo(val);
+      }
+    }
+  }
+  
+  if (base) {
+    buscarCuriosidadesRecursivo(base);
+  }
+  
+  if (curiosidadesEncontradas.length > 0) {
+    let fatoEscolhido = curiosidadesEncontradas.find(c => {
+      const stringified = JSON.stringify(c).toLowerCase();
+      return textoLower.split(/\s+/).some(p => p.length > 3 && stringified.includes(p));
+    });
+    
+    if (!fatoEscolhido) {
+      fatoEscolhido = curiosidadesEncontradas[Math.floor(Math.random() * curiosidadesEncontradas.length)];
+    }
+    
+    if (fatoEscolhido) {
+      const titulo = fatoEscolhido.titulo || fatoEscolhido.title || "Curiosidade Espetacular! 🌟";
+      const fato = fatoEscolhido.fato || fatoEscolhido.fact || fatoEscolhido.text || fatoEscolhido.curiosidade || JSON.stringify(fatoEscolhido);
+      return `🦉 **${titulo}**\n\n${fato}\n\nQue legal, né? Quer aprender outra curiosidade ou prefere praticar inglês? 💪`;
+    }
+  }
+
   const conhecimento = buscarConhecimento(texto);
   if (conhecimento) return conhecimento;
   const glossario = buscarGlossario(texto);
   if (glossario) return glossario;
+  
   return pegarAleatorio([
     "🦉 Sabia que?\n\n🐝 O verbo TO BE é: AM, IS, ARE!\nExemplo: I am happy! ✨",
     "🌟 Curiosidade!\n💪 CAN significa habilidade!\nExemplo: I can swim! 🏊‍♂️",
-    "📚 Aprender inglês é divertido!\nTente: 'Como se diz...' para aprender novas palavras!"
+    "📚 Aprender inglês é divertido!\nTente: 'Como se diz...' para aprender novas palavras!",
+    "🌈 Sabia que na Inglaterra o chá é uma tradição super importante? Eles amam beber chá com leite! ☕"
   ]);
 }
 
@@ -453,6 +618,8 @@ async function respostaControlada(pergunta) {
   switch(tipo) {
     case "traducao_palavra": return await responderPalavra(pergunta);
     case "traducao_frase": return await responderFrase(pergunta);
+    case "wh_questions": return responderWhQuestions(pergunta);
+    case "verbos": return responderVerbos(pergunta);
     case "conteudo": return responderConhecimento(pergunta);
     case "explicacao": return responderExplicacao(pergunta);
     case "pratica": return responderPratica();
@@ -566,7 +733,15 @@ const intencoes = [
   { nome: "who_is_he", padroes: [/who is he/i], respostas: ["👦 He is a boy or a man."] },
   { nome: "what_is_it", padroes: [/what is it/i], respostas: ["📦 It can be an object, animal or thing."] },
   { nome: "what_are_these", padroes: [/what are these/i], respostas: ["📚 These means many things near us!"] },
-  { nome: "thanks", padroes: [/\b(thank|thanks|obrigado|obrigada)\b/i], respostas: ["💛 You're welcome! 🌟"] }
+  { nome: "thanks", padroes: [/\b(thank|thanks|obrigado|obrigada)\b/i], respostas: ["💛 You're welcome! 🌟"] },
+  
+  // Camadas Conversacionais adicionais (Kids Level A)
+  { nome: "animals", padroes: [/\b(animal|animals|dog|cat|lion|monkey|pet|coruja|pets)\b/i], respostas: ["🦁 I love animals! My favorite animal is the owl (coruja) 🦉. What is your favorite animal? A dog 🐶, a cat 🐱, or a lion 🦁?"] },
+  { nome: "colors", padroes: [/\b(color|colors|blue|red|green|yellow|pink|black|white)\b/i], respostas: ["🎨 Colors make the world beautiful! My favorite color is blue 💙. What about you? What's your favorite color?"] },
+  { nome: "family", padroes: [/\b(family|mother|father|brother|sister|mom|dad|parent|parents)\b/i], respostas: ["👨‍👩‍👧‍👦 Family is very important! Do you have a big or small family? Tell me about your brother, sister, mom or dad!"] },
+  { nome: "feelings", padroes: [/\b(happy|sad|tired|hungry|angry|feeling|feelings|sick|excited)\b/i], respostas: ["😊 How do you feel today? I am super happy (feliz) today! Are you happy, sad, or tired?"] },
+  { nome: "food", padroes: [/\b(food|pizza|apple|chocolate|banana|eat|delicious|ice cream|cookie)\b/i], respostas: ["🍕 Yum! Food is delicious! I love eating red apples 🍎. Do you like pizza, chocolate or ice cream? Let me know!"] },
+  { nome: "weather", padroes: [/\b(weather|sunny|rainy|cold|hot|sun|rain|windy|cloudy)\b/i], respostas: ["☀️ The weather is always interesting! Is it sunny (ensolarado), rainy (chuvoso), or cold (frio) where you are today?"] }
 ];
 
 // ========================================
@@ -720,7 +895,7 @@ if (SpeechRecognition && btnMic) {
     console.log("MIC ERROR:", event.error);
     let mensagem = "🎤 Microphone error!";
     if (event.error === "not-allowed") mensagem = "🎤 Please allow microphone access.\nPermita acesso ao microfone ✨";
-    else if (event.error === "no-speech") mensagem = "🎤 I couldn't hear you.\nNão consegui ouvir você ✨";
+    else if (event.error === "no-speech") namespace = "🎤 I couldn't hear you.\nNão consegui ouvir você ✨";
     else if (event.error === "audio-capture") mensagem = "🎤 No microphone detected.\nNenhum microfone encontrado ✨";
     adicionarMensagem(mensagem, "bot");
     btnMic.textContent = "🎤";
@@ -745,6 +920,7 @@ window.addEventListener("DOMContentLoaded", () => {
   if (btnEnviar) btnEnviar.addEventListener("click", (e) => { e.preventDefault(); enviar(); });
   if (inputPergunta) inputPergunta.addEventListener("keydown", (e) => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); enviar(); } });
   if (btnMic && recognition) btnMic.addEventListener("click", (e) => { e.preventDefault(); try { recognition.start(); } catch (err) { console.log(err); } });
+  const btnSpeaker = document.getElementById("btnSpeaker");
   if (btnSpeaker) btnSpeaker.textContent = speechEnabled ? "🔊" : "🔇";
 });
 
