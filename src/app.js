@@ -3,6 +3,7 @@
 // ========================================
 import { carregarConhecimento } from "./data/index.js";
 import { memory } from "./brain/memory.js";
+import nlp from 'compromise';
 
 // ========================================
 // DICIONÁRIOS (Português ↔ Inglês)
@@ -166,6 +167,32 @@ function detectarErroIngles(frase) {
     return 'Dica: não esqueça do sujeito! Ex: "She is happy".';
   }
   return null;
+}
+
+// ========================================
+// CONJUGAÇÃO DE VERBOS COM COMPROMISE
+// ========================================
+function explainVerb(word) {
+  try {
+    // Usa o compromise para conjugar o verbo
+    const result = nlp(word).verbs().conjugate();
+
+    if (!result || !result.length) return null;
+
+    const v = result[0];
+
+    return `
+🌟 Verb: ${word}
+
+Base form: ${v.Infinitive || word}
+Present:   ${v.PresentTense || "-"}
+Past:      ${v.PastTense || "-"}
+Gerund:    ${v.Gerund || "-"}
+`;
+  } catch (err) {
+    console.error("Erro no compromise (conjugação):", err);
+    return null;
+  }
 }
 
 // Mini explicação gramatical
@@ -613,6 +640,38 @@ function fallbackPedagogico() {
 // MOTOR PRINCIPAL
 // ========================================
 async function respostaControlada(pergunta) {
+  // ===== INTERCEPTAÇÃO DE CONJUGAÇÃO =====
+  const texto = pergunta.toLowerCase().trim();
+  if (
+    texto.startsWith("conjugate ") ||
+    texto.startsWith("verb ") ||
+    texto.includes("como conjuga") ||
+    texto.includes("conjugação do verbo") ||
+    texto.includes("conjugue o verbo")
+  ) {
+    // Extrai a palavra alvo
+    let palavra = texto
+      .replace(/^conjugate\s+/i, "")
+      .replace(/^verb\s+/i, "")
+      .replace(/como conjuga\s+/i, "")
+      .replace(/conjugação do verbo\s+/i, "")
+      .replace(/conjugue o verbo\s+/i, "")
+      .trim()
+      .split(/\s+/)[0]; // pega apenas a primeira palavra
+
+    if (palavra) {
+      const resposta = explainVerb(palavra);
+      if (resposta) {
+        return resposta;
+      } else {
+        return `🦉 Não consegui conjugar **${palavra}**. Talvez não seja um verbo em inglês ou seja muito irregular. Tente outro, como *play*, *go*, *eat*.`;
+      }
+    } else {
+      return "🦉 Diga o verbo que deseja conjugar. Exemplo: *conjugate play* ou *como conjuga run*.";
+    }
+  }
+  // ===== FIM DA INTERCEPTAÇÃO =====
+
   const tipo = detectarIntento(pergunta);
   
   switch(tipo) {
