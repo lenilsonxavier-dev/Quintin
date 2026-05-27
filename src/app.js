@@ -203,10 +203,46 @@ function explicarGramatica(tema) {
     "simple past": "Passado simples: verbos regulares terminam em -ed (play → played). Verbos irregulares mudam (go → went). Ex: Yesterday I **played** soccer. ⚽",
     "modal can": "CAN = conseguir/poder. Não muda para he/she (she can). Ex: I can swim. 🏊‍♂️",
     "there is/are": "THERE IS = singular, THERE ARE = plural. Ex: There **is** a cat; There **are** two dogs. 🐶🐶"
+    "advérbio": "🌟 Advérbio é uma palavrinha que explica COMO algo acontece.\n\nExemplo:\n🐇 The rabbit runs FAST!\n(Fast = rápido)\n\nAlguns advérbios:\n✨ quickly = rapidamente\n✨ slowly = devagar\n✨ happily = felizmente",
+
+"adverbio": "🌟 Advérbio é uma palavra que explica COMO algo acontece.\n\nExemplo:\n🐇 The rabbit runs FAST!\n(Fast = rápido)\n\nAlguns advérbios:\n✨ quickly = rapidamente\n✨ slowly = devagar\n✨ happily = felizmente",
+
+"adjetivo": "🎨 Adjetivo é uma palavra que descreve algo ou alguém.\n\nExemplo:\n🐶 A BIG dog\n(BIG = grande)\n\nMais exemplos:\n✨ happy = feliz\n✨ small = pequeno\n✨ beautiful = bonito",
+
+"substantivo": "📦 Substantivo é o nome das coisas, animais, pessoas ou lugares.\n\nExemplo:\n🐱 cat = gato\n🏠 house = casa\n👧 girl = menina",
+
+"verbo": "🏃 Verbo é uma palavra de ação!\n\nExemplo:\n✨ run = correr\n✨ eat = comer\n✨ play = brincar\n\nVerbos mostram o que alguém faz!",
+
+"pronome": "👦 Pronome é uma palavrinha usada no lugar do nome.\n\nExemplo:\n✨ I = eu\n✨ you = você\n✨ he = ele\n✨ she = ela",
+
+"adverbs": "🌟 Adverbs help describe HOW something happens!\n\nExample:\n🐇 The rabbit runs FAST!"
+  
+  "preposição": "🧭 Preposição é uma palavra que mostra lugar, tempo ou posição!\n\nExemplos:\n✨ in = dentro\n✨ on = em cima\n✨ under = embaixo\n\n🐱 The cat is ON the table.\n(O gato está em cima da mesa)",
+
+"preposicao": "🧭 Preposição é uma palavra que mostra lugar, tempo ou posição!\n\nExemplos:\n✨ in = dentro\n✨ on = em cima\n✨ under = embaixo\n\n🐱 The cat is ON the table.\n(O gato está em cima da mesa)",
+
+"artigo": "🍎 Artigo é uma palavra que acompanha o nome das coisas.\n\nEm inglês usamos:\n✨ a = um/uma\n✨ an = um/uma (antes de som de vogal)\n✨ the = o, a, os, as\n\nExemplo:\n🍎 an apple\n🐶 a dog",
+
+"interjeição": "😲 Interjeição é uma palavra usada para mostrar emoção!\n\nExemplos:\n✨ Wow! = Uau!\n✨ Oops! = Ops!\n✨ Yay! = Viva!\n\n😄 Wow! This is fun!",
+
+"interjeicao": "😲 Interjeição é uma palavra usada para mostrar emoção!\n\nExemplos:\n✨ Wow! = Uau!\n✨ Oops! = Ops!\n✨ Yay! = Viva!\n\n😄 Wow! This is fun!",
+
+"conjunção": "🔗 Conjunção é uma palavra que liga palavras ou ideias.\n\nExemplos:\n✨ and = e\n✨ but = mas\n✨ because = porque\n\n🐶 I like dogs AND cats.",
+
+"conjuncao": "🔗 Conjunção é uma palavra que liga palavras ou ideias.\n\nExemplos:\n✨ and = e\n✨ but = mas\n✨ because = porque\n\n🐶 I like dogs AND cats."
   };
   const temaLower = tema.toLowerCase();
-  for (let chave in explicacoes) {
-    if (temaLower.includes(chave)) return explicacoes[chave];
+
+for (let chave in explicacoes) {
+
+  if (
+    temaLower.includes(chave) ||
+    temaLower.includes("o que é " + chave) ||
+    temaLower.includes("o que e " + chave) ||
+    temaLower.includes("me explique " + chave)
+  ) {
+    return explicacoes[chave];
+}
   }
   return "Claro! Me pergunte sobre verb to be, present continuous, simple past, can, there is/are... 🦉";
 }
