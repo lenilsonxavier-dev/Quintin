@@ -195,85 +195,87 @@ Gerund:    ${v.Gerund || "-"}
   }
 }
 
-// Mini explicação gramatical
+// ========================================
+// MINI EXPLICAÇÃO GRAMATICAL (SEM ATIVIDADES)
+// ========================================
 function explicarGramatica(tema) {
+
   const explicacoes = {
-    "verb to be": "O verbo TO BE significa SER ou ESTAR. Conjugação: I am, you are, he/she/it is, we are, they are. Ex: I am happy. 🐝",
-    "present continuous": "Present Continuous = ação acontecendo agora. Formado por verbo to be + verbo com -ing. Ex: I am **eating** an apple. 🍎",
-    "simple past": "Passado simples: verbos regulares terminam em -ed (play → played). Verbos irregulares mudam (go → went). Ex: Yesterday I **played** soccer. ⚽",
-    "modal can": "CAN = conseguir/poder. Não muda para he/she (she can). Ex: I can swim. 🏊‍♂️",
-    "there is/are": "THERE IS = singular, THERE ARE = plural. Ex: There **is** a cat; There **are** two dogs. 🐶🐶"
-    "advérbio": "🌟 Advérbio é uma palavrinha que explica COMO algo acontece.\n\nExemplo:\n🐇 The rabbit runs FAST!\n(Fast = rápido)\n\nAlguns advérbios:\n✨ quickly = rapidamente\n✨ slowly = devagar\n✨ happily = felizmente",
 
-"adverbio": "🌟 Advérbio é uma palavra que explica COMO algo acontece.\n\nExemplo:\n🐇 The rabbit runs FAST!\n(Fast = rápido)\n\nAlguns advérbios:\n✨ quickly = rapidamente\n✨ slowly = devagar\n✨ happily = felizmente",
+    "verb to be":
+      "🐝 O verbo TO BE significa SER ou ESTAR.\n\nExemplo:\n✨ I am happy.\n(Eu estou feliz)\n\nConjugação:\nI am\nYou are\nHe/She is",
 
-"adjetivo": "🎨 Adjetivo é uma palavra que descreve algo ou alguém.\n\nExemplo:\n🐶 A BIG dog\n(BIG = grande)\n\nMais exemplos:\n✨ happy = feliz\n✨ small = pequeno\n✨ beautiful = bonito",
+    "present continuous":
+      "⏰ Present Continuous é uma ação acontecendo AGORA.\n\nUsamos:\n✨ verbo TO BE + verbo com ING\n\nExemplo:\n🍎 I am eating an apple.\n(Eu estou comendo uma maçã)",
 
-"substantivo": "📦 Substantivo é o nome das coisas, animais, pessoas ou lugares.\n\nExemplo:\n🐱 cat = gato\n🏠 house = casa\n👧 girl = menina",
+    "simple past":
+      "📅 Simple Past é o passado.\n\nExemplos:\n✨ play → played\n✨ go → went\n\n⚽ Yesterday I played soccer.",
 
-"verbo": "🏃 Verbo é uma palavra de ação!\n\nExemplo:\n✨ run = correr\n✨ eat = comer\n✨ play = brincar\n\nVerbos mostram o que alguém faz!",
+    "modal can":
+      "💪 CAN significa poder ou conseguir.\n\nExemplo:\n🏊 I can swim.\n(Eu consigo nadar)",
 
-"pronome": "👦 Pronome é uma palavrinha usada no lugar do nome.\n\nExemplo:\n✨ I = eu\n✨ you = você\n✨ he = ele\n✨ she = ela",
+    "there is/are":
+      "📦 THERE IS = uma coisa\n📦 THERE ARE = várias coisas\n\nExemplo:\n🐱 There is a cat.\n🐶🐶 There are two dogs.",
 
-"adverbs": "🌟 Adverbs help describe HOW something happens!\n\nExample:\n🐇 The rabbit runs FAST!"
-  
-  "preposição": "🧭 Preposição é uma palavra que mostra lugar, tempo ou posição!\n\nExemplos:\n✨ in = dentro\n✨ on = em cima\n✨ under = embaixo\n\n🐱 The cat is ON the table.\n(O gato está em cima da mesa)",
+    "advérbio":
+      "🌟 Advérbio é uma palavra que explica COMO algo acontece.\n\nExemplo:\n🐇 The rabbit runs FAST!\n(Fast = rápido)\n\n✨ quickly = rapidamente\n✨ slowly = devagar\n✨ happily = felizmente",
 
-"preposicao": "🧭 Preposição é uma palavra que mostra lugar, tempo ou posição!\n\nExemplos:\n✨ in = dentro\n✨ on = em cima\n✨ under = embaixo\n\n🐱 The cat is ON the table.\n(O gato está em cima da mesa)",
+    "adverbio":
+      "🌟 Advérbio é uma palavra que explica COMO algo acontece.\n\nExemplo:\n🐇 The rabbit runs FAST!\n(Fast = rápido)\n\n✨ quickly = rapidamente\n✨ slowly = devagar\n✨ happily = felizmente",
 
-"artigo": "🍎 Artigo é uma palavra que acompanha o nome das coisas.\n\nEm inglês usamos:\n✨ a = um/uma\n✨ an = um/uma (antes de som de vogal)\n✨ the = o, a, os, as\n\nExemplo:\n🍎 an apple\n🐶 a dog",
+    "adjetivo":
+      "🎨 Adjetivo é uma palavra que descreve algo ou alguém.\n\nExemplo:\n🐶 A BIG dog\n(BIG = grande)\n\n✨ happy = feliz\n✨ small = pequeno\n✨ beautiful = bonito",
 
-"interjeição": "😲 Interjeição é uma palavra usada para mostrar emoção!\n\nExemplos:\n✨ Wow! = Uau!\n✨ Oops! = Ops!\n✨ Yay! = Viva!\n\n😄 Wow! This is fun!",
+    "substantivo":
+      "📦 Substantivo é o nome das coisas, animais, pessoas ou lugares.\n\nExemplo:\n🐱 cat = gato\n🏠 house = casa\n👧 girl = menina",
 
-"interjeicao": "😲 Interjeição é uma palavra usada para mostrar emoção!\n\nExemplos:\n✨ Wow! = Uau!\n✨ Oops! = Ops!\n✨ Yay! = Viva!\n\n😄 Wow! This is fun!",
+    "verbo":
+      "🏃 Verbo é uma palavra de ação!\n\nExemplo:\n✨ run = correr\n✨ eat = comer\n✨ play = brincar\n\nVerbos mostram o que alguém faz.",
 
-"conjunção": "🔗 Conjunção é uma palavra que liga palavras ou ideias.\n\nExemplos:\n✨ and = e\n✨ but = mas\n✨ because = porque\n\n🐶 I like dogs AND cats.",
+    "pronome":
+      "👦 Pronome é uma palavra usada no lugar do nome.\n\nExemplos:\n✨ I = eu\n✨ you = você\n✨ he = ele\n✨ she = ela",
 
-"conjuncao": "🔗 Conjunção é uma palavra que liga palavras ou ideias.\n\nExemplos:\n✨ and = e\n✨ but = mas\n✨ because = porque\n\n🐶 I like dogs AND cats."
+    "preposição":
+      "🧭 Preposição é uma palavra que mostra lugar, tempo ou posição.\n\nExemplos:\n✨ in = dentro\n✨ on = em cima\n✨ under = embaixo\n\n🐱 The cat is ON the table.\n(O gato está em cima da mesa)",
+
+    "preposicao":
+      "🧭 Preposição é uma palavra que mostra lugar, tempo ou posição.\n\nExemplos:\n✨ in = dentro\n✨ on = em cima\n✨ under = embaixo\n\n🐱 The cat is ON the table.\n(O gato está em cima da mesa)",
+
+    "artigo":
+      "🍎 Artigo acompanha o nome das coisas.\n\nEm inglês usamos:\n✨ a = um/uma\n✨ an = um/uma (antes de som de vogal)\n✨ the = o, a, os, as\n\nExemplo:\n🍎 an apple\n🐶 a dog",
+
+    "interjeição":
+      "😲 Interjeição mostra emoção!\n\nExemplos:\n✨ Wow! = Uau!\n✨ Oops! = Ops!\n✨ Yay! = Viva!\n\n😄 Wow! This is fun!",
+
+    "interjeicao":
+      "😲 Interjeição mostra emoção!\n\nExemplos:\n✨ Wow! = Uau!\n✨ Oops! = Ops!\n✨ Yay! = Viva!\n\n😄 Wow! This is fun!",
+
+    "conjunção":
+      "🔗 Conjunção liga palavras ou ideias.\n\nExemplos:\n✨ and = e\n✨ but = mas\n✨ because = porque\n\n🐶 I like dogs AND cats.",
+
+    "conjuncao":
+      "🔗 Conjunção liga palavras ou ideias.\n\nExemplos:\n✨ and = e\n✨ but = mas\n✨ because = porque\n\n🐶 I like dogs AND cats."
+
   };
+
   const temaLower = tema.toLowerCase();
 
-for (let chave in explicacoes) {
+  for (let chave in explicacoes) {
 
-  if (
-    temaLower.includes(chave) ||
-    temaLower.includes("o que é " + chave) ||
-    temaLower.includes("o que e " + chave) ||
-    temaLower.includes("me explique " + chave)
-  ) {
-    return explicacoes[chave];
-}
+    if (
+      temaLower.includes(chave) ||
+      temaLower.includes("o que é " + chave) ||
+      temaLower.includes("o que e " + chave) ||
+      temaLower.includes("me explique " + chave)
+    ) {
+      return explicacoes[chave];
+    }
+
   }
-  return "Claro! Me pergunte sobre verb to be, present continuous, simple past, can, there is/are... 🦉";
+
+  return "🦉 Posso explicar gramática! Pergunte sobre:\n\n✨ verbo\n✨ substantivo\n✨ adjetivo\n✨ advérbio\n✨ artigo\n✨ pronome\n✨ preposição\n✨ interjeição\n✨ conjunção";
 }
 
-// Prática guiada (atividades interativas)
-let atividadeAtiva = null;
-
-function gerarAtividade() {
-  const atividades = [
-    { pergunta: "Complete: I ____ a student.", respostaEsperada: "am", dica: "O verbo to be para I é 'am'." },
-    { pergunta: "Traduza: 'Eu gosto de gatos'", respostaEsperada: "I like cats", dica: "Use 'I like' + plural." },
-    { pergunta: "Passe para o passado: 'I play soccer'", respostaEsperada: "I played soccer", dica: "Acrescente -ed ao verbo." },
-    { pergunta: "Complete: She ___ to music every day. (listen/listens)", respostaEsperada: "listens", dica: "He/She/It - acrescenta 's' ou 'es'." }
-  ];
-  const escolhida = atividades[Math.floor(Math.random() * atividades.length)];
-  atividadeAtiva = escolhida;
-  return `🎯 Vamos praticar!\n\n${escolhida.pergunta}\n\nMe diga sua resposta! 🦉\n(Dica: ${escolhida.dica})`;
-}
-
-function verificarRespostaAtividade(respostaUsuario) {
-  if (!atividadeAtiva) return null;
-  const respostaNorm = respostaUsuario.toLowerCase().trim();
-  const esperadaNorm = atividadeAtiva.respostaEsperada.toLowerCase().trim();
-  if (respostaNorm === esperadaNorm) {
-    const incentivo = mensagensIncentivo[Math.floor(Math.random() * mensagensIncentivo.length)];
-    atividadeAtiva = null;
-    return `✅ Correto! ${incentivo}\n\nQue tal outra atividade? Diga "prática" ou "atividade".`;
-  } else {
-    return `❌ Quase lá! Tente novamente. Dica: ${atividadeAtiva.dica}`;
-  }
-}
 
 function registrarInteracao(tipo, conteudo) {
   ultimoAssunto = { tipo, conteudo, timestamp: Date.now() };
