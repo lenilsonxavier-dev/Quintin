@@ -4,7 +4,6 @@
 import { carregarConhecimento } from "./data/index.js";
 import { memory } from "./brain/memory.js";
 import nlp from 'https://cdn.skypack.dev/compromise';
-import { jsllm7 } from 'https://cdn.jsdelivr.net/npm/jsllm7/jsllm7.js';
 
 // ========================================
 // PERSONALIDADE DO QUINTI (para IA)
