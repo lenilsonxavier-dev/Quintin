@@ -343,9 +343,14 @@ function detectarIntento(texto) {
     return "wh_questions";
   }
 
-  // Verbos (Mapeamento para busca no data)
-  if (texto.includes("verbo") || texto.includes("verbs") || texto.includes("conjugar")) {
-    return "verbos";
+  // Conjugação de verbos (substitui o antigo "verbos")
+  if (
+    texto.includes("conjugue") ||
+    texto.includes("conjugar") ||
+    texto.includes("conjugate") ||
+    texto.startsWith("verbo ")
+  ) {
+    return "conjugacao";
   }
 
   // Conteúdo educativo / curiosidade
@@ -403,7 +408,12 @@ async function responderPalavra(texto) {
   let traducao = await traduzirComLibreTranslate(termo);
   if (!traducao) traducao = procurarNoDicionario(termo);
   
-  if (traducao) {
+  if (
+    traducao &&
+    traducao.trim() &&
+    traducao !== termo &&
+    traducao !== "​"
+  ) {
     const exemplo = procurarExemplo(traducao);
     let resposta = `✨ *${termo}* em inglês é **${traducao}**`;
     if (exemplo) resposta += `\n\n📚 Exemplo:\n${exemplo.english}\n🇧🇷 ${exemplo.portuguese}`;
@@ -691,6 +701,27 @@ async function respostaControlada(pergunta) {
   }
   // ===== FIM DA INTERCEPTAÇÃO =====
 
+  // ===== SIGNIFICADO DE VERBO (atalho) =====
+  const textoPergunta = pergunta.toLowerCase().trim();
+  if (
+    textoPergunta.includes("o que significa o verbo") ||
+    (textoPergunta.includes("verbo") && textoPergunta.includes("significa"))
+  ) {
+    let verbo = textoPergunta
+      .replace("o que significa o verbo", "")
+      .replace("verbo", "")
+      .replace("significa", "")
+      .replace("?", "")
+      .trim();
+    // Extrai a primeira palavra (o verbo)
+    verbo = verbo.split(/\s+/)[0];
+    const significado = procurarNoDicionario(verbo);
+    if (significado) {
+      return `🌟 O verbo **${verbo}** significa:\n\n${significado}`;
+    }
+  }
+  // ===== FIM DO ATALHO =====
+
   const tipo = detectarIntento(pergunta);
   
   switch(tipo) {
@@ -705,6 +736,22 @@ async function respostaControlada(pergunta) {
     case "correcao_ingles": return responderCorrecaoIngles(pergunta);
     case "elogio_ingles": return responderElogioIngles(pergunta);
     case "social": return responderSocial(pergunta);
+    case "conjugacao":
+      // Extrair o verbo da pergunta
+      let verbToConjugate = pergunta.toLowerCase().trim()
+        .replace(/conjugue\s+/i, "")
+        .replace(/conjugar\s+/i, "")
+        .replace(/conjugate\s+/i, "")
+        .replace(/^verbo\s+/i, "")
+        .trim()
+        .split(/\s+/)[0];
+      if (verbToConjugate) {
+        const conjugationResult = explainVerb(verbToConjugate);
+        if (conjugationResult) return conjugationResult;
+        else return `🦉 Não consegui conjugar **${verbToConjugate}**. Tente outro verbo como *play*, *go*, *eat*.`;
+      } else {
+        return "🦉 Diga o verbo que deseja conjugar. Exemplo: *conjugate play* ou *verbo run*.";
+      }
     default: return fallbackPedagogico();
   }
 }
