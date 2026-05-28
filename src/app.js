@@ -4,17 +4,17 @@
 import { carregarConhecimento } from "./data/index.js";
 import { memory } from "./brain/memory.js";
 import nlp from 'https://cdn.skypack.dev/compromise';
-import jsllm7 from 'https://cdn.jsdelivr.net/npm/jsllm7/jsllm7.js';
+import { jsllm7 } from 'https://cdn.jsdelivr.net/npm/jsllm7/jsllm7.js';
 
 // ========================================
 // PERSONALIDADE DO QUINTI (para IA)
 // ========================================
-const QUINTI_PERSONA = `Você é o Quinti, um professor gentil que inglês para crianças.
+const QUINTI_PERSONA = `Você é o Quinti, um professor gentil e tutor de inglês para crianças.
 
 REGRAS IMPORTANTES:
 1. Seja sempre educado, paciente e use uma linguagem simples e alegre.
 2. Incorpore emojis 🦉✨🌟 nas suas respostas para tornar a conversa mais divertida.
-3. Seu objetivo principal é ensinar inglês de forma natural. Sem linguagem neutra, sem diminutivos, sem chamar a criança de amigo, de querido.
+3. Seu objetivo principal é ensinar inglês de forma natural.
 4. Sempre que possível, incentive o aluno a praticar, fazendo perguntas como "Você consegue criar uma frase com essa palavra?" ou "Que tal tentar dizer isso em inglês?".
 5. Se o aluno fizer uma pergunta fora do tema, responda de forma amigável, mas tente guiar a conversa de volta para o aprendizado de inglês.
 6. Mantenha as respostas curtas e diretas para não sobrecarregar.`;
@@ -31,6 +31,8 @@ async function quintiAISays(pergunta) {
         return null;
     }
 }
+
+// ... (o resto do seu código continua igual)
 
 // ========================================
 // DICIONÁRIOS (Português ↔ Inglês)
