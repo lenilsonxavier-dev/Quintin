@@ -76,20 +76,16 @@ function procurarExemplo(palavra) {
 }
 
 // ========================================
-// INTEGRAÇÃO COM LIBRETRANSLATE (DOCKER)
+// INTEGRAÇÃO COM TRADUÇÃO (MyMemory)
 // ========================================
-const LIBRE_URL = 'http://localhost:5000/translate';
-
 async function traduzirComLibreTranslate(texto, source = 'pt', target = 'en') {
     try {
-        // Usamos a API do MyMemory com um email de contato para melhorar o limite
         const url = `https://api.mymemory.translated.net/get?q=${encodeURIComponent(texto)}&langpair=${source}|${target}&de=lenilsonxavier@gmail.com`;
         const response = await fetch(url);
         const data = await response.json();
 
         if (data && data.responseData && data.responseData.translatedText) {
             let traducao = data.responseData.translatedText;
-            // O MyMemory devolve a frase original se não achar a tradução, prevenimos isso.
             if (traducao && traducao !== texto) {
                 return traducao;
             }
@@ -103,10 +99,8 @@ async function traduzirComLibreTranslate(texto, source = 'pt', target = 'en') {
 }
 
 // ========================================
-// MÓDULO DE ENCORAJAMENTO, CORREÇÃO, GRAMÁTICA E PRÁTICA
+// MÓDULO DE ENCORAJAMENTO, CORREÇÃO, GRAMÁTICA
 // ========================================
-
-// Banco de mensagens de incentivo
 const mensagensIncentivo = [
   "🌟 Muito bem! Continue assim!",
   "🦉 Você está aprendendo rápido!",
@@ -117,7 +111,6 @@ const mensagensIncentivo = [
   "🌈 Sabia que praticar todo dia faz milagres? Você está no caminho certo!"
 ];
 
-// Sugestões de prática baseadas no último assunto
 let ultimoAssunto = null;
 const sugestoesPratica = {
   saudacao: ["Que tal responder 'How are you?' agora?", "Tente dizer 'Good morning!' para mim."],
@@ -126,7 +119,6 @@ const sugestoesPratica = {
   generico: ["Que tal perguntar 'Como se diz...' para aprender mais?", "Posso te ensinar os números em inglês?"]
 };
 
-// Conjugador verbal simples (presente, passado, futuro)
 function conjugarVerbo(verboInfinitivo, tempo = "presente") {
   const verbosIrregulares = {
     "be": { passado: "was/were", particípio: "been" },
@@ -147,22 +139,18 @@ function conjugarVerbo(verboInfinitivo, tempo = "presente") {
   }
 }
 
-// Detector de erros simples em inglês (frases curtas)
 function detectarErroIngles(frase) {
   const fraseLower = frase.toLowerCase().trim();
   const palavras = fraseLower.split(/\s+/);
-  // Verbo no passado com yesterday/last
   if (palavras.includes("yesterday") || palavras.includes("last")) {
     const verboIndex = palavras.findIndex(p => p === "go" || p === "eat" || p === "play" || p === "run");
     if (verboIndex !== -1 && !palavras[verboIndex].endsWith("ed") && !palavras[verboIndex].match(/went|ate|ran/)) {
       return `Você usou "${palavras[verboIndex]}" com "yesterday". Tente usar o passado: "${conjugarVerbo(palavras[verboIndex], "passado")}". Exemplo: I ${conjugarVerbo(palavras[verboIndex], "passado")} to school yesterday.`;
     }
   }
-  // Verbo to be faltando (ex: "She happy")
   if (fraseLower.match(/^(he|she|it)\s+[a-z]+$/) && !fraseLower.includes(" is ") && !fraseLower.includes(" are ")) {
     return 'Dica: use o verbo "to be"! Ex: "She **is** happy".';
   }
-  // Falta sujeito (ex: "is happy")
   if (fraseLower.match(/^(am|is|are)\s+/) && !fraseLower.match(/^(i|you|he|she|it|we|they)\s+/)) {
     return 'Dica: não esqueça do sujeito! Ex: "She is happy".';
   }
@@ -174,13 +162,9 @@ function detectarErroIngles(frase) {
 // ========================================
 function explainVerb(word) {
   try {
-    // Usa o compromise para conjugar o verbo
     const result = nlp(word).verbs().conjugate();
-
     if (!result || !result.length) return null;
-
     const v = result[0];
-
     return `
 🌟 Verb: ${word}
 
@@ -196,86 +180,31 @@ Gerund:    ${v.Gerund || "-"}
 }
 
 // ========================================
-// MINI EXPLICAÇÃO GRAMATICAL (SEM ATIVIDADES)
+// EXPLICAÇÃO GRAMATICAL
 // ========================================
 function explicarGramatica(tema) {
-
   const explicacoes = {
-
-    "verb to be":
-      "🐝 O verbo TO BE significa SER ou ESTAR.\n\nExemplo:\n✨ I am happy.\n(Eu estou feliz)\n\nConjugação:\nI am\nYou are\nHe/She is",
-
-    "present continuous":
-      "⏰ Present Continuous é uma ação acontecendo AGORA.\n\nUsamos:\n✨ verbo TO BE + verbo com ING\n\nExemplo:\n🍎 I am eating an apple.\n(Eu estou comendo uma maçã)",
-
-    "simple past":
-      "📅 Simple Past é o passado.\n\nExemplos:\n✨ play → played\n✨ go → went\n\n⚽ Yesterday I played soccer.",
-
-    "modal can":
-      "💪 CAN significa poder ou conseguir.\n\nExemplo:\n🏊 I can swim.\n(Eu consigo nadar)",
-
-    "there is/are":
-      "📦 THERE IS = uma coisa\n📦 THERE ARE = várias coisas\n\nExemplo:\n🐱 There is a cat.\n🐶🐶 There are two dogs.",
-
-    "advérbio":
-      "🌟 Advérbio é uma palavra que explica COMO algo acontece.\n\nExemplo:\n🐇 The rabbit runs FAST!\n(Fast = rápido)\n\n✨ quickly = rapidamente\n✨ slowly = devagar\n✨ happily = felizmente",
-
-    "adverbio":
-      "🌟 Advérbio é uma palavra que explica COMO algo acontece.\n\nExemplo:\n🐇 The rabbit runs FAST!\n(Fast = rápido)\n\n✨ quickly = rapidamente\n✨ slowly = devagar\n✨ happily = felizmente",
-
-    "adjetivo":
-      "🎨 Adjetivo é uma palavra que descreve algo ou alguém.\n\nExemplo:\n🐶 A BIG dog\n(BIG = grande)\n\n✨ happy = feliz\n✨ small = pequeno\n✨ beautiful = bonito",
-
-    "substantivo":
-      "📦 Substantivo é o nome das coisas, animais, pessoas ou lugares.\n\nExemplo:\n🐱 cat = gato\n🏠 house = casa\n👧 girl = menina",
-
-    "verbo":
-      "🏃 Verbo é uma palavra de ação!\n\nExemplo:\n✨ run = correr\n✨ eat = comer\n✨ play = brincar\n\nVerbos mostram o que alguém faz.",
-
-    "pronome":
-      "👦 Pronome é uma palavra usada no lugar do nome.\n\nExemplos:\n✨ I = eu\n✨ you = você\n✨ he = ele\n✨ she = ela",
-
-    "preposição":
-      "🧭 Preposição é uma palavra que mostra lugar, tempo ou posição.\n\nExemplos:\n✨ in = dentro\n✨ on = em cima\n✨ under = embaixo\n\n🐱 The cat is ON the table.\n(O gato está em cima da mesa)",
-
-    "preposicao":
-      "🧭 Preposição é uma palavra que mostra lugar, tempo ou posição.\n\nExemplos:\n✨ in = dentro\n✨ on = em cima\n✨ under = embaixo\n\n🐱 The cat is ON the table.\n(O gato está em cima da mesa)",
-
-    "artigo":
-      "🍎 Artigo acompanha o nome das coisas.\n\nEm inglês usamos:\n✨ a = um/uma\n✨ an = um/uma (antes de som de vogal)\n✨ the = o, a, os, as\n\nExemplo:\n🍎 an apple\n🐶 a dog",
-
-    "interjeição":
-      "😲 Interjeição mostra emoção!\n\nExemplos:\n✨ Wow! = Uau!\n✨ Oops! = Ops!\n✨ Yay! = Viva!\n\n😄 Wow! This is fun!",
-
-    "interjeicao":
-      "😲 Interjeição mostra emoção!\n\nExemplos:\n✨ Wow! = Uau!\n✨ Oops! = Ops!\n✨ Yay! = Viva!\n\n😄 Wow! This is fun!",
-
-    "conjunção":
-      "🔗 Conjunção liga palavras ou ideias.\n\nExemplos:\n✨ and = e\n✨ but = mas\n✨ because = porque\n\n🐶 I like dogs AND cats.",
-
-    "conjuncao":
-      "🔗 Conjunção liga palavras ou ideias.\n\nExemplos:\n✨ and = e\n✨ but = mas\n✨ because = porque\n\n🐶 I like dogs AND cats."
-
+    "verb to be": "🐝 O verbo TO BE significa SER ou ESTAR.\n\nExemplo:\n✨ I am happy.\n(Eu estou feliz)\n\nConjugação:\nI am\nYou are\nHe/She is",
+    "present continuous": "⏰ Present Continuous é uma ação acontecendo AGORA.\n\nUsamos: verbo TO BE + verbo com ING\n\nExemplo: I am eating an apple.",
+    "simple past": "📅 Simple Past é o passado.\n\nExemplos: play → played, go → went\nYesterday I played soccer.",
+    "modal can": "💪 CAN significa poder ou conseguir.\nExemplo: I can swim.",
+    "there is/are": "📦 THERE IS = uma coisa, THERE ARE = várias.\nExemplo: There is a cat.",
+    "advérbio": "🌟 Advérbio explica COMO algo acontece.\nExemplo: runs FAST (rápido).",
+    "adjetivo": "🎨 Adjetivo descreve algo: BIG dog.",
+    "substantivo": "📦 Substantivo é nome: cat, house.",
+    "verbo": "🏃 Verbo é ação: run, eat, play.",
+    "pronome": "👦 Pronome substitui nome: I, you, he.",
+    "preposição": "🧭 Preposição mostra lugar: in, on, under.",
+    "artigo": "🍎 Artigo: a, an, the.",
+    "interjeição": "😲 Interjeição mostra emoção: Wow! Oops!",
+    "conjunção": "🔗 Conjunção liga ideias: and, but, because."
   };
-
   const temaLower = tema.toLowerCase();
-
   for (let chave in explicacoes) {
-
-    if (
-      temaLower.includes(chave) ||
-      temaLower.includes("o que é " + chave) ||
-      temaLower.includes("o que e " + chave) ||
-      temaLower.includes("me explique " + chave)
-    ) {
-      return explicacoes[chave];
-    }
-
+    if (temaLower.includes(chave)) return explicacoes[chave];
   }
-
-  return "🦉 Posso explicar gramática! Pergunte sobre:\n\n✨ verbo\n✨ substantivo\n✨ adjetivo\n✨ advérbio\n✨ artigo\n✨ pronome\n✨ preposição\n✨ interjeição\n✨ conjunção";
+  return "🦉 Posso explicar gramática! Pergunte sobre verbo, substantivo, adjetivo, etc.";
 }
-
 
 function registrarInteracao(tipo, conteudo) {
   ultimoAssunto = { tipo, conteudo, timestamp: Date.now() };
@@ -290,13 +219,14 @@ function sugerirPratica() {
 }
 
 // ========================================
-// DETECTOR DE INTENTO (com novas intenções)
+// DETECTOR DE INTENTO (CORRIGIDO)
 // ========================================
 function extrairTermoParaTraducao(texto) {
   texto = texto.toLowerCase().trim();
   const padroes = [
     /como se diz\s+(.+?)(?:\s+em inglês|\s+em ingles|$)/i,
     /como se diz\s+(.+)/i,
+    /traduz(?:ir)?a?\s*:?\s+(.+)/i,   // aceita "traduza:" ou "traduzir:"
     /traduz(?:ir)?\s+(.+)/i,
     /o que significa\s+(.+)/i,
     /what(?:'s| is)\s+(.+)/i,
@@ -332,18 +262,18 @@ function detectarIntento(texto) {
     return "traducao_palavra";
   }
 
-  // WH-Questions (Mapeamento específico)
+  // WH-Questions
   if (
     texto.includes("wh question") ||
     texto.includes("wh-question") ||
     texto.includes("perguntas com wh") ||
     (texto.match(/\b(what|who|where|when|why|how)\b/) && 
-     (texto.includes("significa") || texto.includes("traduz") || texto.includes("como usar") || texto.includes("o que é") || texto.includes("o que sao")))
+     (texto.includes("significa") || texto.includes("traduz") || texto.includes("como usar") || texto.includes("o que é")))
   ) {
     return "wh_questions";
   }
 
-  // Conjugação de verbos (substitui o antigo "verbos")
+  // CONJUGAÇÃO (prioridade alta)
   if (
     texto.includes("conjugue") ||
     texto.includes("conjugar") ||
@@ -353,7 +283,7 @@ function detectarIntento(texto) {
     return "conjugacao";
   }
 
-  // Conteúdo educativo / curiosidade
+  // Conteúdo educativo
   if (
     texto.includes("curiosidade") ||
     texto.includes("piada") ||
@@ -371,7 +301,7 @@ function detectarIntento(texto) {
     texto.includes("como funciona")
   ) return "explicacao";
 
-  // Conversa social (Expandida para camadas conversacionais nível A)
+  // Conversa social
   if (
     texto.match(/\b(hi|hello|hey|olá|oi)\b/i) ||
     texto.includes("como você está") ||
@@ -397,7 +327,7 @@ function detectarIntento(texto) {
 }
 
 // ========================================
-// RESPONDEDORES ESPECIALIZADOS (com incentivos)
+// RESPONDEDORES
 // ========================================
 function pegarAleatorio(array) {
   return array[Math.floor(Math.random() * array.length)];
@@ -408,25 +338,20 @@ async function responderPalavra(texto) {
   let traducao = await traduzirComLibreTranslate(termo);
   if (!traducao) traducao = procurarNoDicionario(termo);
   
-  if (
-    traducao &&
-    traducao.trim() &&
-    traducao !== termo &&
-    traducao !== "​"
-  ) {
+  if (traducao && traducao.trim() && traducao !== termo && traducao !== "​") {
     const exemplo = procurarExemplo(traducao);
     let resposta = `✨ *${termo}* em inglês é **${traducao}**`;
     if (exemplo) resposta += `\n\n📚 Exemplo:\n${exemplo.english}\n🇧🇷 ${exemplo.portuguese}`;
-    const incentivo = "\n\n" + pegarAleatorio(mensagensIncentivo);
-    const sugestao = "\n💡 " + sugerirPratica();
+    resposta += "\n\n" + pegarAleatorio(mensagensIncentivo);
+    resposta += "\n💡 " + sugerirPratica();
     registrarInteracao("traducao", termo);
-    return resposta + incentivo + sugestao;
+    return resposta;
   }
   
   return pegarAleatorio([
-    "🦉 Ainda estou aprendendo! ✨\n\nTente soletrar de outra forma?",
-    "🌟 Vamos aprender juntos!\n\nDigite: 'Como se diz gato em inglês?'",
-    "🍎 Não conheço essa palavra ainda!\n\nPode me dar um exemplo?"
+    "🦉 Ainda estou aprendendo! Tente soletrar de outra forma?",
+    "Digite: 'Como se diz gato em inglês?'",
+    "Não conheço essa palavra ainda! Pode me dar um exemplo?"
   ]);
 }
 
@@ -435,209 +360,45 @@ async function responderFrase(texto) {
   let traducao = await traduzirComLibreTranslate(termo);
   if (traducao && traducao !== termo) {
     traducao = traducao.charAt(0).toUpperCase() + traducao.slice(1);
-    const incentivo = "\n\n" + pegarAleatorio(mensagensIncentivo);
-    const sugestao = "\n💡 " + sugerirPratica();
-    registrarInteracao("traducao", termo);
-    return `✨ *${termo}*\n➡️ *${traducao}*${incentivo}${sugestao}`;
+    return `✨ *${termo}*\n➡️ *${traducao}*\n\n${pegarAleatorio(mensagensIncentivo)}\n💡 ${sugerirPratica()}`;
   }
-  
-  // Fallback palavra por palavra
-  const palavras = termo.toLowerCase().trim().split(/\s+/);
-  const mapaFixos = { "eu":"i","você":"you","voce":"you","ele":"he","ela":"she","nós":"we","nos":"we","eles":"they","amo":"love","gosto":"like","quero":"want","tenho":"have","sou":"am","é":"is","esta":"is","está":"is","te":"you","me":"me","uma":"a","um":"a","o":"the","a":"the" };
-  const traduzidas = palavras.map(p => {
-    p = p.toLowerCase().trim();
-    if (!p) return "";
-    if (mapaFixos[p]) return mapaFixos[p];
-    const semAcento = p.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-    let t = ptEn[p] || ptEn[semAcento];
-    if (t) {
-      t = limparTraducao(t);
-      return t.split(/\s+/).pop();
-    }
-    return p;
-  });
-  const resultado = traduzidas.filter(Boolean).join(" ");
-  if (resultado && resultado !== termo && !resultado.includes("undefined")) {
-    const incentivo = "\n\n" + pegarAleatorio(mensagensIncentivo);
-    return `✨ ${resultado}${incentivo}`;
-  }
-  
-  return pegarAleatorio([
-    "🦉 Ainda estou aprendendo frases completas! ✨\n\nTente uma frase mais simples?",
-    "🌟 Vamos aprender palavra por palavra primeiro!\n\nComo se diz 'gato' em inglês?",
-    "🎯 Boa tentativa! Tente separar em partes menores.",
-    "💪 Aprendendo passo a passo!\n\nPergunte: 'Como se diz [palavra] em inglês?'"
-  ]);
+  return "🦉 Ainda estou aprendendo frases completas! Tente uma frase mais simples.";
 }
 
-// Resposta sobre Verbos usando recursão nos dados locais
-function responderVerbos(pergunta) {
-  const base = window.conhecimentoGlobal;
-  const texto = pergunta.toLowerCase().trim();
-  let verbosEncontrados = [];
-  
-  function buscarVerboRecursivo(obj) {
-    if (!obj || typeof obj !== 'object') return;
-    for (const [key, val] of Object.entries(obj)) {
-      const kLower = key.toLowerCase();
-      if ((kLower.includes('verb') || kLower.includes('verbo')) && typeof val === 'object') {
-        if (Array.isArray(val)) {
-          verbosEncontrados.push(...val);
-        } else {
-          for (const [vName, vData] of Object.entries(val)) {
-            if (typeof vData === 'object') {
-              verbosEncontrados.push({ nome: vName, ...vData });
-            } else {
-              verbosEncontrados.push({ nome: vName, traducao: vData });
-            }
-          }
-        }
-      } else {
-        buscarVerboRecursivo(val);
-      }
-    }
-  }
-  
-  if (base) {
-    buscarVerboRecursivo(base);
-  }
-  
-  if (verbosEncontrados.length > 0) {
-    const verboMencionado = verbosEncontrados.find(v => {
-      const nome = (v.en || v.name || v.english || v.nome || "").toLowerCase();
-      const pt = (v.pt || v.portuguese || v.traducao || "").toLowerCase();
-      return (nome && texto.includes(nome)) || (pt && texto.includes(pt));
-    });
-    
-    if (verboMencionado) {
-      const en = verboMencionado.en || verboMencionado.name || verboMencionado.english || verboMencionado.nome || "Verbo";
-      const pt = verboMencionado.pt || verboMencionado.portuguese || verboMencionado.traducao || "Ação";
-      const exEn = verboMencionado.example_en || verboMencionado.ex_en || verboMencionado.ex || verboMencionado.example || "";
-      const exPt = verboMencionado.example_pt || verboMencionado.ex_pt || verboMencionado.traducao_ex || "";
-      let desc = `✨ Encontrei o verbo *${en}* (${pt}) nos meus arquivos! 🦉\n\n`;
-      if (exEn) {
-        desc += `📚 Exemplo:\n"${exEn}"\n🇧🇷 (${exPt || "Tradução pendente"})\n\n`;
-      }
-      desc += "Que tal tentar criar uma frase divertida com ele? 😉";
-      return desc;
-    }
-    
-    const listaNomes = verbosEncontrados.slice(0, 5).map(v => {
-      const en = v.en || v.name || v.english || v.nome || "";
-      const pt = v.pt || v.portuguese || v.traducao || "";
-      return `• **${en}** (${pt})`;
-    }).filter(Boolean).join("\n");
-    
-    if (listaNomes) {
-      return `📚 Olha só alguns verbos super divertidos que eu encontrei na minha biblioteca:\n\n${listaNomes}\n\nPergunte sobre qualquer um deles ou me diga "prática"! 🦉`;
-    }
-  }
-  
-  return `🦉 Eu adoro verbos! Verbos são ações como **run** (correr), **play** (brincar) e **eat** (comer).\n\nQual dessas ações você quer aprender hoje? Me pergunte! 🌟`;
-}
-
-// Respostas para WH-Questions no nível A
 function responderWhQuestions(pergunta) {
   const texto = pergunta.toLowerCase().trim();
-  
-  if (texto.includes("what")) {
-    return `🎨 **WHAT** significa **"O que"** ou **"Qual"**.\n\nUsamos para fazer perguntas sobre coisas, objetos ou ações!\n\n👉 Exemplo:\n* "What is your name?" (Qual é o seu nome?)\n* "What is this?" (O que é isso?)\n\nQue tal tentar me perguntar: *"What is your favorite animal?"* 🐶`;
-  }
-  if (texto.includes("who")) {
-    return `👩‍🏫 **WHO** significa **"Quem"**.\n\nUsamos sempre para perguntar sobre pessoas!\n\n👉 Exemplo:\n* "Who is your teacher?" (Quem é seu professor?)\n* "Who is she?" (Quem é ela?)\n\nMe diga: *Who is your favorite superhero?* 🦸‍♂️`;
-  }
-  if (texto.includes("where")) {
-    return `🗺️ **WHERE** significa **"Onde"**.\n\nUsamos para perguntar sobre lugares e localizações!\n\n👉 Exemplo:\n* "Where are you from?" (De onde você é?)\n* "Where is my book?" (Onde está meu livro?)\n\nMe pergunte: *"Where is Quinti?"* 🦉`;
-  }
-  if (texto.includes("when")) {
-    return `📅 **WHEN** significa **"Quando"**.\n\nUsamos para perguntar sobre o tempo, datas ou momentos especiais!\n\n👉 Exemplo:\n* "When is your birthday?" (Quando é seu aniversário?)\n* "When do you study?" (Quando você estuda?)\n\nVocê sabe responder: *When is your birthday?* 🎂`;
-  }
-  if (texto.includes("why")) {
-    return `❓ **WHY** significa **"Por que"** (para fazer perguntas).\n\nUsamos para saber o motivo de algo. E a resposta quase sempre começa com **Because** (Porque)!\n\n👉 Exemplo:\n* "Why are you happy?" (Por que você está feliz?)\n* Resposta: "Because I like English!" (Porque eu gosto de inglês!)\n\nWhy are you studying English today? 😊`;
-  }
-  if (texto.includes("how")) {
-    return `🌟 **HOW** significa **"Como"** ou **"Quanto"** (dependendo de como usamos).\n\nUsamos para saber o estado, modo ou a idade!\n\n👉 Exemplo:\n* "How are you?" (Como você está?)\n* "How old are you?" (Quantos anos você tem?)\n\nLet's practice! Responda para mim: *How are you today?* 😊`;
-  }
-
-  return `🦉 **As "WH- Questions" são palavras mágicas usadas para fazer perguntas em inglês!** 🌟\n\nOlha só a nossa lista de ouro:\n\n1️⃣ **What** (O que / Qual) ➡️ Coisas e ações\n2️⃣ **Who** (Quem) ➡️ Pessoas\n3️⃣ **Where** (Onde) ➡️ Lugares\n4️⃣ **When** (Quando) ➡️ Tempo/datas\n5️⃣ **Why** (Por que) ➡️ Motivo (Responda com *Because*!)\n6️⃣ **How** (Como) ➡️ Modo ou idade\n\nQual delas você quer praticar hoje? Escolha uma ou tente me fazer uma pergunta! 😊`;
+  if (texto.includes("what")) return "🎨 WHAT significa 'O que' ou 'Qual'. Ex: What is your name?";
+  if (texto.includes("who")) return "👩‍🏫 WHO significa 'Quem'. Ex: Who is she?";
+  if (texto.includes("where")) return "🗺️ WHERE significa 'Onde'. Ex: Where are you from?";
+  if (texto.includes("when")) return "📅 WHEN significa 'Quando'. Ex: When is your birthday?";
+  if (texto.includes("why")) return "❓ WHY significa 'Por que'. Responda com Because.";
+  if (texto.includes("how")) return "🌟 HOW significa 'Como' ou 'Quanto'. Ex: How are you?";
+  return "WH-questions: What, Who, Where, When, Why, How. Qual você quer praticar?";
 }
 
 function responderConhecimento(texto) {
-  const base = window.conhecimentoGlobal;
-  const textoLower = texto.toLowerCase().trim();
-  let curiosidadesEncontradas = [];
-  
-  function buscarCuriosidadesRecursivo(obj) {
-    if (!obj || typeof obj !== 'object') return;
-    for (const [key, val] of Object.entries(obj)) {
-      const kLower = key.toLowerCase();
-      if ((kLower.includes('curios') || kLower.includes('trivia') || kLower.includes('fact') || kLower.includes('dica') || kLower.includes('piada')) && typeof val === 'object') {
-        if (Array.isArray(val)) {
-          curiosidadesEncontradas.push(...val);
-        } else {
-          for (const [cName, cData] of Object.entries(val)) {
-            if (typeof cData === 'object') {
-              curiosidadesEncontradas.push({ titulo: cName, ...cData });
-            } else {
-              curiosidadesEncontradas.push({ fato: cData });
-            }
-          }
-        }
-      } else {
-        buscarCuriosidadesRecursivo(val);
-      }
-    }
-  }
-  
-  if (base) {
-    buscarCuriosidadesRecursivo(base);
-  }
-  
-  if (curiosidadesEncontradas.length > 0) {
-    let fatoEscolhido = curiosidadesEncontradas.find(c => {
-      const stringified = JSON.stringify(c).toLowerCase();
-      return textoLower.split(/\s+/).some(p => p.length > 3 && stringified.includes(p));
-    });
-    
-    if (!fatoEscolhido) {
-      fatoEscolhido = curiosidadesEncontradas[Math.floor(Math.random() * curiosidadesEncontradas.length)];
-    }
-    
-    if (fatoEscolhido) {
-      const titulo = fatoEscolhido.titulo || fatoEscolhido.title || "Curiosidade Espetacular! 🌟";
-      const fato = fatoEscolhido.fato || fatoEscolhido.fact || fatoEscolhido.text || fatoEscolhido.curiosidade || JSON.stringify(fatoEscolhido);
-      return `🦉 **${titulo}**\n\n${fato}\n\nQue legal, né? Quer aprender outra curiosidade ou prefere praticar inglês? 💪`;
-    }
-  }
-
-  const conhecimento = buscarConhecimento(texto);
-  if (conhecimento) return conhecimento;
-  const glossario = buscarGlossario(texto);
-  if (glossario) return glossario;
-  
   return pegarAleatorio([
-    "🦉 Sabia que?\n\n🐝 O verbo TO BE é: AM, IS, ARE!\nExemplo: I am happy! ✨",
-    "🌟 Curiosidade!\n💪 CAN significa habilidade!\nExemplo: I can swim! 🏊‍♂️",
-    "📚 Aprender inglês é divertido!\nTente: 'Como se diz...' para aprender novas palavras!",
-    "🌈 Sabia que na Inglaterra o chá é uma tradição super importante? Eles amam beber chá com leite! ☕"
+    "🦉 Sabia que? O verbo TO BE é: AM, IS, ARE! Ex: I am happy!",
+    "🌟 CAN significa habilidade! Ex: I can swim!",
+    "📚 Aprender inglês é divertido! Tente 'Como se diz...'",
+    "🌈 Na Inglaterra, o chá com leite é tradição!"
   ]);
 }
 
 function responderSocial(texto) {
+  const intencoes = [
+    { nome: "greeting", padroes: [/\b(hi|hello|hey|olá|oi)\b/i], respostas: ["👋 Hello! Como posso ajudar?"] },
+    { nome: "how_are_you", padroes: [/how are you/i, /como você está/i], respostas: ["😊 Estou ótimo! E você?"] },
+    { nome: "ask_name_bot", padroes: [/what(?:'s| is) your name/i, /qual.*seu nome/i], respostas: ["🦉 Meu nome é Quinti!"] }
+  ];
   for (const intent of intencoes) {
     for (const regex of intent.padroes) {
       if (regex.test(texto)) {
-        let resp = intent.respostas[Math.floor(Math.random() * intent.respostas.length)];
-        if (intent.nome === "how_are_you") resp += " E você? How are you today? 😊";
-        return resp;
+        return intent.respostas[0];
       }
     }
   }
-  return pegarAleatorio([
-    "👋 Olá estrelinha! ✨\nComo posso ajudar você hoje?",
-    "🌟 Oi amigo! Vamos aprender uma palavra nova?",
-    "🦉 Olá explorador! Tente: 'Como se diz coruja em inglês?'"
-  ]);
+  return "👋 Olá! Vamos aprender inglês?";
 }
 
 function responderExplicacao(texto) {
@@ -646,81 +407,91 @@ function responderExplicacao(texto) {
 
 function responderCorrecaoIngles(texto) {
   const erro = detectarErroIngles(texto);
-  if (erro) {
-    return `🦉 **Dica gentil**: ${erro}\n\n${pegarAleatorio(mensagensIncentivo)}`;
-  }
-  return `🌟 Bom inglês! ${pegarAleatorio(mensagensIncentivo)}\n\nQuer que eu te ensine uma palavra nova? Diga 'Como se diz...'`;
+  if (erro) return `🦉 Dica gentil: ${erro}\n\n${pegarAleatorio(mensagensIncentivo)}`;
+  return `🌟 Bom inglês! ${pegarAleatorio(mensagensIncentivo)}`;
 }
 
 function responderElogioIngles(texto) {
-  return `🌟 Ótimo! Você está praticando inglês! ${pegarAleatorio(mensagensIncentivo)}\n\nQuer traduzir alguma frase?`;
+  return `🌟 Ótimo! Você está praticando inglês! ${pegarAleatorio(mensagensIncentivo)}`;
 }
 
 function fallbackPedagogico() {
   return pegarAleatorio([
-    "🦉 Estou aprendendo ainda! ✨\nQue tal: 'Como se diz gato em inglês?'",
-    "🌟 Vamos aprender juntos!\nTente perguntar outra palavra.",
-    "🍎 Exemplo: 'Como se diz maçã em inglês?'",
-    "💪 Continue praticando!\nPergunte: 'Como se diz [palavra] em inglês?'"
+    "🦉 Que tal: 'Como se diz gato em inglês?'",
+    "Tente perguntar outra palavra.",
+    "Exemplo: 'Como se diz maçã em inglês?'"
   ]);
 }
 
 // ========================================
-// MOTOR PRINCIPAL
+// FUNÇÃO PRINCIPAL (COM ATALHOS)
 // ========================================
 async function respostaControlada(pergunta) {
-  // ===== INTERCEPTAÇÃO DE CONJUGAÇÃO =====
-  const texto = pergunta.toLowerCase().trim();
+  const textoPergunta = pergunta.toLowerCase().trim();
+
+  // ATALHO 1: significado de verbo ("o que significa o verbo see")
   if (
-    texto.startsWith("conjugate ") ||
-    texto.startsWith("verb ") ||
-    texto.includes("como conjuga") ||
-    texto.includes("conjugação do verbo") ||
-    texto.includes("conjugue o verbo")
+    textoPergunta.includes("o que significa o verbo") ||
+    (textoPergunta.includes("verbo") && textoPergunta.includes("significa"))
   ) {
-    // Extrai a palavra alvo
-    let palavra = texto
+    let verbo = textoPergunta
+      .replace(/o que significa o verbo/gi, "")
+      .replace(/verbo/gi, "")
+      .replace(/significa/gi, "")
+      .replace(/[?]/g, "")
+      .trim()
+      .split(/\s+/)[0];
+    if (verbo) {
+      const significado = procurarNoDicionario(verbo);
+      if (significado) {
+        return `🌟 O verbo **${verbo}** significa:\n\n${significado}`;
+      }
+    }
+  }
+
+  // ATALHO 2: significado genérico ("qual é o significado de see", "o que quer dizer see")
+  if (
+    textoPergunta.includes("qual é o significado") ||
+    textoPergunta.includes("qual o significado") ||
+    textoPergunta.includes("o que quer dizer") ||
+    (textoPergunta.includes("o que significa") && !textoPergunta.includes("verbo"))
+  ) {
+    let termo = textoPergunta
+      .replace(/qual é o significado de|qual o significado de|o que quer dizer|o que significa/gi, "")
+      .replace(/[?]/g, "")
+      .trim();
+    if (termo) {
+      const significado = procurarNoDicionario(termo);
+      if (significado) {
+        return `🌟 O significado de *${termo}* é:\n\n${significado}`;
+      } else {
+        return `🦉 Não sei o significado de "${termo}" ainda. Tente perguntar de outra forma.`;
+      }
+    }
+  }
+
+  // ATALHO 3: conjugação direta (já existia, mas mantemos)
+  if (
+    textoPergunta.startsWith("conjugate ") ||
+    textoPergunta.startsWith("verb ") ||
+    textoPergunta.includes("como conjuga") ||
+    textoPergunta.includes("conjugação do verbo") ||
+    textoPergunta.includes("conjugue o verbo")
+  ) {
+    let palavra = textoPergunta
       .replace(/^conjugate\s+/i, "")
       .replace(/^verb\s+/i, "")
       .replace(/como conjuga\s+/i, "")
       .replace(/conjugação do verbo\s+/i, "")
       .replace(/conjugue o verbo\s+/i, "")
       .trim()
-      .split(/\s+/)[0]; // pega apenas a primeira palavra
-
+      .split(/\s+/)[0];
     if (palavra) {
       const resposta = explainVerb(palavra);
-      if (resposta) {
-        return resposta;
-      } else {
-        return `🦉 Não consegui conjugar **${palavra}**. Talvez não seja um verbo em inglês ou seja muito irregular. Tente outro, como *play*, *go*, *eat*.`;
-      }
-    } else {
-      return "🦉 Diga o verbo que deseja conjugar. Exemplo: *conjugate play* ou *como conjuga run*.";
+      if (resposta) return resposta;
+      return `🦉 Não consegui conjugar **${palavra}**. Tente *play*, *go*, *eat*.`;
     }
   }
-  // ===== FIM DA INTERCEPTAÇÃO =====
-
-  // ===== SIGNIFICADO DE VERBO (atalho) =====
-  const textoPergunta = pergunta.toLowerCase().trim();
-  if (
-    textoPergunta.includes("o que significa o verbo") ||
-    (textoPergunta.includes("verbo") && textoPergunta.includes("significa"))
-  ) {
-    let verbo = textoPergunta
-      .replace("o que significa o verbo", "")
-      .replace("verbo", "")
-      .replace("significa", "")
-      .replace("?", "")
-      .trim();
-    // Extrai a primeira palavra (o verbo)
-    verbo = verbo.split(/\s+/)[0];
-    const significado = procurarNoDicionario(verbo);
-    if (significado) {
-      return `🌟 O verbo **${verbo}** significa:\n\n${significado}`;
-    }
-  }
-  // ===== FIM DO ATALHO =====
 
   const tipo = detectarIntento(pergunta);
   
@@ -728,16 +499,7 @@ async function respostaControlada(pergunta) {
     case "traducao_palavra": return await responderPalavra(pergunta);
     case "traducao_frase": return await responderFrase(pergunta);
     case "wh_questions": return responderWhQuestions(pergunta);
-    case "verbos": return responderVerbos(pergunta);
-    case "conteudo": return responderConhecimento(pergunta);
-    case "explicacao": return responderExplicacao(pergunta);
-    case "pratica": return responderPratica();
-    case "resposta_atividade": return responderRespostaAtividade(pergunta);
-    case "correcao_ingles": return responderCorrecaoIngles(pergunta);
-    case "elogio_ingles": return responderElogioIngles(pergunta);
-    case "social": return responderSocial(pergunta);
-    case "conjugacao":
-      // Extrair o verbo da pergunta
+    case "conjugacao": {
       let verbToConjugate = pergunta.toLowerCase().trim()
         .replace(/conjugue\s+/i, "")
         .replace(/conjugar\s+/i, "")
@@ -746,18 +508,23 @@ async function respostaControlada(pergunta) {
         .trim()
         .split(/\s+/)[0];
       if (verbToConjugate) {
-        const conjugationResult = explainVerb(verbToConjugate);
-        if (conjugationResult) return conjugationResult;
-        else return `🦉 Não consegui conjugar **${verbToConjugate}**. Tente outro verbo como *play*, *go*, *eat*.`;
-      } else {
-        return "🦉 Diga o verbo que deseja conjugar. Exemplo: *conjugate play* ou *verbo run*.";
+        const res = explainVerb(verbToConjugate);
+        if (res) return res;
+        return `🦉 Não consegui conjugar **${verbToConjugate}**. Tente outro verbo.`;
       }
+      return "🦉 Diga o verbo que deseja conjugar. Ex: *verbo run*.";
+    }
+    case "conteudo": return responderConhecimento(pergunta);
+    case "explicacao": return responderExplicacao(pergunta);
+    case "correcao_ingles": return responderCorrecaoIngles(pergunta);
+    case "elogio_ingles": return responderElogioIngles(pergunta);
+    case "social": return responderSocial(pergunta);
     default: return fallbackPedagogico();
   }
 }
 
 // ========================================
-// FUNÇÃO PROcurarNoDicionario (FALLBACK)
+// FUNÇÕES AUXILIARES (dicionário, glossário)
 // ========================================
 function procurarNoDicionario(texto) {
   texto = texto.toLowerCase().trim();
@@ -768,45 +535,28 @@ function procurarNoDicionario(texto) {
     .replace(/what means/g, "")
     .replace(/what is/g, "")
     .replace(/how do you say/g, "")
-    .replace(/traduz(?:ir)?/g, "")
-    .replace(/em inglês/g, "")
-    .replace(/em ingles/g, "")
-    .replace(/in english/g, "")
-    .replace(/\be\b/g, "")
+    .replace(/traduz(?:ir)?a?/g, "")
+    .replace(/em inglês|em ingles|in english/g, "")
     .replace(/[?.!,:]/g, "")
     .trim();
-  console.log("Palavra limpa (fallback):", palavra);
   if (ptEn[palavra]) {
     const traducao = limparTraducao(ptEn[palavra]);
     const exemplo = procurarExemplo(traducao);
-    if (exemplo) {
-      return `✨ ${palavra} em inglês é ${traducao}\n\n📚 Example:\n${exemplo.english}\n🇧🇷 ${exemplo.portuguese}`;
-    }
+    if (exemplo) return `✨ ${palavra} em inglês é ${traducao}\n\n📚 Exemplo:\n${exemplo.english}\n🇧🇷 ${exemplo.portuguese}`;
     return `✨ ${palavra} em inglês é ${traducao}`;
   }
   if (enPt[palavra]) {
     const traducao = limparTraducao(enPt[palavra]);
     const exemplo = procurarExemplo(palavra);
-    if (exemplo) {
-      return `✨ ${palavra} significa ${traducao}\n\n📚 Example:\n${exemplo.english}\n🇧🇷 ${exemplo.portuguese}`;
-    }
+    if (exemplo) return `✨ ${palavra} significa ${traducao}\n\n📚 Exemplo:\n${exemplo.english}\n🇧🇷 ${exemplo.portuguese}`;
     return `✨ ${palavra} significa ${traducao}`;
   }
   const semAcento = palavra.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-  if (ptEn[semAcento]) {
-    const traducao = limparTraducao(ptEn[semAcento]);
-    return `✨ ${palavra} em inglês é ${traducao}`;
-  }
-  if (enPt[semAcento]) {
-    const traducao = limparTraducao(enPt[semAcento]);
-    return `✨ ${palavra} significa ${traducao}`;
-  }
+  if (ptEn[semAcento]) return `✨ ${palavra} em inglês é ${limparTraducao(ptEn[semAcento])}`;
+  if (enPt[semAcento]) return `✨ ${palavra} significa ${limparTraducao(enPt[semAcento])}`;
   return null;
 }
 
-// ========================================
-// FUNÇÕES AUXILIARES (glossário, conhecimento)
-// ========================================
 function buscarGlossario(pergunta) {
   if (!window.conhecimentoGlobal?.glossary) return null;
   const texto = pergunta.toLowerCase().trim();
@@ -838,157 +588,54 @@ function buscarConhecimento(pergunta) {
 }
 
 // ========================================
-// BASE DE CONHECIMENTO A1
-// ========================================
-const intencoes = [
-  { nome: "verb_to_be", padroes: [/verb to be/i, /o que é am is are/i, /verbo ser ou estar/i], respostas: ["🐝 The Verb TO BE is: AM, IS, ARE.\nExample: I am happy! ✨"] },
-  { nome: "present_simple_do", padroes: [/present simple/i, /auxiliar do/i, /quando usar do ou does/i], respostas: ["⚙️ Use DO for I, YOU, WE, THEY.\nUse DOES for HE, SHE, IT! 🍕"] },
-  { nome: "modal_can", padroes: [/\bcan\b/i, /o que é can/i, /verbo poder/i], respostas: ["💪 CAN means ability!\nExample: I can swim! 🏊‍♂️"] },
-  { nome: "there_is_are", padroes: [/there is/i, /there are/i, /verbo haver/i], respostas: ["📍 THERE IS = singular.\nTHERE ARE = plural 🍎"] },
-  { nome: "how_much_many", padroes: [/how much/i, /how many/i, /quantos/i], respostas: ["🔢 HOW MANY = countable.\nHOW MUCH = uncountable 💰"] },
-  { nome: "greeting", padroes: [/\b(hi|hello|hey|olá|oi)\b/i], respostas: ["👋 Hello little star! ✨", "🌟 Hi friend! How are you today?", "🦉 Hello explorer! Ready to learn?"] },
-  { nome: "ask_name_bot", padroes: [/what(?:'s| is) your name/i, /qual.*seu nome/i], respostas: ["🦉 My name is Quinti!", "✨ I'm Quinti, your English owl!", "🌟 You can call me Quinti!"] },
-  { nome: "how_are_you", padroes: [/how are you/i, /como você está/i], respostas: ["😊 I'm great! Thanks for asking!", "🌟 I'm happy and ready to learn!", "🦉 I'm doing very well today!"] },
-  { nome: "how_old", padroes: [/how old are you/i, /qual sua idade/i], respostas: ["🎈 I don't have an age like humans!", "🦉 I'm always learning every day!"] },
-  { nome: "where_are_you_from", padroes: [/where are you from/i, /de onde você é/i], respostas: ["🌍 I'm from the world of learning!", "✨ I come from a magical world of English!"] },
-  { nome: "who_are_you", padroes: [/who are you/i, /quem é você/i], respostas: ["🦉 I'm Quinti, your English tutor!", "✨ I'm Quinti! I help children learn English."] },
-  { nome: "do_you_like", padroes: [/do you like/i], respostas: ["😊 That sounds interesting!", "🌟 I like learning new things!", "🦉 Tell me more!"] },
-  { nome: "favorite", padroes: [/what(?:'s| is) your favorite/i], respostas: ["🐶 I like animals and words!", "🌈 Learning is one of my favorite things!"] },
-  { nome: "who_is_she", padroes: [/who is she/i], respostas: ["👧 She is a girl or a woman."] },
-  { nome: "who_is_he", padroes: [/who is he/i], respostas: ["👦 He is a boy or a man."] },
-  { nome: "what_is_it", padroes: [/what is it/i], respostas: ["📦 It can be an object, animal or thing."] },
-  { nome: "what_are_these", padroes: [/what are these/i], respostas: ["📚 These means many things near us!"] },
-  { nome: "thanks", padroes: [/\b(thank|thanks|obrigado|obrigada)\b/i], respostas: ["💛 You're welcome! 🌟"] },
-  
-  // Camadas Conversacionais adicionais (Kids Level A)
-  { nome: "animals", padroes: [/\b(animal|animals|dog|cat|lion|monkey|pet|coruja|pets)\b/i], respostas: ["🦁 I love animals! My favorite animal is the owl (coruja) 🦉. What is your favorite animal? A dog 🐶, a cat 🐱, or a lion 🦁?"] },
-  { nome: "colors", padroes: [/\b(color|colors|blue|red|green|yellow|pink|black|white)\b/i], respostas: ["🎨 Colors make the world beautiful! My favorite color is blue 💙. What about you? What's your favorite color?"] },
-  { nome: "family", padroes: [/\b(family|mother|father|brother|sister|mom|dad|parent|parents)\b/i], respostas: ["👨‍👩‍👧‍👦 Family is very important! Do you have a big or small family? Tell me about your brother, sister, mom or dad!"] },
-  { nome: "feelings", padroes: [/\b(happy|sad|tired|hungry|angry|feeling|feelings|sick|excited)\b/i], respostas: ["😊 How do you feel today? I am super happy (feliz) today! Are you happy, sad, or tired?"] },
-  { nome: "food", padroes: [/\b(food|pizza|apple|chocolate|banana|eat|delicious|ice cream|cookie)\b/i], respostas: ["🍕 Yum! Food is delicious! I love eating red apples 🍎. Do you like pizza, chocolate or ice cream? Let me know!"] },
-  { nome: "weather", padroes: [/\b(weather|sunny|rainy|cold|hot|sun|rain|windy|cloudy)\b/i], respostas: ["☀️ The weather is always interesting! Is it sunny (ensolarado), rainy (chuvoso), or cold (frio) where you are today?"] }
-];
-
-// ========================================
-// MÓDULO DE VOZ (COM TOGGLER FUNCIONAL)
+// MÓDULO DE VOZ
 // ========================================
 let speechEnabled = true;
 let vozFeminina = null;
 
-// Função para alternar o estado e o ícone
 function toggleSpeaker() {
-    speechEnabled = !speechEnabled;
-    const btn = document.getElementById("btnSpeaker");
-    if (btn) {
-        btn.textContent = speechEnabled ? "🔊" : "🔇";
-        console.log(`🦉 Voz ${speechEnabled ? "ativada" : "desativada"}`);
-    }
+  speechEnabled = !speechEnabled;
+  const btn = document.getElementById("btnSpeaker");
+  if (btn) btn.textContent = speechEnabled ? "🔊" : "🔇";
 }
 
-// Configura o evento de clique (garantindo que o botão já existe)
 document.addEventListener("DOMContentLoaded", () => {
-    const btnSpeaker = document.getElementById("btnSpeaker");
-    if (btnSpeaker) {
-        btnSpeaker.addEventListener("click", toggleSpeaker);
-        btnSpeaker.textContent = speechEnabled ? "🔊" : "🔇";
-        console.log("✅ Botão alto-falante configurado");
-    } else {
-        console.warn("⚠️ Botão #btnSpeaker não encontrado");
-    }
+  const btnSpeaker = document.getElementById("btnSpeaker");
+  if (btnSpeaker) {
+    btnSpeaker.addEventListener("click", toggleSpeaker);
+    btnSpeaker.textContent = speechEnabled ? "🔊" : "🔇";
+  }
 });
 
-// Carrega a melhor voz feminina disponível
 async function carregarVozFeminina() {
-    if (!window.speechSynthesis) return null;
-    return new Promise((resolve) => {
-        const obterVoz = () => {
-            const vozes = window.speechSynthesis.getVoices();
-            if (vozes.length === 0) {
-                setTimeout(obterVoz, 50);
-                return;
-            }
-            resolve(encontrarMelhorVozFeminina(vozes));
-        };
-        obterVoz();
-    });
+  if (!window.speechSynthesis) return null;
+  return new Promise((resolve) => {
+    const obterVoz = () => {
+      const vozes = window.speechSynthesis.getVoices();
+      if (vozes.length === 0) { setTimeout(obterVoz, 50); return; }
+      const voz = vozes.find(v => v.lang === 'pt-BR' && v.name.toLowerCase().includes('female')) || vozes.find(v => v.lang === 'pt-BR');
+      resolve(voz);
+    };
+    obterVoz();
+  });
 }
 
-function encontrarMelhorVozFeminina(vozes) {
-    const prioridades = [
-        (v) => v.lang === 'pt-BR' && v.name.toLowerCase().includes('female'),
-        (v) => v.lang === 'pt-BR' && v.name.toLowerCase().includes('google'),
-        (v) => v.lang === 'pt-BR' && v.name.toLowerCase().includes('maria'),
-        (v) => v.lang === 'pt-BR',
-        (v) => v.name.toLowerCase().includes('female') && v.lang.startsWith('pt')
-    ];
-    for (const test of prioridades) {
-        const found = vozes.find(test);
-        if (found) return found;
-    }
-    return vozes.find(v => v.lang.startsWith('pt')) || null;
-}
-
-// Função que fala (só executa se speechEnabled for true)
 function falarTexto(texto) {
-
-    if (!speechEnabled) {
-        console.log("🔇 Voz desligada – não vou falar");
-        return;
-    }
-
-    if (!window.speechSynthesis) return;
-
-    // Limpa o texto para a voz
-    let textoLimpo = texto
-
-        // remove markdown
-        .replace(/[*_`~#>|]/g, '')
-
-        // remove emojis
-        .replace(/[\p{Emoji_Presentation}\p{Extended_Pictographic}]/gu, '')
-
-        // remove parênteses, colchetes e chaves
-        .replace(/[()[\]{}]/g, '')
-
-        // remove símbolos muito falados pela voz
-        .replace(/[•✨🦉📚🎯🌟🍎💪🐶🐱🐝🧭😲🔗📦🏃👦🎨🎉🌈😊]+/g, '')
-
-        // remove sinais chatos
-        .replace(/[=:;]/g, '')
-
-        // transforma quebra de linha em pausa
-        .replace(/\n+/g, '. ')
-
-        // remove espaços duplicados
-        .replace(/\s+/g, ' ')
-        .trim();
-
-    const utterance = new SpeechSynthesisUtterance(textoLimpo);
-
-    utterance.lang = 'pt-BR';
-    utterance.rate = 1.05;
-    utterance.pitch = 1.2;
-
-    if (vozFeminina) {
-        utterance.voice = vozFeminina;
-    }
-
-    window.speechSynthesis.cancel();
-    window.speechSynthesis.speak(utterance);
+  if (!speechEnabled || !window.speechSynthesis) return;
+  let textoLimpo = texto.replace(/[*_`~#]/g, '').replace(/[\p{Emoji_Presentation}\p{Extended_Pictographic}]/gu, '').replace(/\n+/g, '. ');
+  const utterance = new SpeechSynthesisUtterance(textoLimpo);
+  utterance.lang = 'pt-BR';
+  utterance.rate = 1.05;
+  utterance.pitch = 1.2;
+  if (vozFeminina) utterance.voice = vozFeminina;
+  window.speechSynthesis.cancel();
+  window.speechSynthesis.speak(utterance);
 }
 
-// Inicializa a voz assim que possível
-carregarVozFeminina().then(voz => {
-    if (voz) {
-        vozFeminina = voz;
-        console.log(`✅ Voz carregada: ${voz.name} (${voz.lang})`);
-    } else {
-        console.warn("⚠️ Usando voz padrão do sistema");
-    }
-});
+carregarVozFeminina().then(voz => { if (voz) vozFeminina = voz; });
 
- // ========================================
-// UI e EVENTOS
+// ========================================
+// UI E EVENTOS
 // ========================================
 const MAX_HISTORY = 6;
 const chat = document.getElementById("chat");
@@ -1030,7 +677,6 @@ function removerPensando() {
   if (el) el.remove();
 }
 
-// Microfone
 const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 let recognition = null;
 if (SpeechRecognition && btnMic) {
@@ -1038,28 +684,18 @@ if (SpeechRecognition && btnMic) {
   recognition.lang = "pt-BR";
   recognition.continuous = false;
   recognition.interimResults = false;
-  recognition.onstart = () => { btnMic.textContent = "🔴"; adicionarMensagem("🎤 Estou ouvindo... Speak to me!", "bot"); };
+  recognition.onstart = () => { btnMic.textContent = "🔴"; adicionarMensagem("🎤 Estou ouvindo...", "bot"); };
   recognition.onend = () => { btnMic.textContent = "🎤"; };
   recognition.onresult = (event) => {
-    const texto = event.results[0][0].transcript;
-    inputPergunta.value = texto;
+    inputPergunta.value = event.results[0][0].transcript;
     enviar();
   };
-  recognition.onerror = (event) => {
-    console.log("MIC ERROR:", event.error);
-    let mensagem = "🎤 Microphone error!";
-    if (event.error === "not-allowed") mensagem = "🎤 Please allow microphone access.\nPermita acesso ao microfone ✨";
-    else if (event.error === "no-speech") namespace = "🎤 I couldn't hear you.\nNão consegui ouvir você ✨";
-    else if (event.error === "audio-capture") mensagem = "🎤 No microphone detected.\nNenhum microfone encontrado ✨";
-    adicionarMensagem(mensagem, "bot");
-    btnMic.textContent = "🎤";
-  };
+  recognition.onerror = () => { btnMic.textContent = "🎤"; };
 }
 
 async function enviar() {
   const texto = inputPergunta?.value?.trim();
   if (!texto) return;
-
   adicionarMensagem(texto, "user");
   inputPergunta.value = "";
   mostrarPensando();
@@ -1069,13 +705,10 @@ async function enviar() {
   adicionarMensagem(resp, "bot");
 }
 
-// EVENTOS
 window.addEventListener("DOMContentLoaded", () => {
   if (btnEnviar) btnEnviar.addEventListener("click", (e) => { e.preventDefault(); enviar(); });
   if (inputPergunta) inputPergunta.addEventListener("keydown", (e) => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); enviar(); } });
-  if (btnMic && recognition) btnMic.addEventListener("click", (e) => { e.preventDefault(); try { recognition.start(); } catch (err) { console.log(err); } });
-  const btnSpeaker = document.getElementById("btnSpeaker");
-  if (btnSpeaker) btnSpeaker.textContent = speechEnabled ? "🔊" : "🔇";
+  if (btnMic && recognition) btnMic.addEventListener("click", (e) => { e.preventDefault(); recognition.start(); });
 });
 
 // INICIALIZAÇÃO
@@ -1088,12 +721,6 @@ window.addEventListener("DOMContentLoaded", () => {
     ptEn = dicts.PT_EN;
     await carregarExemplos();
     atualizarStatus("✅ Quinti is Ready!", 1);
-    console.log("🦉 Quinti pronto!");
-    const test = await traduzirComLibreTranslate("gato");
-    if (test) console.log("✅ LibreTranslate conectado!");
-    else console.warn("⚠️ LibreTranslate não respondeu. Usando dicionário local como fallback.");
-  } catch (e) {
-    console.error(e);
-  }
-  adicionarMensagem("🦉 Hello!\n\nI am Quinti ✨\n\nReady for English Lessons?\n\n🔊", "bot");
+  } catch (e) { console.error(e); }
+  adicionarMensagem("🦉 Hello! I am Quinti ✨ Ready for English Lessons? 🔊", "bot");
 })();
