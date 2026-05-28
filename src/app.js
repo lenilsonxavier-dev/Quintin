@@ -317,9 +317,6 @@ function extrairTermoParaTraducao(texto) {
 function detectarIntento(texto) {
   texto = texto.toLowerCase().trim();
 
-  // Atividade pendente
-  if (atividadeAtiva) return "resposta_atividade";
-
   // Tradução
   if (
     texto.includes("como se diz") ||
@@ -368,14 +365,6 @@ function detectarIntento(texto) {
     texto.includes("o que é") ||
     texto.includes("como funciona")
   ) return "explicacao";
-
-  // Prática guiada
-  if (
-    texto.includes("prática") ||
-    texto.includes("praticar") ||
-    texto.includes("atividade") ||
-    texto.includes("vamos praticar")
-  ) return "pratica";
 
   // Conversa social (Expandida para camadas conversacionais nível A)
   if (
@@ -645,14 +634,6 @@ function responderExplicacao(texto) {
   return explicarGramatica(texto);
 }
 
-function responderPratica() {
-  return gerarAtividade();
-}
-
-function responderRespostaAtividade(resposta) {
-  return verificarRespostaAtividade(resposta);
-}
-
 function responderCorrecaoIngles(texto) {
   const erro = detectarErroIngles(texto);
   if (erro) {
@@ -902,19 +883,48 @@ function encontrarMelhorVozFeminina(vozes) {
 
 // Função que fala (só executa se speechEnabled for true)
 function falarTexto(texto) {
+
     if (!speechEnabled) {
         console.log("🔇 Voz desligada – não vou falar");
         return;
     }
+
     if (!window.speechSynthesis) return;
 
-    // Remove emojis e markdown para leitura limpa
-    let textoLimpo = texto.replace(/[*_`~#]/g, '').replace(/[\u{1F600}-\u{1F6FF}]/gu, '');
+    // Limpa o texto para a voz
+    let textoLimpo = texto
+
+        // remove markdown
+        .replace(/[*_`~#>|]/g, '')
+
+        // remove emojis
+        .replace(/[\p{Emoji_Presentation}\p{Extended_Pictographic}]/gu, '')
+
+        // remove parênteses, colchetes e chaves
+        .replace(/[()[\]{}]/g, '')
+
+        // remove símbolos muito falados pela voz
+        .replace(/[•✨🦉📚🎯🌟🍎💪🐶🐱🐝🧭😲🔗📦🏃👦🎨🎉🌈😊]+/g, '')
+
+        // remove sinais chatos
+        .replace(/[=:;]/g, '')
+
+        // transforma quebra de linha em pausa
+        .replace(/\n+/g, '. ')
+
+        // remove espaços duplicados
+        .replace(/\s+/g, ' ')
+        .trim();
+
     const utterance = new SpeechSynthesisUtterance(textoLimpo);
+
     utterance.lang = 'pt-BR';
     utterance.rate = 1.05;
     utterance.pitch = 1.2;
-    if (vozFeminina) utterance.voice = vozFeminina;
+
+    if (vozFeminina) {
+        utterance.voice = vozFeminina;
+    }
 
     window.speechSynthesis.cancel();
     window.speechSynthesis.speak(utterance);
