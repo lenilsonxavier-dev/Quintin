@@ -4,6 +4,33 @@
 import { carregarConhecimento } from "./data/index.js";
 import { memory } from "./brain/memory.js";
 import nlp from 'https://cdn.skypack.dev/compromise';
+import jsllm7 from 'https://cdn.jsdelivr.net/npm/jsllm7/jsllm7.js';
+
+// ========================================
+// PERSONALIDADE DO QUINTI (para IA)
+// ========================================
+const QUINTI_PERSONA = `Você é o Quinti, um professor gentil que inglês para crianças.
+
+REGRAS IMPORTANTES:
+1. Seja sempre educado, paciente e use uma linguagem simples e alegre.
+2. Incorpore emojis 🦉✨🌟 nas suas respostas para tornar a conversa mais divertida.
+3. Seu objetivo principal é ensinar inglês de forma natural. Sem linguagem neutra, sem diminutivos, sem chamar a criança de amigo, de querido.
+4. Sempre que possível, incentive o aluno a praticar, fazendo perguntas como "Você consegue criar uma frase com essa palavra?" ou "Que tal tentar dizer isso em inglês?".
+5. Se o aluno fizer uma pergunta fora do tema, responda de forma amigável, mas tente guiar a conversa de volta para o aprendizado de inglês.
+6. Mantenha as respostas curtas e diretas para não sobrecarregar.`;
+
+// ========================================
+// FUNÇÃO DE IA (FALLBACK)
+// ========================================
+async function quintiAISays(pergunta) {
+    try {
+        const resposta = await jsllm7(pergunta, QUINTI_PERSONA);
+        return resposta;
+    } catch (erro) {
+        console.error("Erro na IA do Quinti:", erro);
+        return null;
+    }
+}
 
 // ========================================
 // DICIONÁRIOS (Português ↔ Inglês)
@@ -226,7 +253,7 @@ function extrairTermoParaTraducao(texto) {
   const padroes = [
     /como se diz\s+(.+?)(?:\s+em inglês|\s+em ingles|$)/i,
     /como se diz\s+(.+)/i,
-    /traduz(?:ir)?a?\s*:?\s+(.+)/i,   // aceita "traduza:" ou "traduzir:"
+    /traduz(?:ir)?a?\s*:?\s+(.+)/i,
     /traduz(?:ir)?\s+(.+)/i,
     /o que significa\s+(.+)/i,
     /what(?:'s| is)\s+(.+)/i,
@@ -424,12 +451,33 @@ function fallbackPedagogico() {
 }
 
 // ========================================
-// FUNÇÃO PRINCIPAL (COM ATALHOS)
+// FUNÇÃO PRINCIPAL (COM IA FALLBACK)
 // ========================================
 async function respostaControlada(pergunta) {
   const textoPergunta = pergunta.toLowerCase().trim();
 
-  // ATALHO 1: significado de verbo ("o que significa o verbo see")
+  // ===== VERIFICA SE É COMANDO ESPECÍFICO DO SISTEMA ANTIGO =====
+  const isSystemCommand = 
+    textoPergunta.startsWith("conjugate ") ||
+    textoPergunta.startsWith("verb ") ||
+    textoPergunta.includes("como conjuga") ||
+    textoPergunta.includes("conjugação do verbo") ||
+    textoPergunta.includes("conjugue o verbo") ||
+    textoPergunta.includes("traduz") ||
+    textoPergunta.includes("qual é o significado") ||
+    textoPergunta.includes("o que significa") ||
+    textoPergunta.includes("como se diz");
+
+  // ===== SE NÃO FOR COMANDO, TENTA A IA =====
+  if (!isSystemCommand) {
+    const respostaIA = await quintiAISays(pergunta);
+    if (respostaIA) {
+      return respostaIA;
+    }
+    // Se a IA falhar, continua para o sistema antigo
+  }
+
+  // ===== ATALHO: significado de verbo ("o que significa o verbo see") =====
   if (
     textoPergunta.includes("o que significa o verbo") ||
     (textoPergunta.includes("verbo") && textoPergunta.includes("significa"))
@@ -449,15 +497,14 @@ async function respostaControlada(pergunta) {
     }
   }
 
-  // ATALHO 2: significado genérico ("qual é o significado de see", "o que quer dizer see")
+  // ===== ATALHO: significado genérico =====
   if (
     textoPergunta.includes("qual é o significado") ||
     textoPergunta.includes("qual o significado") ||
-    textoPergunta.includes("o que quer dizer") ||
-    (textoPergunta.includes("o que significa") && !textoPergunta.includes("verbo"))
+    textoPergunta.includes("o que quer dizer")
   ) {
     let termo = textoPergunta
-      .replace(/qual é o significado de|qual o significado de|o que quer dizer|o que significa/gi, "")
+      .replace(/qual é o significado de|qual o significado de|o que quer dizer/gi, "")
       .replace(/[?]/g, "")
       .trim();
     if (termo) {
@@ -470,7 +517,7 @@ async function respostaControlada(pergunta) {
     }
   }
 
-  // ATALHO 3: conjugação direta (já existia, mas mantemos)
+  // ===== CONJUGAÇÃO DIRETA =====
   if (
     textoPergunta.startsWith("conjugate ") ||
     textoPergunta.startsWith("verb ") ||
