@@ -1,0 +1,1 @@
+json<br/>{<br/> "rewrites": [{ "source": "/(.*)", "destination": "/" }]<br/>}<br/>
