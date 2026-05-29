@@ -19,20 +19,24 @@ REGRAS IMPORTANTES:
 6. Mantenha as respostas curtas e diretas para não sobrecarregar.`;
 
 // ========================================
-// FUNÇÃO DE IA (FALLBACK)
+// FUNÇÃO DE IA (FALLBACK) - COM LIMPEZA
 // ========================================
 async function quintiAISays(pergunta) {
     try {
-        const resposta = await jsllm7(pergunta, QUINTI_PERSONA);
+        let resposta = await jsllm7(pergunta, QUINTI_PERSONA);
+        
+        // 🔥 LIMPEZA: remove tudo entre <think> e </think> (inclusive as tags)
+        resposta = resposta.replace(/<think>[\s\S]*?<\/think>/g, '').trim();
+        
+        // Se sobrar apenas espaços ou string vazia, retorna null para usar fallback
+        if (!resposta) return null;
+        
         return resposta;
     } catch (erro) {
         console.error("Erro na IA do Quinti:", erro);
         return null;
     }
 }
-
-// ... (o resto do seu código continua igual)
-
 // ========================================
 // DICIONÁRIOS (Português ↔ Inglês)
 // ========================================
