@@ -3,7 +3,7 @@
 // ========================================
 import { carregarConhecimento } from "./data/index.js";
 import { memory } from "./brain/memory.js";
-import nlp from 'https://cdn.skypack.dev/compromise';
+import nlp from 'https://cdn.skypack.dev/compromise'; 
 
 // ========================================
 // PERSONALIDADE DO QUINTI (para IA)
