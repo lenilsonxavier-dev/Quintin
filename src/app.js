@@ -640,7 +640,7 @@ function buscarConhecimento(pergunta) {
 }
 
 // ========================================
-// MÓDULO DE VOZ
+// MÓDULO DE VOZ - CORRIGIDO (Feminino/Infantil e mais rápido)
 // ========================================
 let speechEnabled = true;
 let vozFeminina = null;
@@ -659,32 +659,90 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
+// Melhorada: busca ativa por vozes femininas ou infantis
 async function carregarVozFeminina() {
   if (!window.speechSynthesis) return null;
+  
   return new Promise((resolve) => {
-    const obterVoz = () => {
+    const tentarSelecionar = () => {
       const vozes = window.speechSynthesis.getVoices();
-      if (vozes.length === 0) { setTimeout(obterVoz, 50); return; }
-      const voz = vozes.find(v => v.lang === 'pt-BR' && v.name.toLowerCase().includes('female')) || vozes.find(v => v.lang === 'pt-BR');
-      resolve(voz);
+      if (vozes.length === 0) {
+        setTimeout(tentarSelecionar, 100);
+        return;
+      }
+      
+      // Lista de palavras-chave que indicam voz feminina ou infantil
+      const keywords = [
+        'female', 'feminina', 'menina', 'criança', 'child', 'kids',
+        'Google UK English Female', 'Microsoft Maria', 'Microsoft Helena',
+        'Samantha', 'Karen', 'Moira', 'Luciana', 'Joana', 'Beatriz',
+        'Victoria', 'Carla', 'Fernanda', 'infantil', 'menino'
+      ];
+      
+      // Primeiro: tenta encontrar voz pt-BR com keyword feminina/ infantil
+      let voice = vozes.find(v => 
+        v.lang === 'pt-BR' && 
+        keywords.some(k => v.name.toLowerCase().includes(k.toLowerCase()))
+      );
+      
+      // Segundo: qualquer voz pt-BR (se não achou a ideal)
+      if (!voice) {
+        voice = vozes.find(v => v.lang === 'pt-BR');
+      }
+      
+      // Terceiro: qualquer voz com keyword feminina (pode ser outro idioma, mas ainda mais agradável)
+      if (!voice) {
+        voice = vozes.find(v => keywords.some(k => v.name.toLowerCase().includes(k.toLowerCase())));
+      }
+      
+      resolve(voice || null);
     };
-    obterVoz();
+    
+    // Se as vozes já estiverem carregadas, chama imediatamente
+    if (window.speechSynthesis.getVoices().length > 0) {
+      tentarSelecionar();
+    } else {
+      window.speechSynthesis.addEventListener('voiceschanged', tentarSelecionar);
+    }
   });
 }
 
 function falarTexto(texto) {
   if (!speechEnabled || !window.speechSynthesis) return;
-  let textoLimpo = texto.replace(/[*_`~#]/g, '').replace(/[\p{Emoji_Presentation}\p{Extended_Pictographic}]/gu, '').replace(/\n+/g, '. ');
+  
+  // Remove marcações e emojis para uma fala mais limpa
+  let textoLimpo = texto
+    .replace(/[*_`~#]/g, '')
+    .replace(/[\p{Emoji_Presentation}\p{Extended_Pictographic}]/gu, '')
+    .replace(/\n+/g, '. ');
+  
   const utterance = new SpeechSynthesisUtterance(textoLimpo);
   utterance.lang = 'pt-BR';
-  utterance.rate = 1.05;
-  utterance.pitch = 1.2;
-  if (vozFeminina) utterance.voice = vozFeminina;
+  
+  // Ajustes para tornar a voz mais viva, rápida e feminina/ infantil
+  utterance.rate = 1.2;      // levemente mais rápido (antes 1.05)
+  utterance.pitch = 1.5;     // tom mais alto (antes 1.2) → dá aspecto infantil/ feminino
+  
+  if (vozFeminina) {
+    utterance.voice = vozFeminina;
+  } else {
+    // Fallback: sem voz específica, o pitch alto já melhora
+    console.warn("Nenhuma voz feminina/infantil encontrada, usando padrão com pitch alto.");
+  }
+  
   window.speechSynthesis.cancel();
   window.speechSynthesis.speak(utterance);
 }
 
-carregarVozFeminina().then(voz => { if (voz) vozFeminina = voz; });
+// Inicializa a voz assim que possível
+carregarVozFeminina().then(voz => {
+  if (voz) {
+    vozFeminina = voz;
+    console.log(`✅ Voz selecionada: ${voz.name} (${voz.lang})`);
+  } else {
+    console.warn("⚠️ Nenhuma voz feminina/infantil encontrada. Use pitch alto como fallback.");
+  }
+});
 
 // ========================================
 // UI E EVENTOS
