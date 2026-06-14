@@ -640,10 +640,11 @@ function buscarConhecimento(pergunta) {
 }
 
 // ========================================
-// MÓDULO DE VOZ - COM PRONÚNCIA MISTA (PORTUGUÊS/INGLÊS)
+// MÓDULO DE VOZ - COM PRONÚNCIA CORRETA (PORTUGUÊS/INGLÊS)
 // ========================================
 let speechEnabled = true;
 let vozFeminina = null;
+let vozIngles = null; // Armazena a voz nativa em inglês
 
 function toggleSpeaker() {
   speechEnabled = !speechEnabled;
@@ -659,49 +660,63 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-async function carregarVozFeminina() {
-  if (!window.speechSynthesis) return null;
+// Carrega as vozes de forma robusta e mapeia os dois idiomas
+async function carregarVozes() {
+  if (!window.speechSynthesis) return { pt: null, en: null };
   
   return new Promise((resolve) => {
-    const tentarSelecionar = () => {
+    const selecionarVozes = () => {
       const vozes = window.speechSynthesis.getVoices();
       if (vozes.length === 0) {
-        setTimeout(tentarSelecionar, 100);
+        setTimeout(selecionarVozes, 100);
         return;
       }
       
-      const keywords = [
+      // Filtros para Português
+      const keywordsPt = [
         'female', 'feminina', 'menina', 'criança', 'child', 'kids',
-        'Google UK English Female', 'Microsoft Maria', 'Microsoft Helena',
-        'Samantha', 'Karen', 'Moira', 'Luciana', 'Joana', 'Beatriz',
-        'Victoria', 'Carla', 'Fernanda', 'infantil', 'menino'
+        'Microsoft Maria', 'Microsoft Helena', 'Samantha', 'Luciana', 'Joana', 'Beatriz', 'Daniela'
       ];
-      
-      let voice = vozes.find(v => 
+      let ptVoice = vozes.find(v => 
         v.lang === 'pt-BR' && 
-        keywords.some(k => v.name.toLowerCase().includes(k.toLowerCase()))
+        keywordsPt.some(k => v.name.toLowerCase().includes(k.toLowerCase()))
       );
-      
-      if (!voice) {
-        voice = vozes.find(v => v.lang === 'pt-BR');
-      }
-      
-      if (!voice) {
-        voice = vozes.find(v => keywords.some(k => v.name.toLowerCase().includes(k.toLowerCase())));
-      }
-      
-      resolve(voice || null);
+      if (!ptVoice) ptVoice = vozes.find(v => v.lang === 'pt-BR');
+
+      // Filtros para Inglês
+      const keywordsEn = [
+        'female', 'child', 'kids', 'Samantha', 'Zira', 'Google US English', 'Microsoft Zira', 'Karen'
+      ];
+      let enVoice = vozes.find(v => 
+        (v.lang === 'en-US' || v.lang === 'en-GB') && 
+        keywordsEn.some(k => v.name.toLowerCase().includes(k.toLowerCase()))
+      );
+      if (!enVoice) enVoice = vozes.find(v => v.lang.startsWith('en'));
+
+      resolve({ pt: ptVoice || null, en: enVoice || null });
     };
     
     if (window.speechSynthesis.getVoices().length > 0) {
-      tentarSelecionar();
+      selecionarVozes();
     } else {
-      window.speechSynthesis.addEventListener('voiceschanged', tentarSelecionar);
+      window.speechSynthesis.addEventListener('voiceschanged', selecionarVozes);
     }
   });
 }
 
-// NOVA função falarTexto com divisão de idiomas
+// Modificado para carregar e atribuir corretamente ambas as vozes
+carregarVozes().then(vozes => {
+  if (vozes.pt) {
+    vozFeminina = vozes.pt;
+    console.log(`✅ Voz Português carregada: ${vozes.pt.name}`);
+  }
+  if (vozes.en) {
+    vozIngles = vozes.en;
+    console.log(`✅ Voz Inglês carregada: ${vozes.en.name}`);
+  }
+});
+
+// Função de fala com suporte a troca de vozes reais por trecho
 function falarTexto(texto) {
   if (!speechEnabled || !window.speechSynthesis) return;
 
@@ -721,11 +736,16 @@ function falarTexto(texto) {
     const { texto: trecho, lang } = partes[index];
     const utterance = new SpeechSynthesisUtterance(trecho);
     utterance.lang = lang;
-    utterance.rate = 1.2;
-    utterance.pitch = (lang === 'en-US') ? 1.3 : 1.5;
     
-    if (lang === 'pt-BR' && vozFeminina) {
-      utterance.voice = vozFeminina;
+    // Configurações específicas para cada voz
+    if (lang === 'en-US') {
+      utterance.rate = 1.0; 
+      utterance.pitch = 1.1;
+      if (vozIngles) utterance.voice = vozIngles;
+    } else {
+      utterance.rate = 1.2;
+      utterance.pitch = 1.4;
+      if (vozFeminina) utterance.voice = vozFeminina;
     }
     
     utterance.onend = () => {
@@ -795,16 +815,6 @@ function dividirPorIdioma(texto) {
   
   return mesclado;
 }
-
-// Inicializa a voz
-carregarVozFeminina().then(voz => {
-  if (voz) {
-    vozFeminina = voz;
-    console.log(`✅ Voz selecionada: ${voz.name} (${voz.lang})`);
-  } else {
-    console.warn("⚠️ Nenhuma voz feminina/infantil encontrada. Use pitch alto como fallback.");
-  }
-});
 
 // ========================================
 // UI E EVENTOS
