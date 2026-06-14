@@ -1,1 +1,8 @@
-json<br/>{<br/> "rewrites": [{ "source": "/(.*)", "destination": "/" }]<br/>}<br/>
+{
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/"
+    }
+  ]
+}
