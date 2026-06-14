@@ -640,7 +640,7 @@ function buscarConhecimento(pergunta) {
 }
 
 // ========================================
-// MÓDULO DE VOZ - CORRIGIDO (Feminino/Infantil e mais rápido)
+// MÓDULO DE VOZ - COM PRONÚNCIA MISTA (PORTUGUÊS/INGLÊS)
 // ========================================
 let speechEnabled = true;
 let vozFeminina = null;
@@ -659,7 +659,6 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-// Melhorada: busca ativa por vozes femininas ou infantis
 async function carregarVozFeminina() {
   if (!window.speechSynthesis) return null;
   
@@ -671,7 +670,6 @@ async function carregarVozFeminina() {
         return;
       }
       
-      // Lista de palavras-chave que indicam voz feminina ou infantil
       const keywords = [
         'female', 'feminina', 'menina', 'criança', 'child', 'kids',
         'Google UK English Female', 'Microsoft Maria', 'Microsoft Helena',
@@ -679,18 +677,15 @@ async function carregarVozFeminina() {
         'Victoria', 'Carla', 'Fernanda', 'infantil', 'menino'
       ];
       
-      // Primeiro: tenta encontrar voz pt-BR com keyword feminina/ infantil
       let voice = vozes.find(v => 
         v.lang === 'pt-BR' && 
         keywords.some(k => v.name.toLowerCase().includes(k.toLowerCase()))
       );
       
-      // Segundo: qualquer voz pt-BR (se não achou a ideal)
       if (!voice) {
         voice = vozes.find(v => v.lang === 'pt-BR');
       }
       
-      // Terceiro: qualquer voz com keyword feminina (pode ser outro idioma, mas ainda mais agradável)
       if (!voice) {
         voice = vozes.find(v => keywords.some(k => v.name.toLowerCase().includes(k.toLowerCase())));
       }
@@ -698,7 +693,6 @@ async function carregarVozFeminina() {
       resolve(voice || null);
     };
     
-    // Se as vozes já estiverem carregadas, chama imediatamente
     if (window.speechSynthesis.getVoices().length > 0) {
       tentarSelecionar();
     } else {
@@ -707,34 +701,102 @@ async function carregarVozFeminina() {
   });
 }
 
+// NOVA função falarTexto com divisão de idiomas
 function falarTexto(texto) {
   if (!speechEnabled || !window.speechSynthesis) return;
-  
-  // Remove marcações e emojis para uma fala mais limpa
-  let textoLimpo = texto
+
+  let limpo = texto
     .replace(/[*_`~#]/g, '')
     .replace(/[\p{Emoji_Presentation}\p{Extended_Pictographic}]/gu, '')
-    .replace(/\n+/g, '. ');
-  
-  const utterance = new SpeechSynthesisUtterance(textoLimpo);
-  utterance.lang = 'pt-BR';
-  
-  // Ajustes para tornar a voz mais viva, rápida e feminina/ infantil
-  utterance.rate = 1.2;      // levemente mais rápido (antes 1.05)
-  utterance.pitch = 1.5;     // tom mais alto (antes 1.2) → dá aspecto infantil/ feminino
-  
-  if (vozFeminina) {
-    utterance.voice = vozFeminina;
-  } else {
-    // Fallback: sem voz específica, o pitch alto já melhora
-    console.warn("Nenhuma voz feminina/infantil encontrada, usando padrão com pitch alto.");
+    .trim();
+
+  if (!limpo) return;
+
+  const partes = dividirPorIdioma(limpo);
+  window.speechSynthesis.cancel();
+
+  let index = 0;
+  function falarProxima() {
+    if (index >= partes.length) return;
+    const { texto: trecho, lang } = partes[index];
+    const utterance = new SpeechSynthesisUtterance(trecho);
+    utterance.lang = lang;
+    utterance.rate = 1.2;
+    utterance.pitch = (lang === 'en-US') ? 1.3 : 1.5;
+    
+    if (lang === 'pt-BR' && vozFeminina) {
+      utterance.voice = vozFeminina;
+    }
+    
+    utterance.onend = () => {
+      index++;
+      falarProxima();
+    };
+    window.speechSynthesis.speak(utterance);
   }
   
-  window.speechSynthesis.cancel();
-  window.speechSynthesis.speak(utterance);
+  falarProxima();
 }
 
-// Inicializa a voz assim que possível
+// Função auxiliar para dividir trechos por idioma
+function dividirPorIdioma(texto) {
+  const partes = [];
+  let acumulador = '';
+  let ultimoLang = null;
+  
+  const partesComMarcadores = texto.split(/(\*\*[^*]+\*\*)/);
+  
+  for (let parte of partesComMarcadores) {
+    if (parte.startsWith('**') && parte.endsWith('**')) {
+      const ingles = parte.slice(2, -2);
+      if (acumulador) {
+        partes.push({ texto: acumulador.trim(), lang: ultimoLang || 'pt-BR' });
+        acumulador = '';
+      }
+      partes.push({ texto: ingles, lang: 'en-US' });
+      ultimoLang = 'en-US';
+    } else {
+      const palavras = parte.split(/(\s+)/);
+      for (let palavra of palavras) {
+        if (palavra.trim().length === 0) continue;
+        
+        const isPossivelIngles = /^[A-Za-z]{3,}$/.test(palavra) && 
+          !/^(é|e|do|da|de|em|um|uma|para|com|sem|por|que|como|mais|mas|ou|se|já|vou|vai|foi|são|está|estou|estão|tem|têm|ter|ser|ir|ver|dar|dizer|falar|olá|tudo|certo|obrigado|bom|dia|noite|tarde)$/i.test(palavra);
+        
+        if (isPossivelIngles && ultimoLang !== 'en-US') {
+          if (acumulador) {
+            partes.push({ texto: acumulador.trim(), lang: ultimoLang || 'pt-BR' });
+            acumulador = '';
+          }
+          partes.push({ texto: palavra, lang: 'en-US' });
+          ultimoLang = 'en-US';
+        } else {
+          acumulador += palavra;
+          if (ultimoLang === null) ultimoLang = 'pt-BR';
+          else if (ultimoLang === 'en-US' && !isPossivelIngles) ultimoLang = 'pt-BR';
+        }
+      }
+    }
+  }
+  
+  if (acumulador) {
+    partes.push({ texto: acumulador.trim(), lang: ultimoLang || 'pt-BR' });
+  }
+  
+  // Mescla partes adjacentes do mesmo idioma
+  const mesclado = [];
+  for (const parte of partes) {
+    if (mesclado.length > 0 && mesclado[mesclado.length-1].lang === parte.lang) {
+      mesclado[mesclado.length-1].texto += ' ' + parte.texto;
+    } else {
+      mesclado.push({ ...parte });
+    }
+  }
+  
+  return mesclado;
+}
+
+// Inicializa a voz
 carregarVozFeminina().then(voz => {
   if (voz) {
     vozFeminina = voz;
