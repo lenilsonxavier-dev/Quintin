@@ -640,10 +640,9 @@ function buscarConhecimento(pergunta) {
 }
 
 // ========================================
-// MÓDULO DE VOZ - COM PRONÚNCIA CORRETA (PORTUGUÊS/INGLÊS)
+// MÓDULO DE VOZ - AGORA APENAS COM VOZ EM INGLÊS PARA TODO O TEXTO
 // ========================================
 let speechEnabled = true;
-let vozFeminina = null;
 let vozIngles = null; // Armazena a voz nativa em inglês
 
 function toggleSpeaker() {
@@ -660,9 +659,9 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-// Carrega as vozes de forma robusta e mapeia os dois idiomas
+// Carrega apenas a voz inglesa
 async function carregarVozes() {
-  if (!window.speechSynthesis) return { pt: null, en: null };
+  if (!window.speechSynthesis) return null;
   
   return new Promise((resolve) => {
     const selecionarVozes = () => {
@@ -672,18 +671,7 @@ async function carregarVozes() {
         return;
       }
       
-      // Filtros para Português
-      const keywordsPt = [
-        'female', 'feminina', 'menina', 'criança', 'child', 'kids',
-        'Microsoft Maria', 'Microsoft Helena', 'Samantha', 'Luciana', 'Joana', 'Beatriz', 'Daniela'
-      ];
-      let ptVoice = vozes.find(v => 
-        v.lang === 'pt-BR' && 
-        keywordsPt.some(k => v.name.toLowerCase().includes(k.toLowerCase()))
-      );
-      if (!ptVoice) ptVoice = vozes.find(v => v.lang === 'pt-BR');
-
-      // Filtros para Inglês
+      // Filtros para Inglês (voz feminina de preferência)
       const keywordsEn = [
         'female', 'child', 'kids', 'Samantha', 'Zira', 'Google US English', 'Microsoft Zira', 'Karen'
       ];
@@ -693,7 +681,7 @@ async function carregarVozes() {
       );
       if (!enVoice) enVoice = vozes.find(v => v.lang.startsWith('en'));
 
-      resolve({ pt: ptVoice || null, en: enVoice || null });
+      resolve(enVoice || null);
     };
     
     if (window.speechSynthesis.getVoices().length > 0) {
@@ -704,21 +692,17 @@ async function carregarVozes() {
   });
 }
 
-// Modificado para carregar e atribuir corretamente ambas as vozes
-carregarVozes().then(vozes => {
-  if (vozes.pt) {
-    vozFeminina = vozes.pt;
-    console.log(`✅ Voz Português carregada: ${vozes.pt.name}`);
-  }
-  if (vozes.en) {
-    vozIngles = vozes.en;
-    console.log(`✅ Voz Inglês carregada: ${vozes.en.name}`);
+// Atribuição da voz inglesa
+carregarVozes().then(voz => {
+  if (voz) {
+    vozIngles = voz;
+    console.log(`✅ Voz Inglês carregada: ${voz.name}`);
   }
 });
 
-// Função de fala com suporte a troca de vozes reais por trecho
+// NOVA FUNÇÃO DE FALA: lê todo o texto apenas com a voz inglesa
 function falarTexto(texto) {
-  if (!speechEnabled || !window.speechSynthesis) return;
+  if (!speechEnabled || !window.speechSynthesis || !vozIngles) return;
 
   let limpo = texto
     .replace(/[*_`~#]/g, '')
@@ -727,97 +711,17 @@ function falarTexto(texto) {
 
   if (!limpo) return;
 
-  const partes = dividirPorIdioma(limpo);
   window.speechSynthesis.cancel();
-
-  let index = 0;
-  function falarProxima() {
-    if (index >= partes.length) return;
-    const { texto: trecho, lang } = partes[index];
-    const utterance = new SpeechSynthesisUtterance(trecho);
-    utterance.lang = lang;
-    
-    // Configurações específicas para cada voz
-    if (lang === 'en-US') {
-      utterance.rate = 1.0; 
-      utterance.pitch = 1.1;
-      if (vozIngles) utterance.voice = vozIngles;
-    } else {
-      utterance.rate = 1.2;
-      utterance.pitch = 1.4;
-      if (vozFeminina) utterance.voice = vozFeminina;
-    }
-    
-    utterance.onend = () => {
-      index++;
-      falarProxima();
-    };
-    window.speechSynthesis.speak(utterance);
-  }
-  
-  falarProxima();
-}
-
-// Função auxiliar para dividir trechos por idioma
-function dividirPorIdioma(texto) {
-  const partes = [];
-  let acumulador = '';
-  let ultimoLang = null;
-  
-  const partesComMarcadores = texto.split(/(\*\*[^*]+\*\*)/);
-  
-  for (let parte of partesComMarcadores) {
-    if (parte.startsWith('**') && parte.endsWith('**')) {
-      const ingles = parte.slice(2, -2);
-      if (acumulador) {
-        partes.push({ texto: acumulador.trim(), lang: ultimoLang || 'pt-BR' });
-        acumulador = '';
-      }
-      partes.push({ texto: ingles, lang: 'en-US' });
-      ultimoLang = 'en-US';
-    } else {
-      const palavras = parte.split(/(\s+)/);
-      for (let palavra of palavras) {
-        if (palavra.trim().length === 0) continue;
-        
-        const isPossivelIngles = /^[A-Za-z]{3,}$/.test(palavra) && 
-          !/^(é|e|do|da|de|em|um|uma|para|com|sem|por|que|como|mais|mas|ou|se|já|vou|vai|foi|são|está|estou|estão|tem|têm|ter|ser|ir|ver|dar|dizer|falar|olá|tudo|certo|obrigado|bom|dia|noite|tarde)$/i.test(palavra);
-        
-        if (isPossivelIngles && ultimoLang !== 'en-US') {
-          if (acumulador) {
-            partes.push({ texto: acumulador.trim(), lang: ultimoLang || 'pt-BR' });
-            acumulador = '';
-          }
-          partes.push({ texto: palavra, lang: 'en-US' });
-          ultimoLang = 'en-US';
-        } else {
-          acumulador += palavra;
-          if (ultimoLang === null) ultimoLang = 'pt-BR';
-          else if (ultimoLang === 'en-US' && !isPossivelIngles) ultimoLang = 'pt-BR';
-        }
-      }
-    }
-  }
-  
-  if (acumulador) {
-    partes.push({ texto: acumulador.trim(), lang: ultimoLang || 'pt-BR' });
-  }
-  
-  // Mescla partes adjacentes do mesmo idioma
-  const mesclado = [];
-  for (const parte of partes) {
-    if (mesclado.length > 0 && mesclado[mesclado.length-1].lang === parte.lang) {
-      mesclado[mesclado.length-1].texto += ' ' + parte.texto;
-    } else {
-      mesclado.push({ ...parte });
-    }
-  }
-  
-  return mesclado;
+  const utterance = new SpeechSynthesisUtterance(limpo);
+  utterance.voice = vozIngles;
+  utterance.lang = vozIngles.lang || 'en-US';
+  utterance.rate = 1.0; 
+  utterance.pitch = 1.1;
+  window.speechSynthesis.speak(utterance);
 }
 
 // ========================================
-// UI E EVENTOS
+// UI E EVENTOS (inalterado)
 // ========================================
 const MAX_HISTORY = 6;
 const chat = document.getElementById("chat");
