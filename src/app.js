@@ -640,67 +640,81 @@ function buscarConhecimento(pergunta) {
 }
 
 // ========================================
-// MÓDULO DE VOZ - AGORA APENAS COM VOZ EM INGLÊS PARA TODO O TEXTO
+// MÓDULO DE VOZ - CORRIGIDO PARA AGUARDAR VOZES
 // ========================================
 let speechEnabled = true;
-let vozIngles = null; // Armazena a voz nativa em inglês
+let vozIngles = null;
 
-function toggleSpeaker() {
-  speechEnabled = !speechEnabled;
-  const btn = document.getElementById("btnSpeaker");
-  if (btn) btn.textContent = speechEnabled ? "🔊" : "🔇";
-}
-
-document.addEventListener("DOMContentLoaded", () => {
-  const btnSpeaker = document.getElementById("btnSpeaker");
-  if (btnSpeaker) {
-    btnSpeaker.addEventListener("click", toggleSpeaker);
-    btnSpeaker.textContent = speechEnabled ? "🔊" : "🔇";
-  }
-});
-
-// Carrega apenas a voz inglesa
+// Função corrigida: aguarda o evento voiceschanged
 async function carregarVozes() {
-  if (!window.speechSynthesis) return null;
-  
-  return new Promise((resolve) => {
-    const selecionarVozes = () => {
-      const vozes = window.speechSynthesis.getVoices();
-      if (vozes.length === 0) {
-        setTimeout(selecionarVozes, 100);
-        return;
-      }
-      
-      // Filtros para Inglês (voz feminina de preferência)
-      const keywordsEn = [
-        'female', 'child', 'kids', 'Samantha', 'Zira', 'Google US English', 'Microsoft Zira', 'Karen'
-      ];
-      let enVoice = vozes.find(v => 
-        (v.lang === 'en-US' || v.lang === 'en-GB') && 
-        keywordsEn.some(k => v.name.toLowerCase().includes(k.toLowerCase()))
-      );
-      if (!enVoice) enVoice = vozes.find(v => v.lang.startsWith('en'));
+  if (!window.speechSynthesis) {
+    console.error("Web Speech API não suportada.");
+    return null;
+  }
 
-      resolve(enVoice || null);
+  // Cria uma Promise que só resolve quando as vozes estiverem carregadas
+  return new Promise((resolve) => {
+    // Função para tentar pegar as vozes
+    const tentarPegarVozes = () => {
+      const vozes = window.speechSynthesis.getVoices();
+      if (vozes.length > 0) {
+        // Vozes carregadas! Agora podemos selecionar.
+        console.log(`${vozes.length} vozes encontradas.`);
+        
+        // Tenta encontrar uma voz feminina em inglês (prioriza Samantha, Zira)
+        let enVoice = vozes.find(v => 
+          (v.lang === 'en-US' || v.lang === 'en-GB') && 
+          (v.name.includes('Samantha') || v.name.includes('Zira') || v.name.includes('Google UK') || v.name.includes('Microsoft'))
+        );
+        
+        // Se não encontrar, pega qualquer voz em inglês
+        if (!enVoice) {
+          enVoice = vozes.find(v => v.lang.startsWith('en'));
+        }
+        
+        resolve(enVoice || null);
+        return true; // Indica que terminou
+      }
+      return false; // Indica que ainda não tem vozes
     };
+
+    // Tenta imediatamente
+    if (tentarPegarVozes()) return;
+
+    // Se não conseguiu, configura um listener para o evento 'voiceschanged'
+    const onVoicesChanged = () => {
+      if (tentarPegarVozes()) {
+        window.speechSynthesis.removeEventListener('voiceschanged', onVoicesChanged);
+      }
+    };
+    window.speechSynthesis.addEventListener('voiceschanged', onVoicesChanged);
     
-    if (window.speechSynthesis.getVoices().length > 0) {
-      selecionarVozes();
-    } else {
-      window.speechSynthesis.addEventListener('voiceschanged', selecionarVozes);
-    }
+    // Timeout de segurança: se após 3 segundos nada carregar, desiste
+    setTimeout(() => {
+      window.speechSynthesis.removeEventListener('voiceschanged', onVoicesChanged);
+      console.warn("Timeout: Nenhuma voz encontrada após 3 segundos.");
+      resolve(null);
+    }, 3000);
   });
 }
 
-// Atribuição da voz inglesa
-carregarVozes().then(voz => {
-  if (voz) {
-    vozIngles = voz;
-    console.log(`✅ Voz Inglês carregada: ${voz.name}`);
+// Agora, para usar, a inicialização fica assim:
+// (Remova a chamada direta que estava solta no código e use esta lógica no DOMContentLoaded)
+document.addEventListener("DOMContentLoaded", async () => {
+  // ... seu outro código de inicialização ...
+
+  // Carrega as vozes
+  vozIngles = await carregarVozes();
+  if (vozIngles) {
+    console.log(`✅ Voz em Inglês carregada: ${vozIngles.name}`);
+  } else {
+    console.warn(`⚠️ Nenhuma voz em Inglês encontrada.`);
   }
+
+  // ... resto do código ...
 });
 
-// NOVA FUNÇÃO DE FALA: lê todo o texto apenas com a voz inglesa
+// Sua função falarTexto continua a mesma
 function falarTexto(texto) {
   if (!speechEnabled || !window.speechSynthesis || !vozIngles) return;
 
@@ -711,11 +725,13 @@ function falarTexto(texto) {
 
   if (!limpo) return;
 
-  window.speechSynthesis.cancel();
+  // Importante: cancelar a fala anterior para evitar conflitos em algumas versões do Android
+  window.speechSynthesis.cancel(); 
+  
   const utterance = new SpeechSynthesisUtterance(limpo);
   utterance.voice = vozIngles;
-  utterance.lang = vozIngles.lang || 'en-US';
-  utterance.rate = 1.0; 
+  utterance.lang = vozIngles.lang; // Use o lang da voz selecionada
+  utterance.rate = 1.0;
   utterance.pitch = 1.1;
   window.speechSynthesis.speak(utterance);
 }
